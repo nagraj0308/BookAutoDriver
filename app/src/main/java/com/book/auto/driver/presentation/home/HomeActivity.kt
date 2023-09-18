@@ -19,6 +19,9 @@ import com.book.auto.driver.databinding.ActivityHomeBinding
 import com.book.auto.driver.utils.Constants
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.remoteconfig.ktx.remoteConfig
+import com.google.firebase.remoteconfig.ktx.remoteConfigSettings
 
 class HomeActivity : AppCompatActivity() {
 
@@ -55,6 +58,28 @@ class HomeActivity : AppCompatActivity() {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.main, menu)
         return true
+    }
+
+    override fun onStart() {
+        super.onStart()
+        viewModel.updateLocation(this)
+        remoteConfig = Firebase.remoteConfig
+        val configSettings = remoteConfigSettings {
+            minimumFetchIntervalInSeconds = 300
+        }
+        remoteConfig.setConfigSettingsAsync(configSettings)
+        remoteConfig.setDefaultsAsync(R.xml.remote_config_defaults)
+        remoteConfig.fetchAndActivate()
+            .addOnCompleteListener(
+                this
+            ) { task ->
+                if (task.isSuccessful) {
+                    val minVersion = remoteConfig.getLong("min_version")
+                    if (BuildConfig.VERSION_CODE < minVersion) {
+                        showDialog()
+                    }
+                }
+            }
     }
 
     override fun onSupportNavigateUp(): Boolean {
