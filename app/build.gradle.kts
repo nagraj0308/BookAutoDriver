@@ -1,6 +1,11 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("com.google.gms.google-services")
+    id("com.google.firebase.crashlytics")
+    id("com.google.firebase.firebase-perf")
+    id("com.google.dagger.hilt.android")
+    id("kotlin-kapt")
 }
 
 android {
@@ -36,7 +41,9 @@ android {
     }
     buildFeatures {
         viewBinding = true
+        buildConfig = true
     }
+
 }
 
 dependencies {
@@ -52,4 +59,41 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+
+    // Retrofit
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.okhttp3:okhttp:5.0.0-alpha.3")
+    implementation("com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.3")
+    implementation("com.squareup.okhttp3:okhttp:4.10.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+
+
+    implementation("androidx.datastore:datastore-preferences:1.1.0-alpha04")
+
+    //firebase
+    implementation(platform("com.google.firebase:firebase-bom:32.1.1"))
+    implementation("com.google.firebase:firebase-analytics-ktx")
+    implementation("com.google.firebase:firebase-crashlytics-ktx")
+    implementation("com.google.firebase:firebase-perf-ktx")
+    implementation("com.google.firebase:firebase-config-ktx")
+    implementation("com.google.firebase:firebase-storage-ktx")
+    implementation("com.google.firebase:firebase-auth-ktx")
+
+    // Also add the dependency for the Google Play services library and specify its version
+    implementation("com.google.android.gms:play-services-auth:20.7.0")
+    implementation("com.google.android.gms:play-services-maps:18.1.0")
+    implementation("com.google.android.gms:play-services-location:21.0.1")
+
+    // Coroutines
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.4.0")
+
+    //dagger
+    implementation("com.google.dagger:hilt-android:2.46.1")
+    kapt("com.google.dagger:hilt-compiler:2.46.1")
+    androidTestImplementation("com.google.dagger:hilt-android-testing:2.46.1")
+    kaptAndroidTest("com.google.dagger:hilt-compiler:2.46.1")
+    testImplementation("com.google.dagger:hilt-android-testing:2.46.1")
+    kaptTest("com.google.dagger:hilt-compiler:2.46.1")
 }
