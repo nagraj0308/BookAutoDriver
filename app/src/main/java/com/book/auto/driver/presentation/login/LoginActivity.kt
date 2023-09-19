@@ -43,8 +43,7 @@ class LoginActivity : AppCompatActivity() {
         ) {
             dataStore.isLogin.collect {
                 if (it) {
-                    finish()
-                    startActivity(Intent(this@LoginActivity, HomeActivity::class.java))
+                    login()
                 }
             }
         }
@@ -96,6 +95,7 @@ class LoginActivity : AppCompatActivity() {
                             dataStore.setLogin(true)
                             dataStore.setEmail(account.email.toString())
                             dataStore.setName(account.displayName.toString())
+                            login()
                         }
 
                     }
@@ -110,6 +110,11 @@ class LoginActivity : AppCompatActivity() {
 
     private fun showToast(msg: String) {
         Toast.makeText(this, msg, Toast.LENGTH_LONG).show()
+    }
+
+    private fun login() {
+        finish()
+        startActivity(Intent(this@LoginActivity, HomeActivity::class.java))
     }
 
 }

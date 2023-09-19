@@ -41,7 +41,7 @@ data class HomeState(
 @SuppressLint("MissingPermission")
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val api: Lazy<BVApi>
+    private val api: BVApi
 ) : ViewModel() {
     private lateinit var dataStore: DataStore
 
@@ -57,16 +57,23 @@ class HomeViewModel @Inject constructor(
     val readShowToast: LiveData<Boolean> get() = _showToast
 
 
-    init {
-        api.value
-    }
-
     fun initDataStore(activity: Activity) {
         dataStore = DataStore(activity)
         GlobalScope.launch(Dispatchers.IO) {
             dataStore.getEmail.collect {
                 _state.value!!.email = it
             }
+        }
+        GlobalScope.launch(Dispatchers.IO) {
+            dataStore.getName.collect {
+                _state.value!!.name = it
+            }
+        }
+    }
+
+    fun logout() {
+        GlobalScope.launch(Dispatchers.IO) {
+            dataStore.setLogin(false)
         }
     }
 
@@ -78,14 +85,6 @@ class HomeViewModel @Inject constructor(
         _showProgress.value = false
     }
 
-
-    suspend fun setUserEmail(
-        email: String
-    ) {
-        _state.value!!.email = email
-        dataStore.setEmail(email)
-        dataStore.setLogin(true)
-    }
 
     private fun showToast(msg: String) {
         _toastMsg.value = msg
@@ -165,7 +164,7 @@ class HomeViewModel @Inject constructor(
     ) {
         CoroutineScope(Dispatchers.IO).launch {
             runCatching {
-                api.value.insertVehicle(
+                api.insertVehicle(
                     VehicleRequest(
                         gId,
                         gName,
@@ -270,7 +269,7 @@ class HomeViewModel @Inject constructor(
     ) {
         CoroutineScope(Dispatchers.IO).launch {
             runCatching {
-                api.value.updateVehicle(
+                api.updateVehicle(
                     VehicleRequest(
                         gId,
                         gName,
@@ -306,7 +305,7 @@ class HomeViewModel @Inject constructor(
         CoroutineScope(Dispatchers.IO).launch {
             runCatching {
                 _showProgress.value = true
-                api.value.getVehicleByGmailId(GetVehicleByGmailIdRequest(_state.value!!.email))
+                api.getVehicleByGmailId(GetVehicleByGmailIdRequest(_state.value!!.email))
             }.onSuccess {
                 _showProgress.value = false
                 withContext(Dispatchers.Main) {
@@ -406,7 +405,7 @@ class HomeViewModel @Inject constructor(
     private fun deleteGaadiData(gaadiId: String, callback: (Boolean) -> Unit) {
         CoroutineScope(Dispatchers.IO).launch {
             runCatching {
-                api.value.deleteVehicleById(DeleteVehicleRequest(gaadiId))
+                api.deleteVehicleById(DeleteVehicleRequest(gaadiId))
             }.onSuccess {
                 withContext(Dispatchers.Main) {
                     showToast("Gaadi deleted successfully")
