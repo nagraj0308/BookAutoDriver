@@ -38,13 +38,6 @@ data class BasicResponse(
 )
 
 
-data class VehiclesResponse(
-    val `data`: List<Vehicle>,
-    val msg: String,
-    val isTrue: Int
-)
-
-
 data class Vehicle(
     val _id: String = "",
     val name: String = "",

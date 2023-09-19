@@ -3,14 +3,28 @@ package com.book.auto.driver.presentation.home
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.graphics.Bitmap
+import android.location.Location
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.book.auto.driver.data.DataStore
+import com.book.auto.driver.data.remote.reqres.DeleteVehicleRequest
+import com.book.auto.driver.data.remote.reqres.GetVehicleByGmailIdRequest
 import com.book.auto.driver.data.remote.reqres.Vehicle
+import com.book.auto.driver.data.remote.reqres.VehicleRequest
 import com.book.auto.driver.domain.BVApi
+import com.book.auto.driver.utils.FBS
+import com.book.auto.driver.utils.PermissionUtils
+import com.google.android.gms.location.LocationServices
+import com.google.firebase.storage.UploadTask
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.io.ByteArrayOutputStream
 import javax.inject.Inject
 
@@ -30,22 +44,28 @@ class HomeViewModel @Inject constructor(
     private val api: Lazy<BVApi>
 ) : ViewModel() {
     private lateinit var dataStore: DataStore
-    private var _showProgress = mutableStateOf(false)
-    private var _myGaadis = mutableStateOf(Vehicle)
-    private val _state: MutableState<HomeState> = mutableStateOf(HomeState())
-    var showToast = MutableLiveData<Boolean?>()
-    var toastMsg = mutableStateOf("")
+
+    private var _vehicle: MutableLiveData<Vehicle> = MutableLiveData(Vehicle())
+    private val _state: MutableLiveData<HomeState> = MutableLiveData(HomeState())
+    private var _showProgress: MutableLiveData<Boolean> = MutableLiveData(false)
+    private var _toastMsg: MutableLiveData<String> = MutableLiveData("")
+    private var _showToast: MutableLiveData<Boolean> = MutableLiveData(false)
+    val readShowProgress: LiveData<Boolean> get() = _showProgress
+    val readVehicle: LiveData<Vehicle> get() = _vehicle
+    val readState: LiveData<HomeState> get() = _state
+    val readToastMsg: LiveData<String> get() = _toastMsg
+    val readShowToast: LiveData<Boolean> get() = _showToast
 
 
     init {
-        api.get()
+        api.value
     }
 
     fun initDataStore(activity: Activity) {
         dataStore = DataStore(activity)
         GlobalScope.launch(Dispatchers.IO) {
             dataStore.getEmail.collect {
-                _state.value.email = it
+                _state.value!!.email = it
             }
         }
     }
@@ -62,14 +82,14 @@ class HomeViewModel @Inject constructor(
     suspend fun setUserEmail(
         email: String
     ) {
-        _state.value.email = email
+        _state.value!!.email = email
         dataStore.setEmail(email)
         dataStore.setLogin(true)
     }
 
     private fun showToast(msg: String) {
-        toastMsg.value = msg
-        showToast.value = true
+        _toastMsg.value = msg
+        _showToast.value = true
     }
 
     fun insertFSImage(
@@ -145,16 +165,16 @@ class HomeViewModel @Inject constructor(
     ) {
         CoroutineScope(Dispatchers.IO).launch {
             runCatching {
-                api.get().insertVehicle(
+                api.value.insertVehicle(
                     VehicleRequest(
                         gId,
                         gName,
                         gDeactivated,
                         gDriver,
-                        _state.value.email,
+                        _state.value!!.email,
                         url,
-                        _state.value.lat,
-                        _state.value.lon,
+                        _state.value!!.lat,
+                        _state.value!!.lon,
                         gMobile,
                         gNumber,
                         gRate,
@@ -250,16 +270,16 @@ class HomeViewModel @Inject constructor(
     ) {
         CoroutineScope(Dispatchers.IO).launch {
             runCatching {
-                api.get().updateVehicle(
+                api.value.updateVehicle(
                     VehicleRequest(
                         gId,
                         gName,
                         gDeactivated,
                         gDriver,
-                        _state.value.email,
+                        _state.value!!.email,
                         url,
-                        _state.value.lat,
-                        _state.value.lon,
+                        _state.value!!.lat,
+                        _state.value!!.lon,
                         gMobile,
                         gNumber,
                         gRate,
@@ -282,38 +302,16 @@ class HomeViewModel @Inject constructor(
     }
 
 
-    fun getGaadisDetails() {
-        CoroutineScope(Dispatchers.IO).launch {
-            runCatching {
-                _showProgress.value = true
-                api.get().getAllVehicle()
-            }.onSuccess {
-                _showProgress.value = false
-                withContext(Dispatchers.Main) {
-                    if (it.isSuccessful) {
-                        _gaadis.value = it.body()?.data ?: emptyList()
-                    }
-                }
-            }.onFailure {
-                _showProgress.value = false
-                withContext(Dispatchers.Main) {
-                    it.printStackTrace()
-                    showToast(it.toString())
-                }
-            }
-        }
-    }
-
     fun getMyGaadisDetails() {
         CoroutineScope(Dispatchers.IO).launch {
             runCatching {
                 _showProgress.value = true
-                api.get().getVehicleByGmailId(GetVehicleByGmailIdRequest(_state.value.email))
+                api.value.getVehicleByGmailId(GetVehicleByGmailIdRequest(_state.value!!.email))
             }.onSuccess {
                 _showProgress.value = false
                 withContext(Dispatchers.Main) {
                     if (it.isSuccessful) {
-                        _myGaadis.value = it.body()?.data ?: emptyList()
+                        _vehicle.value = it.body()?.data
                     }
                 }
             }.onFailure {
@@ -324,19 +322,6 @@ class HomeViewModel @Inject constructor(
             }
         }
     }
-
-
-    val showProgress: State<Boolean>
-        get() = _showProgress
-
-    val state: State<HomeState>
-        get() = _state
-
-    val gaadis: State<List<Vehicle>>
-        get() = _gaadis
-
-    val myGaadis: State<List<Vehicle>>
-        get() = _myGaadis
 
 
     fun updateLocation(activity: Activity) {
@@ -345,9 +330,9 @@ class HomeViewModel @Inject constructor(
                 val fusedLocationClient = LocationServices.getFusedLocationProviderClient(activity)
                 fusedLocationClient.lastLocation.addOnSuccessListener { location: Location? ->
                     location?.let {
-                        _state.value.isLocationUpdated = true
-                        _state.value.lat = it.latitude
-                        _state.value.lon = it.longitude
+                        _state.value!!.isLocationUpdated = true
+                        _state.value!!.lat = it.latitude
+                        _state.value!!.lon = it.longitude
                     }
                 }
             } else {
@@ -421,7 +406,7 @@ class HomeViewModel @Inject constructor(
     private fun deleteGaadiData(gaadiId: String, callback: (Boolean) -> Unit) {
         CoroutineScope(Dispatchers.IO).launch {
             runCatching {
-                api.get().deleteVehicleById(DeleteVehicleRequest(gaadiId))
+                api.value.deleteVehicleById(DeleteVehicleRequest(gaadiId))
             }.onSuccess {
                 withContext(Dispatchers.Main) {
                     showToast("Gaadi deleted successfully")

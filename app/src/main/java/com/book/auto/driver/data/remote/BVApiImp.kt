@@ -5,7 +5,6 @@ import com.book.auto.driver.data.remote.reqres.DeleteVehicleRequest
 import com.book.auto.driver.data.remote.reqres.GetVehicleByGmailIdRequest
 import com.book.auto.driver.data.remote.reqres.VehicleRequest
 import com.book.auto.driver.data.remote.reqres.VehicleResponse
-import com.book.auto.driver.data.remote.reqres.VehiclesResponse
 import com.book.auto.driver.domain.BVApi
 import retrofit2.Response
 import javax.inject.Inject
@@ -24,7 +23,7 @@ class BVApiImp @Inject constructor(
     }
 
 
-    override suspend fun getVehicleByGmailId(request: GetVehicleByGmailIdRequest?): Response<VehiclesResponse> {
+    override suspend fun getVehicleByGmailId(request: GetVehicleByGmailIdRequest?): Response<VehicleResponse> {
         return service.getVehicleByGmailId(request)
     }
 
