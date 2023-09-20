@@ -94,7 +94,7 @@ open class HomeActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        //viewModel.updateLocation(this)
+        viewModel.updateLocation(this)
         remoteConfig = Firebase.remoteConfig
         val configSettings = remoteConfigSettings {
             minimumFetchIntervalInSeconds = 300

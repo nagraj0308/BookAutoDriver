@@ -13,5 +13,6 @@
     <string name="privacy_and_policy">Privacy and Policy</string>
     <string name="rate">Rate</string>
     <string name="share">Share</string>
+    <string name="update_location">Update Location</string>
 
 </resources>

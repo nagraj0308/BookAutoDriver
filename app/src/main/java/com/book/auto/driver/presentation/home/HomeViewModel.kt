@@ -5,6 +5,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.graphics.Bitmap
 import android.location.Location
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -332,6 +333,7 @@ class HomeViewModel @Inject constructor(
                         _state.value!!.isLocationUpdated = true
                         _state.value!!.lat = it.latitude
                         _state.value!!.lon = it.longitude
+                        Log.v("NAGRAJ", it.latitude.toString() + " " + it.longitude.toString())
                     }
                 }
             } else {
