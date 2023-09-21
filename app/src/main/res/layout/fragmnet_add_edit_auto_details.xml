@@ -25,7 +25,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
                 android:hint="@string/auto_name"
-                app:startIconDrawable="@drawable/ic_edit">
+                app:startIconDrawable="@drawable/ic_auto">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -40,7 +40,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
                 android:hint="@string/auto_number"
-                app:startIconDrawable="@drawable/ic_edit">
+                app:startIconDrawable="@drawable/ic_number">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -55,7 +55,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
                 android:hint="@string/driver_name"
-                app:startIconDrawable="@drawable/ic_edit">
+                app:startIconDrawable="@drawable/ic_person">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -70,7 +70,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
                 android:hint="@string/mobile_number"
-                app:startIconDrawable="@drawable/ic_edit">
+                app:startIconDrawable="@drawable/ic_call">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -100,7 +100,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
                 android:hint="@string/normal_rate"
-                app:startIconDrawable="@drawable/ic_edit">
+                app:startIconDrawable="@drawable/ic_normal_rate">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -111,11 +111,10 @@
             <com.google.android.material.switchmaterial.SwitchMaterial
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:checked="false"
                 android:layout_marginBottom="5dp"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:text="@string/deactivated" />
+                android:checked="false"
+                android:text="@string/deactivated"
+                android:textSize="18sp" />
 
 
         </LinearLayout>
@@ -146,7 +145,7 @@
                 android:padding="10dp"
                 android:text="@string/save"
                 android:textAllCaps="false"
-                app:icon="@drawable/ic_refresh" />
+                app:icon="@drawable/ic_sync" />
 
             <Button
                 android:id="@+id/btn_delete"
@@ -158,7 +157,7 @@
                 android:padding="10dp"
                 android:text="@string/delete"
                 android:textAllCaps="false"
-                app:icon="@drawable/ic_refresh" />
+                app:icon="@drawable/ic_delete" />
         </LinearLayout>
 
         <Button
@@ -171,7 +170,7 @@
             android:padding="10dp"
             android:text="@string/submit"
             android:textAllCaps="false"
-            app:icon="@drawable/ic_refresh" />
+            app:icon="@drawable/ic_done" />
 
 
     </LinearLayout>
