@@ -4,16 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
+import com.book.auto.driver.R
 import com.book.auto.driver.databinding.FragmentHomeBinding
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
-import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 
@@ -41,10 +40,21 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
 
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        binding.btnUpdateLocation.setOnClickListener(View.OnClickListener {
-            activity?.let { it1 -> viewModel.updateLocation(it1) }
-        })
         val root: View = binding.root
+        val navController = findNavController()
+        binding.btnUpdateLocation.setOnClickListener {
+            activity?.let { it1 -> viewModel.updateLocation(it1) }
+        }
+        binding.btnAddAuto.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putBoolean("is_add", true)
+            navController.navigate(R.id.nav_add_edit_auto, bundle)
+        }
+        binding.btnEdit.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putBoolean("is_add", false)
+            navController.navigate(R.id.nav_add_edit_auto, bundle)
+        }
 
 //        val mapFragment = binding.mvCl as SupportMapFragment
 //        mapFragment.getMapAsync(this)

@@ -5,10 +5,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
+    <Button
+        android:id="@+id/btn_add_auto"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="160dp"
+        android:text="@string/add_auto"
+        android:textAllCaps="false"
+        android:visibility="visible"
+        app:icon="@drawable/ic_add" />
+
+
     <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cv_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
+        android:visibility="gone"
         app:cardElevation="10dp">
 
         <LinearLayout
@@ -45,15 +61,17 @@
                     android:text="Live on map"
                     android:textSize="18sp" />
 
-                <ImageButton
-                    android:id="@+id/ib_edit"
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/btn_edit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
+                    android:layout_gravity="bottom|right"
                     android:layout_margin="10dp"
-                    android:src="@drawable/ic_edit" />
-
+                    app:fabSize="mini"
+                    app:srcCompat="@drawable/ic_edit" />
 
             </RelativeLayout>
 
@@ -68,6 +86,7 @@
 
     <Button
         android:id="@+id/btn_update_location"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -75,5 +94,8 @@
         android:layout_marginBottom="20dp"
         android:padding="10dp"
         android:text="@string/update_location"
-        android:textAllCaps="false" />
+        android:textAllCaps="false"
+        app:icon="@drawable/ic_refresh" />
+
+
 </RelativeLayout>
