@@ -11,7 +11,7 @@ class Constants {
             "https://play.google.com/store/apps/details?id=com.book.auto.driver"
         const val APK_SHARE_MSG =
             "Hey!! I am using Book Auto Driver app for adding our vehicles, you can also try., link:- $PLAYSTORE_URL Thanks!!"
-        const val IMG_WBH = 1.5
+        const val IMG_HBW = 0.66
 
         val gaadiTypes = listOf("4 Wheeler", "3 Wheeler", "2 Wheeler", "Other")
     }

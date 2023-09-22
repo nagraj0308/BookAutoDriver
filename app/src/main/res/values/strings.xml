@@ -2,10 +2,6 @@
     <string name="app_name">Book Auto Driver</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
-    <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
 
     <string name="about_us">About Us</string>
     <string name="add_auto">Add Auto</string>
@@ -26,6 +22,7 @@
     <string name="save">Save</string>
     <string name="share">Share</string>
     <string name="submit">Submit</string>
+    <string name="this_field_required">This field required !</string>
     <string name="update_location">Update Location</string>
 
 </resources>
