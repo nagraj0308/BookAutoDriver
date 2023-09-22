@@ -1,6 +1,5 @@
 package com.book.auto.driver.presentation.addeditauto
 
-import android.R
 import android.R.attr.width
 import android.os.Bundle
 import android.util.Log
@@ -11,6 +10,7 @@ import android.widget.ArrayAdapter
 import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.book.auto.driver.R
 import com.book.auto.driver.databinding.FragmnetAddEditAutoDetailsBinding
 import com.book.auto.driver.presentation.home.HomeViewModel
 import com.book.auto.driver.utils.Constants
@@ -45,7 +45,7 @@ class AddEditAutoFragment : Fragment() {
 
         val arrayAdapter = ArrayAdapter<String>(
             requireContext(),
-            R.layout.simple_spinner_dropdown_item,
+            R.layout.item_spinner,
             Constants.gaadiTypes
         )
         binding.actvAutoType.setAdapter(arrayAdapter)
@@ -68,8 +68,8 @@ class AddEditAutoFragment : Fragment() {
 //            textView.text = it
 //        }
 
-        binding.btnSubmit.setOnClickListener{
-            if (validate()){
+        binding.btnSubmit.setOnClickListener {
+            if (validate()) {
 
             }
         }
@@ -77,13 +77,37 @@ class AddEditAutoFragment : Fragment() {
     }
 
 
-    fun validate(): Boolean {
-        val name =binding.tilAutoName.editText!!.text.trim().toString()
-        if(name.isEmpty()){
-            binding.tilAutoName.error= getString(R.string.paste_as_plain_text)
+    private fun validate(): Boolean {
+        val name = binding.tilAutoName.editText!!.text.trim().toString()
+        if (name.isEmpty()) {
+            binding.tilAutoName.error = getString(R.string.this_field_required)
             return false
-        }else{
-            binding.tilAutoName.error=""
+        } else {
+            binding.tilAutoName.error = ""
+        }
+
+        val autoNumber = binding.tilAutoNumber.editText!!.text.trim().toString()
+        if (autoNumber.length < 10) {
+            binding.tilAutoNumber.error = getString(R.string.this_should_be_10_digits)
+            return false
+        } else {
+            binding.tilAutoNumber.error = ""
+        }
+
+        val driverName = binding.tilDriverName.editText!!.text.trim().toString()
+        if (driverName.isEmpty()) {
+            binding.tilDriverName.error = getString(R.string.this_field_required)
+            return false
+        } else {
+            binding.tilDriverName.error = ""
+        }
+
+        val mobileNumber = binding.tilMobileNumber.editText!!.text.trim().toString()
+        if (mobileNumber.length < 10) {
+            binding.tilMobileNumber.error = getString(R.string.this_should_be_10_digits)
+            return false
+        } else {
+            binding.tilMobileNumber.error = ""
         }
 
         return true
