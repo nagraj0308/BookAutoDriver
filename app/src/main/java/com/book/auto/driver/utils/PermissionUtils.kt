@@ -7,6 +7,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.pm.PackageManager
 import android.location.LocationManager
+import android.os.Build
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.google.android.gms.common.api.ResolvableApiException
@@ -22,30 +23,36 @@ class PermissionUtils {
         private const val REQUEST_CODE_READ_STORAGE = 13
 
         fun checkReadStoragePermission(context: Context): Boolean {
-            val readPermission: Int =
-                ContextCompat.checkSelfPermission(context, permission.READ_EXTERNAL_STORAGE)
-            return readPermission == PackageManager.PERMISSION_GRANTED
+            return if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.S_V2) {
+                val readPermission: Int =
+                    ContextCompat.checkSelfPermission(context, permission.READ_EXTERNAL_STORAGE)
+                readPermission == PackageManager.PERMISSION_GRANTED
+            } else {
+                true
+            }
         }
 
         fun requestReadStoragePermission(activity: Activity) {
-            activity.requestPermissions(
-                arrayOf(permission.READ_EXTERNAL_STORAGE),
-                REQUEST_CODE_READ_STORAGE
-            )
+            if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.S_V2) {
+                activity.requestPermissions(
+                    arrayOf(permission.READ_EXTERNAL_STORAGE),
+                    REQUEST_CODE_READ_STORAGE
+                )
+            }
         }
 
         fun requestLocationAccessPermission(activity: Activity) {
             ActivityCompat.requestPermissions(
                 activity,
                 arrayOf(
-                    Manifest.permission.ACCESS_FINE_LOCATION,
+                    permission.ACCESS_FINE_LOCATION,
                 ),
                 RequestCode.LOCATION
             )
         }
 
         fun checkLocationAccessPermission(activity: Activity): Boolean {
-            return activity.checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
+            return activity.checkSelfPermission(permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
         }
 
         fun checkLocationEnabled(activity: Activity): Boolean {

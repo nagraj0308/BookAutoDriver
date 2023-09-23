@@ -31,6 +31,7 @@ class AddEditAutoFragment : Fragment() {
     private val binding get() = _binding!!
     private var imageState: Int = 0
 
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -59,33 +60,10 @@ class AddEditAutoFragment : Fragment() {
         binding.actvAutoType.setText(Constants.gaadiTypes[0], false)
 
 
-        //Auto Photo
 
-        val startForResult = registerForActivityResult(
-            ActivityResultContracts.StartActivityForResult()
-        ) { result: ActivityResult ->
-
-            if (result.resultCode == Activity.RESULT_OK && null != result.data) {
-                val data = result.data
-                val selectedImage: Uri = data!!.data!!
-                val filePathColumn = arrayOf(MediaStore.Images.Media.DATA)
-                val cursor = requireActivity().contentResolver
-                    .query(selectedImage, filePathColumn, null, null, null)
-                cursor!!.moveToFirst()
-                val columnIndex = cursor.getColumnIndex(filePathColumn[0])
-                val picturePath = cursor.getString(columnIndex)
-                cursor.close()
-                Glide.with(this).asBitmap().load(picturePath).into(binding.ivAutoPhoto)
-                performCrop(
-                    selectedImage,
-                    3,
-                    2
-                )
-            }
-        }
 
         binding.btnEditPhoto.setOnClickListener {
-            if (PermissionUtils.checkLocationEnabled(requireActivity())) {
+            if (PermissionUtils.checkReadStoragePermission(requireContext())) {
                 startForResult.launch(
                     Intent(
                         Intent.ACTION_PICK,
@@ -107,21 +85,41 @@ class AddEditAutoFragment : Fragment() {
         return root
     }
 
-    private fun performCrop(picUri: Uri, arx: Int, ary: Int) {
-        val startForCropResult = registerForActivityResult(
-            ActivityResultContracts.StartActivityForResult()
-        ) { result: ActivityResult ->
-            if (result.resultCode == Activity.RESULT_OK && null != result.data) {
-                val data = result.data
-                try {
-                    val extras: Bundle = data!!.extras!!
-                    val croppedPic = extras.getParcelable<Bitmap>("data")
-                    Glide.with(this).asBitmap().load(croppedPic).into(binding.ivAutoPhoto)
-                } catch (_: Exception) {
-                }
+    private val startForResult = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result: ActivityResult ->
+
+        if (result.resultCode == Activity.RESULT_OK && null != result.data) {
+            val data = result.data
+            val selectedImage: Uri = data!!.data!!
+            val filePathColumn = arrayOf(MediaStore.Images.Media.DATA)
+            val cursor = requireActivity().contentResolver
+                .query(selectedImage, filePathColumn, null, null, null)
+            cursor!!.moveToFirst()
+            val columnIndex = cursor.getColumnIndex(filePathColumn[0])
+            val picturePath = cursor.getString(columnIndex)
+            cursor.close()
+            Glide.with(this).asBitmap().load(picturePath).into(binding.ivAutoPhoto)
+            performCrop(selectedImage, 3, 2)
+        }
+    }
+
+
+    private val startForCropResult = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result: ActivityResult ->
+        if (result.resultCode == Activity.RESULT_OK && null != result.data) {
+            val data = result.data
+            try {
+                val extras: Bundle = data!!.extras!!
+                val croppedPic = extras.getParcelable<Bitmap>("data")
+                Glide.with(this).asBitmap().load(croppedPic).into(binding.ivAutoPhoto)
+            } catch (_: Exception) {
             }
         }
+    }
 
+    private fun performCrop(picUri: Uri, arx: Int, ary: Int) {
         val cropIntent = Intent("com.android.camera.action.CROP")
         cropIntent.setDataAndType(picUri, "image/*")
         cropIntent.putExtra("crop", "true")
@@ -130,13 +128,11 @@ class AddEditAutoFragment : Fragment() {
         cropIntent.putExtra("outputX", 256)
         cropIntent.putExtra("outputY", 256)
         cropIntent.putExtra("return-data", true)
-
         startForCropResult.launch(
             Intent(
                 cropIntent
             )
         )
-
     }
 
 
