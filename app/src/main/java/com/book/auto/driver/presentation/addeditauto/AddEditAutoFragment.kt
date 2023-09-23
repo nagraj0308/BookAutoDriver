@@ -45,6 +45,16 @@ class AddEditAutoFragment : Fragment() {
         binding.btnSubmit.setOnClickListener(View.OnClickListener {
 
         })
+        binding.btnSave.setOnClickListener(View.OnClickListener {
+
+        })
+        binding.btnDelete.setOnClickListener {
+            viewModel.deleteAuto {
+                if (it) {
+                    activity?.onBackPressed()
+                }
+            }
+        }
 
         if (arguments != null) {
             isNew = requireArguments().getBoolean("is_new")

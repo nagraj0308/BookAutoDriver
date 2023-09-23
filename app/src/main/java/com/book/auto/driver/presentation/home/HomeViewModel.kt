@@ -353,12 +353,12 @@ class HomeViewModel @Inject constructor(
     }
 
 
-    fun deleteGaadi(gaadiId: String, callback: (Boolean) -> Unit) {
+    fun deleteAuto(callback: (Boolean) -> Unit) {
         _showProgress.value = true
         CoroutineScope(Dispatchers.IO).launch {
-            deleteGaadiImage(gaadiId) { result ->
+            deleteGaadiImage(_vehicle.value!!._id) { result ->
                 if (result) {
-                    deleteGaadiData(gaadiId) {
+                    deleteGaadiData(_vehicle.value!!._id) {
                         if (it) {
                             _showProgress.value = false
                             CoroutineScope(Dispatchers.IO).launch {
