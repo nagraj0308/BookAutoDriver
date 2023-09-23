@@ -5,6 +5,7 @@ plugins {
     id("com.google.firebase.crashlytics")
     id("com.google.firebase.firebase-perf")
     id("com.google.dagger.hilt.android")
+    id("androidx.navigation.safeargs.kotlin")
     id("kotlin-kapt")
 }
 
@@ -90,10 +91,16 @@ dependencies {
     implementation("com.google.maps.android:maps-utils-ktx:3.0.0")
 
 
+    implementation("android.arch.lifecycle:extensions:1.1.1")
+
+
     // Coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.4.0")
+
+    implementation("pub.devrel:easypermissions:3.0.0")
+
 
     implementation("com.github.bumptech.glide:glide:4.16.0")
 
