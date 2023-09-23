@@ -30,6 +30,7 @@ class AddEditAutoFragment : Fragment() {
     private val viewModel: HomeViewModel by activityViewModels()
     private val binding get() = _binding!!
     private var imageState: Int = 0
+    private var isNew: Boolean = true
 
 
     override fun onCreateView(
@@ -46,8 +47,7 @@ class AddEditAutoFragment : Fragment() {
         })
 
         if (arguments != null) {
-            val url: Boolean = requireArguments().getBoolean("is_add")
-            Log.v("NAGRAJ", url.toString())
+            isNew = requireArguments().getBoolean("is_new")
         }
 
 
@@ -81,6 +81,23 @@ class AddEditAutoFragment : Fragment() {
             if (validate()) {
 
             }
+        }
+
+
+        if (isNew) {
+            binding.tilDriverName.editText!!.setText(viewModel.readState.value!!.name)
+            binding.llEdit.visibility = View.GONE
+            binding.btnSubmit.visibility = View.VISIBLE
+        } else {
+            binding.tilAutoName.editText!!.setText(viewModel.readVehicle.value!!.name)
+            binding.tilAutoNumber.editText!!.setText(viewModel.readVehicle.value!!.number)
+            binding.tilDriverName.editText!!.setText(viewModel.readVehicle.value!!.driver)
+            binding.tilMobileNumber.editText!!.setText(viewModel.readVehicle.value!!.mobileNo)
+            Glide.with(this).asBitmap().load(viewModel.readVehicle.value!!.imageUrl)
+                .into(binding.ivAutoPhoto)
+
+            binding.llEdit.visibility = View.VISIBLE
+            binding.btnSubmit.visibility = View.GONE
         }
         return root
     }

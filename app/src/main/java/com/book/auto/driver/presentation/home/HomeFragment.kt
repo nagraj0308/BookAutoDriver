@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.findNavController
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.book.auto.driver.R
 import com.book.auto.driver.databinding.FragmentHomeBinding
@@ -24,12 +24,11 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
     private val UPDATE_INTERVAL = (10 * 1000).toLong()  /* 10 secs */
     private val FASTEST_INTERVAL: Long = 2000 /* 2 sec */
     private val viewModel: HomeViewModel by activityViewModels()
+    private var isNew: Boolean = true
 
 
     private lateinit var mGoogleMap: GoogleMap
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -37,8 +36,6 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
-
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
         val navController = findNavController()
@@ -47,14 +44,18 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         }
         binding.btnAddAuto.setOnClickListener {
             val bundle = Bundle()
-            bundle.putBoolean("is_add", true)
+            bundle.putBoolean("is_new", isNew)
             navController.navigate(R.id.nav_add_edit_auto, bundle)
         }
         binding.btnEdit.setOnClickListener {
             val bundle = Bundle()
-            bundle.putBoolean("is_add", false)
+            bundle.putBoolean("is_new", isNew)
             navController.navigate(R.id.nav_add_edit_auto, bundle)
         }
+
+        viewModel.readVehicle.observe(viewLifecycleOwner, Observer {
+            setContentState()
+        })
 
 //        val mapFragment = binding.mvCl as SupportMapFragment
 //        mapFragment.getMapAsync(this)
@@ -65,6 +66,25 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
 //        }
         return root
     }
+
+    private fun setContentState() {
+        if (viewModel.readVehicle.value?._id == "") {
+            isNew = true
+            binding.btnAddAuto.visibility = View.VISIBLE
+            binding.cvContent.visibility = View.GONE
+
+        } else {
+            isNew = false
+            binding.btnAddAuto.visibility = View.GONE
+            binding.cvContent.visibility = View.VISIBLE
+            binding.tvAutoNo.text = viewModel.readVehicle.value!!.number
+            binding.tvMobileNo.text = viewModel.readVehicle.value!!.mobileNo
+            binding.tvLive.text =
+                if (viewModel.readVehicle.value!!.deactivated || viewModel.readVehicle.value!!.verificationState != "A") "Not Live" else "Live"
+        }
+
+    }
+
 
     override fun onMapReady(googleMap: GoogleMap) {
         mGoogleMap = googleMap;
