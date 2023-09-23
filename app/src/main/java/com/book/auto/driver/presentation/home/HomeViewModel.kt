@@ -34,9 +34,6 @@ import javax.inject.Inject
 data class HomeState(
     var email: String = "",
     var name: String = "",
-    var lat: Double = 28.656473,
-    var lon: Double = 77.242943,
-    var isLocationUpdated: Boolean = false,
 )
 
 
@@ -52,11 +49,18 @@ class HomeViewModel @Inject constructor(
     private var _showProgress = MutableLiveData(false)
     private var _toastMsg = MutableLiveData("")
     private var _showToast = MutableLiveData(false)
+    private val _isLocationUpdated = MutableLiveData(false)
+    private val _lat = MutableLiveData(28.656473)
+    private val _lon = MutableLiveData(77.242943)
+
     val readShowProgress: LiveData<Boolean> get() = _showProgress
     val readVehicle: LiveData<Vehicle> get() = _vehicle
     val readState: LiveData<HomeState> get() = _state
     val readToastMsg: LiveData<String> get() = _toastMsg
     val readShowToast: LiveData<Boolean> get() = _showToast
+
+    val lat: LiveData<Double> get() = _lat
+    val lon: LiveData<Double> get() = _lon
 
 
     @OptIn(DelicateCoroutinesApi::class)
@@ -178,8 +182,8 @@ class HomeViewModel @Inject constructor(
                         gDeactivated,
                         gDriver,
                         url,
-                        _state.value!!.lat,
-                        _state.value!!.lon,
+                        _lat.value,
+                        _lon.value,
                         gMobile,
                         gNumber,
                         gRate,
@@ -282,8 +286,8 @@ class HomeViewModel @Inject constructor(
                         gDeactivated,
                         gDriver,
                         url,
-                        _state.value!!.lat,
-                        _state.value!!.lon,
+                        _lat.value,
+                        _lon.value,
                         gMobile,
                         gNumber,
                         gRate,
@@ -306,7 +310,7 @@ class HomeViewModel @Inject constructor(
     }
 
 
-    fun getAutoDetails(callback: (Boolean) -> Unit) {
+    private fun getAutoDetails(callback: (Boolean) -> Unit) {
         _showProgress.value = true
         CoroutineScope(Dispatchers.IO).launch {
             runCatching {
@@ -338,9 +342,9 @@ class HomeViewModel @Inject constructor(
                 val fusedLocationClient = LocationServices.getFusedLocationProviderClient(activity)
                 fusedLocationClient.lastLocation.addOnSuccessListener { location: Location? ->
                     location?.let {
-                        _state.value!!.isLocationUpdated = true
-                        _state.value!!.lat = it.latitude
-                        _state.value!!.lon = it.longitude
+                        _isLocationUpdated.value = true
+                        _lat.value = it.latitude
+                        _lon.value = it.longitude
                         Log.v("NAGRAJ", it.latitude.toString() + " " + it.longitude.toString())
                     }
                 }

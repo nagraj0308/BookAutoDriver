@@ -10,24 +10,20 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.book.auto.driver.R
 import com.book.auto.driver.databinding.FragmentHomeBinding
-import com.google.android.gms.location.LocationRequest
+import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 
-class HomeFragment : Fragment(), OnMapReadyCallback {
+
+class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
-
-    private var mLocationRequest: LocationRequest? = null
-    private val UPDATE_INTERVAL = (10 * 1000).toLong()  /* 10 secs */
-    private val FASTEST_INTERVAL: Long = 2000 /* 2 sec */
     private val viewModel: HomeViewModel by activityViewModels()
     private var isNew: Boolean = true
+    private var map: GoogleMap? = null
+    private var cl: LatLng? = null
 
-
-    private lateinit var mGoogleMap: GoogleMap
 
     private val binding get() = _binding!!
 
@@ -57,14 +53,64 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
             setContentState()
         })
 
-//        val mapFragment = binding.mvCl as SupportMapFragment
-//        mapFragment.getMapAsync(this)
+        //Maps View
+        binding.mvCl.onCreate(savedInstanceState)
+        binding.mvCl.getMapAsync {
+            map = it
+            viewModel.lat.observe(viewLifecycleOwner, Observer { it1 ->
+                map!!.clear()
+                cl = LatLng(it1, viewModel.lon.value!!)
+                val update = CameraUpdateFactory.newLatLngZoom(cl!!, 10f)
+                map!!.moveCamera(update)
 
-//        val textView: TextView = binding.textHome
-//        homeViewModel.text.observe(viewLifecycleOwner) {
-//            textView.text = it
-//        }
+                map!!.addMarker(
+                    MarkerOptions().position(cl!!).title("Current Location")
+                )
+            })
+
+            viewModel.lon.observe(viewLifecycleOwner, Observer { it1 ->
+                map!!.clear()
+                cl = LatLng(viewModel.lat.value!!, it1)
+                val update = CameraUpdateFactory.newLatLngZoom(cl!!, 10f)
+                map!!.moveCamera(update)
+
+                map!!.addMarker(
+                    MarkerOptions().position(cl!!).title("Current Location")
+                )
+            })
+        }
         return root
+    }
+
+
+    override fun onStart() {
+        super.onStart()
+        binding.mvCl.onStart()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding.mvCl.onResume()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        binding.mvCl.onPause()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        binding.mvCl.onStop()
+    }
+
+    override fun onLowMemory() {
+        super.onLowMemory()
+        binding.mvCl.onLowMemory()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        binding.mvCl.onSaveInstanceState(outState)
     }
 
     private fun setContentState() {
@@ -85,19 +131,6 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
 
     }
 
-
-    override fun onMapReady(googleMap: GoogleMap) {
-        mGoogleMap = googleMap;
-        mGoogleMap.addMarker(
-            MarkerOptions().position(
-                LatLng(
-                    viewModel.readState.value!!.lat,
-                    viewModel.readState.value!!.lon
-                )
-            ).title("Current Location")
-        )
-
-    }
 
     override fun onDestroyView() {
         super.onDestroyView()
