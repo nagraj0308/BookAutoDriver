@@ -93,6 +93,9 @@ class AddEditAutoFragment : Fragment() {
             binding.tilAutoNumber.editText!!.setText(viewModel.readVehicle.value!!.number)
             binding.tilDriverName.editText!!.setText(viewModel.readVehicle.value!!.driver)
             binding.tilMobileNumber.editText!!.setText(viewModel.readVehicle.value!!.mobileNo)
+            binding.actvAutoType.setText(viewModel.readVehicle.value!!.type)
+            binding.sbDeactivated.setChecked(viewModel.readVehicle.value!!.deactivated)
+
             Glide.with(this).asBitmap().load(viewModel.readVehicle.value!!.imageUrl)
                 .into(binding.ivAutoPhoto)
 
