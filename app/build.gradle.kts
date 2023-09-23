@@ -94,6 +94,8 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.4.0")
 
+    implementation("com.github.bumptech.glide:glide:4.16.0")
+
     //dagger
     implementation("com.google.dagger:hilt-android:2.46.1")
     kapt("com.google.dagger:hilt-compiler:2.46.1")

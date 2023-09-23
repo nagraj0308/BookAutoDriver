@@ -19,3 +19,8 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+./gradlew :samples:flickr:run
+./gradlew :samples:giphy:run
+./gradlew :samples:svg:run
+./gradlew :samples:contacturi:run
