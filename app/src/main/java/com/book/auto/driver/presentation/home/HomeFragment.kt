@@ -1,6 +1,7 @@
 package com.book.auto.driver.presentation.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +13,7 @@ import com.book.auto.driver.R
 import com.book.auto.driver.databinding.FragmentHomeBinding
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.MapsInitializer
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 
@@ -33,6 +35,9 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        MapsInitializer.initialize(requireContext(), MapsInitializer.Renderer.LATEST) {
+            Log.v("NAGRAJ", it.name)
+        }
         val root: View = binding.root
         val navController = findNavController()
         binding.btnUpdateLocation.setOnClickListener {
@@ -130,7 +135,6 @@ class HomeFragment : Fragment() {
         }
 
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()
