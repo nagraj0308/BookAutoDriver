@@ -24,13 +24,29 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    signingConfigs {
+        create("release") {
+            storeFile =
+                file("C:\\Users\\NAGRAJ\\AndroidStudioProjects\\BookGaadiDriver\\nagraj0308.jks")
+            storePassword = "@nagraj"
+            keyAlias = "nagraj0308"
+            keyPassword = "@nagraj"
+        }
+
+
+    }
+
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
+            isShrinkResources = false
+            isDebuggable = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            signingConfig = signingConfigs.getByName("release")
+
         }
     }
     compileOptions {

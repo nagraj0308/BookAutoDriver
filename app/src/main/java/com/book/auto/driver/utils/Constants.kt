@@ -4,7 +4,7 @@ class Constants {
     companion object {
 //        #557a2a
 //        rgb(85, 122, 42)
-        const val BASE_URL = "https://bookgaadiserver.onrender.com/"
+        const val BASE_URL = "http://43.204.42.94:5002/"
         const val ABOUT_US_URL = "https://nagraj0308.github.io/book_auto_driver_aboutus/"
         const val PNP_URL = "https://nagraj0308.github.io/book_auto_driver_pnp/"
         const val PLAYSTORE_URL =
