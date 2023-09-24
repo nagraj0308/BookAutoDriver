@@ -20,10 +20,6 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 
-./gradlew :samples:flickr:run
-./gradlew :samples:giphy:run
-./gradlew :samples:svg:run
-./gradlew :samples:contacturi:run
 
 -dontwarn com.book.auto.driver.presentation.home.HomeFragment
 -dontwarn com.book.auto.driver.presentation.home.HomeActivity
