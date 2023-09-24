@@ -21,14 +21,32 @@
 #-renamesourcefileattribute SourceFile
 
 
--dontwarn com.book.auto.driver.presentation.home.HomeFragment
--dontwarn com.book.auto.driver.presentation.home.HomeActivity
+-keep class com.book.auto.driver.presentation.home.HomeFragment
+-keep class com.book.auto.driver.utils.BaseFragment
+-keep class com.book.auto.driver.presentation.home.HomeActivity
 -keep class com.book.auto.driver.driver** { *; }
 -keep class com.book.auto.driver.utils.Utils
 -keep class com.book.auto.driver.utils.Constants
 -keep class com.book.auto.driver.utils.PermissionUtils
 -keep class com.book.auto.driver.utils.RequestCode
+-keep class com.book.auto.driver.domain.BVApi
+-keep class com.book.auto.driver.data.remote.BVApiImp
+-keep class com.book.auto.driver.data.remote.reqres.BasicResponse
+-keep class com.book.auto.driver.data.remote.reqres.DeleteVehicleRequest
+-keep class com.book.auto.driver.data.remote.reqres.GetVehicleByGmailIdRequest
+-keep class com.book.auto.driver.data.remote.reqres.Vehicle
+-keep class com.book.auto.driver.data.remote.reqres.VehicleLocationRequest
+-keep class com.book.auto.driver.data.remote.reqres.VehicleRequest
+-keep class com.book.auto.driver.data.remote.reqres.VehicleResponse
+-keep class com.book.auto.driver.data.DataStore
+-keep class com.book.auto.driver.data.DataStorePref
+-keep class com.book.auto.driver.data.remote.BVService
+
+
 -keep class com.book.auto.driver.* {*;}
+-keep class com.book.auto.driver.presentation.addeditauto.AddEditAutoFragment
+-keep class com.book.auto.driver.presentation.home.HomeViewModel
+
 
 -keep,allowobfuscation,allowshrinking class kotlin.coroutines.Continuation
 -keepattributes Signature
