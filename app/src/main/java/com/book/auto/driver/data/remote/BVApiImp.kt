@@ -3,6 +3,7 @@ package com.book.auto.driver.data.remote
 import com.book.auto.driver.data.remote.reqres.BasicResponse
 import com.book.auto.driver.data.remote.reqres.DeleteVehicleRequest
 import com.book.auto.driver.data.remote.reqres.GetVehicleByGmailIdRequest
+import com.book.auto.driver.data.remote.reqres.VehicleLocationRequest
 import com.book.auto.driver.data.remote.reqres.VehicleRequest
 import com.book.auto.driver.data.remote.reqres.VehicleResponse
 import com.book.auto.driver.domain.BVApi
@@ -20,6 +21,10 @@ class BVApiImp @Inject constructor(
 
     override suspend fun updateVehicle(request: VehicleRequest?): Response<VehicleResponse> {
         return service.updateVehicle(request)
+    }
+
+    override suspend fun updateVehicleLocation(request: VehicleLocationRequest?): Response<BasicResponse> {
+        return service.updateVehicleLocation(request)
     }
 
 

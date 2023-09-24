@@ -14,6 +14,7 @@ import com.book.auto.driver.data.DataStore
 import com.book.auto.driver.data.remote.reqres.DeleteVehicleRequest
 import com.book.auto.driver.data.remote.reqres.GetVehicleByGmailIdRequest
 import com.book.auto.driver.data.remote.reqres.Vehicle
+import com.book.auto.driver.data.remote.reqres.VehicleLocationRequest
 import com.book.auto.driver.data.remote.reqres.VehicleRequest
 import com.book.auto.driver.domain.BVApi
 import com.book.auto.driver.utils.FBS
@@ -309,6 +310,28 @@ class HomeViewModel @Inject constructor(
         }
     }
 
+    private fun updateAutoLocation(
+        gId: String,
+        aLat: Double,
+        aLon: Double
+    ) {
+        CoroutineScope(Dispatchers.IO).launch {
+            runCatching {
+                api.updateVehicleLocation(
+                    VehicleLocationRequest(
+                        gId, aLat, aLon
+                    )
+                )
+            }.onSuccess {
+                withContext(Dispatchers.Main) {
+                    _isLocationUpdated.value = true
+                    _lat.value = aLat
+                    _lon.value = aLon
+                }
+            }
+        }
+    }
+
 
     private fun getAutoDetails(callback: (Boolean) -> Unit) {
         _showProgress.value = true
@@ -345,6 +368,7 @@ class HomeViewModel @Inject constructor(
                         _isLocationUpdated.value = true
                         _lat.value = it.latitude
                         _lon.value = it.longitude
+                        updateAutoLocation(_state.value!!.email, it.latitude, it.longitude)
                         Log.v("NAGRAJ", it.latitude.toString() + " " + it.longitude.toString())
                     }
                 }

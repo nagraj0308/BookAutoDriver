@@ -1,5 +1,8 @@
 package com.book.auto.driver.presentation.home
 
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -14,6 +17,8 @@ import com.book.auto.driver.databinding.FragmentHomeBinding
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapsInitializer
+import com.google.android.gms.maps.model.BitmapDescriptor
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 
@@ -61,15 +66,17 @@ class HomeFragment : Fragment() {
         //Maps View
         binding.mvCl.onCreate(savedInstanceState)
         binding.mvCl.getMapAsync {
+
+            val circleDrawable = resources.getDrawable(R.drawable.ic_auto,null)
+            val markerIcon: BitmapDescriptor = getMarkerIconFromDrawable(circleDrawable)
             map = it
             viewModel.lat.observe(viewLifecycleOwner, Observer { it1 ->
                 map!!.clear()
                 cl = LatLng(it1, viewModel.lon.value!!)
                 val update = CameraUpdateFactory.newLatLngZoom(cl!!, 10f)
                 map!!.moveCamera(update)
-
                 map!!.addMarker(
-                    MarkerOptions().position(cl!!).title("Current Location")
+                    MarkerOptions().position(cl!!).title("Current Location").icon(markerIcon)
                 )
             })
 
@@ -78,9 +85,8 @@ class HomeFragment : Fragment() {
                 cl = LatLng(viewModel.lat.value!!, it1)
                 val update = CameraUpdateFactory.newLatLngZoom(cl!!, 10f)
                 map!!.moveCamera(update)
-
                 map!!.addMarker(
-                    MarkerOptions().position(cl!!).title("Current Location")
+                    MarkerOptions().position(cl!!).title("Current Location").icon(markerIcon)
                 )
             })
         }
@@ -139,6 +145,19 @@ class HomeFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun getMarkerIconFromDrawable(drawable: Drawable): BitmapDescriptor {
+        val canvas = Canvas()
+        val bitmap = Bitmap.createBitmap(
+            drawable.intrinsicWidth,
+            drawable.intrinsicHeight,
+            Bitmap.Config.ARGB_8888
+        )
+        canvas.setBitmap(bitmap)
+        drawable.setBounds(0, 0, drawable.intrinsicWidth, drawable.intrinsicHeight)
+        drawable.draw(canvas)
+        return BitmapDescriptorFactory.fromBitmap(bitmap)
     }
 
 

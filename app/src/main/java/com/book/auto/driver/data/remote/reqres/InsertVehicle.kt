@@ -17,6 +17,12 @@ data class VehicleRequest(
     @SerializedName("type") val type: String?
 )
 
+data class VehicleLocationRequest(
+    @SerializedName("vId") val vId: String?,
+    @SerializedName("lat") val lat: Double?,
+    @SerializedName("lon") val lon: Double?
+)
+
 data class GetVehicleByGmailIdRequest(
     @SerializedName("gmailId") val gmailId: String?,
 )
