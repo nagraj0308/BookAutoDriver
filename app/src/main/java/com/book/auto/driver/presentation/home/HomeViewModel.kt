@@ -62,6 +62,7 @@ class HomeViewModel @Inject constructor(
 
     val lat: LiveData<Double> get() = _lat
     val lon: LiveData<Double> get() = _lon
+    val isLocationUpdated: LiveData<Boolean> get() = _isLocationUpdated
 
 
     @OptIn(DelicateCoroutinesApi::class)
@@ -104,7 +105,6 @@ class HomeViewModel @Inject constructor(
     }
 
     fun insertFSImage(
-        gId: String,
         gName: String,
         gType: String,
         gRate: String,
@@ -117,7 +117,7 @@ class HomeViewModel @Inject constructor(
 
 
         viewModelScope.launch(Dispatchers.IO) {
-            val ref = FBS.getReference(gId)
+            val ref = FBS.getReference(_state.value!!.email)
             val baos = ByteArrayOutputStream()
             bitmap.compress(Bitmap.CompressFormat.JPEG, 20, baos)
             val data = baos.toByteArray()
@@ -133,7 +133,7 @@ class HomeViewModel @Inject constructor(
             }.addOnSuccessListener {
                 ref.downloadUrl.addOnSuccessListener {
                     insertGaadi(
-                        gId,
+                        _state.value!!.email,
                         gName,
                         gType,
                         gRate,
@@ -208,7 +208,6 @@ class HomeViewModel @Inject constructor(
 
 
     fun updateFSImage(
-        gId: String,
         gName: String,
         gType: String,
         gRate: String,
@@ -220,7 +219,7 @@ class HomeViewModel @Inject constructor(
     ) {
         _showProgress.value = true
         viewModelScope.launch(Dispatchers.IO) {
-            val ref = FBS.getReference(gId)
+            val ref = FBS.getReference(_state.value!!.email)
             val baos = ByteArrayOutputStream()
             bitmap.compress(Bitmap.CompressFormat.JPEG, 20, baos)
             val data = baos.toByteArray()
@@ -236,7 +235,7 @@ class HomeViewModel @Inject constructor(
             }.addOnSuccessListener {
                 ref.downloadUrl.addOnSuccessListener {
                     updateGaadiData(
-                        gId,
+                        _state.value!!.email,
                         gName,
                         gType,
                         gRate,

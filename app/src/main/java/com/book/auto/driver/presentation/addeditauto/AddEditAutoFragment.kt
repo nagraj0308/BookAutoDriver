@@ -6,30 +6,29 @@ import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.book.auto.driver.R
 import com.book.auto.driver.databinding.FragmnetAddEditAutoDetailsBinding
 import com.book.auto.driver.presentation.home.HomeViewModel
+import com.book.auto.driver.utils.BaseFragment
 import com.book.auto.driver.utils.Constants
 import com.book.auto.driver.utils.PermissionUtils
+import com.book.auto.driver.utils.Utils
 import com.bumptech.glide.Glide
 
 
-class AddEditAutoFragment : Fragment() {
+class AddEditAutoFragment : BaseFragment() {
 
     private var _binding: FragmnetAddEditAutoDetailsBinding? = null
 
     private val viewModel: HomeViewModel by activityViewModels()
     private val binding get() = _binding!!
-    private var imageState: Int = 0
     private var isNew: Boolean = true
 
 
@@ -43,9 +42,54 @@ class AddEditAutoFragment : Fragment() {
         _binding = FragmnetAddEditAutoDetailsBinding.inflate(inflater, container, false)
         val root: View = binding.root
         binding.btnSubmit.setOnClickListener(View.OnClickListener {
-
+            if (validate()) {
+                val name = binding.tilAutoName.editText!!.text.trim().toString()
+                val autoNumber = binding.tilAutoNumber.editText!!.text.trim().toString()
+                val driverName = binding.tilDriverName.editText!!.text.trim().toString()
+                val mobileNumber = binding.tilMobileNumber.editText!!.text.trim().toString()
+                val rate = binding.tilNormalRate.editText!!.text.trim().toString()
+                val autoType = binding.actvAutoType.text.trim().toString()
+                viewModel.insertFSImage(
+                    name, autoType,
+                    rate,
+                    autoNumber,
+                    driverName,
+                    mobileNumber,
+                    binding.sbDeactivated.isChecked,
+                    Utils.screenShot(binding.ivAutoPhoto)!!
+                ) {
+                    if (it) {
+                        requireActivity().onBackPressed()
+                    } else {
+                        showToast("Try again")
+                    }
+                }
+            }
         })
         binding.btnSave.setOnClickListener(View.OnClickListener {
+            if (validate()) {
+                val name = binding.tilAutoName.editText!!.text.trim().toString()
+                val autoNumber = binding.tilAutoNumber.editText!!.text.trim().toString()
+                val driverName = binding.tilDriverName.editText!!.text.trim().toString()
+                val mobileNumber = binding.tilMobileNumber.editText!!.text.trim().toString()
+                val rate = binding.tilNormalRate.editText!!.text.trim().toString()
+                val autoType = binding.actvAutoType.text.trim().toString()
+                viewModel.updateFSImage(
+                    name, autoType,
+                    rate,
+                    autoNumber,
+                    driverName,
+                    mobileNumber,
+                    binding.sbDeactivated.isChecked,
+                    Utils.screenShot(binding.ivAutoPhoto)!!
+                ) {
+                    if (it) {
+                        requireActivity().onBackPressed()
+                    } else {
+                        showToast("Try again")
+                    }
+                }
+            }
 
         })
         binding.btnDelete.setOnClickListener {
@@ -84,15 +128,6 @@ class AddEditAutoFragment : Fragment() {
                 PermissionUtils.requestReadStoragePermission(requireActivity())
             }
         }
-
-
-
-        binding.btnSubmit.setOnClickListener {
-            if (validate()) {
-
-            }
-        }
-
 
         if (isNew) {
             binding.tilDriverName.editText!!.setText(viewModel.readState.value!!.name)
@@ -172,7 +207,7 @@ class AddEditAutoFragment : Fragment() {
             binding.tilAutoName.error = getString(R.string.this_field_required)
             return false
         } else {
-            binding.tilAutoName.error = ""
+            binding.tilAutoName.isErrorEnabled = false
         }
 
         val autoNumber = binding.tilAutoNumber.editText!!.text.trim().toString()
@@ -180,7 +215,7 @@ class AddEditAutoFragment : Fragment() {
             binding.tilAutoNumber.error = getString(R.string.this_should_be_10_digits)
             return false
         } else {
-            binding.tilAutoNumber.error = ""
+            binding.tilAutoNumber.isErrorEnabled = false
         }
 
         val driverName = binding.tilDriverName.editText!!.text.trim().toString()
@@ -188,7 +223,7 @@ class AddEditAutoFragment : Fragment() {
             binding.tilDriverName.error = getString(R.string.this_field_required)
             return false
         } else {
-            binding.tilDriverName.error = ""
+            binding.tilDriverName.isErrorEnabled = false
         }
 
         val mobileNumber = binding.tilMobileNumber.editText!!.text.trim().toString()
@@ -196,7 +231,12 @@ class AddEditAutoFragment : Fragment() {
             binding.tilMobileNumber.error = getString(R.string.this_should_be_10_digits)
             return false
         } else {
-            binding.tilMobileNumber.error = ""
+            binding.tilMobileNumber.isErrorEnabled = false
+        }
+
+        if (!viewModel.isLocationUpdated.value!!) {
+            showToast("Please update location")
+            return false
         }
 
         return true

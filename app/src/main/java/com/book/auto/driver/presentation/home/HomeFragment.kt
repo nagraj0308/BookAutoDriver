@@ -67,7 +67,7 @@ class HomeFragment : Fragment() {
         binding.mvCl.onCreate(savedInstanceState)
         binding.mvCl.getMapAsync {
 
-            val circleDrawable = resources.getDrawable(R.drawable.ic_auto,null)
+            val circleDrawable = resources.getDrawable(R.drawable.ic_auto, null)
             val markerIcon: BitmapDescriptor = getMarkerIconFromDrawable(circleDrawable)
             map = it
             viewModel.lat.observe(viewLifecycleOwner, Observer { it1 ->
@@ -104,10 +104,6 @@ class HomeFragment : Fragment() {
         binding.mvCl.onResume()
     }
 
-    override fun onPause() {
-        super.onPause()
-        binding.mvCl.onPause()
-    }
 
     override fun onStop() {
         super.onStop()
@@ -119,10 +115,6 @@ class HomeFragment : Fragment() {
         binding.mvCl.onLowMemory()
     }
 
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        binding.mvCl.onSaveInstanceState(outState)
-    }
 
     private fun setContentState() {
         if (viewModel.readVehicle.value?._id == "") {
