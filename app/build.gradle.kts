@@ -108,6 +108,7 @@ dependencies {
 
 
     implementation("android.arch.lifecycle:extensions:1.1.1")
+    implementation("androidx.work:work-runtime-ktx:2.8.1")
 
 
     // Coroutines
