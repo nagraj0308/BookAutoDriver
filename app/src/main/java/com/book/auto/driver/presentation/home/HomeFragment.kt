@@ -60,7 +60,7 @@ class HomeFragment : Fragment() {
         }
 
         viewModel.readVehicle.observe(viewLifecycleOwner, Observer {
-            setContentState()
+            //setContentState()
         })
 
         //Maps View

@@ -27,7 +27,7 @@ android {
     signingConfigs {
         create("release") {
             storeFile =
-                file("C:\\Users\\NAGRAJ\\AndroidStudioProjects\\BookAutoDriver\\nagraj0308.jks")
+                file("..\\nagraj0308.jks")
             storePassword = "@nagraj"
             keyAlias = "nagraj0308"
             keyPassword = "@nagraj"

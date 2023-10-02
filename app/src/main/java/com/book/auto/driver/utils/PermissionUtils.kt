@@ -21,6 +21,27 @@ class PermissionUtils {
 
     companion object {
         private const val REQUEST_CODE_READ_STORAGE = 13
+        private const val REQUEST_CODE_POST_NOTIFICATION = 14
+
+        fun requestShowNotificationPermission(activity: Activity) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                activity.requestPermissions(
+                    arrayOf(permission.POST_NOTIFICATIONS),
+                    REQUEST_CODE_POST_NOTIFICATION
+                )
+            }
+        }
+
+        fun checkPostNotificationPermission(context: Context): Boolean {
+            return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                val readPermission: Int =
+                    ContextCompat.checkSelfPermission(context, permission.POST_NOTIFICATIONS)
+                readPermission == PackageManager.PERMISSION_GRANTED
+            } else {
+                true
+            }
+        }
+
 
         fun checkReadStoragePermission(context: Context): Boolean {
             return if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.S_V2) {
