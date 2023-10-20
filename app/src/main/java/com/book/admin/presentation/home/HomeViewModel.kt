@@ -25,10 +25,10 @@ class HomeViewModel @Inject constructor(
 ) : ViewModel() {
     private lateinit var dataStore: DataStore
 
-    private val _autos = MutableLiveData<MutableList<Auto>>()
+    private val _autos = MutableLiveData<List<Auto>>()
     private val _password = MutableLiveData("")
 
-    val autos: MutableLiveData<MutableList<Auto>> get() = _autos
+    val autos: LiveData<List<Auto>> get() = _autos
     val password: LiveData<String> get() = _password
 
 
@@ -39,7 +39,7 @@ class HomeViewModel @Inject constructor(
             dataStore.getPassword.collect {
                 withContext(Dispatchers.Main) {
                     _password.value = it
-//                    getPendingAutos()
+                    getPendingAutos()
                 }
             }
         }
@@ -49,7 +49,6 @@ class HomeViewModel @Inject constructor(
     fun logout() {
         GlobalScope.launch(Dispatchers.IO) {
             dataStore.setLogin(false, "") {
-
             }
         }
     }
@@ -61,9 +60,9 @@ class HomeViewModel @Inject constructor(
                 api.getAllAutoAdmin("nagraj0308")
             }.onSuccess {
                 withContext(Dispatchers.Main) {
-                    _autos.value!!.clear()
+                    _autos.value = emptyList()
                     if (it.isSuccessful && it.body() != null) {
-//                        _autos.value!!.addAll(it.body()!!.data)
+                        _autos.value = it.body()!!.data
                     }
                 }
             }
