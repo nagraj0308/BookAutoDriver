@@ -1,10 +1,10 @@
-package com.book.auto.driver.di
+package com.book.admin.di
 
-import com.book.auto.driver.BuildConfig
-import com.book.auto.driver.data.remote.BVApiImp
-import com.book.auto.driver.data.remote.BVService
-import com.book.auto.driver.domain.BVApi
-import com.book.auto.driver.utils.Constants
+import com.book.admin.BuildConfig
+import com.book.admin.data.remote.BVApiImp
+import com.book.admin.data.remote.BVService
+import com.book.admin.domain.BVApi
+import com.book.admin.utils.Constants
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

@@ -14,20 +14,13 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
+            android:layout_margin="15dp"
             android:background="@android:color/white"
-            android:text="This version is outdated please update from google playstore to latest version."
+            android:textAlignment="center"
+            android:text="This version is outdated!!"
             android:textColor="@color/black"
             android:textSize="18sp" />
 
-        <Button
-            android:id="@+id/btn_update"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="@android:color/white"
-            android:clickable="true"
-            android:text="@string/update" />
     </androidx.appcompat.widget.LinearLayoutCompat>
 
 </androidx.leanback.widget.BaseCardView>

@@ -6,36 +6,27 @@
     <uses-feature
         android:name="android.software.leanback"
         android:required="false" />
-    <uses-feature
-        android:name="android.hardware.location.gps"
-        android:required="false" />
+
     <uses-feature
         android:name="android.hardware.touchscreen"
         android:required="false" />
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
-    <uses-permission
-        android:name="android.permission.READ_EXTERNAL_STORAGE"
-        android:maxSdkVersion="32" />
 
 
     <application
-        android:name=".App"
+        android:name="com.book.admin.App"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:usesCleartextTraffic="true"
         android:supportsRtl="true"
         android:theme="@style/Theme.BookAutoDriver"
-        tools:targetApi="31">
+        android:usesCleartextTraffic="true">
         <activity
-            android:name=".presentation.login.LoginActivity"
+            android:name="com.book.admin.presentation.login.LoginActivity"
             android:exported="true"
             android:theme="@style/Theme.BookAutoDriver.NoActionBar">
             <intent-filter>
@@ -45,25 +36,11 @@
         </activity>
 
         <activity
-            android:name=".presentation.home.HomeActivity"
+            android:name="com.book.admin.presentation.home.HomeActivity"
             android:exported="true"
             android:theme="@style/Theme.BookAutoDriver.NoActionBar" />
 
-        <provider
-            android:name="androidx.core.content.FileProvider"
-            android:authorities="${applicationId}.provider"
-            android:exported="false"
-            android:grantUriPermissions="true">
 
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/path_provider" />
-
-        </provider>
-
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyCsbv5QqoEoZgaCgQjqbZ-v_vBYsSVXwsY" />
     </application>
 
 </manifest>

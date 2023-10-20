@@ -1,12 +1,10 @@
-package com.book.auto.driver.presentation.home
+package com.book.admin.presentation.home
 
 import android.app.Dialog
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.Window
 import android.widget.Button
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
@@ -15,12 +13,11 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.book.auto.driver.BuildConfig
-import com.book.auto.driver.R
-import com.book.auto.driver.databinding.ActivityHomeBinding
-import com.book.auto.driver.databinding.NavHeaderMainBinding
-import com.book.auto.driver.presentation.login.LoginActivity
-import com.book.auto.driver.utils.Constants
+import com.book.admin.BuildConfig
+import com.book.admin.R
+import com.book.admin.databinding.ActivityHomeBinding
+import com.book.admin.databinding.NavHeaderMainBinding
+import com.book.admin.presentation.login.LoginActivity
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
@@ -47,42 +44,23 @@ open class HomeActivity : AppCompatActivity() {
         viewModel.initDataStore(this)
 
         setSupportActionBar(binding.appBarMain.toolbar)
+        viewModel.password.observe(viewLifecycleOwner, { newWord ->
+            headerBinding.tvName.text = newWord
+        }
 
-        headerBinding.tvName.text = viewModel.readState.value?.name ?: ""
-        headerBinding.tvGmail.text = viewModel.readState.value?.email ?: ""
 
         val drawerLayout: DrawerLayout = binding.drawerLayout
         val navView: NavigationView = binding.navView
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_home,
-                R.id.nav_about_us,
-                R.id.nav_pnp
+                R.id.nav_auto,
+                R.id.nav_vehicle,
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
-        navView.menu.findItem(R.id.nav_share).setOnMenuItemClickListener {
-            val sendIntent: Intent = Intent().apply {
-                action = Intent.ACTION_SEND
-                putExtra(Intent.EXTRA_TEXT, Constants.APK_SHARE_MSG)
-                type = "text/plain"
-            }
-            val shareIntent = Intent.createChooser(sendIntent, "Share app")
-            startActivity(shareIntent)
-            true
-        }
-        navView.menu.findItem(R.id.nav_rate).setOnMenuItemClickListener {
-            startActivity(
-                Intent(
-                    Intent.ACTION_VIEW,
-                    Uri.parse(Constants.PLAYSTORE_URL)
-                )
-            )
-            true
-        }
         navView.menu.findItem(R.id.nav_exit).setOnMenuItemClickListener {
             viewModel.logout()
             finish()
@@ -94,7 +72,6 @@ open class HomeActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        viewModel.updateLocation(this)
         remoteConfig = Firebase.remoteConfig
         val configSettings = remoteConfigSettings {
             minimumFetchIntervalInSeconds = 300
@@ -125,21 +102,8 @@ open class HomeActivity : AppCompatActivity() {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setCancelable(false)
         dialog.setContentView(R.layout.layout_dailog)
-        val yesBtn = dialog.findViewById(R.id.btn_update) as Button
-        yesBtn.setOnClickListener {
-            startActivity(
-                Intent(
-                    Intent.ACTION_VIEW,
-                    Uri.parse(Constants.PLAYSTORE_URL)
-                )
-            )
-        }
         dialog.show()
     }
 
-    private fun showToast(msg: String) {
-        Toast.makeText(
-            this@HomeActivity, msg, Toast.LENGTH_LONG
-        ).show()
-    }
+
 }

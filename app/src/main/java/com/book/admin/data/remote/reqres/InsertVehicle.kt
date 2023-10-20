@@ -1,4 +1,4 @@
-package com.book.auto.driver.data.remote.reqres
+package com.book.admin.data.remote.reqres
 
 import com.google.gson.annotations.SerializedName
 
@@ -31,8 +31,8 @@ data class DeleteVehicleRequest(
     @SerializedName("vId") val vId: String?,
 )
 
-data class VehicleResponse(
-    val `data`: Vehicle,
+data class AutosResponse(
+    val `data`: List<Auto>,
     val msg: String,
     val isTrue: Int
 )
@@ -43,7 +43,7 @@ data class BasicResponse(
 )
 
 
-data class Vehicle(
+data class Auto(
     val _id: String = "",
     val name: String = "",
     val deactivated: Boolean = false,
@@ -52,7 +52,7 @@ data class Vehicle(
     val lat: Double = 0.0,
     val lon: Double = 0.0,
     val mobileNo: String = "",
-    val modifyTime: String = "0",
+    val modifyTime: Long = 0,
     val number: String = "",
     val rate: String = "",
     val type: String = "",

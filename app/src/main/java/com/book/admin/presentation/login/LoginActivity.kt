@@ -1,0 +1,76 @@
+package com.book.admin.presentation.login
+
+import android.content.Intent
+import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import com.book.admin.data.DataStore
+import com.book.admin.databinding.ActivityLoginBinding
+import com.book.admin.presentation.home.HomeActivity
+import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withContext
+
+
+class LoginActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityLoginBinding
+    private lateinit var dataStore: DataStore
+
+
+    @OptIn(DelicateCoroutinesApi::class)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = ActivityLoginBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        dataStore = DataStore(this)
+        runBlocking {
+
+            GlobalScope.launch(
+                Dispatchers.IO
+            ) {
+                dataStore.isLogin.collect {
+                    if (it) {
+                        gotoHomePage()
+                    }
+                }
+            }
+        }
+
+
+        binding.btnLogin.setOnClickListener {
+
+            runBlocking {
+                GlobalScope.launch(
+                    Dispatchers.IO
+                ) {
+                    val pass = binding.tilPassword.editText!!.text.trim().toString();
+                    if (pass.length >= 6) {
+                        withContext(Dispatchers.Main) {
+                            dataStore.setLogin(true, pass) {
+                                gotoHomePage()
+                            }
+                        }
+
+                    } else {
+                        Toast.makeText(
+                            this@LoginActivity,
+                            "Pass should be min 6 digit!",
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
+                }
+            }
+        }
+    }
+
+
+    private fun gotoHomePage() {
+        finish()
+        startActivity(Intent(this@LoginActivity, HomeActivity::class.java))
+    }
+}
