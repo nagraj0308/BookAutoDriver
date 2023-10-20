@@ -2,7 +2,6 @@ package com.book.admin.presentation.home
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -27,7 +26,7 @@ class HomeViewModel @Inject constructor(
     private lateinit var dataStore: DataStore
 
     private val _autos = MutableLiveData<MutableList<Auto>>()
-    private val _password = MutableLiveData<String>("")
+    private val _password = MutableLiveData("")
 
     val autos: MutableLiveData<MutableList<Auto>> get() = _autos
     val password: LiveData<String> get() = _password

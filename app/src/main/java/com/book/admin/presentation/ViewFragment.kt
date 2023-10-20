@@ -11,7 +11,7 @@ import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.activityViewModels
 import com.book.admin.R
-import com.book.admin.databinding.FragmnetViewBinding
+import com.book.admin.databinding.FragmentViewBinding
 import com.book.admin.presentation.home.HomeViewModel
 import com.book.admin.utils.BaseFragment
 import com.book.admin.utils.Constants
@@ -20,7 +20,7 @@ import com.bumptech.glide.Glide
 
 class ViewFragment : BaseFragment() {
 
-    private var _binding: FragmnetViewBinding? = null
+    private var _binding: FragmentViewBinding? = null
 
     private val viewModel: HomeViewModel by activityViewModels()
     private val binding get() = _binding!!
@@ -34,7 +34,7 @@ class ViewFragment : BaseFragment() {
     ): View {
 
 
-        _binding = FragmnetViewBinding.inflate(inflater, container, false)
+        _binding = FragmentViewBinding.inflate(inflater, container, false)
         val root: View = binding.root
         binding.btnSubmit.setOnClickListener({
             if (validate()) {

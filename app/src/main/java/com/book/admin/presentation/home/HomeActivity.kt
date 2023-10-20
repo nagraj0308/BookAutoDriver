@@ -43,11 +43,7 @@ open class HomeActivity : AppCompatActivity() {
 
         viewModel.initDataStore(this)
 
-//        setSupportActionBar(binding.appBarMain.toolbar)
-//        viewModel.password.observe(viewLifecycleOwner, { newWord ->
-//            headerBinding.tvName.text = newWord
-//        }
-
+        setSupportActionBar(binding.appBarMain.toolbar)
 
         val drawerLayout: DrawerLayout = binding.drawerLayout
         val navView: NavigationView = binding.navView
@@ -72,6 +68,11 @@ open class HomeActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
+
+        viewModel.password.observe(this) {
+            headerBinding.tvName.text = it
+        }
+
         remoteConfig = Firebase.remoteConfig
         val configSettings = remoteConfigSettings {
             minimumFetchIntervalInSeconds = 300
