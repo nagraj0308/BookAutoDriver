@@ -40,8 +40,6 @@ class HomeViewModel @Inject constructor(
             dataStore.getPassword.collect {
                 withContext(Dispatchers.Main) {
                     _password.value = it
-                    Log.v("naGraj", _password.value!!)
-
 //                    getPendingAutos()
                 }
             }
