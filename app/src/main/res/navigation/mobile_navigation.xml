@@ -3,24 +3,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_auto">
+    app:startDestination="@+id/frag_auto">
 
     <fragment
-        android:id="@+id/nav_auto"
+        android:id="@+id/frag_auto"
         android:name="com.book.admin.presentation.home.AutoFragment"
         android:label="Auto"
         tools:layout="@layout/fragment_auto" />
 
     <fragment
-        android:id="@+id/nav_view"
+        android:id="@+id/frag_view"
         android:name="com.book.admin.presentation.ViewFragment"
         android:label="View"
-        tools:layout="@layout/fragmnet_view">
+        tools:layout="@layout/fragment_view">
 
     </fragment>
 
     <fragment
-        android:id="@+id/nav_vehicle"
+        android:id="@+id/frag_vehicle"
         android:name="com.book.admin.presentation.VehicleFragment"
         android:label="Gaadi"
         tools:layout="@layout/fragment_vehicle" />

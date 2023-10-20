@@ -7,11 +7,11 @@
         <item
             android:id="@+id/nav_auto"
             android:icon="@drawable/ic_home"
-            android:title="auto" />
+            android:title="@string/auto" />
         <item
             android:id="@+id/nav_vehicle"
             android:icon="@drawable/ic_info"
-            android:title="Gaaddi" />
+            android:title="@string/gaadi" />
         <item
             android:id="@+id/nav_exit"
             android:icon="@drawable/ic_exit_to_app"

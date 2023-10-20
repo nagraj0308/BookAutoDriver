@@ -5,6 +5,7 @@
 
     <string name="about_us">About Us</string>
     <string name="add_auto">Add Auto</string>
+    <string name="auto">Auto</string>
     <string name="auto_details">Auto Details</string>
     <string name="auto_image">Auto Image</string>
     <string name="auto_name">Auto Name</string>
@@ -14,6 +15,7 @@
     <string name="delete">Delete</string>
     <string name="driver_name">Driver Name</string>
     <string name="exit">Exit</string>
+    <string name="gaadi">Gaadi</string>
     <string name="home">Home</string>
     <string name="mobile_number">Mobile Number</string>
     <string name="normal_rate">Normal Rate</string>

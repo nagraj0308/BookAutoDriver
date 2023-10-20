@@ -43,10 +43,10 @@ open class HomeActivity : AppCompatActivity() {
 
         viewModel.initDataStore(this)
 
-        setSupportActionBar(binding.appBarMain.toolbar)
-        viewModel.password.observe(viewLifecycleOwner, { newWord ->
-            headerBinding.tvName.text = newWord
-        }
+//        setSupportActionBar(binding.appBarMain.toolbar)
+//        viewModel.password.observe(viewLifecycleOwner, { newWord ->
+//            headerBinding.tvName.text = newWord
+//        }
 
 
         val drawerLayout: DrawerLayout = binding.drawerLayout
