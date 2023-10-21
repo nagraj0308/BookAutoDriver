@@ -9,7 +9,10 @@ import retrofit2.http.Query
 
 interface BVService {
     @Headers("Content-Type: application/json")
-    @GET("api/getAllAutoAdmin/")
-    suspend fun getAllAutoAdmin(@Query("password") password: String): Response<AutosResponse>
+    @GET("api/getAllAutoAdminV1/")
+    suspend fun getAllAutoAdmin(
+        @Query("password") password: String,
+        @Query("verificationState") verificationState: String
+    ): Response<AutosResponse>
 
 }

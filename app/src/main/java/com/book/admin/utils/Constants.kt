@@ -6,14 +6,9 @@ import java.util.Date
 
 class Constants {
     companion object {
-        const val BASE_URL = "http://43.204.42.94:5002/"
-
-        val vss = listOf(VS("Pending", ""), VS("Pending", ""), VS("Pending", ""))
-
-
+        const val BASE_URL = "https://server0308.azurewebsites.net/"
+        val vss = listOf(VS("Pending", "U"), VS("Accepted", "A"), VS("Rejected", "R"))
     }
-
-
 }
 
 class Utils {
