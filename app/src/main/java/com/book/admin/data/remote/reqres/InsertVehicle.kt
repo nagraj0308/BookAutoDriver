@@ -1,6 +1,7 @@
 package com.book.admin.data.remote.reqres
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 
 data class VehicleRequest(
@@ -57,5 +58,14 @@ data class Auto(
     val rate: String = "",
     val type: String = "",
     val verificationState: String = "U"
-)
+) : Serializable
+
+data class VS(
+    val name: String,
+    val code: String
+) {
+    override fun toString(): String {
+        return name
+    }
+}
 

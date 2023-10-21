@@ -22,60 +22,22 @@
                 android:orientation="vertical"
                 android:padding="15dp">
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/til_auto_name"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:hint="@string/auto_name"
-                    app:startIconDrawable="@drawable/ic_auto">
+                    android:layout_height="wrap_content">
 
-                    <com.google.android.material.textfield.TextInputEditText
+                    <ImageView
+                        android:id="@+id/iv_photo"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="text"
-                        android:maxLength="18"
-                        android:maxLines="1" />
+                        android:layout_height="0dp"
+                        android:scaleType="fitXY"
+                        app:layout_constraintDimensionRatio="3:2"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        tools:ignore="MissingConstraints" />
 
-                </com.google.android.material.textfield.TextInputLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/til_auto_number"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:hint="@string/auto_number"
-                    app:startIconDrawable="@drawable/ic_number">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:digits="1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-                        android:inputType="textCapCharacters"
-                        android:maxLength="10"
-                        android:maxLines="1" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/til_driver_name"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:hint="@string/driver_name"
-                    app:startIconDrawable="@drawable/ic_person">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="text"
-                        android:maxLength="18"
-                        android:maxLines="1" />
-
-                </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/til_mobile_number"
@@ -120,66 +82,6 @@
                 </LinearLayout>
 
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/til_normal_rate"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:hint="@string/normal_rate"
-                    app:startIconDrawable="@drawable/ic_normal_rate">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.switchmaterial.SwitchMaterial
-                    android:id="@+id/sb_deactivated"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:checked="false"
-                    android:text="@string/deactivated"
-                    android:textSize="18sp" />
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentStart="true"
-                        android:layout_centerVertical="true"
-                        android:text="@string/auto_image"
-                        android:textSize="18sp" />
-
-                    <ImageButton
-                        android:id="@+id/btn_edit_photo"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        app:srcCompat="@drawable/ic_edit" />
-                </RelativeLayout>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <ImageView
-                        android:id="@+id/iv_auto_photo"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:scaleType="fitXY"
-                        app:layout_constraintDimensionRatio="3:2"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        tools:ignore="MissingConstraints" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
 
 
             </LinearLayout>
@@ -188,59 +90,6 @@
         </com.google.android.material.card.MaterialCardView>
 
     </ScrollView>
-
-
-    <LinearLayout
-        android:id="@+id/ll_buttons"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:orientation="vertical">
-
-        <LinearLayout
-            android:id="@+id/ll_edit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/btn_save"
-                style="@style/Widget.MaterialComponents.Button.Icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="30dp"
-                android:padding="10dp"
-                android:text="@string/save"
-                android:textAllCaps="false"
-                app:icon="@drawable/ic_sync" />
-
-            <Button
-                android:id="@+id/btn_delete"
-                style="@style/Widget.MaterialComponents.Button.Icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
-                android:padding="10dp"
-                android:text="@string/delete"
-                android:textAllCaps="false"
-                app:icon="@drawable/ic_delete" />
-        </LinearLayout>
-
-
-        <Button
-            android:id="@+id/btn_submit"
-            style="@style/Widget.MaterialComponents.Button.Icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:padding="10dp"
-            android:text="@string/submit"
-            android:textAllCaps="false"
-            app:icon="@drawable/ic_done" />
-
-
-    </LinearLayout>
 
 
 </RelativeLayout>

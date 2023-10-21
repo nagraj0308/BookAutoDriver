@@ -1,4 +1,4 @@
-package com.book.admin.presentation
+package com.book.admin.presentation.vehicle
 
 import android.os.Bundle
 import android.view.LayoutInflater
