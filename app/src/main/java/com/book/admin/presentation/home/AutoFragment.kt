@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AbsListView
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.book.admin.databinding.FragmentAutoBinding
 import com.book.admin.utils.BaseFragment
 
@@ -33,7 +35,14 @@ class AutoFragment : BaseFragment() {
             val adapter = AutoAdapter(it)
             binding.rcv.adapter = adapter
         }
-
+        binding.rcv.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                if (newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
+                    viewModel.getPendingAutos()
+                }
+            }
+        })
         return root
     }
 

@@ -54,7 +54,7 @@ class HomeViewModel @Inject constructor(
     }
 
 
-    private fun getPendingAutos() {
+    fun getPendingAutos() {
         CoroutineScope(Dispatchers.IO).launch {
             runCatching {
                 api.getAllAutoAdmin("nagraj0308")
