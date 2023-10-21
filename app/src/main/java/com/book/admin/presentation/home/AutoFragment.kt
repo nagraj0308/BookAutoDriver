@@ -32,7 +32,7 @@ class AutoFragment : BaseFragment() {
 
         binding.rcv.layoutManager = LinearLayoutManager(context)
         viewModel.autos.observe(viewLifecycleOwner) {
-            if (it != null && it.isNotEmpty()) {
+            if (it != null) {
                 val adapter = AutoAdapter(it, navController)
                 binding.rcv.adapter = adapter
             }

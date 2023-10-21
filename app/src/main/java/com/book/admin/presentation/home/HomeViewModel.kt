@@ -69,6 +69,26 @@ class HomeViewModel @Inject constructor(
         }
     }
 
+    fun changeAutoStatus(
+        verificationState: String,
+        vId: String, callback: () -> Unit
+    ) {
+        CoroutineScope(Dispatchers.IO).launch {
+            runCatching {
+                api.changeAutoStatusV1(password.value!!, verificationState, vId)
+            }.onSuccess {
+                withContext(Dispatchers.Main) {
+                    if (it.isSuccessful && it.body() != null) {
+                        if (it.body()!!.isTrue == 1) {
+                            getPendingAutos()
+                            callback()
+                        }
+                    }
+                }
+            }
+        }
+    }
+
 
 //    private fun updateAutoLocation(
 //        gId: String,

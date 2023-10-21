@@ -5,8 +5,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.NavController
+import androidx.navigation.fragment.findNavController
 import com.book.admin.R
 import com.book.admin.data.remote.reqres.Auto
 import com.book.admin.databinding.FragmentViewBinding
@@ -33,27 +36,7 @@ class ViewFragment : BaseFragment() {
     ): View {
         _binding = FragmentViewBinding.inflate(inflater, container, false)
         val root: View = binding.root
-//        binding.btnSubmit.setOnClickListener({
-//            val mobileNumber = binding.tilMobileNumber.editText!!.text.trim().toString()
-//            val rate = binding.tilNormalRate.editText!!.text.trim().toString()
-//            val autoType = binding.actvAutoType.text.trim().toString()
-////                viewModel.insertFSImage(
-////                    name, autoType,
-////                    rate,
-////                    autoNumber,
-////                    driverName,
-////                    mobileNumber,
-////                    binding.sbDeactivated.isChecked,
-////                    Utils.screenShot(binding.ivAutoPhoto)!!
-////                ) {
-////                    if (it) {
-////                        requireActivity().onBackPressed()
-////                    } else {
-////                        showToast("Try again")
-////                    }
-////                }
-//        })
-
+        val navController = findNavController()
 
         if (arguments != null) {
             isAuto = requireArguments().getBoolean("is_auto")
@@ -61,9 +44,6 @@ class ViewFragment : BaseFragment() {
         }
 
         if (data != null) {
-            val arrayAdapter = ArrayAdapter(
-                requireContext(), R.layout.item_spinner, Constants.vss
-            )
             binding.tvName.text = ": " + data!!.name
             binding.tvNumber.text = ": " + data!!.number
             binding.tvId.text = ": " + data!!._id
@@ -72,12 +52,27 @@ class ViewFragment : BaseFragment() {
             binding.tvRate.text = ": " + data!!.rate
             binding.tvType.text = ": " + data!!.type
 
-
+            val arrayAdapter = ArrayAdapter(
+                requireContext(), R.layout.item_spinner, Constants.vss
+            )
             binding.actvStatus.setAdapter(arrayAdapter)
-            binding.actvStatus.setText(Constants.vss[0].toString(), false)
+            binding.actvStatus.setOnItemClickListener { _, _, position, _ ->
+                setStatus(position, navController)
+            }
+            setStatus(0, navController)
             context?.let { Glide.with(it).asBitmap().load(data?.imageUrl).into(binding.ivPhoto) }
         }
         return root
+    }
+
+    private fun setStatus(pos: Int, navController: NavController) {
+        binding.actvStatus.setText(Constants.vss[pos].toString(), false)
+        if (pos > 0) {
+            binding.actvStatus.isEnabled = false
+            viewModel.changeAutoStatus(Constants.vss[pos].code, data!!._id) {
+                navController.popBackStack()
+            }
+        }
     }
 
     override fun onDestroyView() {
