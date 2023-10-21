@@ -32,8 +32,10 @@ class AutoFragment : BaseFragment() {
 
         binding.rcv.layoutManager = LinearLayoutManager(context)
         viewModel.autos.observe(viewLifecycleOwner) {
-            val adapter = AutoAdapter(it)
-            binding.rcv.adapter = adapter
+            if (it != null && it.isNotEmpty()) {
+                val adapter = AutoAdapter(it, navController)
+                binding.rcv.adapter = adapter
+            }
         }
         binding.rcv.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {

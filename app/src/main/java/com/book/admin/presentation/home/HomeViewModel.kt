@@ -57,7 +57,7 @@ class HomeViewModel @Inject constructor(
     fun getPendingAutos() {
         CoroutineScope(Dispatchers.IO).launch {
             runCatching {
-                api.getAllAutoAdmin("nagraj0308")
+                api.getAllAutoAdmin(password.value!!)
             }.onSuccess {
                 withContext(Dispatchers.Main) {
                     _autos.value = emptyList()

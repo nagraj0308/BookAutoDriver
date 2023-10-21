@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
+import androidx.navigation.NavController
 import androidx.recyclerview.widget.RecyclerView
 import com.book.admin.R
 import com.book.admin.data.remote.reqres.Auto
@@ -13,7 +15,8 @@ import com.bumptech.glide.Glide
 import java.text.SimpleDateFormat
 import java.util.Date
 
-class AutoAdapter(private val mList: List<Auto>) : RecyclerView.Adapter<AutoAdapter.ViewHolder>() {
+class AutoAdapter(private val mList: List<Auto>, val nc: NavController) :
+    RecyclerView.Adapter<AutoAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_auto, parent, false)
@@ -27,6 +30,9 @@ class AutoAdapter(private val mList: List<Auto>) : RecyclerView.Adapter<AutoAdap
         holder.tvNumber.text = item.number
         holder.tvDate.text = convertLongToTime(item.modifyTime)
         Glide.with(holder.iv.context).asBitmap().load(item.imageUrl).into(holder.iv)
+        holder.itemView.setOnClickListener {
+            Toast.makeText(holder.itemView.context, position.toString(), Toast.LENGTH_LONG).show()
+        }
     }
 
     override fun getItemCount(): Int {
@@ -45,11 +51,5 @@ class AutoAdapter(private val mList: List<Auto>) : RecyclerView.Adapter<AutoAdap
         val tvMobile: TextView = itemView.findViewById(R.id.tv_mobile)
         val tvNumber: TextView = itemView.findViewById(R.id.tv_number)
         val tvDate: TextView = itemView.findViewById(R.id.tv_date)
-        init {
-            itemView.setOnClickListener {
-
-            }
-        }
-
     }
 }
