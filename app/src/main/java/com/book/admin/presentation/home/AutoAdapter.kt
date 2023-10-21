@@ -11,9 +11,8 @@ import androidx.navigation.NavController
 import androidx.recyclerview.widget.RecyclerView
 import com.book.admin.R
 import com.book.admin.data.remote.reqres.Auto
+import com.book.admin.utils.Utils
 import com.bumptech.glide.Glide
-import java.text.SimpleDateFormat
-import java.util.Date
 
 class AutoAdapter(private val mList: List<Auto>, val nc: NavController) :
     RecyclerView.Adapter<AutoAdapter.ViewHolder>() {
@@ -28,7 +27,7 @@ class AutoAdapter(private val mList: List<Auto>, val nc: NavController) :
         holder.tvName.text = item.name
         holder.tvMobile.text = item.mobileNo
         holder.tvNumber.text = item.number
-        holder.tvDate.text = convertLongToTime(item.modifyTime)
+        holder.tvDate.text = Utils.convertLongToTime(item.modifyTime)
         Glide.with(holder.iv.context).asBitmap().load(item.imageUrl).into(holder.iv)
         holder.itemView.setOnClickListener {
             val bundle = Bundle()
@@ -42,11 +41,6 @@ class AutoAdapter(private val mList: List<Auto>, val nc: NavController) :
         return mList.size
     }
 
-    private fun convertLongToTime(time: Long): String {
-        val date = Date(time)
-        val format = SimpleDateFormat("yyyy.MM.dd HH:mm")
-        return format.format(date)
-    }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val iv: ImageView = itemView.findViewById(R.id.iv)

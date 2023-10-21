@@ -21,7 +21,7 @@
 
     <fragment
         android:id="@+id/nav_vehicle"
-        android:name="com.book.admin.presentation.VehicleFragment"
+        android:name="com.book.admin.presentation.vehicle.VehicleFragment"
         android:label="Gaadi"
         tools:layout="@layout/fragment_vehicle" />
 
