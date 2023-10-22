@@ -1,6 +1,8 @@
 package com.book.admin.presentation
 
 import android.annotation.SuppressLint
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -44,6 +46,15 @@ class ViewFragment : BaseFragment() {
         }
 
         if (data != null) {
+            binding.btnCall.setOnClickListener {
+                val u = Uri.parse("tel:" + data!!.mobileNo)
+                val i = Intent(Intent.ACTION_DIAL, u)
+                try {
+                    context?.startActivity(i)
+                } catch (_: Exception) {
+
+                }
+            }
             binding.tvName.text = ": " + data!!.name
             binding.tvNumber.text = ": " + data!!.number
             binding.tvId.text = ": " + data!!._id
@@ -68,7 +79,7 @@ class ViewFragment : BaseFragment() {
     private fun setStatus(code: String, navController: NavController) {
         binding.actvStatus.setText(Constants.status(code).toString(), false)
         if (code != Constants.vss[0].code) {
-            binding.actvStatus.setAdapter(null)
+            binding.llStatus.visibility = View.GONE
             if (!(Constants.vss[1].code == code || Constants.vss[2].code == code)) {
                 viewModel.changeAutoStatus(code, data!!._id) {
                     navController.popBackStack()
