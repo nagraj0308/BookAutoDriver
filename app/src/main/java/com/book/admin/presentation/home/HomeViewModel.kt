@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel
 import com.book.admin.data.DataStore
 import com.book.admin.data.remote.reqres.Auto
 import com.book.admin.domain.BVApi
+import com.book.admin.utils.Constants
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.DelicateCoroutinesApi
@@ -27,9 +28,12 @@ class HomeViewModel @Inject constructor(
 
     private val _autos = MutableLiveData<List<Auto>>()
     private val _password = MutableLiveData("")
+    private val _statePos = MutableLiveData(1)
+
 
     val autos: LiveData<List<Auto>> get() = _autos
     val password: LiveData<String> get() = _password
+    val statePos: LiveData<Int> get() = _statePos
 
 
     @OptIn(DelicateCoroutinesApi::class)
@@ -39,7 +43,6 @@ class HomeViewModel @Inject constructor(
             dataStore.getPassword.collect {
                 withContext(Dispatchers.Main) {
                     _password.value = it
-                    getPendingAutos()
                 }
             }
         }
@@ -54,10 +57,11 @@ class HomeViewModel @Inject constructor(
     }
 
 
-    fun getPendingAutos() {
+    fun getAutos(pos: Int) {
+        _statePos.value = pos
         CoroutineScope(Dispatchers.IO).launch {
             runCatching {
-                api.getAllAutoAdmin(password.value!!)
+                api.getAllAutoAdmin(Constants.vss[pos].code, password.value!!)
             }.onSuccess {
                 withContext(Dispatchers.Main) {
                     _autos.value = emptyList()
@@ -80,7 +84,7 @@ class HomeViewModel @Inject constructor(
                 withContext(Dispatchers.Main) {
                     if (it.isSuccessful && it.body() != null) {
                         if (it.body()!!.isTrue == 1) {
-                            getPendingAutos()
+                            getAutos(_statePos.value!!)
                             callback()
                         }
                     }

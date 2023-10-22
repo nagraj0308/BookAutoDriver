@@ -7,7 +7,7 @@ import retrofit2.http.Query
 
 
 interface BVApi {
-    suspend fun getAllAutoAdmin(password: String): Response<AutosResponse>
+    suspend fun getAllAutoAdmin(code: String, password: String): Response<AutosResponse>
 
     suspend fun changeAutoStatusV1(
         password: String,

@@ -34,26 +34,27 @@ class AutoFragment : BaseFragment() {
         binding.bottomNav.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.bn_accepted -> {
-                    viewModel.getPendingAutos()
+                    viewModel.getAutos(1)
                     true
                 }
 
-                R.id.bn_accepted -> {
-                    viewModel.getPendingAutos()
+                R.id.bn_pending -> {
+                    viewModel.getAutos(0)
                     true
                 }
 
                 R.id.bn_rejected -> {
-                    viewModel.getPendingAutos()
+                    viewModel.getAutos(2)
                     true
                 }
 
                 else -> {
-                    viewModel.getPendingAutos()
+                    viewModel.getAutos(1)
                     true
                 }
             }
         }
+        binding.bottomNav.selectedItemId = R.id.bn_pending
 
         binding.rcv.layoutManager = LinearLayoutManager(context)
         viewModel.autos.observe(viewLifecycleOwner) {
@@ -66,7 +67,7 @@ class AutoFragment : BaseFragment() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
                 if (newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
-                    viewModel.getPendingAutos()
+                    viewModel.getAutos(viewModel.statePos.value!!)
                 }
             }
         })

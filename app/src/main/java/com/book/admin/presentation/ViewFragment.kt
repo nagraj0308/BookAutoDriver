@@ -57,20 +57,22 @@ class ViewFragment : BaseFragment() {
             )
             binding.actvStatus.setAdapter(arrayAdapter)
             binding.actvStatus.setOnItemClickListener { _, _, position, _ ->
-                setStatus(position, navController)
+                setStatus(Constants.vss[position].code, navController)
             }
-            setStatus(0, navController)
+            setStatus(data!!.verificationState, navController)
             context?.let { Glide.with(it).asBitmap().load(data?.imageUrl).into(binding.ivPhoto) }
         }
         return root
     }
 
-    private fun setStatus(pos: Int, navController: NavController) {
-        binding.actvStatus.setText(Constants.vss[pos].toString(), false)
-        if (pos > 0) {
-            binding.actvStatus.isEnabled = false
-            viewModel.changeAutoStatus(Constants.vss[pos].code, data!!._id) {
-                navController.popBackStack()
+    private fun setStatus(code: String, navController: NavController) {
+        binding.actvStatus.setText(Constants.status(code).toString(), false)
+        if (code != Constants.vss[0].code) {
+            binding.actvStatus.setAdapter(null)
+            if (!(Constants.vss[1].code == code || Constants.vss[2].code == code)) {
+                viewModel.changeAutoStatus(code, data!!._id) {
+                    navController.popBackStack()
+                }
             }
         }
     }

@@ -11,8 +11,8 @@ class BVApiImp @Inject constructor(
     private val service: BVService,
 ) : BVApi {
 
-    override suspend fun getAllAutoAdmin(password: String): Response<AutosResponse> {
-        return service.getAllAutoAdmin(password, "U")
+    override suspend fun getAllAutoAdmin(code: String, password: String): Response<AutosResponse> {
+        return service.getAllAutoAdmin(password, code)
     }
 
     override suspend fun changeAutoStatusV1(
