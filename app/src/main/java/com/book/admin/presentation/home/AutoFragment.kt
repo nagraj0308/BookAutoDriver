@@ -9,6 +9,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.book.admin.R
 import com.book.admin.databinding.FragmentAutoBinding
 import com.book.admin.utils.BaseFragment
 
@@ -29,6 +30,30 @@ class AutoFragment : BaseFragment() {
 
         val root: View = binding.root
         val navController = findNavController()
+
+        binding.bottomNav.setOnItemSelectedListener {
+            when (it.itemId) {
+                R.id.bn_accepted -> {
+                    viewModel.getPendingAutos()
+                    true
+                }
+
+                R.id.bn_accepted -> {
+                    viewModel.getPendingAutos()
+                    true
+                }
+
+                R.id.bn_rejected -> {
+                    viewModel.getPendingAutos()
+                    true
+                }
+
+                else -> {
+                    viewModel.getPendingAutos()
+                    true
+                }
+            }
+        }
 
         binding.rcv.layoutManager = LinearLayoutManager(context)
         viewModel.autos.observe(viewLifecycleOwner) {

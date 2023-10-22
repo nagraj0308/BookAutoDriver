@@ -4,6 +4,7 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="about_us">About Us</string>
+    <string name="accepted">Accepted</string>
     <string name="add_auto">Add Auto</string>
     <string name="auto">Auto</string>
     <string name="auto_details">Auto Details</string>
@@ -24,7 +25,9 @@
     <string name="name">Name</string>
     <string name="normal_rate">Normal Rate</string>
     <string name="privacy_and_policy">Privacy and Policy</string>
+    <string name="pending">Pending</string>
     <string name="rate">Rate</string>
+    <string name="rejected">Rejected</string>
     <string name="save">Save</string>
     <string name="share">Share</string>
     <string name="submit">Submit</string>
