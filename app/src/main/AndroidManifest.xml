@@ -52,7 +52,7 @@
             android:theme="@style/Theme.BookAutoDriver.NoActionBar" />
 
         <service
-            android:name=".presentation.pl.LocationService"
+            android:name=".presentation.pl.SyncLocationService"
             android:foregroundServiceType="location" />
 
 

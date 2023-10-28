@@ -14,7 +14,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.book.auto.driver.R
 import com.book.auto.driver.databinding.FragmentHomeBinding
-import com.book.auto.driver.utils.PermissionUtils
+import com.book.auto.driver.presentation.pl.SyncLocationService
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapsInitializer
@@ -47,9 +47,9 @@ class HomeFragment : Fragment() {
         val root: View = binding.root
         val navController = findNavController()
         binding.btnUpdateLocation.setOnClickListener {
+            context?.let { it1 -> SyncLocationService.start(it1) };
             activity?.let { it1 ->
                 viewModel.updateLocation(it1)
-                PermissionUtils.start(it1.applicationContext)
             }
         }
         binding.btnAddAuto.setOnClickListener {

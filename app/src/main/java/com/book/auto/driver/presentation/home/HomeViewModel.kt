@@ -371,8 +371,6 @@ class HomeViewModel @Inject constructor(
                         Log.v("NAGRAJ", it.latitude.toString() + " " + it.longitude.toString())
                     }
                 }
-            } else {
-                PermissionUtils.requestLocationAccessPermission(activity)
             }
         } else {
             PermissionUtils.requestLocationEnableRequest(activity)

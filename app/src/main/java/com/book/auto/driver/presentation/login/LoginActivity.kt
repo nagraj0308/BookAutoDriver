@@ -1,16 +1,17 @@
 package com.book.auto.driver.presentation.login
 
+import android.Manifest
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import com.book.auto.driver.R
 import com.book.auto.driver.data.DataStore
 import com.book.auto.driver.databinding.ActivityLoginBinding
 import com.book.auto.driver.presentation.home.HomeActivity
-import com.book.auto.driver.utils.PermissionUtils
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -31,6 +32,8 @@ class LoginActivity : AppCompatActivity() {
 
     private lateinit var mGoogleSignInClient: GoogleSignInClient
     val REQ_CODE: Int = 123
+
+
 
     @OptIn(DelicateCoroutinesApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -119,7 +122,12 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        PermissionUtils.requestLocationAccessPermissions(this)
+        ActivityCompat.requestPermissions(
+            this, arrayOf(
+                Manifest.permission.ACCESS_COARSE_LOCATION,
+                Manifest.permission.ACCESS_FINE_LOCATION,
+            ), 0
+        )
     }
 
 }
