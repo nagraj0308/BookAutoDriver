@@ -5,11 +5,13 @@ import android.Manifest
 import android.Manifest.permission
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.LocationManager
 import android.os.Build
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.book.auto.driver.presentation.pl.LocationService
 import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
@@ -26,8 +28,7 @@ class PermissionUtils {
         fun requestShowNotificationPermission(activity: Activity) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
                 activity.requestPermissions(
-                    arrayOf(permission.POST_NOTIFICATIONS),
-                    REQUEST_CODE_POST_NOTIFICATION
+                    arrayOf(permission.POST_NOTIFICATIONS), REQUEST_CODE_POST_NOTIFICATION
                 )
             }
         }
@@ -40,6 +41,15 @@ class PermissionUtils {
             } else {
                 true
             }
+        }
+
+        fun requestLocationAccessPermissions(activity: Activity) {
+            ActivityCompat.requestPermissions(
+                activity, arrayOf(
+                    permission.ACCESS_COARSE_LOCATION,
+                    permission.ACCESS_FINE_LOCATION,
+                ), RequestCode.LOCATION
+            )
         }
 
 
@@ -56,19 +66,16 @@ class PermissionUtils {
         fun requestReadStoragePermission(activity: Activity) {
             if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.S_V2) {
                 activity.requestPermissions(
-                    arrayOf(permission.READ_EXTERNAL_STORAGE),
-                    REQUEST_CODE_READ_STORAGE
+                    arrayOf(permission.READ_EXTERNAL_STORAGE), REQUEST_CODE_READ_STORAGE
                 )
             }
         }
 
         fun requestLocationAccessPermission(activity: Activity) {
             ActivityCompat.requestPermissions(
-                activity,
-                arrayOf(
+                activity, arrayOf(
                     permission.ACCESS_FINE_LOCATION,
-                ),
-                RequestCode.LOCATION
+                ), RequestCode.LOCATION
             )
         }
 
@@ -85,22 +92,17 @@ class PermissionUtils {
 
         fun requestLocationEnableRequest(activity: Activity) {
             val locationRequest: LocationRequest = LocationRequest.create()
-            val builder = LocationSettingsRequest.Builder()
-                .addLocationRequest(locationRequest)
-            LocationServices
-                .getSettingsClient(activity)
-                .checkLocationSettings(builder.build())
+            val builder = LocationSettingsRequest.Builder().addLocationRequest(locationRequest)
+            LocationServices.getSettingsClient(activity).checkLocationSettings(builder.build())
                 .addOnSuccessListener(
                     activity
-                ) { response: LocationSettingsResponse? -> }
-                .addOnFailureListener(
+                ) { response: LocationSettingsResponse? -> }.addOnFailureListener(
                     activity
                 ) { ex: Exception? ->
                     if (ex is ResolvableApiException) {
                         try {
                             ex.startResolutionForResult(
-                                activity,
-                                10
+                                activity, 10
                             )
                         } catch (e: Exception) {
                             e.printStackTrace()
@@ -109,5 +111,26 @@ class PermissionUtils {
                 }
         }
 
+
+        fun start(context: Context) {
+            Intent(context, LocationService::class.java).apply {
+                action = LocationService.ACTION_START
+                context.startService(this)
+            }
+        }
+
+        fun stop(context: Context) {
+            Intent(context, LocationService::class.java).apply {
+                action = LocationService.ACTION_STOP
+                context.startService(this)
+            }
+        }
+
+    }
+}
+
+class RequestCode {
+    companion object {
+        const val LOCATION = 10
     }
 }

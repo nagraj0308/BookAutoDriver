@@ -10,6 +10,7 @@ import com.book.auto.driver.R
 import com.book.auto.driver.data.DataStore
 import com.book.auto.driver.databinding.ActivityLoginBinding
 import com.book.auto.driver.presentation.home.HomeActivity
+import com.book.auto.driver.utils.PermissionUtils
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -114,6 +115,11 @@ class LoginActivity : AppCompatActivity() {
     private fun login() {
         finish()
         startActivity(Intent(this@LoginActivity, HomeActivity::class.java))
+    }
+
+    override fun onStart() {
+        super.onStart()
+        PermissionUtils.requestLocationAccessPermissions(this)
     }
 
 }

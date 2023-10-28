@@ -2,7 +2,7 @@ package com.book.auto.driver.utils
 
 class Constants {
     companion object {
-//        #557a2a
+        //        #557a2a
 //        rgb(85, 122, 42)
         const val BASE_URL = "http://43.204.42.94:5002/"
         const val ABOUT_US_URL = "https://nagraj0308.github.io/book_auto_driver_aboutus/"
@@ -14,12 +14,5 @@ class Constants {
         const val IMG_HBW = 0.66
 
         val gaadiTypes = listOf("4 Wheeler", "3 Wheeler", "2 Wheeler", "Other")
-    }
-}
-
-
-class RequestCode {
-    companion object {
-        const val LOCATION = 10
     }
 }
