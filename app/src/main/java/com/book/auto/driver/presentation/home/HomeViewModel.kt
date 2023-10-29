@@ -5,7 +5,6 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.graphics.Bitmap
 import android.location.Location
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -40,9 +39,6 @@ class HomeViewModel @Inject constructor(
     lateinit var pm: PM
 
     private val _vehicle = MutableLiveData(Vehicle())
-    private var _showProgress = MutableLiveData(false)
-    private var _toastMsg = MutableLiveData("")
-    private var _showToast = MutableLiveData(false)
     private val _isLocationUpdated = MutableLiveData(false)
     private val _lat = MutableLiveData(0.0)
     private val _lon = MutableLiveData(0.0)
@@ -54,15 +50,6 @@ class HomeViewModel @Inject constructor(
     val isLocationUpdated: LiveData<Boolean> get() = _isLocationUpdated
 
 
-    fun logout() {
-        pm.clearAll();
-    }
-
-    private fun showToast(msg: String) {
-        _toastMsg.value = msg
-        _showToast.value = true
-    }
-
     fun insertFSImage(
         gName: String,
         gType: String,
@@ -71,7 +58,7 @@ class HomeViewModel @Inject constructor(
         gDriver: String,
         gMobile: String,
         gDeactivated: Boolean,
-        bitmap: Bitmap, callback: (Boolean) -> Unit
+        bitmap: Bitmap, callback: (Boolean) -> Unit, msg: (String) -> Unit
     ) {
 
 
@@ -82,10 +69,9 @@ class HomeViewModel @Inject constructor(
             val data = baos.toByteArray()
             val uploadTask: UploadTask = ref.putBytes(data)
             uploadTask.addOnFailureListener {
-                _showProgress.value = false
                 CoroutineScope(Dispatchers.IO).launch {
                     withContext(Dispatchers.Main) {
-                        showToast(it.toString())
+                        msg(it.toString())
                         callback(false)
                     }
                 }
@@ -100,20 +86,18 @@ class HomeViewModel @Inject constructor(
                         gDriver,
                         gMobile,
                         gDeactivated,
-                        it.toString()
-                    ) {
-                        _showProgress.value = false
-                        CoroutineScope(Dispatchers.IO).launch {
-                            withContext(Dispatchers.Main) {
-                                callback(it)
+                        it.toString(), {
+                            CoroutineScope(Dispatchers.IO).launch {
+                                withContext(Dispatchers.Main) {
+                                    callback(it)
+                                }
                             }
-                        }
-                    }
+                        }, {}
+                    )
                 }.addOnFailureListener {
-                    _showProgress.value = false
                     CoroutineScope(Dispatchers.IO).launch {
                         withContext(Dispatchers.Main) {
-                            showToast(it.toString())
+                            msg(it.toString())
                             callback(false)
                         }
                     }
@@ -131,7 +115,7 @@ class HomeViewModel @Inject constructor(
         gDriver: String,
         gMobile: String,
         gDeactivated: Boolean,
-        url: String, callback: (Boolean) -> Unit
+        url: String, callback: (Boolean) -> Unit, msg: (String) -> Unit
     ) {
         CoroutineScope(Dispatchers.IO).launch {
             runCatching {
@@ -152,13 +136,13 @@ class HomeViewModel @Inject constructor(
                 )
             }.onSuccess {
                 withContext(Dispatchers.Main) {
-                    showToast("Gaadi added successfully")
+                    msg("Gaadi added successfully")
                     getAutoDetails() {}
                     callback(true)
                 }
             }.onFailure {
                 withContext(Dispatchers.Main) {
-                    showToast("Gaadi not added")
+                    msg("Gaadi not added")
                     callback(false)
                 }
             }
@@ -174,9 +158,8 @@ class HomeViewModel @Inject constructor(
         gDriver: String,
         gMobile: String,
         gDeactivated: Boolean,
-        bitmap: Bitmap, callback: (Boolean) -> Unit
+        bitmap: Bitmap, callback: (Boolean) -> Unit, msg: (String) -> Unit
     ) {
-        _showProgress.value = true
         viewModelScope.launch(Dispatchers.IO) {
             val ref = FBS.getReference(pm.gmail!!)
             val baos = ByteArrayOutputStream()
@@ -184,10 +167,9 @@ class HomeViewModel @Inject constructor(
             val data = baos.toByteArray()
             val uploadTask: UploadTask = ref.putBytes(data)
             uploadTask.addOnFailureListener {
-                _showProgress.value = false
                 CoroutineScope(Dispatchers.IO).launch {
                     withContext(Dispatchers.Main) {
-                        showToast(it.toString())
+                        msg(it.toString())
                         callback(false)
                     }
                 }
@@ -202,20 +184,18 @@ class HomeViewModel @Inject constructor(
                         gDriver,
                         gMobile,
                         gDeactivated,
-                        it.toString()
-                    ) {
-                        _showProgress.value = false
-                        CoroutineScope(Dispatchers.IO).launch {
-                            withContext(Dispatchers.Main) {
-                                callback(it)
+                        it.toString(), {
+                            CoroutineScope(Dispatchers.IO).launch {
+                                withContext(Dispatchers.Main) {
+                                    callback(it)
+                                }
                             }
-                        }
-                    }
+                        }, {}
+                    )
                 }.addOnFailureListener {
-                    _showProgress.value = false
                     CoroutineScope(Dispatchers.IO).launch {
                         withContext(Dispatchers.Main) {
-                            showToast(it.toString())
+                            msg(it.toString())
                             callback(false)
                         }
                     }
@@ -234,7 +214,7 @@ class HomeViewModel @Inject constructor(
         gDriver: String,
         gMobile: String,
         gDeactivated: Boolean,
-        url: String, callback: (Boolean) -> Unit
+        url: String, callback: (Boolean) -> Unit, msg: (String) -> Unit
     ) {
         CoroutineScope(Dispatchers.IO).launch {
             runCatching {
@@ -255,13 +235,13 @@ class HomeViewModel @Inject constructor(
                 )
             }.onSuccess {
                 withContext(Dispatchers.Main) {
-                    showToast("Gaadi updated successfully")
+                    msg("Gaadi updated successfully")
                     getAutoDetails() {}
                     callback(true)
                 }
             }.onFailure {
                 withContext(Dispatchers.Main) {
-                    showToast("Gaadi not updated")
+                    msg("Gaadi not updated")
                     callback(false)
                 }
             }
@@ -292,13 +272,11 @@ class HomeViewModel @Inject constructor(
 
 
     private fun getAutoDetails(callback: (Boolean) -> Unit) {
-        _showProgress.value = true
         CoroutineScope(Dispatchers.IO).launch {
             runCatching {
                 api.getVehicleByGmailId(GetVehicleByGmailIdRequest(pm.gmail))
             }.onSuccess {
                 withContext(Dispatchers.Main) {
-                    _showProgress.value = false
                     if (it.isSuccessful) {
                         if (it.body() != null) {
                             callback(true)
@@ -309,8 +287,6 @@ class HomeViewModel @Inject constructor(
             }.onFailure {
                 withContext(Dispatchers.Main) {
                     callback(true)
-                    _showProgress.value = false
-                    showToast(it.toString())
                 }
             }
         }
@@ -336,56 +312,56 @@ class HomeViewModel @Inject constructor(
     }
 
 
-    fun deleteAuto(callback: (Boolean) -> Unit) {
-        _showProgress.value = true
+    fun deleteAuto(callback: (Boolean) -> Unit, msg: (String) -> Unit) {
         CoroutineScope(Dispatchers.IO).launch {
-            deleteGaadiImage(_vehicle.value!!._id) { result ->
+            deleteGaadiImage(_vehicle.value!!._id, { result ->
                 if (result) {
-                    deleteGaadiData(_vehicle.value!!._id) {
+                    deleteGaadiData(_vehicle.value!!._id, {
                         if (it) {
-                            _showProgress.value = false
                             CoroutineScope(Dispatchers.IO).launch {
                                 withContext(Dispatchers.Main) {
                                     callback(true)
                                 }
                             }
                         } else {
-                            _showProgress.value = false
                             CoroutineScope(Dispatchers.IO).launch {
                                 withContext(Dispatchers.Main) {
                                     callback(false)
                                 }
                             }
                         }
-                    }
+                    }, {})
                 } else {
-                    _showProgress.value = false
                     CoroutineScope(Dispatchers.IO).launch {
                         withContext(Dispatchers.Main) {
                             callback(false)
                         }
                     }
                 }
-            }
+            }, {})
         }
     }
 
 
-    private fun deleteGaadiImage(gaadiId: String, callback: (Boolean) -> Unit) {
+    private fun deleteGaadiImage(
+        gaadiId: String,
+        callback: (Boolean) -> Unit,
+        msg: (String) -> Unit
+    ) {
         viewModelScope.launch(Dispatchers.IO) {
             val ref = FBS.getReference(gaadiId)
             ref.delete()
                 .addOnSuccessListener {
                     CoroutineScope(Dispatchers.IO).launch {
                         withContext(Dispatchers.Main) {
-                            showToast("Related Image deleted successfully")
+                            msg("Related Image deleted successfully")
                             callback(true)
                         }
                     }
                 }.addOnFailureListener {
                     CoroutineScope(Dispatchers.IO).launch {
                         withContext(Dispatchers.Main) {
-                            showToast("Could not Image deleted successfully")
+                            msg("Could not Image deleted successfully")
                             callback(false)
                         }
                     }
@@ -395,19 +371,23 @@ class HomeViewModel @Inject constructor(
     }
 
 
-    private fun deleteGaadiData(gaadiId: String, callback: (Boolean) -> Unit) {
+    private fun deleteGaadiData(
+        gaadiId: String,
+        callback: (Boolean) -> Unit,
+        msg: (String) -> Unit
+    ) {
         CoroutineScope(Dispatchers.IO).launch {
             runCatching {
                 api.deleteVehicleById(DeleteVehicleRequest(gaadiId))
             }.onSuccess {
                 withContext(Dispatchers.Main) {
-                    showToast("Gaadi deleted successfully")
+                    msg("Gaadi deleted successfully")
                     getAutoDetails() {}
                     callback(true)
                 }
             }.onFailure {
                 withContext(Dispatchers.Main) {
-                    showToast("Gaadi not deleted")
+                    msg("Gaadi not deleted")
                     callback(false)
                 }
             }

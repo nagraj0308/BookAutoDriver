@@ -88,7 +88,7 @@ class HomeActivity : BaseActivity() {
             true
         }
         navView.menu.findItem(R.id.nav_exit).setOnMenuItemClickListener {
-            viewModel.logout()
+            pm.clearAll()
             finish()
             startActivity(Intent(this@HomeActivity, LoginActivity::class.java))
             true

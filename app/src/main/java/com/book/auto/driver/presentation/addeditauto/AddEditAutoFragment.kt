@@ -56,14 +56,14 @@ class AddEditAutoFragment : BaseFragment() {
                     driverName,
                     mobileNumber,
                     binding.sbDeactivated.isChecked,
-                    Utils.screenShot(binding.ivAutoPhoto)!!
-                ) {
-                    if (it) {
-                        requireActivity().onBackPressed()
-                    } else {
-                        showToast("Try again")
-                    }
-                }
+                    Utils.screenShot(binding.ivAutoPhoto)!!, {
+                        if (it) {
+                            requireActivity().onBackPressed()
+                        } else {
+                            showToast("Try again")
+                        }
+                    }, { showToast("") }
+                )
             }
         })
         binding.btnSave.setOnClickListener(View.OnClickListener {
@@ -81,23 +81,23 @@ class AddEditAutoFragment : BaseFragment() {
                     driverName,
                     mobileNumber,
                     binding.sbDeactivated.isChecked,
-                    Utils.screenShot(binding.ivAutoPhoto)!!
-                ) {
-                    if (it) {
-                        requireActivity().onBackPressed()
-                    } else {
-                        showToast("Try again")
-                    }
-                }
+                    Utils.screenShot(binding.ivAutoPhoto)!!, {
+                        if (it) {
+                            requireActivity().onBackPressed()
+                        } else {
+                            showToast("Try again")
+                        }
+                    }, {}
+                )
             }
 
         })
         binding.btnDelete.setOnClickListener {
-            viewModel.deleteAuto {
+            viewModel.deleteAuto({
                 if (it) {
                     activity?.onBackPressed()
                 }
-            }
+            }, {})
         }
 
         if (arguments != null) {
