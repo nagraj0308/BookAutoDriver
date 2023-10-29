@@ -93,6 +93,9 @@ class HomeFragment : BaseFragment() {
 
 
     override fun onStart() {
+        viewModel.getAutoDetails {
+
+        }
         super.onStart()
         binding.mvCl.onStart()
     }

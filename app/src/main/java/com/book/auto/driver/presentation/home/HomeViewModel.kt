@@ -271,7 +271,7 @@ class HomeViewModel @Inject constructor(
     }
 
 
-    private fun getAutoDetails(callback: (Boolean) -> Unit) {
+    fun getAutoDetails(callback: (Boolean) -> Unit) {
         CoroutineScope(Dispatchers.IO).launch {
             runCatching {
                 api.getVehicleByGmailId(GetVehicleByGmailIdRequest(pm.gmail))
