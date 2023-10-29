@@ -134,14 +134,14 @@ class AddEditAutoFragment : BaseFragment() {
             binding.llEdit.visibility = View.GONE
             binding.btnSubmit.visibility = View.VISIBLE
         } else {
-            binding.tilAutoName.editText!!.setText(viewModel.readVehicle.value!!.name)
-            binding.tilAutoNumber.editText!!.setText(viewModel.readVehicle.value!!.number)
-            binding.tilDriverName.editText!!.setText(viewModel.readVehicle.value!!.driver)
-            binding.tilMobileNumber.editText!!.setText(viewModel.readVehicle.value!!.mobileNo)
-            binding.actvAutoType.setText(viewModel.readVehicle.value!!.type)
-            binding.sbDeactivated.setChecked(viewModel.readVehicle.value!!.deactivated)
+            binding.tilAutoName.editText!!.setText(viewModel.vehicle.value!!.name)
+            binding.tilAutoNumber.editText!!.setText(viewModel.vehicle.value!!.number)
+            binding.tilDriverName.editText!!.setText(viewModel.vehicle.value!!.driver)
+            binding.tilMobileNumber.editText!!.setText(viewModel.vehicle.value!!.mobileNo)
+            binding.actvAutoType.setText(viewModel.vehicle.value!!.type)
+            binding.sbDeactivated.setChecked(viewModel.vehicle.value!!.deactivated)
 
-            Glide.with(this).asBitmap().load(viewModel.readVehicle.value!!.imageUrl)
+            Glide.with(this).asBitmap().load(viewModel.vehicle.value!!.imageUrl)
                 .into(binding.ivAutoPhoto)
 
             binding.llEdit.visibility = View.VISIBLE

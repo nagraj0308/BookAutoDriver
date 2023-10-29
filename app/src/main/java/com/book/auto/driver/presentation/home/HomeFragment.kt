@@ -11,6 +11,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.book.auto.driver.R
+import com.book.auto.driver.data.remote.reqres.Vehicle
 import com.book.auto.driver.databinding.FragmentHomeBinding
 import com.book.auto.driver.presentation.base.BaseFragment
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -56,8 +57,8 @@ class HomeFragment : BaseFragment() {
             navController.navigate(R.id.nav_add_edit_auto, bundle)
         }
 
-        viewModel.readVehicle.observe(viewLifecycleOwner, Observer {
-            //setContentState()
+        viewModel.vehicle.observe(viewLifecycleOwner, Observer {
+            setContentState(it)
         })
 
         //Maps View
@@ -113,20 +114,22 @@ class HomeFragment : BaseFragment() {
     }
 
 
-    private fun setContentState() {
-        if (viewModel.readVehicle.value?._id == "") {
-            isNew = true
-            binding.btnAddAuto.visibility = View.VISIBLE
-            binding.cvContent.visibility = View.GONE
+    private fun setContentState(vehicle: Vehicle?) {
+        if (vehicle != null) {
+            if (vehicle._id == "") {
+                isNew = true
+                binding.btnAddAuto.visibility = View.VISIBLE
+                binding.cvContent.visibility = View.GONE
 
-        } else {
-            isNew = false
-            binding.btnAddAuto.visibility = View.GONE
-            binding.cvContent.visibility = View.VISIBLE
-            binding.tvAutoNo.text = viewModel.readVehicle.value!!.number
-            binding.tvMobileNo.text = viewModel.readVehicle.value!!.mobileNo
-            binding.tvLive.text =
-                if (viewModel.readVehicle.value!!.deactivated || viewModel.readVehicle.value!!.verificationState != "A") "Not Live" else "Live"
+            } else {
+                isNew = false
+                binding.btnAddAuto.visibility = View.GONE
+                binding.cvContent.visibility = View.VISIBLE
+                binding.tvAutoNo.text = vehicle.number
+                binding.tvMobileNo.text = vehicle.mobileNo
+                binding.tvLive.text =
+                    if (vehicle.deactivated || (vehicle.verificationState != "A")) "Not Live" else "Live"
+            }
         }
 
     }

@@ -24,7 +24,7 @@ data class VehicleLocationRequest(
 )
 
 data class GetVehicleByGmailIdRequest(
-    @SerializedName("gmailId") val gmailId: String?,
+    @SerializedName("vId") val gmailId: String?,
 )
 
 data class DeleteVehicleRequest(
