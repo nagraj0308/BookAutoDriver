@@ -60,7 +60,7 @@ class AddEditAutoFragment : BaseFragment() {
                     autoNumber,
                     driverName,
                     mobileNumber,
-                    binding.sbDeactivated.isChecked,
+                    true,
                     Utils.screenShot(binding.ivAutoPhoto)!!, {
                         if (it) {
                             requireActivity().onBackPressed()
@@ -85,7 +85,7 @@ class AddEditAutoFragment : BaseFragment() {
                     autoNumber,
                     driverName,
                     mobileNumber,
-                    binding.sbDeactivated.isChecked,
+                    true,
                     Utils.screenShot(binding.ivAutoPhoto)!!, {
                         if (it) {
                             requireActivity().onBackPressed()
@@ -144,7 +144,6 @@ class AddEditAutoFragment : BaseFragment() {
             binding.tilDriverName.editText!!.setText(viewModel.vehicle.value!!.driver)
             binding.tilMobileNumber.editText!!.setText(viewModel.vehicle.value!!.mobileNo)
             binding.actvAutoType.setText(viewModel.vehicle.value!!.type)
-            binding.sbDeactivated.setChecked(viewModel.vehicle.value!!.deactivated)
 
             Glide.with(this).asBitmap().load(viewModel.vehicle.value!!.imageUrl)
                 .into(binding.ivAutoPhoto)

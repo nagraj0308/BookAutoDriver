@@ -132,6 +132,8 @@ class HomeFragment : BaseFragment() {
                 binding.tvMobileNo.text = vehicle.mobileNo
                 binding.tvLive.text =
                     if (vehicle.deactivated || (vehicle.verificationState != "A")) "Not Live" else "Live"
+                binding.sbDeactivated.setChecked(vehicle.deactivated)
+
             }
         }
 
