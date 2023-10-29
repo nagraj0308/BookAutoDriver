@@ -5,11 +5,12 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import android.graphics.Color
-import com.book.auto.driver.presentation.pl.SyncLocationService
+import com.book.auto.driver.presentation.synclocation.Sync15MinWorker
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
 class App : Application() {
+
     override fun onCreate() {
         super.onCreate()
         val channel = NotificationChannel(
@@ -23,6 +24,8 @@ class App : Application() {
         val notificationManager =
             getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         notificationManager.createNotificationChannel(channel)
-        SyncLocationService.start(this)
+        Sync15MinWorker.scheduleWorker(this)
     }
+
+
 }

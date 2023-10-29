@@ -6,9 +6,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.Window
 import android.widget.Button
-import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -16,9 +14,11 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.book.auto.driver.BuildConfig
+import com.book.auto.driver.PM
 import com.book.auto.driver.R
 import com.book.auto.driver.databinding.ActivityHomeBinding
 import com.book.auto.driver.databinding.NavHeaderMainBinding
+import com.book.auto.driver.presentation.base.BaseActivity
 import com.book.auto.driver.presentation.login.LoginActivity
 import com.book.auto.driver.utils.Constants
 import com.google.android.material.navigation.NavigationView
@@ -27,9 +27,13 @@ import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.ktx.remoteConfig
 import com.google.firebase.remoteconfig.ktx.remoteConfigSettings
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
+
 
 @AndroidEntryPoint
-open class HomeActivity : AppCompatActivity() {
+class HomeActivity : BaseActivity() {
+    @Inject
+    lateinit var pm: PM
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityHomeBinding
@@ -44,12 +48,12 @@ open class HomeActivity : AppCompatActivity() {
         setContentView(binding.root)
         headerBinding = NavHeaderMainBinding.bind(binding.navView.getHeaderView(0))
 
-        viewModel.initDataStore(this)
 
         setSupportActionBar(binding.appBarMain.toolbar)
 
-        headerBinding.tvName.text = viewModel.readState.value?.name ?: ""
-        headerBinding.tvGmail.text = viewModel.readState.value?.email ?: ""
+
+        headerBinding.tvName.text = pm.name ?: ""
+        headerBinding.tvGmail.text = pm.gmail ?: ""
 
         val drawerLayout: DrawerLayout = binding.drawerLayout
         val navView: NavigationView = binding.navView
@@ -135,11 +139,5 @@ open class HomeActivity : AppCompatActivity() {
             )
         }
         dialog.show()
-    }
-
-    private fun showToast(msg: String) {
-        Toast.makeText(
-            this@HomeActivity, msg, Toast.LENGTH_LONG
-        ).show()
     }
 }

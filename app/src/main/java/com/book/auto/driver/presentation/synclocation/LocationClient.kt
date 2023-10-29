@@ -1,4 +1,4 @@
-package com.book.auto.driver.presentation.pl
+package com.book.auto.driver.presentation.synclocation
 
 
 import android.location.Location

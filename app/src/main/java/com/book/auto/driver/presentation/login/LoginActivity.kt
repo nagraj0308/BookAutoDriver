@@ -5,12 +5,11 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.view.animation.AnimationUtils
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import com.book.auto.driver.PM
 import com.book.auto.driver.R
-import com.book.auto.driver.data.DataStore
 import com.book.auto.driver.databinding.ActivityLoginBinding
+import com.book.auto.driver.presentation.base.BaseActivity
 import com.book.auto.driver.presentation.home.HomeActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -18,37 +17,27 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
-import kotlinx.coroutines.DelicateCoroutinesApi
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.runBlocking
+import javax.inject.Inject
 
-
-class LoginActivity : AppCompatActivity() {
+@AndroidEntryPoint
+class LoginActivity : BaseActivity() {
+    @Inject
+    lateinit var pm: PM
 
     private lateinit var binding: ActivityLoginBinding
-    private lateinit var dataStore: DataStore
 
     private lateinit var mGoogleSignInClient: GoogleSignInClient
     val REQ_CODE: Int = 123
 
 
-
-    @OptIn(DelicateCoroutinesApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        dataStore = DataStore(this)
-        GlobalScope.launch(
-            Dispatchers.IO
-        ) {
-            dataStore.isLogin.collect {
-                if (it) {
-                    login()
-                }
-            }
+        if (pm.isLoggedIn) {
+            login()
         }
 
         val animationFadeOut = AnimationUtils.loadAnimation(this, R.anim.fade_out)
@@ -89,18 +78,13 @@ class LoginActivity : AppCompatActivity() {
             val account: GoogleSignInAccount? = completedTask.getResult(ApiException::class.java)
             if (account != null) {
                 runBlocking {
-                    GlobalScope.launch(
-                        Dispatchers.IO
-                    ) {
-                        if (account.email == null) {
-                            showToast("There is some error!!")
-                        } else {
-                            dataStore.setLogin(true)
-                            dataStore.setEmail(account.email.toString())
-                            dataStore.setName(account.displayName.toString())
-                            login()
-                        }
-
+                    if (account.email == null) {
+                        showToast("There is some error!!")
+                    } else {
+                        pm.isLoggedIn = true
+                        pm.gmail = account.email.toString()
+                        pm.name = account.displayName.toString()
+                        login()
                     }
                 }
             }
@@ -110,10 +94,6 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-
-    private fun showToast(msg: String) {
-        Toast.makeText(this, msg, Toast.LENGTH_LONG).show()
-    }
 
     private fun login() {
         finish()

@@ -4,17 +4,15 @@ import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.book.auto.driver.R
 import com.book.auto.driver.databinding.FragmentHomeBinding
-import com.book.auto.driver.presentation.pl.SyncLocationService
+import com.book.auto.driver.presentation.base.BaseFragment
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapsInitializer
@@ -24,7 +22,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 
 
-class HomeFragment : Fragment() {
+class HomeFragment : BaseFragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private val viewModel: HomeViewModel by activityViewModels()
@@ -36,18 +34,13 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        MapsInitializer.initialize(requireContext(), MapsInitializer.Renderer.LATEST) {
-            Log.v("NAGRAJ", it.name)
-        }
+        MapsInitializer.initialize(requireContext(), MapsInitializer.Renderer.LATEST) {}
         val root: View = binding.root
         val navController = findNavController()
         binding.btnUpdateLocation.setOnClickListener {
-            context?.let { it1 -> SyncLocationService.start(it1) };
             activity?.let { it1 ->
                 viewModel.updateLocation(it1)
             }
@@ -146,9 +139,7 @@ class HomeFragment : Fragment() {
     private fun getMarkerIconFromDrawable(drawable: Drawable): BitmapDescriptor {
         val canvas = Canvas()
         val bitmap = Bitmap.createBitmap(
-            drawable.intrinsicWidth,
-            drawable.intrinsicHeight,
-            Bitmap.Config.ARGB_8888
+            drawable.intrinsicWidth, drawable.intrinsicHeight, Bitmap.Config.ARGB_8888
         )
         canvas.setBitmap(bitmap)
         drawable.setBounds(0, 0, drawable.intrinsicWidth, drawable.intrinsicHeight)

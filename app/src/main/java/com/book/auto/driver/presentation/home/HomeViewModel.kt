@@ -10,7 +10,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.book.auto.driver.data.DataStore
+import com.book.auto.driver.PM
 import com.book.auto.driver.data.remote.reqres.DeleteVehicleRequest
 import com.book.auto.driver.data.remote.reqres.GetVehicleByGmailIdRequest
 import com.book.auto.driver.data.remote.reqres.Vehicle
@@ -23,19 +23,11 @@ import com.google.android.gms.location.LocationServices
 import com.google.firebase.storage.UploadTask
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.ByteArrayOutputStream
 import javax.inject.Inject
-
-
-data class HomeState(
-    var email: String = "",
-    var name: String = "",
-)
 
 
 @SuppressLint("MissingPermission")
@@ -43,61 +35,28 @@ data class HomeState(
 class HomeViewModel @Inject constructor(
     private val api: BVApi
 ) : ViewModel() {
-    private lateinit var dataStore: DataStore
+
+    @Inject
+    lateinit var pm: PM
 
     private val _vehicle = MutableLiveData(Vehicle())
-    private val _state = MutableLiveData(HomeState())
     private var _showProgress = MutableLiveData(false)
     private var _toastMsg = MutableLiveData("")
     private var _showToast = MutableLiveData(false)
     private val _isLocationUpdated = MutableLiveData(false)
-    private val _lat = MutableLiveData(28.656473)
-    private val _lon = MutableLiveData(77.242943)
+    private val _lat = MutableLiveData(0.0)
+    private val _lon = MutableLiveData(0.0)
 
-    val readShowProgress: LiveData<Boolean> get() = _showProgress
     val readVehicle: LiveData<Vehicle> get() = _vehicle
-    val readState: LiveData<HomeState> get() = _state
-    val readToastMsg: LiveData<String> get() = _toastMsg
-    val readShowToast: LiveData<Boolean> get() = _showToast
 
     val lat: LiveData<Double> get() = _lat
     val lon: LiveData<Double> get() = _lon
     val isLocationUpdated: LiveData<Boolean> get() = _isLocationUpdated
 
 
-    @OptIn(DelicateCoroutinesApi::class)
-    fun initDataStore(activity: Activity) {
-        dataStore = DataStore(activity)
-        GlobalScope.launch(Dispatchers.IO) {
-            dataStore.getEmail.collect {
-                _state.value!!.email = it
-                withContext(Dispatchers.Main) {
-                    getAutoDetails { }
-                }
-            }
-        }
-        GlobalScope.launch(Dispatchers.IO) {
-            dataStore.getName.collect {
-                _state.value!!.name = it
-            }
-        }
-    }
-
-    @OptIn(DelicateCoroutinesApi::class)
     fun logout() {
-        GlobalScope.launch(Dispatchers.IO) {
-            dataStore.setLogin(false)
-        }
+        pm.clearAll();
     }
-
-    fun showProgress() {
-        _showProgress.value = true
-    }
-
-    fun hideProgress() {
-        _showProgress.value = false
-    }
-
 
     private fun showToast(msg: String) {
         _toastMsg.value = msg
@@ -117,7 +76,7 @@ class HomeViewModel @Inject constructor(
 
 
         viewModelScope.launch(Dispatchers.IO) {
-            val ref = FBS.getReference(_state.value!!.email)
+            val ref = FBS.getReference(pm.gmail!!)
             val baos = ByteArrayOutputStream()
             bitmap.compress(Bitmap.CompressFormat.JPEG, 20, baos)
             val data = baos.toByteArray()
@@ -133,7 +92,7 @@ class HomeViewModel @Inject constructor(
             }.addOnSuccessListener {
                 ref.downloadUrl.addOnSuccessListener {
                     insertGaadi(
-                        _state.value!!.email,
+                        pm.gmail!!,
                         gName,
                         gType,
                         gRate,
@@ -219,7 +178,7 @@ class HomeViewModel @Inject constructor(
     ) {
         _showProgress.value = true
         viewModelScope.launch(Dispatchers.IO) {
-            val ref = FBS.getReference(_state.value!!.email)
+            val ref = FBS.getReference(pm.gmail!!)
             val baos = ByteArrayOutputStream()
             bitmap.compress(Bitmap.CompressFormat.JPEG, 20, baos)
             val data = baos.toByteArray()
@@ -235,7 +194,7 @@ class HomeViewModel @Inject constructor(
             }.addOnSuccessListener {
                 ref.downloadUrl.addOnSuccessListener {
                     updateGaadiData(
-                        _state.value!!.email,
+                        pm.gmail!!,
                         gName,
                         gType,
                         gRate,
@@ -336,7 +295,7 @@ class HomeViewModel @Inject constructor(
         _showProgress.value = true
         CoroutineScope(Dispatchers.IO).launch {
             runCatching {
-                api.getVehicleByGmailId(GetVehicleByGmailIdRequest(_state.value!!.email))
+                api.getVehicleByGmailId(GetVehicleByGmailIdRequest(pm.gmail))
             }.onSuccess {
                 withContext(Dispatchers.Main) {
                     _showProgress.value = false
@@ -367,8 +326,7 @@ class HomeViewModel @Inject constructor(
                         _isLocationUpdated.value = true
                         _lat.value = it.latitude
                         _lon.value = it.longitude
-                        updateAutoLocation(_state.value!!.email, it.latitude, it.longitude)
-                        Log.v("NAGRAJ", it.latitude.toString() + " " + it.longitude.toString())
+                        updateAutoLocation(pm.gmail!!, it.latitude, it.longitude)
                     }
                 }
             }

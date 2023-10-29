@@ -51,10 +51,6 @@
             android:exported="true"
             android:theme="@style/Theme.BookAutoDriver.NoActionBar" />
 
-        <service
-            android:name=".presentation.pl.SyncLocationService"
-            android:foregroundServiceType="location" />
-
 
         <provider
             android:name="androidx.core.content.FileProvider"

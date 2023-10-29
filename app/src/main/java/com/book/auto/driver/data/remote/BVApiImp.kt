@@ -1,5 +1,6 @@
 package com.book.auto.driver.data.remote
 
+import com.book.auto.driver.PM
 import com.book.auto.driver.data.remote.reqres.BasicResponse
 import com.book.auto.driver.data.remote.reqres.DeleteVehicleRequest
 import com.book.auto.driver.data.remote.reqres.GetVehicleByGmailIdRequest
@@ -12,7 +13,7 @@ import javax.inject.Inject
 
 
 class BVApiImp @Inject constructor(
-    private val service: BVService,
+    private val service: BVService
 ) : BVApi {
 
     override suspend fun insertVehicle(request: VehicleRequest?): Response<VehicleResponse> {

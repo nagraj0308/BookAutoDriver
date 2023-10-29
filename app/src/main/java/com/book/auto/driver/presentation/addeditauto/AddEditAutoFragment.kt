@@ -15,8 +15,8 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.activityViewModels
 import com.book.auto.driver.R
 import com.book.auto.driver.databinding.FragmnetAddEditAutoDetailsBinding
+import com.book.auto.driver.presentation.base.BaseFragment
 import com.book.auto.driver.presentation.home.HomeViewModel
-import com.book.auto.driver.utils.BaseFragment
 import com.book.auto.driver.utils.Constants
 import com.book.auto.driver.utils.PermissionUtils
 import com.book.auto.driver.utils.Utils
@@ -130,7 +130,7 @@ class AddEditAutoFragment : BaseFragment() {
         }
 
         if (isNew) {
-            binding.tilDriverName.editText!!.setText(viewModel.readState.value!!.name)
+            binding.tilDriverName.editText!!.setText("")
             binding.llEdit.visibility = View.GONE
             binding.btnSubmit.visibility = View.VISIBLE
         } else {
