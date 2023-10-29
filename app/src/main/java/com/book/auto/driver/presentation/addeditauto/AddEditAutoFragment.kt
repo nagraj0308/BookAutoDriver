@@ -100,9 +100,11 @@ class AddEditAutoFragment : BaseFragment() {
         binding.btnDelete.setOnClickListener {
             viewModel.deleteAuto({
                 if (it) {
-                    activity?.onBackPressed()
+                    activity?.finish()
                 }
-            }, {})
+            }, {
+                showToast(it)
+            })
         }
 
         if (arguments != null) {

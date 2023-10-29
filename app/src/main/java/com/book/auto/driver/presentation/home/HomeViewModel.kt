@@ -321,6 +321,7 @@ class HomeViewModel @Inject constructor(
                             CoroutineScope(Dispatchers.IO).launch {
                                 withContext(Dispatchers.Main) {
                                     callback(true)
+
                                 }
                             }
                         } else {
@@ -330,7 +331,7 @@ class HomeViewModel @Inject constructor(
                                 }
                             }
                         }
-                    }, {})
+                    }, { msg(it) })
                 } else {
                     CoroutineScope(Dispatchers.IO).launch {
                         withContext(Dispatchers.Main) {
