@@ -6,6 +6,7 @@ import com.book.auto.driver.data.remote.reqres.GetVehicleByGmailIdRequest
 import com.book.auto.driver.data.remote.reqres.VehicleLocationRequest
 import com.book.auto.driver.data.remote.reqres.VehicleRequest
 import com.book.auto.driver.data.remote.reqres.VehicleResponse
+import com.book.auto.driver.data.remote.reqres.VerificationStatusRequest
 import retrofit2.Response
 
 interface BVApi {
@@ -14,6 +15,8 @@ interface BVApi {
     suspend fun updateVehicle(request: VehicleRequest?): Response<VehicleResponse>
 
     suspend fun updateVehicleLocation(request: VehicleLocationRequest?): Response<BasicResponse>
+
+    suspend fun updateAutoActiveStatus(request: VerificationStatusRequest?): Response<BasicResponse>
 
     suspend fun getVehicleByGmailId(request: GetVehicleByGmailIdRequest?): Response<VehicleResponse>
 

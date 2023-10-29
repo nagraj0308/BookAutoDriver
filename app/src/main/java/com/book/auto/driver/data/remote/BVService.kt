@@ -6,6 +6,7 @@ import com.book.auto.driver.data.remote.reqres.GetVehicleByGmailIdRequest
 import com.book.auto.driver.data.remote.reqres.VehicleLocationRequest
 import com.book.auto.driver.data.remote.reqres.VehicleRequest
 import com.book.auto.driver.data.remote.reqres.VehicleResponse
+import com.book.auto.driver.data.remote.reqres.VerificationStatusRequest
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.Headers
@@ -24,6 +25,11 @@ interface BVService {
     @Headers("Content-Type: application/json")
     @POST("api/updateAutoLocation/")
     suspend fun updateVehicleLocation(@Body request: VehicleLocationRequest?): Response<BasicResponse>
+
+    @Headers("Content-Type: application/json")
+    @POST("api/updateAutoActiveStatus/")
+    suspend fun updateAutoActiveStatus(@Body request: VerificationStatusRequest?): Response<BasicResponse>
+
 
     @Headers("Content-Type: application/json")
     @POST("api/getAutoByGmailId/")

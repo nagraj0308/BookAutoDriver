@@ -15,6 +15,7 @@ import com.book.auto.driver.data.remote.reqres.GetVehicleByGmailIdRequest
 import com.book.auto.driver.data.remote.reqres.Vehicle
 import com.book.auto.driver.data.remote.reqres.VehicleLocationRequest
 import com.book.auto.driver.data.remote.reqres.VehicleRequest
+import com.book.auto.driver.data.remote.reqres.VerificationStatusRequest
 import com.book.auto.driver.domain.BVApi
 import com.book.auto.driver.utils.FBS
 import com.book.auto.driver.utils.PermissionUtils
@@ -265,6 +266,25 @@ class HomeViewModel @Inject constructor(
                     _isLocationUpdated.value = true
                     _lat.value = aLat
                     _lon.value = aLon
+                }
+            }
+        }
+    }
+
+
+    fun updateAutoActivation(
+        deactivated: Boolean
+    ) {
+        CoroutineScope(Dispatchers.IO).launch {
+            runCatching {
+                api.updateAutoActiveStatus(
+                    VerificationStatusRequest(
+                        pm.gmail, deactivated
+                    )
+                )
+            }.onSuccess {
+                withContext(Dispatchers.Main) {
+                    getAutoDetails { }
                 }
             }
         }

@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CompoundButton
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -51,6 +52,11 @@ class HomeFragment : BaseFragment() {
             bundle.putBoolean("is_new", isNew)
             navController.navigate(R.id.nav_add_edit_auto, bundle)
         }
+
+        binding.sbDeactivated.setOnCheckedChangeListener { _, isChecked ->
+            viewModel.updateAutoActivation(isChecked)
+        };
+
         binding.btnEdit.setOnClickListener {
             val bundle = Bundle()
             bundle.putBoolean("is_new", isNew)
@@ -130,13 +136,26 @@ class HomeFragment : BaseFragment() {
                 binding.cvContent.visibility = View.VISIBLE
                 binding.tvAutoNo.text = vehicle.number
                 binding.tvMobileNo.text = vehicle.mobileNo
-                binding.tvLive.text =
-                    if (vehicle.deactivated || (vehicle.verificationState != "A")) "Not Live" else "Live"
+                binding.tvLive.text = getStatusMsg(vehicle.deactivated, vehicle.verificationState)
                 binding.sbDeactivated.setChecked(vehicle.deactivated)
 
             }
         }
 
+    }
+
+    private fun getStatusMsg(deactivated: Boolean, verificationState: String): String {
+        return if (verificationState == "U") {
+            "System Verification Pending"
+        } else if (verificationState == "R") {
+            "Rejected in verification"
+        } else {
+            if (deactivated) {
+                "Deactivated by you"
+            } else {
+                "Live"
+            }
+        }
     }
 
     override fun onDestroyView() {

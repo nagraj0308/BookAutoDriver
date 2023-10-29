@@ -7,6 +7,7 @@ import com.book.auto.driver.data.remote.reqres.GetVehicleByGmailIdRequest
 import com.book.auto.driver.data.remote.reqres.VehicleLocationRequest
 import com.book.auto.driver.data.remote.reqres.VehicleRequest
 import com.book.auto.driver.data.remote.reqres.VehicleResponse
+import com.book.auto.driver.data.remote.reqres.VerificationStatusRequest
 import com.book.auto.driver.domain.BVApi
 import retrofit2.Response
 import javax.inject.Inject
@@ -26,6 +27,10 @@ class BVApiImp @Inject constructor(
 
     override suspend fun updateVehicleLocation(request: VehicleLocationRequest?): Response<BasicResponse> {
         return service.updateVehicleLocation(request)
+    }
+
+    override suspend fun updateAutoActiveStatus(request: VerificationStatusRequest?): Response<BasicResponse> {
+        return service.updateAutoActiveStatus(request)
     }
 
 
