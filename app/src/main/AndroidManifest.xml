@@ -39,8 +39,6 @@
             android:name="com.book.admin.presentation.home.HomeActivity"
             android:exported="true"
             android:theme="@style/Theme.BookAutoDriver.NoActionBar" />
-
-
     </application>
 
 </manifest>
