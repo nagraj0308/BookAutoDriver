@@ -1,19 +1,19 @@
-
-
--keep class com.book.admin.data.remote.reqres.*{*;}
--keep class com.book.admin.data.remote.*{*;}
--keep class com.book.admin.data.*{*;}
--keep class com.book.admin.di.*{*;}
--keep class com.book.admin.domain.*{*;}
--keep class com.book.admin.presentation.home.*{*;}
--keep class com.book.admin.presentation.login.*{*;}
--keep class com.book.admin.presentation.vehicle.*{*;}
--keep class com.book.admin.utils.*{*;}
--keep class com.book.admin.*{*;}
-
-
-
-
+-keep class com.book.auto.driver.data.remote.reqres.*{*;}
+-keep class com.book.auto.driver.data.remote.*{*;}
+-keep class com.book.auto.driver.data.*{*;}
+-keep class com.book.auto.driver.di.*{*;}
+-keep class com.book.auto.driver.domain.*{*;}
+-keep class com.book.auto.driver.presentation.home.*{*;}
+-keep class com.book.auto.driver.presentation.login.*{*;}
+-keep class com.book.auto.driver.presentation.addeditauto.*{*;}
+-keep class com.book.auto.driver.presentation.base.*{*;}
+-keep class com.book.auto.driver.presentation.vehicle.*{*;}
+-keep class com.book.auto.driver.presentation.home.*{*;}
+-keep class com.book.auto.driver.presentation.login.*{*;}
+-keep class com.book.auto.driver.presentation.synclocation.*{*;}
+-keep class com.book.auto.driver.presentation.*{*;}
+-keep class com.book.auto.driver.utils.*{*;}
+-keep class com.book.auto.driver.*{*;}
 
 
 -keep,allowobfuscation,allowshrinking class kotlin.coroutines.Continuation
