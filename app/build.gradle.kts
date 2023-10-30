@@ -15,10 +15,10 @@ android {
 
     defaultConfig {
         applicationId = "com.book.admin"
-        minSdk = 31
+        minSdk = 29
         targetSdk = 34
-        versionCode = 4
-        versionName = "0.4"
+        versionCode = 5
+        versionName = "0.5"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
