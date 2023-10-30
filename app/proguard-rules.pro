@@ -1,51 +1,19 @@
-# Add project specific ProGuard rules here.
-# You can control the set of applied configuration files using the
-# proguardFiles setting in build.gradle.
-#
-# For more details, see
-#   http://developer.android.com/guide/developing/tools/proguard.html
-
-# If your project uses WebView with JS, uncomment the following
-# and specify the fully qualified class name to the JavaScript interface
-# class:
-#-keepclassmembers class fqcn.of.javascript.interface.for.webview {
-#   public *;
-#}
-
-# Uncomment this to preserve the line number information for
-# debugging stack traces.
-#-keepattributes SourceFile,LineNumberTable
-
-# If you keep the line number information, uncomment this to
-# hide the original source file name.
-#-renamesourcefileattribute SourceFile
 
 
--keep class com.book.auto.driver.presentation.home.HomeFragment
--keep class com.book.auto.driver.utils.BaseFragment
--keep class com.book.auto.driver.presentation.home.HomeActivity
--keep class com.book.auto.driver.driver** { *; }
--keep class com.book.auto.driver.utils.Utils
--keep class com.book.auto.driver.utils.Constants
--keep class com.book.auto.driver.utils.PermissionUtils
--keep class com.book.auto.driver.utils.RequestCode
--keep class com.book.auto.driver.domain.BVApi
--keep class com.book.auto.driver.data.remote.BVApiImp
--keep class com.book.auto.driver.data.remote.reqres.BasicResponse
--keep class com.book.auto.driver.data.remote.reqres.DeleteVehicleRequest
--keep class com.book.auto.driver.data.remote.reqres.GetVehicleByGmailIdRequest
--keep class com.book.auto.driver.data.remote.reqres.Vehicle
--keep class com.book.auto.driver.data.remote.reqres.VehicleLocationRequest
--keep class com.book.auto.driver.data.remote.reqres.VehicleRequest
--keep class com.book.auto.driver.data.remote.reqres.VehicleResponse
--keep class com.book.auto.driver.data.DataStore
--keep class com.book.auto.driver.data.DataStorePref
--keep class com.book.auto.driver.data.remote.BVService
+-keep class com.book.admin.data.remote.reqres.*{*;}
+-keep class com.book.admin.data.remote.*{*;}
+-keep class com.book.admin.data.*{*;}
+-keep class com.book.admin.di.*{*;}
+-keep class com.book.admin.domain.*{*;}
+-keep class com.book.admin.presentation.home.*{*;}
+-keep class com.book.admin.presentation.login.*{*;}
+-keep class com.book.admin.presentation.vehicle.*{*;}
+-keep class com.book.admin.utils.*{*;}
+-keep class com.book.admin.*{*;}
 
 
--keep class com.book.auto.driver.* {*;}
--keep class com.book.auto.driver.presentation.addeditauto.AddEditAutoFragment
--keep class com.book.auto.driver.presentation.home.HomeViewModel
+
+
 
 
 -keep,allowobfuscation,allowshrinking class kotlin.coroutines.Continuation
@@ -72,5 +40,3 @@
 # Retain generic signatures of TypeToken and its subclasses with R8 version 3.0 and higher.
 -keep,allowobfuscation,allowshrinking class com.google.gson.reflect.TypeToken
 -keep,allowobfuscation,allowshrinking class * extends com.google.gson.reflect.TypeToken
--keep class com.book.auto.driver.utils.FBS
--keep class com.book.auto.driver.utils.Utils
