@@ -58,7 +58,6 @@ class HomeViewModel @Inject constructor(
         gNumber: String,
         gDriver: String,
         gMobile: String,
-        gDeactivated: Boolean,
         bitmap: Bitmap, callback: (Boolean) -> Unit, msg: (String) -> Unit
     ) {
 
@@ -86,7 +85,6 @@ class HomeViewModel @Inject constructor(
                         gNumber,
                         gDriver,
                         gMobile,
-                        gDeactivated,
                         it.toString(), {
                             CoroutineScope(Dispatchers.IO).launch {
                                 withContext(Dispatchers.Main) {
@@ -115,7 +113,6 @@ class HomeViewModel @Inject constructor(
         gNumber: String,
         gDriver: String,
         gMobile: String,
-        gDeactivated: Boolean,
         url: String, callback: (Boolean) -> Unit, msg: (String) -> Unit
     ) {
         CoroutineScope(Dispatchers.IO).launch {
@@ -124,7 +121,7 @@ class HomeViewModel @Inject constructor(
                     VehicleRequest(
                         gId,
                         gName,
-                        gDeactivated,
+                        false,
                         gDriver,
                         url,
                         _lat.value,
@@ -158,7 +155,6 @@ class HomeViewModel @Inject constructor(
         gNumber: String,
         gDriver: String,
         gMobile: String,
-        gDeactivated: Boolean,
         bitmap: Bitmap, callback: (Boolean) -> Unit, msg: (String) -> Unit
     ) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -184,7 +180,6 @@ class HomeViewModel @Inject constructor(
                         gNumber,
                         gDriver,
                         gMobile,
-                        gDeactivated,
                         it.toString(), {
                             CoroutineScope(Dispatchers.IO).launch {
                                 withContext(Dispatchers.Main) {
@@ -214,7 +209,6 @@ class HomeViewModel @Inject constructor(
         gNumber: String,
         gDriver: String,
         gMobile: String,
-        gDeactivated: Boolean,
         url: String, callback: (Boolean) -> Unit, msg: (String) -> Unit
     ) {
         CoroutineScope(Dispatchers.IO).launch {
@@ -223,7 +217,7 @@ class HomeViewModel @Inject constructor(
                     VehicleRequest(
                         gId,
                         gName,
-                        gDeactivated,
+                        false,
                         gDriver,
                         url,
                         _lat.value,

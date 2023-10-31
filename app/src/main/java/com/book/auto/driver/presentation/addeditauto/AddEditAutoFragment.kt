@@ -38,9 +38,7 @@ class AddEditAutoFragment : BaseFragment() {
 
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
 
 
@@ -54,21 +52,21 @@ class AddEditAutoFragment : BaseFragment() {
                 val mobileNumber = binding.tilMobileNumber.editText!!.text.trim().toString()
                 val rate = binding.tilNormalRate.editText!!.text.trim().toString()
                 val autoType = binding.actvAutoType.text.trim().toString()
-                viewModel.insertFSImage(
-                    name, autoType,
+                viewModel.insertFSImage(name,
+                    autoType,
                     rate,
                     autoNumber,
                     driverName,
                     mobileNumber,
-                    true,
-                    Utils.screenShot(binding.ivAutoPhoto)!!, {
+                    Utils.screenShot(binding.ivAutoPhoto)!!,
+                    {
                         if (it) {
                             requireActivity().onBackPressed()
                         } else {
                             showToast("Try again")
                         }
-                    }, { showToast("") }
-                )
+                    },
+                    { showToast("") })
             }
         })
         binding.btnSave.setOnClickListener(View.OnClickListener {
@@ -79,21 +77,21 @@ class AddEditAutoFragment : BaseFragment() {
                 val mobileNumber = binding.tilMobileNumber.editText!!.text.trim().toString()
                 val rate = binding.tilNormalRate.editText!!.text.trim().toString()
                 val autoType = binding.actvAutoType.text.trim().toString()
-                viewModel.updateFSImage(
-                    name, autoType,
+                viewModel.updateFSImage(name,
+                    autoType,
                     rate,
                     autoNumber,
                     driverName,
                     mobileNumber,
-                    true,
-                    Utils.screenShot(binding.ivAutoPhoto)!!, {
+                    Utils.screenShot(binding.ivAutoPhoto)!!,
+                    {
                         if (it) {
                             requireActivity().onBackPressed()
                         } else {
                             showToast("Try again")
                         }
-                    }, {}
-                )
+                    },
+                    {})
             }
 
         })
@@ -113,9 +111,7 @@ class AddEditAutoFragment : BaseFragment() {
 
 
         val arrayAdapter = ArrayAdapter(
-            requireContext(),
-            R.layout.item_spinner,
-            Constants.gaadiTypes
+            requireContext(), R.layout.item_spinner, Constants.gaadiTypes
         )
         binding.actvAutoType.setAdapter(arrayAdapter)
         binding.actvAutoType.setText(Constants.gaadiTypes[0], false)
@@ -127,8 +123,7 @@ class AddEditAutoFragment : BaseFragment() {
             if (PermissionUtils.checkReadStoragePermission(requireContext())) {
                 startForResult.launch(
                     Intent(
-                        Intent.ACTION_PICK,
-                        MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+                        Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI
                     )
                 )
             } else {
@@ -166,8 +161,13 @@ class AddEditAutoFragment : BaseFragment() {
             val data = result.data
             val selectedImage: Uri = data!!.data!!
             val filePathColumn = arrayOf(MediaStore.Images.Media.DATA)
-            val cursor = requireActivity().contentResolver
-                .query(selectedImage, filePathColumn, null, null, null)
+            val cursor = requireActivity().contentResolver.query(
+                    selectedImage,
+                    filePathColumn,
+                    null,
+                    null,
+                    null
+                )
             cursor!!.moveToFirst()
             val columnIndex = cursor.getColumnIndex(filePathColumn[0])
             val picturePath = cursor.getString(columnIndex)
