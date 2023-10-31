@@ -1,6 +1,5 @@
 package com.book.auto.driver.data.remote
 
-import com.book.auto.driver.PM
 import com.book.auto.driver.data.remote.reqres.BasicResponse
 import com.book.auto.driver.data.remote.reqres.DeleteVehicleRequest
 import com.book.auto.driver.data.remote.reqres.GetVehicleByGmailIdRequest
