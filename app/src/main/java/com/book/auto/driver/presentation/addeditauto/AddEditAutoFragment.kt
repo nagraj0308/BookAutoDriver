@@ -69,7 +69,7 @@ class AddEditAutoFragment : BaseFragment() {
                     { showToast("") })
             }
         })
-        binding.btnSave.setOnClickListener(View.OnClickListener {
+        binding.btnSave.setOnClickListener {
             if (validate()) {
                 val name = binding.tilAutoName.editText!!.text.trim().toString()
                 val autoNumber = binding.tilAutoNumber.editText!!.text.trim().toString()
@@ -94,7 +94,7 @@ class AddEditAutoFragment : BaseFragment() {
                     {})
             }
 
-        })
+        }
         binding.btnDelete.setOnClickListener {
             viewModel.deleteAuto({
                 if (it) {
@@ -162,12 +162,12 @@ class AddEditAutoFragment : BaseFragment() {
             val selectedImage: Uri = data!!.data!!
             val filePathColumn = arrayOf(MediaStore.Images.Media.DATA)
             val cursor = requireActivity().contentResolver.query(
-                    selectedImage,
-                    filePathColumn,
-                    null,
-                    null,
-                    null
-                )
+                selectedImage,
+                filePathColumn,
+                null,
+                null,
+                null
+            )
             cursor!!.moveToFirst()
             val columnIndex = cursor.getColumnIndex(filePathColumn[0])
             val picturePath = cursor.getString(columnIndex)
@@ -219,8 +219,8 @@ class AddEditAutoFragment : BaseFragment() {
         }
 
         val autoNumber = binding.tilAutoNumber.editText!!.text.trim().toString()
-        if (autoNumber.length < 10) {
-            binding.tilAutoNumber.error = getString(R.string.this_should_be_10_digits)
+        if (autoNumber.length < 4) {
+            binding.tilAutoNumber.error = getString(R.string.this_should_be_4_digits)
             return false
         } else {
             binding.tilAutoNumber.isErrorEnabled = false
