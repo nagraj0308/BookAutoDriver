@@ -40,11 +40,9 @@ class AddEditAutoFragment : BaseFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
-
-
         _binding = FragmnetAddEditAutoDetailsBinding.inflate(inflater, container, false)
         val root: View = binding.root
-        binding.btnSubmit.setOnClickListener(View.OnClickListener {
+        binding.btnSubmit.setOnClickListener {
             if (validate()) {
                 val name = binding.tilAutoName.editText!!.text.trim().toString()
                 val autoNumber = binding.tilAutoNumber.editText!!.text.trim().toString()
@@ -68,7 +66,7 @@ class AddEditAutoFragment : BaseFragment() {
                     },
                     { showToast("") })
             }
-        })
+        }
         binding.btnSave.setOnClickListener {
             if (validate()) {
                 val name = binding.tilAutoName.editText!!.text.trim().toString()
