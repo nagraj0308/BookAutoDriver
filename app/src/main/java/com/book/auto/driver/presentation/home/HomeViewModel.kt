@@ -63,7 +63,7 @@ class HomeViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             val ref = FBS.getReference(pm.gmail!!)
             val baos = ByteArrayOutputStream()
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 20, baos)
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 60, baos)
             val data = baos.toByteArray()
             val uploadTask: UploadTask = ref.putBytes(data)
             uploadTask.addOnFailureListener {
@@ -150,7 +150,7 @@ class HomeViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             val ref = FBS.getReference(pm.gmail!!)
             val baos = ByteArrayOutputStream()
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 20, baos)
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 60, baos)
             val data = baos.toByteArray()
             val uploadTask: UploadTask = ref.putBytes(data)
             uploadTask.addOnFailureListener {
