@@ -103,10 +103,10 @@ class AddEditAutoFragment : BaseFragment() {
 
 
         val arrayAdapter = ArrayAdapter(
-            requireContext(), R.layout.item_spinner, Constants.gaadiTypes
+            requireContext(), R.layout.item_spinner, Constants.autoTypes
         )
         binding.actvAutoType.setAdapter(arrayAdapter)
-        binding.actvAutoType.setText(Constants.gaadiTypes[0], false)
+        binding.actvAutoType.setText(Constants.autoTypes[0], false)
 
 
 

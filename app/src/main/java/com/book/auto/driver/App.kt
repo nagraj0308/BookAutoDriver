@@ -5,7 +5,6 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import android.graphics.Color
-import com.book.auto.driver.presentation.synclocation.Sync15MinWorker
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
@@ -21,10 +20,6 @@ class App : Application() {
             lightColor = Color.BLUE
             enableLights(true)
         }
-        val notificationManager =
-            getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        notificationManager.createNotificationChannel(channel)
-        Sync15MinWorker.scheduleWorker(this)
     }
 
 

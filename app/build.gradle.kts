@@ -17,8 +17,8 @@ android {
         applicationId = "com.book.auto.driver"
         minSdk = 28
         targetSdk = 34
-        versionCode = 3
-        versionName = "0.3"
+        versionCode = 4
+        versionName = "0.4"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -100,7 +100,7 @@ dependencies {
 
     // Also add the dependency for the Google Play services library and specify its version
     implementation("com.google.android.gms:play-services-auth:20.7.0")
-    implementation("com.google.android.gms:play-services-maps:18.1.0")
+    implementation("com.google.android.gms:play-services-maps:18.2.0")
     implementation("com.google.android.gms:play-services-location:21.0.1")
     implementation("com.google.maps.android:maps-ktx:3.3.0")
     implementation("com.google.maps.android:maps-utils-ktx:3.0.0")
@@ -112,9 +112,9 @@ dependencies {
 
 
     // Coroutines
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.6.4")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.7.1")
 
     implementation("pub.devrel:easypermissions:3.0.0")
 
