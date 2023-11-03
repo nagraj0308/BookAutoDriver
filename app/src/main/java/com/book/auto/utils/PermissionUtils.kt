@@ -10,7 +10,6 @@ import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.LocationSettingsRequest
-import com.google.android.gms.location.LocationSettingsResponse
 
 class PermissionUtils {
 
@@ -37,7 +36,7 @@ class PermissionUtils {
             LocationServices.getSettingsClient(activity).checkLocationSettings(builder.build())
                 .addOnSuccessListener(
                     activity
-                ) { response: LocationSettingsResponse? -> }.addOnFailureListener(
+                ) { }.addOnFailureListener(
                     activity
                 ) { ex: Exception? ->
                     if (ex is ResolvableApiException) {

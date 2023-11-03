@@ -1,32 +1,17 @@
-package com.book.auto.driver.presentation.home
+package com.book.auto.presentation.home
 
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.graphics.Bitmap
 import android.location.Location
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.book.auto.driver.PM
-import com.book.auto.driver.data.remote.reqres.DeleteVehicleRequest
-import com.book.auto.driver.data.remote.reqres.GetVehicleByGmailIdRequest
-import com.book.auto.driver.data.remote.reqres.Vehicle
-import com.book.auto.driver.data.remote.reqres.VehicleLocationRequest
-import com.book.auto.driver.data.remote.reqres.VehicleRequest
-import com.book.auto.driver.data.remote.reqres.VerificationStatusRequest
-import com.book.auto.driver.domain.BVApi
-import com.book.auto.utils.FBS
-import com.book.auto.driver.utils.PermissionUtils
+import com.book.auto.data.remote.reqres.Vehicle
+import com.book.auto.domain.BVApi
+import com.book.auto.utils.PermissionUtils
 import com.google.android.gms.location.LocationServices
-import com.google.firebase.storage.UploadTask
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import java.io.ByteArrayOutputStream
 import javax.inject.Inject
 
 
@@ -35,9 +20,6 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val api: BVApi
 ) : ViewModel() {
-
-    @Inject
-    lateinit var pm: PM
 
     private val _vehicle = MutableLiveData(Vehicle())
     private val _isLocationUpdated = MutableLiveData(false)
@@ -51,246 +33,6 @@ class HomeViewModel @Inject constructor(
     val isLocationUpdated: LiveData<Boolean> get() = _isLocationUpdated
 
 
-    fun insertFSImage(
-        gType: String,
-        gNumber: String,
-        gDriver: String,
-        gMobile: String,
-        bitmap: Bitmap, callback: (Boolean) -> Unit, msg: (String) -> Unit
-    ) {
-
-
-        viewModelScope.launch(Dispatchers.IO) {
-            val ref = FBS.getReference(pm.gmail!!)
-            val baos = ByteArrayOutputStream()
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 60, baos)
-            val data = baos.toByteArray()
-            val uploadTask: UploadTask = ref.putBytes(data)
-            uploadTask.addOnFailureListener {
-                CoroutineScope(Dispatchers.IO).launch {
-                    withContext(Dispatchers.Main) {
-                        msg(it.toString())
-                        callback(false)
-                    }
-                }
-            }.addOnSuccessListener {
-                ref.downloadUrl.addOnSuccessListener {
-                    insertGaadi(
-                        pm.gmail!!,
-                        gType,
-                        gNumber,
-                        gDriver,
-                        gMobile,
-                        it.toString(), {
-                            CoroutineScope(Dispatchers.IO).launch {
-                                withContext(Dispatchers.Main) {
-                                    callback(it)
-                                }
-                            }
-                        }, {}
-                    )
-                }.addOnFailureListener {
-                    CoroutineScope(Dispatchers.IO).launch {
-                        withContext(Dispatchers.Main) {
-                            msg(it.toString())
-                            callback(false)
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    private fun insertGaadi(
-        gId: String,
-        gType: String,
-        gNumber: String,
-        gDriver: String,
-        gMobile: String,
-        url: String, callback: (Boolean) -> Unit, msg: (String) -> Unit
-    ) {
-        CoroutineScope(Dispatchers.IO).launch {
-            runCatching {
-                api.insertVehicle(
-                    VehicleRequest(
-                        gId,
-                        false,
-                        gDriver,
-                        url,
-                        _lat.value,
-                        _lon.value,
-                        gMobile,
-                        gNumber,
-                        gType
-                    )
-                )
-            }.onSuccess {
-                withContext(Dispatchers.Main) {
-                    msg("Gaadi added successfully")
-                    getAutoDetails() {}
-                    callback(true)
-                }
-            }.onFailure {
-                withContext(Dispatchers.Main) {
-                    msg("Gaadi not added")
-                    callback(false)
-                }
-            }
-        }
-    }
-
-
-    fun updateFSImage(
-        gType: String,
-        gNumber: String,
-        gDriver: String,
-        gMobile: String,
-        bitmap: Bitmap, callback: (Boolean) -> Unit, msg: (String) -> Unit
-    ) {
-        viewModelScope.launch(Dispatchers.IO) {
-            val ref = FBS.getReference(pm.gmail!!)
-            val baos = ByteArrayOutputStream()
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 60, baos)
-            val data = baos.toByteArray()
-            val uploadTask: UploadTask = ref.putBytes(data)
-            uploadTask.addOnFailureListener {
-                CoroutineScope(Dispatchers.IO).launch {
-                    withContext(Dispatchers.Main) {
-                        msg(it.toString())
-                        callback(false)
-                    }
-                }
-            }.addOnSuccessListener {
-                ref.downloadUrl.addOnSuccessListener {
-                    updateGaadiData(
-                        pm.gmail!!,
-                        gType,
-                        gNumber,
-                        gDriver,
-                        gMobile,
-                        it.toString(), {
-                            CoroutineScope(Dispatchers.IO).launch {
-                                withContext(Dispatchers.Main) {
-                                    callback(it)
-                                }
-                            }
-                        }, {}
-                    )
-                }.addOnFailureListener {
-                    CoroutineScope(Dispatchers.IO).launch {
-                        withContext(Dispatchers.Main) {
-                            msg(it.toString())
-                            callback(false)
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-
-    private fun updateGaadiData(
-        gId: String,
-        gType: String,
-        gNumber: String,
-        gDriver: String,
-        gMobile: String,
-        url: String, callback: (Boolean) -> Unit, msg: (String) -> Unit
-    ) {
-        CoroutineScope(Dispatchers.IO).launch {
-            runCatching {
-                api.updateVehicle(
-                    VehicleRequest(
-                        gId,
-                        false,
-                        gDriver,
-                        url,
-                        _lat.value,
-                        _lon.value,
-                        gMobile,
-                        gNumber,
-                        gType
-                    )
-                )
-            }.onSuccess {
-                withContext(Dispatchers.Main) {
-                    msg("Gaadi updated successfully")
-                    getAutoDetails() {}
-                    callback(true)
-                }
-            }.onFailure {
-                withContext(Dispatchers.Main) {
-                    msg("Gaadi not updated")
-                    callback(false)
-                }
-            }
-        }
-    }
-
-    private fun updateAutoLocation(
-        gId: String,
-        aLat: Double,
-        aLon: Double
-    ) {
-        CoroutineScope(Dispatchers.IO).launch {
-            runCatching {
-                api.updateVehicleLocation(
-                    VehicleLocationRequest(
-                        gId, aLat, aLon
-                    )
-                )
-            }.onSuccess {
-                withContext(Dispatchers.Main) {
-                    _isLocationUpdated.value = true
-                    _lat.value = aLat
-                    _lon.value = aLon
-                }
-            }
-        }
-    }
-
-
-    fun updateAutoActivation(
-        deactivated: Boolean
-    ) {
-        CoroutineScope(Dispatchers.IO).launch {
-            runCatching {
-                api.updateAutoActiveStatus(
-                    VerificationStatusRequest(
-                        pm.gmail, deactivated
-                    )
-                )
-            }.onSuccess {
-                withContext(Dispatchers.Main) {
-                    getAutoDetails { }
-                }
-            }
-        }
-    }
-
-
-    fun getAutoDetails(callback: (Boolean) -> Unit) {
-        CoroutineScope(Dispatchers.IO).launch {
-            runCatching {
-                api.getVehicleByGmailId(GetVehicleByGmailIdRequest(pm.gmail))
-            }.onSuccess {
-                withContext(Dispatchers.Main) {
-                    if (it.isSuccessful) {
-                        if (it.body() != null) {
-                            callback(true)
-                            _vehicle.value = it.body()!!.data
-                        }
-                    }
-                }
-            }.onFailure {
-                withContext(Dispatchers.Main) {
-                    callback(true)
-                }
-            }
-        }
-    }
-
-
     fun updateLocation(activity: Activity) {
         if (PermissionUtils.checkLocationEnabled(activity)) {
             if (PermissionUtils.checkLocationAccessPermission(activity)) {
@@ -300,7 +42,7 @@ class HomeViewModel @Inject constructor(
                         _isLocationUpdated.value = true
                         _lat.value = it.latitude
                         _lon.value = it.longitude
-                        updateAutoLocation(pm.gmail!!, it.latitude, it.longitude)
+//                        updateAutoLocation(pm.gmail!!, it.latitude, it.longitude)
                     }
                 }
             }
@@ -309,88 +51,5 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-
-    fun deleteAuto(callback: (Boolean) -> Unit, msg: (String) -> Unit) {
-        CoroutineScope(Dispatchers.IO).launch {
-            deleteGaadiImage(_vehicle.value!!._id, { result ->
-                if (result) {
-                    deleteGaadiData(_vehicle.value!!._id, {
-                        if (it) {
-                            CoroutineScope(Dispatchers.IO).launch {
-                                withContext(Dispatchers.Main) {
-                                    callback(true)
-
-                                }
-                            }
-                        } else {
-                            CoroutineScope(Dispatchers.IO).launch {
-                                withContext(Dispatchers.Main) {
-                                    callback(false)
-                                }
-                            }
-                        }
-                    }, { msg(it) })
-                } else {
-                    CoroutineScope(Dispatchers.IO).launch {
-                        withContext(Dispatchers.Main) {
-                            callback(false)
-                        }
-                    }
-                }
-            }, {})
-        }
-    }
-
-
-    private fun deleteGaadiImage(
-        gaadiId: String,
-        callback: (Boolean) -> Unit,
-        msg: (String) -> Unit
-    ) {
-        viewModelScope.launch(Dispatchers.IO) {
-            val ref = FBS.getReference(gaadiId)
-            ref.delete()
-                .addOnSuccessListener {
-                    CoroutineScope(Dispatchers.IO).launch {
-                        withContext(Dispatchers.Main) {
-                            msg("Related Image deleted successfully")
-                            callback(true)
-                        }
-                    }
-                }.addOnFailureListener {
-                    CoroutineScope(Dispatchers.IO).launch {
-                        withContext(Dispatchers.Main) {
-                            msg("Could not Image deleted successfully")
-                            callback(false)
-                        }
-                    }
-
-                };
-        }
-    }
-
-
-    private fun deleteGaadiData(
-        gaadiId: String,
-        callback: (Boolean) -> Unit,
-        msg: (String) -> Unit
-    ) {
-        CoroutineScope(Dispatchers.IO).launch {
-            runCatching {
-                api.deleteVehicleById(DeleteVehicleRequest(gaadiId))
-            }.onSuccess {
-                withContext(Dispatchers.Main) {
-                    msg("Gaadi deleted successfully")
-                    getAutoDetails() {}
-                    callback(true)
-                }
-            }.onFailure {
-                withContext(Dispatchers.Main) {
-                    msg("Gaadi not deleted")
-                    callback(false)
-                }
-            }
-        }
-    }
 
 }

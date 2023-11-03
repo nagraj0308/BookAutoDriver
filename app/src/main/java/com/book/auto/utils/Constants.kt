@@ -11,15 +11,7 @@ class Constants {
         const val PLAYSTORE_URL = "https://play.google.com/store/apps/details?id=com.book.auto"
         const val APK_SHARE_MSG =
             "Hey!! I am using Book Auto app for search nearby vehicles, you can also try., link:- $PLAYSTORE_URL Thanks!!"
-        const val IMG_WBH = 1.5
-
-        val autoTypes = listOf("4 Wheeler", "3 Wheeler", "2 Wheeler", "Other")
+        val autoTypes = listOf("Car", "Auto", "Bike", "Other")
     }
 }
 
-
-class RequestCode {
-    companion object {
-        const val LOCATION = 10
-    }
-}

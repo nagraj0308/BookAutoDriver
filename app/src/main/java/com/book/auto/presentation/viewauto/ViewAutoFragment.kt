@@ -15,7 +15,9 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.activityViewModels
 import com.book.auto.databinding.FragmnetAddEditAutoDetailsBinding
 import com.book.auto.driver.presentation.base.BaseFragment
-import com.book.auto.driver.presentation.home.HomeViewModel
+import com.book.auto.presentation.home.HomeViewModel
+import com.book.auto.utils.Constants
+import com.book.auto.utils.PermissionUtils
 import com.book.auto.utils.Utils
 import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
@@ -37,26 +39,7 @@ class ViewAutoFragment : BaseFragment() {
         _binding = FragmnetAddEditAutoDetailsBinding.inflate(inflater, container, false)
         val root: View = binding.root
         binding.btnSubmit.setOnClickListener {
-            if (validate()) {
-                val autoNumber = binding.tilAutoNumber.editText!!.text.trim().toString()
-                val driverName = binding.tilDriverName.editText!!.text.trim().toString()
-                val mobileNumber = binding.tilMobileNumber.editText!!.text.trim().toString()
-                val autoType = binding.actvAutoType.text.trim().toString()
-                viewModel.insertFSImage(
-                    autoType,
-                    autoNumber,
-                    driverName,
-                    mobileNumber,
-                    Utils.screenShot(binding.ivAutoPhoto)!!,
-                    {
-                        if (it) {
-                            requireActivity().onBackPressed()
-                        } else {
-                            showToast("Try again")
-                        }
-                    },
-                    { showToast("") })
-            }
+
         }
         binding.btnSave.setOnClickListener {
             if (validate()) {
@@ -135,96 +118,6 @@ class ViewAutoFragment : BaseFragment() {
             binding.btnSubmit.visibility = View.GONE
         }
         return root
-    }
-
-    private val startForResult = registerForActivityResult(
-        ActivityResultContracts.StartActivityForResult()
-    ) { result: ActivityResult ->
-
-        if (result.resultCode == Activity.RESULT_OK && null != result.data) {
-            val data = result.data
-            val selectedImage: Uri = data!!.data!!
-            val filePathColumn = arrayOf(MediaStore.Images.Media.DATA)
-            val cursor = requireActivity().contentResolver.query(
-                selectedImage,
-                filePathColumn,
-                null,
-                null,
-                null
-            )
-            cursor!!.moveToFirst()
-            val columnIndex = cursor.getColumnIndex(filePathColumn[0])
-            val picturePath = cursor.getString(columnIndex)
-            cursor.close()
-            Glide.with(this).asBitmap().load(picturePath).into(binding.ivAutoPhoto)
-            performCrop(selectedImage, 3, 2)
-        }
-    }
-
-
-    private val startForCropResult = registerForActivityResult(
-        ActivityResultContracts.StartActivityForResult()
-    ) { result: ActivityResult ->
-        if (result.resultCode == Activity.RESULT_OK && null != result.data) {
-            val data = result.data
-            try {
-                val extras: Bundle = data!!.extras!!
-                val croppedPic = extras.getParcelable<Bitmap>("data")
-                Glide.with(this).asBitmap().load(croppedPic).into(binding.ivAutoPhoto)
-            } catch (_: Exception) {
-            }
-        }
-    }
-
-    private fun performCrop(picUri: Uri, arx: Int, ary: Int) {
-        val cropIntent = Intent("com.android.camera.action.CROP")
-        cropIntent.setDataAndType(picUri, "image/*")
-        cropIntent.putExtra("crop", "true")
-        cropIntent.putExtra("aspectX", arx)
-        cropIntent.putExtra("aspectY", ary)
-        cropIntent.putExtra("outputX", 256)
-        cropIntent.putExtra("outputY", 256)
-        cropIntent.putExtra("return-data", true)
-        startForCropResult.launch(
-            Intent(
-                cropIntent
-            )
-        )
-    }
-
-
-    private fun validate(): Boolean {
-
-        val autoNumber = binding.tilAutoNumber.editText!!.text.trim().toString()
-        if (autoNumber.length < 4) {
-            binding.tilAutoNumber.error = getString(R.string.this_should_be_4_digits)
-            return false
-        } else {
-            binding.tilAutoNumber.isErrorEnabled = false
-        }
-
-        val driverName = binding.tilDriverName.editText!!.text.trim().toString()
-        if (driverName.isEmpty()) {
-            binding.tilDriverName.error = getString(R.string.this_field_required)
-            return false
-        } else {
-            binding.tilDriverName.isErrorEnabled = false
-        }
-
-        val mobileNumber = binding.tilMobileNumber.editText!!.text.trim().toString()
-        if (mobileNumber.length < 10) {
-            binding.tilMobileNumber.error = getString(R.string.this_should_be_10_digits)
-            return false
-        } else {
-            binding.tilMobileNumber.isErrorEnabled = false
-        }
-
-        if (!viewModel.isLocationUpdated.value!!) {
-            showToast("Please update location")
-            return false
-        }
-
-        return true
     }
 
 
