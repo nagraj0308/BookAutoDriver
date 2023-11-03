@@ -63,14 +63,6 @@ class AutoFragment : BaseFragment() {
                 binding.rcv.adapter = adapter
             }
         }
-        binding.rcv.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                super.onScrollStateChanged(recyclerView, newState)
-                if (newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
-                    viewModel.getAutos(viewModel.statePos.value!!)
-                }
-            }
-        })
         return root
     }
 
