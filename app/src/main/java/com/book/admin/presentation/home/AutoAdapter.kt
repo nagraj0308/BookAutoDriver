@@ -24,7 +24,7 @@ class AutoAdapter(private val mList: List<Auto>, val nc: NavController) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = mList[position]
-        holder.tvName.text = item.name
+        holder.tvName.text = item.driver
         holder.tvMobile.text = item.mobileNo
         holder.tvNumber.text = item.number
         holder.tvDate.text = Utils.convertLongToTime(item.modifyTime)

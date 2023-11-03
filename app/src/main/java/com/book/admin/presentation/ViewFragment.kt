@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.NavController
@@ -55,12 +54,10 @@ class ViewFragment : BaseFragment() {
 
                 }
             }
-            binding.tvName.text = ": " + data!!.name
             binding.tvNumber.text = ": " + data!!.number
             binding.tvId.text = ": " + data!!._id
             binding.tvModTime.text = ": " + Utils.convertLongToTime(data!!.modifyTime)
             binding.tvDriverName.text = ": " + data!!.driver
-            binding.tvRate.text = ": " + data!!.rate
             binding.tvType.text = ": " + data!!.type
 
             val arrayAdapter = ArrayAdapter(
