@@ -1,4 +1,4 @@
-package com.book.auto.driver.presentation.addeditauto
+package com.book.auto.presentation.viewauto
 
 import android.app.Activity
 import android.content.Intent
@@ -13,22 +13,16 @@ import android.widget.ArrayAdapter
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.activityViewModels
-import com.book.auto.driver.PM
-import com.book.auto.driver.R
-import com.book.auto.driver.databinding.FragmnetAddEditAutoDetailsBinding
+import com.book.auto.databinding.FragmnetAddEditAutoDetailsBinding
 import com.book.auto.driver.presentation.base.BaseFragment
 import com.book.auto.driver.presentation.home.HomeViewModel
-import com.book.auto.driver.utils.Constants
-import com.book.auto.driver.utils.PermissionUtils
-import com.book.auto.driver.utils.Utils
+import com.book.auto.utils.Utils
 import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class AddEditAutoFragment : BaseFragment() {
-    @Inject
-    lateinit var pm: PM
+class ViewAutoFragment : BaseFragment() {
 
     private var _binding: FragmnetAddEditAutoDetailsBinding? = null
 

@@ -17,7 +17,7 @@ import com.book.auto.driver.data.remote.reqres.VehicleLocationRequest
 import com.book.auto.driver.data.remote.reqres.VehicleRequest
 import com.book.auto.driver.data.remote.reqres.VerificationStatusRequest
 import com.book.auto.driver.domain.BVApi
-import com.book.auto.driver.utils.FBS
+import com.book.auto.utils.FBS
 import com.book.auto.driver.utils.PermissionUtils
 import com.google.android.gms.location.LocationServices
 import com.google.firebase.storage.UploadTask

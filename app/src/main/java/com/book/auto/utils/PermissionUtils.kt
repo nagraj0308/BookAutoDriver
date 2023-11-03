@@ -1,4 +1,4 @@
-package com.book.auto.driver.utils
+package com.book.auto.utils
 
 
 import android.Manifest.permission
@@ -6,8 +6,6 @@ import android.app.Activity
 import android.content.Context
 import android.content.pm.PackageManager
 import android.location.LocationManager
-import android.os.Build
-import androidx.core.content.ContextCompat
 import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
@@ -18,26 +16,6 @@ class PermissionUtils {
 
 
     companion object {
-        private const val REQUEST_CODE_READ_STORAGE = 13
-
-
-        fun checkReadStoragePermission(context: Context): Boolean {
-            return if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.S_V2) {
-                val readPermission: Int =
-                    ContextCompat.checkSelfPermission(context, permission.READ_EXTERNAL_STORAGE)
-                readPermission == PackageManager.PERMISSION_GRANTED
-            } else {
-                true
-            }
-        }
-
-        fun requestReadStoragePermission(activity: Activity) {
-            if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.S_V2) {
-                activity.requestPermissions(
-                    arrayOf(permission.READ_EXTERNAL_STORAGE), REQUEST_CODE_READ_STORAGE
-                )
-            }
-        }
 
 
         fun checkLocationAccessPermission(activity: Activity): Boolean {

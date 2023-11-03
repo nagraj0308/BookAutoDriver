@@ -1,4 +1,4 @@
-package com.book.auto.driver
+package com.book.auto
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp

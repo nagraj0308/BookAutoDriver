@@ -10,11 +10,11 @@ plugins {
 }
 
 android {
-    namespace = "com.book.auto.driver"
+    namespace = "com.book.auto"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.book.auto.driver"
+        applicationId = "com.book.auto"
         minSdk = 28
         targetSdk = 34
         versionCode = 5

@@ -1,4 +1,4 @@
-package com.book.auto.driver.presentation.home
+package com.book.auto.presentation.home
 
 import android.app.Dialog
 import android.content.Intent
@@ -13,28 +13,22 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.book.auto.driver.BuildConfig
-import com.book.auto.driver.PM
-import com.book.auto.driver.R
-import com.book.auto.driver.databinding.ActivityHomeBinding
-import com.book.auto.driver.databinding.NavHeaderMainBinding
+import com.book.auto.R
+import com.book.auto.databinding.ActivityHomeBinding
+import com.book.auto.databinding.NavHeaderMainBinding
 import com.book.auto.driver.presentation.base.BaseActivity
-import com.book.auto.driver.presentation.login.LoginActivity
-import com.book.auto.driver.utils.Constants
+import com.book.auto.driver.presentation.home.HomeViewModel
+import com.book.auto.utils.Constants
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.ktx.remoteConfig
 import com.google.firebase.remoteconfig.ktx.remoteConfigSettings
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 
 @AndroidEntryPoint
 class HomeActivity : BaseActivity() {
-    @Inject
-    lateinit var pm: PM
-
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityHomeBinding
     private lateinit var headerBinding: NavHeaderMainBinding
@@ -52,8 +46,8 @@ class HomeActivity : BaseActivity() {
         setSupportActionBar(binding.appBarMain.toolbar)
 
 
-        headerBinding.tvName.text = pm.name ?: ""
-        headerBinding.tvGmail.text = pm.gmail ?: ""
+        headerBinding.tvName.text = ""
+        headerBinding.tvGmail.text = ""
 
         val drawerLayout: DrawerLayout = binding.drawerLayout
         val navView: NavigationView = binding.navView
@@ -88,9 +82,7 @@ class HomeActivity : BaseActivity() {
             true
         }
         navView.menu.findItem(R.id.nav_exit).setOnMenuItemClickListener {
-            pm.clearAll()
             finish()
-            startActivity(Intent(this@HomeActivity, LoginActivity::class.java))
             true
         }
     }

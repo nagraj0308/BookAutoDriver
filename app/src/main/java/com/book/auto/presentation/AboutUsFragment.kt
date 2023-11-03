@@ -1,4 +1,4 @@
-package com.book.auto.driver.presentation
+package com.book.auto.presentation
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,8 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebViewClient
 import androidx.fragment.app.Fragment
-import com.book.auto.driver.databinding.FragmentWebViewBinding
-import com.book.auto.driver.utils.Constants
+import com.book.admin.databinding.FragmentWebViewBinding
+import com.book.auto.utils.Constants
 
 
 class AboutUsFragment : Fragment() {

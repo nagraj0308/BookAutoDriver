@@ -13,7 +13,7 @@
 
     <fragment
         android:id="@+id/nav_add_edit_auto"
-        android:name="com.book.auto.driver.presentation.addeditauto.AddEditAutoFragment"
+        android:name="com.book.auto.driver.presentation.addeditauto.ViewAutoFragment"
         android:label="@string/auto_details"
         tools:layout="@layout/fragmnet_add_edit_auto_details" >
 
