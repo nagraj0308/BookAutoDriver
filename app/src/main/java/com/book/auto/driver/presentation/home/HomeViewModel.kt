@@ -52,9 +52,7 @@ class HomeViewModel @Inject constructor(
 
 
     fun insertFSImage(
-        gName: String,
         gType: String,
-        gRate: String,
         gNumber: String,
         gDriver: String,
         gMobile: String,
@@ -79,9 +77,7 @@ class HomeViewModel @Inject constructor(
                 ref.downloadUrl.addOnSuccessListener {
                     insertGaadi(
                         pm.gmail!!,
-                        gName,
                         gType,
-                        gRate,
                         gNumber,
                         gDriver,
                         gMobile,
@@ -107,9 +103,7 @@ class HomeViewModel @Inject constructor(
 
     private fun insertGaadi(
         gId: String,
-        gName: String,
         gType: String,
-        gRate: String,
         gNumber: String,
         gDriver: String,
         gMobile: String,
@@ -120,7 +114,6 @@ class HomeViewModel @Inject constructor(
                 api.insertVehicle(
                     VehicleRequest(
                         gId,
-                        gName,
                         false,
                         gDriver,
                         url,
@@ -128,7 +121,6 @@ class HomeViewModel @Inject constructor(
                         _lon.value,
                         gMobile,
                         gNumber,
-                        gRate,
                         gType
                     )
                 )
@@ -149,9 +141,7 @@ class HomeViewModel @Inject constructor(
 
 
     fun updateFSImage(
-        gName: String,
         gType: String,
-        gRate: String,
         gNumber: String,
         gDriver: String,
         gMobile: String,
@@ -174,9 +164,7 @@ class HomeViewModel @Inject constructor(
                 ref.downloadUrl.addOnSuccessListener {
                     updateGaadiData(
                         pm.gmail!!,
-                        gName,
                         gType,
-                        gRate,
                         gNumber,
                         gDriver,
                         gMobile,
@@ -203,9 +191,7 @@ class HomeViewModel @Inject constructor(
 
     private fun updateGaadiData(
         gId: String,
-        gName: String,
         gType: String,
-        gRate: String,
         gNumber: String,
         gDriver: String,
         gMobile: String,
@@ -216,7 +202,6 @@ class HomeViewModel @Inject constructor(
                 api.updateVehicle(
                     VehicleRequest(
                         gId,
-                        gName,
                         false,
                         gDriver,
                         url,
@@ -224,7 +209,6 @@ class HomeViewModel @Inject constructor(
                         _lon.value,
                         gMobile,
                         gNumber,
-                        gRate,
                         gType
                     )
                 )

@@ -44,15 +44,12 @@ class AddEditAutoFragment : BaseFragment() {
         val root: View = binding.root
         binding.btnSubmit.setOnClickListener {
             if (validate()) {
-                val name = binding.tilAutoName.editText!!.text.trim().toString()
                 val autoNumber = binding.tilAutoNumber.editText!!.text.trim().toString()
                 val driverName = binding.tilDriverName.editText!!.text.trim().toString()
                 val mobileNumber = binding.tilMobileNumber.editText!!.text.trim().toString()
-                val rate = binding.tilNormalRate.editText!!.text.trim().toString()
                 val autoType = binding.actvAutoType.text.trim().toString()
-                viewModel.insertFSImage(name,
+                viewModel.insertFSImage(
                     autoType,
-                    rate,
                     autoNumber,
                     driverName,
                     mobileNumber,
@@ -69,15 +66,12 @@ class AddEditAutoFragment : BaseFragment() {
         }
         binding.btnSave.setOnClickListener {
             if (validate()) {
-                val name = binding.tilAutoName.editText!!.text.trim().toString()
                 val autoNumber = binding.tilAutoNumber.editText!!.text.trim().toString()
                 val driverName = binding.tilDriverName.editText!!.text.trim().toString()
                 val mobileNumber = binding.tilMobileNumber.editText!!.text.trim().toString()
-                val rate = binding.tilNormalRate.editText!!.text.trim().toString()
                 val autoType = binding.actvAutoType.text.trim().toString()
-                viewModel.updateFSImage(name,
+                viewModel.updateFSImage(
                     autoType,
-                    rate,
                     autoNumber,
                     driverName,
                     mobileNumber,
@@ -134,12 +128,10 @@ class AddEditAutoFragment : BaseFragment() {
             binding.llEdit.visibility = View.GONE
             binding.btnSubmit.visibility = View.VISIBLE
         } else {
-            binding.tilAutoName.editText!!.setText(viewModel.vehicle.value!!.name)
             binding.tilAutoNumber.editText!!.setText(viewModel.vehicle.value!!.number)
             binding.tilDriverName.editText!!.setText(viewModel.vehicle.value!!.driver)
             binding.tilMobileNumber.editText!!.setText(viewModel.vehicle.value!!.mobileNo)
             binding.actvAutoType.setText(viewModel.vehicle.value!!.type)
-            binding.tilNormalRate.editText!!.setText(viewModel.vehicle.value!!.rate)
 
 
             Glide.with(this).asBitmap().load(viewModel.vehicle.value!!.imageUrl)
@@ -208,13 +200,6 @@ class AddEditAutoFragment : BaseFragment() {
 
 
     private fun validate(): Boolean {
-        val name = binding.tilAutoName.editText!!.text.trim().toString()
-        if (name.isEmpty()) {
-            binding.tilAutoName.error = getString(R.string.this_field_required)
-            return false
-        } else {
-            binding.tilAutoName.isErrorEnabled = false
-        }
 
         val autoNumber = binding.tilAutoNumber.editText!!.text.trim().toString()
         if (autoNumber.length < 4) {
