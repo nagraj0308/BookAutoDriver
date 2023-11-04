@@ -1,7 +1,6 @@
 package com.book.auto.utils
 
 class Constants {
-
     //#557a2a
     //rgb(85, 122, 42)
     companion object {

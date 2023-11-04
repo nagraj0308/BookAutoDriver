@@ -11,7 +11,6 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.book.auto.R
-import com.book.auto.data.remote.reqres.Vehicle
 import com.book.auto.databinding.FragmentHomeBinding
 import com.book.auto.driver.presentation.base.BaseFragment
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -55,7 +54,6 @@ class HomeFragment : BaseFragment() {
 //        }
 
         viewModel.vehicle.observe(viewLifecycleOwner, Observer {
-            setContentState(it)
         })
 
         //Maps View
@@ -110,16 +108,6 @@ class HomeFragment : BaseFragment() {
         binding.mvCl.onLowMemory()
     }
 
-
-    private fun setContentState(vehicle: Vehicle?) {
-//            isNew = false
-//            binding.cvContent.visibility = View.VISIBLE
-//            binding.tvAutoNo.text = vehicle.number
-//            binding.tvMobileNo.text = vehicle.mobileNo
-//            binding.sbDeactivated.setChecked(vehicle.deactivated)
-
-
-    }
 
     private fun getStatusMsg(deactivated: Boolean, verificationState: String): String {
         return if (verificationState == "U") {
