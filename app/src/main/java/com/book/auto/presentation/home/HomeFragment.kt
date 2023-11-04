@@ -15,6 +15,7 @@ import com.book.auto.R
 import com.book.auto.data.remote.reqres.Auto
 import com.book.auto.databinding.FragmentHomeBinding
 import com.book.auto.presentation.base.BaseFragment
+import com.book.auto.utils.Constants
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapsInitializer
@@ -67,7 +68,7 @@ class HomeFragment : BaseFragment() {
         binding.mvCl.getMapAsync()
         {
 
-            val circleDrawable = resources.getDrawable(R.drawable.ic_auto, null)
+            val circleDrawable = resources.getDrawable(R.drawable.user, null)
             val markerIcon: BitmapDescriptor = getMarkerIconFromDrawable(circleDrawable)
             map = it
 
@@ -84,10 +85,20 @@ class HomeFragment : BaseFragment() {
                 for (au in list) {
                     map!!.addMarker(
                         MarkerOptions().position(LatLng(au.lat, au.lon)).title(au.number)
-                            .icon(markerIcon)
+                            .icon(
+                                getMarkerIconFromDrawable(
+                                    resources.getDrawable(
+                                        getDrawable(au.type),
+                                        null
+                                    )
+                                )
+                            )
                     )
                 }
 
+            }
+            map.setOnMarkerClickListener {
+                it.
             }
         }
         return root
@@ -97,6 +108,26 @@ class HomeFragment : BaseFragment() {
         val bundle = Bundle()
         bundle.putSerializable("item", auto)
         findNavController().navigate(R.id.nav_view_auto_details, bundle)
+    }
+
+    private fun getDrawable(type: String): Int {
+        return when (type) {
+            Constants.autoTypes[0] -> {
+                R.drawable.w4
+            }
+
+            Constants.autoTypes[1] -> {
+                R.drawable.w3
+            }
+
+            Constants.autoTypes[2] -> {
+                R.drawable.w2
+            }
+
+            else -> {
+                R.drawable.wo
+            }
+        }
     }
 
 

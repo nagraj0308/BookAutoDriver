@@ -6,15 +6,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import com.book.auto.data.remote.reqres.Auto
 import com.book.auto.databinding.FragmentViewDetailsBinding
 import com.book.auto.presentation.base.BaseFragment
+import com.book.auto.presentation.home.HomeViewModel
+import com.book.auto.utils.Utils
 import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class ViewAutoFragment : BaseFragment() {
-
+    private val viewModel: HomeViewModel by activityViewModels()
     private var _binding: FragmentViewDetailsBinding? = null
     private val binding get() = _binding!!
     private var data: Auto? = null
@@ -38,9 +41,30 @@ class ViewAutoFragment : BaseFragment() {
 
                 }
             }
-            binding.tvNumber.text = ": " + data!!.number
-            binding.tvDriverName.text = ": " + data!!.driver
-            binding.tvType.text = ": " + data!!.type
+            binding.tvNumber.text = buildString {
+                append(": ")
+                append(data!!.number)
+            }
+            binding.tvDriverName.text = buildString {
+                append(": ")
+                append(data!!.driver)
+            }
+            binding.tvType.text = buildString {
+                append(": ")
+                append(data!!.type)
+            }
+            binding.tvDistance.text = buildString {
+                append(": ")
+                append(
+                    Utils.distance(
+                        data!!.lat,
+                        data!!.lon,
+                        viewModel.lat.value!!,
+                        viewModel.lon.value!!
+                    ).toString()
+                )
+                append(" KM")
+            }
 
             context?.let { Glide.with(it).asBitmap().load(data?.imageUrl).into(binding.ivPhoto) }
         }
