@@ -1,4 +1,4 @@
-package com.book.auto.driver.presentation.home
+package com.book.auto.presentation.home
 
 import android.graphics.Bitmap
 import android.graphics.Canvas
@@ -7,13 +7,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CompoundButton
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import com.book.auto.driver.R
-import com.book.auto.driver.data.remote.reqres.Vehicle
-import com.book.auto.driver.databinding.FragmentHomeBinding
+import com.book.auto.R
+import com.book.auto.data.remote.reqres.Vehicle
+import com.book.auto.databinding.FragmentHomeBinding
 import com.book.auto.driver.presentation.base.BaseFragment
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -42,26 +41,18 @@ class HomeFragment : BaseFragment() {
         MapsInitializer.initialize(requireContext(), MapsInitializer.Renderer.LATEST) {}
         val root: View = binding.root
         val navController = findNavController()
-        binding.btnUpdateLocation.setOnClickListener {
+        binding.btnRefresh.setOnClickListener {
             activity?.let { it1 ->
                 viewModel.updateLocation(it1)
             }
         }
-        binding.btnAddAuto.setOnClickListener {
-            val bundle = Bundle()
-            bundle.putBoolean("is_new", isNew)
-            navController.navigate(R.id.nav_add_edit_auto, bundle)
-        }
 
-        binding.sbDeactivated.setOnCheckedChangeListener { _, isChecked ->
-            viewModel.updateAutoActivation(isChecked)
-        };
 
-        binding.btnEdit.setOnClickListener {
-            val bundle = Bundle()
-            bundle.putBoolean("is_new", isNew)
-            navController.navigate(R.id.nav_add_edit_auto, bundle)
-        }
+//        binding.btnEdit.setOnClickListener {
+//            val bundle = Bundle()
+//            bundle.putBoolean("is_new", isNew)
+////            navController.navigate(R.id.nav_add_edit_auto, bundle)
+//        }
 
         viewModel.vehicle.observe(viewLifecycleOwner, Observer {
             setContentState(it)
@@ -99,9 +90,6 @@ class HomeFragment : BaseFragment() {
 
 
     override fun onStart() {
-        viewModel.getAutoDetails {
-
-        }
         super.onStart()
         binding.mvCl.onStart()
     }
@@ -124,23 +112,12 @@ class HomeFragment : BaseFragment() {
 
 
     private fun setContentState(vehicle: Vehicle?) {
-        if (vehicle != null) {
-            if (vehicle._id == "") {
-                isNew = true
-                binding.btnAddAuto.visibility = View.VISIBLE
-                binding.cvContent.visibility = View.GONE
+//            isNew = false
+//            binding.cvContent.visibility = View.VISIBLE
+//            binding.tvAutoNo.text = vehicle.number
+//            binding.tvMobileNo.text = vehicle.mobileNo
+//            binding.sbDeactivated.setChecked(vehicle.deactivated)
 
-            } else {
-                isNew = false
-                binding.btnAddAuto.visibility = View.GONE
-                binding.cvContent.visibility = View.VISIBLE
-                binding.tvAutoNo.text = vehicle.number
-                binding.tvMobileNo.text = vehicle.mobileNo
-                binding.tvLive.text = getStatusMsg(vehicle.deactivated, vehicle.verificationState)
-                binding.sbDeactivated.setChecked(vehicle.deactivated)
-
-            }
-        }
 
     }
 

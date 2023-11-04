@@ -66,7 +66,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
-                    android:hint="@string/mobile_number"
                     app:startIconDrawable="@drawable/ic_call">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -182,7 +181,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
                 android:padding="10dp"
-                android:text="@string/delete"
                 android:textAllCaps="false"
                 app:icon="@drawable/ic_delete" />
         </LinearLayout>
@@ -195,7 +193,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:padding="10dp"
-            android:text="@string/submit"
+            android:text="sdsad"
             android:textAllCaps="false"
             app:icon="@drawable/ic_done" />
 

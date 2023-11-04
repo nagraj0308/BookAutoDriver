@@ -23,8 +23,8 @@ class HomeViewModel @Inject constructor(
 
     private val _vehicle = MutableLiveData(Vehicle())
     private val _isLocationUpdated = MutableLiveData(false)
-    private val _lat = MutableLiveData(0.0)
-    private val _lon = MutableLiveData(0.0)
+    private val _lat = MutableLiveData(28.704060)
+    private val _lon = MutableLiveData(77.102493)
 
     val vehicle: LiveData<Vehicle> get() = _vehicle
 

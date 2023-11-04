@@ -13,11 +13,11 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.book.auto.BuildConfig
 import com.book.auto.R
 import com.book.auto.databinding.ActivityHomeBinding
 import com.book.auto.databinding.NavHeaderMainBinding
 import com.book.auto.driver.presentation.base.BaseActivity
-import com.book.auto.driver.presentation.home.HomeViewModel
 import com.book.auto.utils.Constants
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.ktx.Firebase
@@ -81,8 +81,13 @@ class HomeActivity : BaseActivity() {
             )
             true
         }
-        navView.menu.findItem(R.id.nav_exit).setOnMenuItemClickListener {
-            finish()
+        navView.menu.findItem(R.id.nav_install_driver_app).setOnMenuItemClickListener {
+            startActivity(
+                Intent(
+                    Intent.ACTION_VIEW,
+                    Uri.parse(Constants.PLAYSTORE_URL_DRIVER)
+                )
+            )
             true
         }
     }

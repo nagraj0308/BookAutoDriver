@@ -1,5 +1,6 @@
 package com.book.auto.di
 
+import com.book.auto.BuildConfig
 import com.book.auto.data.remote.BVApiImp
 import com.book.auto.data.remote.BVService
 import com.book.auto.domain.BVApi

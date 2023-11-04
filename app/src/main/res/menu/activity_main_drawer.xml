@@ -25,8 +25,8 @@
             android:icon="@drawable/ic_rate_review"
             android:title="@string/rate" />
         <item
-            android:id="@+id/nav_exit"
-            android:icon="@drawable/ic_exit_to_app"
-            android:title="@string/exit" />
+            android:id="@+id/nav_install_driver_app"
+            android:icon="@drawable/ic_download"
+            android:title="@string/install_driver_app" />
     </group>
 </menu>
