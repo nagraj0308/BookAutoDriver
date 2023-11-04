@@ -9,7 +9,9 @@
     <string name="auto_image">Auto Image</string>
     <string name="auto_name">Auto Name</string>
     <string name="auto_number">Auto Number</string>
+    <string name="distance">Distance</string>
     <string name="auto_type">Auto Type</string>
+
     <string name="driver_name">Driver Name</string>
     <string name="exit">Exit</string>
     <string name="home">Home</string>
@@ -20,5 +22,24 @@
     <string name="save">Save</string>
     <string name="share">Share</string>
     <string name="update">Update</string>
+
+    <string name="accepted">Accepted</string>
+    <string name="auto">Auto</string>
+    <string name="type">Type</string>
+    <string name="call">Call</string>
+    <string name="deactivated">Deactivated</string>
+    <string name="delete">Delete</string>
+    <string name="id">Id</string>
+    <string name="mobile_number">Mobile Number</string>
+    <string name="modify_time">Modify Time</string>
+    <string name="name">Name</string>
+    <string name="normal_rate">Normal Rate</string>
+    <string name="pending">Pending</string>
+    <string name="rejected">Rejected</string>
+    <string name="submit">Submit</string>
+    <string name="this_field_required">This field required !</string>
+    <string name="this_should_be_10_digits">This should be 10 digits</string>
+    <string name="update_location">Update Location</string>
+    <string name="verification_status">Verification Status</string>
 
 </resources>

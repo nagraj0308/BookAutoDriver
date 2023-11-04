@@ -1,4 +1,4 @@
-package com.book.auto.driver.presentation.base
+package com.book.auto.presentation.base
 
 import android.widget.Toast
 import androidx.fragment.app.Fragment

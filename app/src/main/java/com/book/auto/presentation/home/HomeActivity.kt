@@ -2,6 +2,7 @@ package com.book.auto.presentation.home
 
 import android.app.Dialog
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.view.Window
@@ -17,14 +18,18 @@ import com.book.auto.BuildConfig
 import com.book.auto.R
 import com.book.auto.databinding.ActivityHomeBinding
 import com.book.auto.databinding.NavHeaderMainBinding
-import com.book.auto.driver.presentation.base.BaseActivity
+import com.book.auto.presentation.base.BaseActivity
 import com.book.auto.utils.Constants
+import com.book.auto.utils.PermissionUtils
+import com.book.auto.utils.RequestCode
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.ktx.remoteConfig
 import com.google.firebase.remoteconfig.ktx.remoteConfigSettings
 import dagger.hilt.android.AndroidEntryPoint
+import java.security.Permission
+import java.security.Permissions
 
 
 @AndroidEntryPoint
@@ -37,9 +42,9 @@ class HomeActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        viewModel.updateLocation(this)
         headerBinding = NavHeaderMainBinding.bind(binding.navView.getHeaderView(0))
 
 
@@ -54,9 +59,7 @@ class HomeActivity : BaseActivity() {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_home,
-                R.id.nav_about_us,
-                R.id.nav_pnp
+                R.id.nav_home, R.id.nav_about_us, R.id.nav_pnp
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
@@ -75,8 +78,7 @@ class HomeActivity : BaseActivity() {
         navView.menu.findItem(R.id.nav_rate).setOnMenuItemClickListener {
             startActivity(
                 Intent(
-                    Intent.ACTION_VIEW,
-                    Uri.parse(Constants.PLAYSTORE_URL)
+                    Intent.ACTION_VIEW, Uri.parse(Constants.PLAYSTORE_URL)
                 )
             )
             true
@@ -84,8 +86,7 @@ class HomeActivity : BaseActivity() {
         navView.menu.findItem(R.id.nav_install_driver_app).setOnMenuItemClickListener {
             startActivity(
                 Intent(
-                    Intent.ACTION_VIEW,
-                    Uri.parse(Constants.PLAYSTORE_URL_DRIVER)
+                    Intent.ACTION_VIEW, Uri.parse(Constants.PLAYSTORE_URL_DRIVER)
                 )
             )
             true
@@ -95,24 +96,35 @@ class HomeActivity : BaseActivity() {
 
     override fun onStart() {
         super.onStart()
-        viewModel.updateLocation(this)
         remoteConfig = Firebase.remoteConfig
         val configSettings = remoteConfigSettings {
             minimumFetchIntervalInSeconds = 300
         }
         remoteConfig.setConfigSettingsAsync(configSettings)
         remoteConfig.setDefaultsAsync(R.xml.remote_config_defaults)
-        remoteConfig.fetchAndActivate()
-            .addOnCompleteListener(
-                this
-            ) { task ->
-                if (task.isSuccessful) {
-                    val minVersion = remoteConfig.getLong("min_version")
-                    if (BuildConfig.VERSION_CODE < minVersion) {
-                        showDialog()
-                    }
+        remoteConfig.fetchAndActivate().addOnCompleteListener(
+            this
+        ) { task ->
+            if (task.isSuccessful) {
+                val minVersion = remoteConfig.getLong("min_version")
+                if (BuildConfig.VERSION_CODE < minVersion) {
+                    showDialog()
                 }
             }
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int, permissions: Array<out String>, grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == RequestCode.LOCATION && PermissionUtils.checkLocationAccessPermission(
+                this
+            )
+        ) {
+            viewModel.updateLocation(this)
+
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -130,8 +142,7 @@ class HomeActivity : BaseActivity() {
         yesBtn.setOnClickListener {
             startActivity(
                 Intent(
-                    Intent.ACTION_VIEW,
-                    Uri.parse(Constants.PLAYSTORE_URL)
+                    Intent.ACTION_VIEW, Uri.parse(Constants.PLAYSTORE_URL)
                 )
             )
         }

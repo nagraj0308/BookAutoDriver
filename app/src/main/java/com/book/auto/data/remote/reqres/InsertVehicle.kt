@@ -1,16 +1,17 @@
 package com.book.auto.data.remote.reqres
 
+import java.io.Serializable
+
 
 data class VehiclesResponse(
-    val `data`: List<Vehicle>,
+    val `data`: List<Auto>,
     val msg: String,
     val isTrue: Int
 )
 
 
-data class Vehicle(
+data class Auto(
     val _id: String = "",
-    val deactivated: Boolean = false,
     val driver: String = "",
     val imageUrl: String = "",
     val lat: Double = 0.0,
@@ -19,5 +20,5 @@ data class Vehicle(
     val modifyTime: Long = 0,
     val number: String = "",
     val type: String = "",
-)
+) : Serializable
 

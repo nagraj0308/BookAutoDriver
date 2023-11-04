@@ -4,6 +4,7 @@ import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,8 +12,9 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.book.auto.R
+import com.book.auto.data.remote.reqres.Auto
 import com.book.auto.databinding.FragmentHomeBinding
-import com.book.auto.driver.presentation.base.BaseFragment
+import com.book.auto.presentation.base.BaseFragment
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapsInitializer
@@ -26,7 +28,6 @@ class HomeFragment : BaseFragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private val viewModel: HomeViewModel by activityViewModels()
-    private var isNew: Boolean = true
     private var map: GoogleMap? = null
     private var cl: LatLng? = null
 
@@ -39,12 +40,19 @@ class HomeFragment : BaseFragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         MapsInitializer.initialize(requireContext(), MapsInitializer.Renderer.LATEST) {}
         val root: View = binding.root
-        val navController = findNavController()
         binding.btnRefresh.setOnClickListener {
             activity?.let { it1 ->
-                viewModel.updateLocation(it1)
+//                viewModel.updateLocation(it1)
+                showDetails(Auto())
             }
         }
+
+
+//            if (it != null) {
+//                val bundle = Bundle()
+////                bundle.putSerializable("item", mList[position])
+//                navController.navigate(R.id.nav_view, bundle)
+//            }
 
 
 //        binding.btnEdit.setOnClickListener {
@@ -53,37 +61,42 @@ class HomeFragment : BaseFragment() {
 ////            navController.navigate(R.id.nav_add_edit_auto, bundle)
 //        }
 
-        viewModel.vehicle.observe(viewLifecycleOwner, Observer {
-        })
 
         //Maps View
         binding.mvCl.onCreate(savedInstanceState)
-        binding.mvCl.getMapAsync {
+        binding.mvCl.getMapAsync()
+        {
 
             val circleDrawable = resources.getDrawable(R.drawable.ic_auto, null)
             val markerIcon: BitmapDescriptor = getMarkerIconFromDrawable(circleDrawable)
             map = it
-            viewModel.lat.observe(viewLifecycleOwner, Observer { it1 ->
-                map!!.clear()
-                cl = LatLng(it1, viewModel.lon.value!!)
-                val update = CameraUpdateFactory.newLatLngZoom(cl!!, 10f)
-                map!!.moveCamera(update)
-                map!!.addMarker(
-                    MarkerOptions().position(cl!!).title("Current Location").icon(markerIcon)
-                )
-            })
 
-            viewModel.lon.observe(viewLifecycleOwner, Observer { it1 ->
+
+            viewModel.autos.observe(viewLifecycleOwner) { list ->
                 map!!.clear()
-                cl = LatLng(viewModel.lat.value!!, it1)
+                cl = LatLng(viewModel.lat.value!!, viewModel.lon.value!!)
                 val update = CameraUpdateFactory.newLatLngZoom(cl!!, 10f)
                 map!!.moveCamera(update)
                 map!!.addMarker(
                     MarkerOptions().position(cl!!).title("Current Location").icon(markerIcon)
                 )
-            })
+
+                for (au in list) {
+                    map!!.addMarker(
+                        MarkerOptions().position(LatLng(au.lat, au.lon)).title(au.number)
+                            .icon(markerIcon)
+                    )
+                }
+
+            }
         }
         return root
+    }
+
+    private fun showDetails(auto: Auto) {
+        val bundle = Bundle()
+        bundle.putSerializable("item", auto)
+        findNavController().navigate(R.id.nav_view_auto_details, bundle)
     }
 
 
@@ -108,20 +121,6 @@ class HomeFragment : BaseFragment() {
         binding.mvCl.onLowMemory()
     }
 
-
-    private fun getStatusMsg(deactivated: Boolean, verificationState: String): String {
-        return if (verificationState == "U") {
-            "System Verification Pending"
-        } else if (verificationState == "R") {
-            "Rejected in verification"
-        } else {
-            if (deactivated) {
-                "Deactivated by you"
-            } else {
-                "Live"
-            }
-        }
-    }
 
     override fun onDestroyView() {
         super.onDestroyView()
