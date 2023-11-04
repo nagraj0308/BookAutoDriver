@@ -4,12 +4,11 @@
 -keep class com.book.auto.di.*{*;}
 -keep class com.book.auto.domain.*{*;}
 -keep class com.book.auto.presentation.home.*{*;}
--keep class com.book.auto.presentation.login.*{*;}
 -keep class com.book.auto.presentation.addeditauto.*{*;}
 -keep class com.book.auto.presentation.base.*{*;}
 -keep class com.book.auto.presentation.vehicle.*{*;}
 -keep class com.book.auto.presentation.home.*{*;}
--keep class com.book.auto.presentation.login.*{*;}
+-keep class com.book.auto.presentation.viewauto.*{*;}
 -keep class com.book.auto.presentation.synclocation.*{*;}
 -keep class com.book.auto.presentation.*{*;}
 -keep class com.book.auto.utils.*{*;}

@@ -1,5 +1,6 @@
 package com.book.auto.presentation.home
 
+import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.drawable.Drawable
@@ -43,8 +44,7 @@ class HomeFragment : BaseFragment() {
         val root: View = binding.root
         binding.btnRefresh.setOnClickListener {
             activity?.let { it1 ->
-//                viewModel.updateLocation(it1)
-                showDetails(Auto())
+                viewModel.updateLocation(it1)
             }
         }
 
@@ -92,16 +92,34 @@ class HomeFragment : BaseFragment() {
                                         null
                                     )
                                 )
-                            )
+                            ).snippet(au._id)
                     )
                 }
 
+                map!!.setOnMarkerClickListener { marker ->
+                    val auto = getAuto(marker.snippet, list)
+                    if (auto != null) {
+                        showDetails(auto)
+                        true
+                    } else {
+                        false
+
+                    }
+                }
+
             }
-            map.setOnMarkerClickListener {
-                it.
-            }
+
         }
         return root
+    }
+
+    private fun getAuto(id: String?, list: List<Auto>): Auto? {
+        for (au in list) {
+            if (au._id == id) {
+                return au
+            }
+        }
+        return null
     }
 
     private fun showDetails(auto: Auto) {
