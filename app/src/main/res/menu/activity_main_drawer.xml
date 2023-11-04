@@ -25,6 +25,10 @@
             android:icon="@drawable/ic_rate_review"
             android:title="@string/rate" />
         <item
+            android:id="@+id/nav_install_user_app"
+            android:icon="@drawable/ic_install_user_app"
+            android:title="@string/install_user_app" />
+        <item
             android:id="@+id/nav_exit"
             android:icon="@drawable/ic_exit_to_app"
             android:title="@string/exit" />

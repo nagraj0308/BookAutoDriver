@@ -131,7 +131,7 @@ class AddEditAutoFragment : BaseFragment() {
             binding.tilAutoNumber.editText!!.setText(viewModel.vehicle.value!!.number)
             binding.tilDriverName.editText!!.setText(viewModel.vehicle.value!!.driver)
             binding.tilMobileNumber.editText!!.setText(viewModel.vehicle.value!!.mobileNo)
-            binding.actvAutoType.setText(viewModel.vehicle.value!!.type)
+            binding.actvAutoType.setText(viewModel.vehicle.value!!.type, false)
 
 
             Glide.with(this).asBitmap().load(viewModel.vehicle.value!!.imageUrl)

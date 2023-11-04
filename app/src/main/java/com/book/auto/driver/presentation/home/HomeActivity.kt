@@ -60,9 +60,7 @@ class HomeActivity : BaseActivity() {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_home,
-                R.id.nav_about_us,
-                R.id.nav_pnp
+                R.id.nav_home, R.id.nav_about_us, R.id.nav_pnp
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
@@ -81,12 +79,21 @@ class HomeActivity : BaseActivity() {
         navView.menu.findItem(R.id.nav_rate).setOnMenuItemClickListener {
             startActivity(
                 Intent(
-                    Intent.ACTION_VIEW,
-                    Uri.parse(Constants.PLAYSTORE_URL)
+                    Intent.ACTION_VIEW, Uri.parse(Constants.PLAYSTORE_URL)
                 )
             )
             true
         }
+
+        navView.menu.findItem(R.id.nav_install_user_app).setOnMenuItemClickListener {
+            startActivity(
+                Intent(
+                    Intent.ACTION_VIEW, Uri.parse(Constants.PLAYSTORE_URL_USER)
+                )
+            )
+            true
+        }
+
         navView.menu.findItem(R.id.nav_exit).setOnMenuItemClickListener {
             pm.clearAll()
             finish()
@@ -105,8 +112,7 @@ class HomeActivity : BaseActivity() {
         }
         remoteConfig.setConfigSettingsAsync(configSettings)
         remoteConfig.setDefaultsAsync(R.xml.remote_config_defaults)
-        remoteConfig.fetchAndActivate()
-            .addOnCompleteListener(
+        remoteConfig.fetchAndActivate().addOnCompleteListener(
                 this
             ) { task ->
                 if (task.isSuccessful) {
@@ -133,8 +139,7 @@ class HomeActivity : BaseActivity() {
         yesBtn.setOnClickListener {
             startActivity(
                 Intent(
-                    Intent.ACTION_VIEW,
-                    Uri.parse(Constants.PLAYSTORE_URL)
+                    Intent.ACTION_VIEW, Uri.parse(Constants.PLAYSTORE_URL)
                 )
             )
         }

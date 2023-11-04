@@ -9,6 +9,8 @@ class Constants {
         const val PNP_URL = "https://nagraj0308.github.io/book_auto_driver_pnp/"
         const val PLAYSTORE_URL =
             "https://play.google.com/store/apps/details?id=com.book.auto.driver"
+        const val PLAYSTORE_URL_USER =
+            "https://play.google.com/store/apps/details?id=com.book.auto"
         const val APK_SHARE_MSG =
             "Hey!! I am using Book Auto Driver app for adding our vehicles, you can also try., link:- $PLAYSTORE_URL Thanks!!"
         const val IMG_HBW = 0.66
