@@ -13,11 +13,11 @@ import android.widget.ArrayAdapter
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.activityViewModels
-import com.book.auto.driver.presentation.home.HomeViewModel
 import com.book.gaadi.PM
 import com.book.gaadi.R
 import com.book.gaadi.databinding.FragmentAddEditAutoDetailsBinding
 import com.book.gaadi.presentation.base.BaseFragment
+import com.book.gaadi.presentation.home.HomeViewModel
 import com.book.gaadi.utils.Constants
 import com.book.gaadi.utils.PermissionUtils
 import com.book.gaadi.utils.Utils
