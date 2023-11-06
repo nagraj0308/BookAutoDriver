@@ -6,8 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebViewClient
 import androidx.fragment.app.Fragment
-import com.book.admin.databinding.FragmentWebViewBinding
-import com.book.auto.driver.utils.Constants
+import com.book.gaadi.databinding.FragmentWebViewBinding
+import com.book.gaadi.utils.Constants
 
 
 class PnPFragment : Fragment() {

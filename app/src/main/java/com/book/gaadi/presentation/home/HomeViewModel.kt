@@ -1,4 +1,4 @@
-package com.book.auto.driver.presentation.home
+package com.book.gaadi.presentation.home
 
 
 import android.annotation.SuppressLint
@@ -9,16 +9,16 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.book.auto.driver.PM
-import com.book.auto.driver.data.remote.reqres.DeleteVehicleRequest
-import com.book.auto.driver.data.remote.reqres.GetVehicleByGmailIdRequest
-import com.book.auto.driver.data.remote.reqres.Vehicle
-import com.book.auto.driver.data.remote.reqres.VehicleLocationRequest
-import com.book.auto.driver.data.remote.reqres.VehicleRequest
-import com.book.auto.driver.data.remote.reqres.VerificationStatusRequest
-import com.book.auto.driver.domain.BVApi
-import com.book.auto.driver.utils.FBS
-import com.book.auto.driver.utils.PermissionUtils
+import com.book.gaadi.PM
+import com.book.gaadi.data.remote.reqres.DeleteVehicleRequest
+import com.book.gaadi.data.remote.reqres.GetVehicleByGmailIdRequest
+import com.book.gaadi.data.remote.reqres.Vehicle
+import com.book.gaadi.data.remote.reqres.VehicleLocationRequest
+import com.book.gaadi.data.remote.reqres.VehicleRequest
+import com.book.gaadi.data.remote.reqres.VerificationStatusRequest
+import com.book.gaadi.domain.BVApi
+import com.book.gaadi.utils.FBS
+import com.book.gaadi.utils.PermissionUtils
 import com.google.android.gms.location.LocationServices
 import com.google.firebase.storage.UploadTask
 import dagger.hilt.android.lifecycle.HiltViewModel

@@ -6,11 +6,11 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.animation.AnimationUtils
 import androidx.core.app.ActivityCompat
-import com.book.auto.driver.PM
-import com.book.auto.driver.presentation.home.HomeActivity
+import com.book.gaadi.PM
 import com.book.gaadi.R
 import com.book.gaadi.databinding.ActivityLoginBinding
 import com.book.gaadi.presentation.base.BaseActivity
+import com.book.gaadi.presentation.home.HomeActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient

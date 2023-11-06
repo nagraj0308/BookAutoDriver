@@ -1,4 +1,4 @@
-package com.book.auto.driver.presentation.home
+package com.book.gaadi.presentation.home
 
 import android.graphics.Bitmap
 import android.graphics.Canvas
@@ -7,14 +7,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CompoundButton
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import com.book.auto.driver.R
-import com.book.auto.driver.data.remote.reqres.Vehicle
-import com.book.auto.driver.databinding.FragmentHomeBinding
-import com.book.auto.driver.presentation.base.BaseFragment
+import com.book.gaadi.R
+import com.book.gaadi.data.remote.reqres.Vehicle
+import com.book.gaadi.databinding.FragmentHomeBinding
+import com.book.gaadi.presentation.base.BaseFragment
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapsInitializer
