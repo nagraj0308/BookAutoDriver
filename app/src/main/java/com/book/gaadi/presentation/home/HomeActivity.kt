@@ -1,4 +1,4 @@
-package com.book.auto.driver.presentation.home
+package com.book.gaadi.presentation.home
 
 import android.app.Dialog
 import android.content.Intent
@@ -14,13 +14,14 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.book.auto.driver.BuildConfig
-import com.book.auto.driver.PM
-import com.book.auto.driver.R
-import com.book.auto.driver.databinding.ActivityHomeBinding
-import com.book.auto.driver.databinding.NavHeaderMainBinding
-import com.book.auto.driver.presentation.base.BaseActivity
-import com.book.auto.driver.presentation.login.LoginActivity
+import com.book.auto.driver.presentation.home.HomeViewModel
 import com.book.auto.driver.utils.Constants
+import com.book.gaadi.PM
+import com.book.gaadi.R
+import com.book.gaadi.databinding.ActivityHomeBinding
+import com.book.gaadi.databinding.NavHeaderMainBinding
+import com.book.gaadi.presentation.base.BaseActivity
+import com.book.gaadi.presentation.login.LoginActivity
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig

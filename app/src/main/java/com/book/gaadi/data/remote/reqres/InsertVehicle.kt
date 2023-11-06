@@ -1,4 +1,4 @@
-package com.book.auto.driver.data.remote.reqres
+package com.book.gaadi.data.remote.reqres
 
 import com.google.gson.annotations.SerializedName
 

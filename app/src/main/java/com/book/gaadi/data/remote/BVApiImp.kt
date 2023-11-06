@@ -1,13 +1,13 @@
-package com.book.auto.driver.data.remote
+package com.book.gaadi.data.remote
 
-import com.book.auto.driver.data.remote.reqres.BasicResponse
-import com.book.auto.driver.data.remote.reqres.DeleteVehicleRequest
-import com.book.auto.driver.data.remote.reqres.GetVehicleByGmailIdRequest
-import com.book.auto.driver.data.remote.reqres.VehicleLocationRequest
-import com.book.auto.driver.data.remote.reqres.VehicleRequest
-import com.book.auto.driver.data.remote.reqres.VehicleResponse
-import com.book.auto.driver.data.remote.reqres.VerificationStatusRequest
-import com.book.auto.driver.domain.BVApi
+import com.book.gaadi.data.remote.reqres.BasicResponse
+import com.book.gaadi.data.remote.reqres.DeleteVehicleRequest
+import com.book.gaadi.data.remote.reqres.GetVehicleByGmailIdRequest
+import com.book.gaadi.data.remote.reqres.VehicleLocationRequest
+import com.book.gaadi.data.remote.reqres.VehicleRequest
+import com.book.gaadi.data.remote.reqres.VehicleResponse
+import com.book.gaadi.data.remote.reqres.VerificationStatusRequest
+import com.book.gaadi.domain.BVApi
 import retrofit2.Response
 import javax.inject.Inject
 

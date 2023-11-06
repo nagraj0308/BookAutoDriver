@@ -1,4 +1,4 @@
-package com.book.auto.driver.presentation.addeditauto
+package com.book.gaadi.presentation.addeditauto
 
 import android.app.Activity
 import android.content.Intent
@@ -13,14 +13,14 @@ import android.widget.ArrayAdapter
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.activityViewModels
+import com.book.admin.R
+import com.book.admin.databinding.FragmentAddEditAutoDetailsBinding
 import com.book.auto.driver.PM
-import com.book.auto.driver.R
-import com.book.auto.driver.databinding.FragmnetAddEditAutoDetailsBinding
-import com.book.auto.driver.presentation.base.BaseFragment
 import com.book.auto.driver.presentation.home.HomeViewModel
 import com.book.auto.driver.utils.Constants
 import com.book.auto.driver.utils.PermissionUtils
 import com.book.auto.driver.utils.Utils
+import com.book.gaadi.presentation.base.BaseFragment
 import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -30,7 +30,7 @@ class AddEditAutoFragment : BaseFragment() {
     @Inject
     lateinit var pm: PM
 
-    private var _binding: FragmnetAddEditAutoDetailsBinding? = null
+    private var _binding: FragmentAddEditAutoDetailsBinding? = null
 
     private val viewModel: HomeViewModel by activityViewModels()
     private val binding get() = _binding!!
@@ -40,7 +40,7 @@ class AddEditAutoFragment : BaseFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
-        _binding = FragmnetAddEditAutoDetailsBinding.inflate(inflater, container, false)
+        _binding = FragmentAddEditAutoDetailsBinding.inflate(inflater, container, false)
         val root: View = binding.root
         binding.btnSubmit.setOnClickListener {
             if (validate()) {

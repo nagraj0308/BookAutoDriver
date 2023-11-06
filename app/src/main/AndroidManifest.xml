@@ -46,7 +46,6 @@
 
         <activity
             android:name=".presentation.home.HomeActivity"
-            android:exported="true"
             android:theme="@style/Theme.BookAutoDriver.NoActionBar" />
 
 

@@ -1,12 +1,12 @@
-package com.book.auto.driver.domain
+package com.book.gaadi.domain
 
-import com.book.auto.driver.data.remote.reqres.BasicResponse
-import com.book.auto.driver.data.remote.reqres.DeleteVehicleRequest
-import com.book.auto.driver.data.remote.reqres.GetVehicleByGmailIdRequest
-import com.book.auto.driver.data.remote.reqres.VehicleLocationRequest
-import com.book.auto.driver.data.remote.reqres.VehicleRequest
-import com.book.auto.driver.data.remote.reqres.VehicleResponse
-import com.book.auto.driver.data.remote.reqres.VerificationStatusRequest
+import com.book.gaadi.data.remote.reqres.BasicResponse
+import com.book.gaadi.data.remote.reqres.DeleteVehicleRequest
+import com.book.gaadi.data.remote.reqres.GetVehicleByGmailIdRequest
+import com.book.gaadi.data.remote.reqres.VehicleLocationRequest
+import com.book.gaadi.data.remote.reqres.VehicleRequest
+import com.book.gaadi.data.remote.reqres.VehicleResponse
+import com.book.gaadi.data.remote.reqres.VerificationStatusRequest
 import retrofit2.Response
 
 interface BVApi {

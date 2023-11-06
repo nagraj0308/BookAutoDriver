@@ -15,7 +15,7 @@
         android:id="@+id/nav_add_edit_auto"
         android:name="com.book.auto.driver.presentation.addeditauto.AddEditAutoFragment"
         android:label="@string/auto_details"
-        tools:layout="@layout/fragmnet_add_edit_auto_details" >
+        tools:layout="@layout/fragment_add_edit_auto_details" >
 
     </fragment>
 

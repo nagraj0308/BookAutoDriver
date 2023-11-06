@@ -1,4 +1,4 @@
-package com.book.auto.driver.presentation.login
+package com.book.gaadi.presentation.login
 
 import android.Manifest
 import android.content.Intent
@@ -7,10 +7,10 @@ import android.os.Handler
 import android.view.animation.AnimationUtils
 import androidx.core.app.ActivityCompat
 import com.book.auto.driver.PM
-import com.book.auto.driver.R
-import com.book.auto.driver.databinding.ActivityLoginBinding
-import com.book.auto.driver.presentation.base.BaseActivity
 import com.book.auto.driver.presentation.home.HomeActivity
+import com.book.gaadi.R
+import com.book.gaadi.databinding.ActivityLoginBinding
+import com.book.gaadi.presentation.base.BaseActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
