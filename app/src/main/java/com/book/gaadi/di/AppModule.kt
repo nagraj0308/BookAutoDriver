@@ -2,11 +2,12 @@ package com.book.gaadi.di
 
 import android.content.Context
 import android.content.SharedPreferences
-import com.book.auto.driver.PM
-import com.book.auto.driver.utils.Constants
+import com.book.gaadi.BuildConfig
+import com.book.gaadi.PM
 import com.book.gaadi.data.remote.BVApiImp
 import com.book.gaadi.data.remote.BVService
 import com.book.gaadi.domain.BVApi
+import com.book.gaadi.utils.Constants
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
