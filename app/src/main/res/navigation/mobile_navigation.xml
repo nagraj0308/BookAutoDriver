@@ -7,27 +7,27 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.book.auto.driver.presentation.home.HomeFragment"
+        android:name="com.book.gaadi.presentation.home.HomeFragment"
         android:label="@string/home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/nav_add_edit_auto"
-        android:name="com.book.auto.driver.presentation.addeditauto.AddEditAutoFragment"
+        android:name="com.book.gaadi.presentation.addeditauto.AddEditAutoFragment"
         android:label="@string/auto_details"
-        tools:layout="@layout/fragment_add_edit_auto_details" >
+        tools:layout="@layout/fragment_add_edit_auto_details">
 
     </fragment>
 
     <fragment
         android:id="@+id/nav_about_us"
-        android:name="com.book.auto.driver.presentation.AboutUsFragment"
+        android:name="com.book.gaadi.presentation.AboutUsFragment"
         android:label="@string/about_us"
         tools:layout="@layout/fragment_web_view" />
 
     <fragment
         android:id="@+id/nav_pnp"
-        android:name="com.book.auto.driver.presentation.PnPFragment"
+        android:name="com.book.gaadi.presentation.PnPFragment"
         android:label="@string/privacy_and_policy"
         tools:layout="@layout/fragment_web_view" />
 </navigation>

@@ -85,14 +85,7 @@ class HomeActivity : BaseActivity() {
             true
         }
 
-        navView.menu.findItem(R.id.nav_install_user_app).setOnMenuItemClickListener {
-            startActivity(
-                Intent(
-                    Intent.ACTION_VIEW, Uri.parse(Constants.PLAYSTORE_URL_USER)
-                )
-            )
-            true
-        }
+
 
         navView.menu.findItem(R.id.nav_exit).setOnMenuItemClickListener {
             pm.clearAll()

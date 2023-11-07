@@ -2,19 +2,15 @@ package com.book.gaadi.utils
 
 class Constants {
     companion object {
-        //        #557a2a
-//        rgb(85, 122, 42)
         const val BASE_URL = "https://server0308.azurewebsites.net/"
-        const val ABOUT_US_URL = "https://nagraj0308.github.io/book_auto_driver_aboutus/"
-        const val PNP_URL = "https://nagraj0308.github.io/book_auto_driver_pnp/"
-        const val PLAYSTORE_URL =
-            "https://play.google.com/store/apps/details?id=com.book.auto.driver"
-        const val PLAYSTORE_URL_USER =
-            "https://play.google.com/store/apps/details?id=com.book.auto"
-        const val APK_SHARE_MSG =
-            "Hey!! I am using Book Auto Driver app for adding our vehicles, you can also try., link:- $PLAYSTORE_URL Thanks!!"
-        const val IMG_HBW = 0.66
 
-        val autoTypes = listOf("4 Wheeler", "3 Wheeler", "2 Wheeler", "Other")
+        const val ABOUT_US_URL = "https://nagraj0308.github.io/book_gaadi_aboutus/"
+        const val PNP_URL = "https://nagraj0308.github.io/book_gaadi_pnp/"
+        const val PLAYSTORE_URL = "https://play.google.com/store/apps/details?id=com.book.gaadi"
+        const val APK_SHARE_MSG =
+            "Hey!! I am using Book Gaadi app for search nearby vehicles, you can also try., link:- $PLAYSTORE_URL Thanks!!"
+        const val IMG_WBH = 1.5
+
+        val autoTypes = listOf("1", "2", "3", "4")
     }
 }
