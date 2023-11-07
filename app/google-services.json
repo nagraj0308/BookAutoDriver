@@ -7,6 +7,35 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:620168446799:android:6c1d4fa05ce1e99e06bb3a",
+        "android_client_info": {
+          "package_name": "com.book.admin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "620168446799-2d4p855qeg3h5hn73asqt2bk7t75j2nc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBpAwDfiBGJwnrBNqvlVpSbX3o4BHdPuTU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "620168446799-2d4p855qeg3h5hn73asqt2bk7t75j2nc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:620168446799:android:817c45f81e363d4a06bb3a",
         "android_client_info": {
           "package_name": "com.book.auto"
@@ -42,6 +71,38 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "620168446799-a58mervsfvq6hr74hv2gmb5jkccus029.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.book.auto.driver",
+            "certificate_hash": "91b5e82e740953ebcf8a8f85dbe7e4aa4e272e55"
+          }
+        },
+        {
+          "client_id": "620168446799-f6p1sl84ddtcq4s4cslnab5f6ricqnie.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.book.auto.driver",
+            "certificate_hash": "e725ade7a6bb1c88c60fde99b3fd91c7397092b0"
+          }
+        },
+        {
+          "client_id": "620168446799-o827vioq3192gqi6do6824of5a05h40a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.book.auto.driver",
+            "certificate_hash": "8f1041bac72a851584c6aa52205bdc0a51588872"
+          }
+        },
+        {
+          "client_id": "620168446799-qsblou5muhck6r2uantrg1df0rcevb26.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.book.auto.driver",
+            "certificate_hash": "400c11d4efca27b7721b821ba521e3a43860072f"
+          }
+        },
         {
           "client_id": "620168446799-2d4p855qeg3h5hn73asqt2bk7t75j2nc.apps.googleusercontent.com",
           "client_type": 3
