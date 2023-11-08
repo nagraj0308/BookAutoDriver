@@ -1,19 +1,19 @@
--keep class com.book.auto.driver.data.remote.reqres.*{*;}
--keep class com.book.auto.driver.data.remote.*{*;}
--keep class com.book.auto.driver.data.*{*;}
--keep class com.book.auto.driver.di.*{*;}
--keep class com.book.auto.driver.domain.*{*;}
--keep class com.book.auto.driver.presentation.home.*{*;}
--keep class com.book.auto.driver.presentation.login.*{*;}
--keep class com.book.auto.driver.presentation.addeditauto.*{*;}
--keep class com.book.auto.driver.presentation.base.*{*;}
--keep class com.book.auto.driver.presentation.vehicle.*{*;}
--keep class com.book.auto.driver.presentation.home.*{*;}
--keep class com.book.auto.driver.presentation.login.*{*;}
--keep class com.book.auto.driver.presentation.synclocation.*{*;}
--keep class com.book.auto.driver.presentation.*{*;}
--keep class com.book.auto.driver.utils.*{*;}
--keep class com.book.auto.driver.*{*;}
+-keep class com.book.gaadi.data.remote.reqres.*{*;}
+-keep class com.book.gaadi.data.remote.*{*;}
+-keep class com.book.gaadi.data.*{*;}
+-keep class com.book.gaadi.di.*{*;}
+-keep class com.book.gaadi.domain.*{*;}
+-keep class com.book.gaadi.presentation.home.*{*;}
+-keep class com.book.gaadi.presentation.login.*{*;}
+-keep class com.book.gaadi.presentation.addeditauto.*{*;}
+-keep class com.book.gaadi.presentation.base.*{*;}
+-keep class com.book.gaadi.presentation.vehicle.*{*;}
+-keep class com.book.gaadi.presentation.home.*{*;}
+-keep class com.book.gaadi.presentation.login.*{*;}
+-keep class com.book.gaadi.presentation.synclocation.*{*;}
+-keep class com.book.gaadi.presentation.*{*;}
+-keep class com.book.gaadi.utils.*{*;}
+-keep class com.book.gaadi.*{*;}
 
 
 -keep,allowobfuscation,allowshrinking class kotlin.coroutines.Continuation
