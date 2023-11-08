@@ -20,6 +20,20 @@
     </fragment>
 
     <fragment
+        android:id="@+id/nav_my_gaadi"
+        android:name="com.book.gaadi.presentation.home.HomeFragment"
+        android:label="@string/home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/nav_add_edit_aut"
+        android:name="com.book.gaadi.presentation.addeditauto.AddEditAutoFragment"
+        android:label="@string/auto_details"
+        tools:layout="@layout/fragment_add_edit_auto_details">
+
+    </fragment>
+
+    <fragment
         android:id="@+id/nav_about_us"
         android:name="com.book.gaadi.presentation.AboutUsFragment"
         android:label="@string/about_us"

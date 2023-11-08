@@ -9,6 +9,10 @@
             android:icon="@drawable/ic_home"
             android:title="@string/home" />
         <item
+            android:id="@+id/nav_my_gaadi"
+            android:icon="@drawable/ic_auto"
+            android:title="@string/my_gaadi" />
+        <item
             android:id="@+id/nav_about_us"
             android:icon="@drawable/ic_info"
             android:title="@string/about_us" />
@@ -25,9 +29,9 @@
             android:icon="@drawable/ic_rate_review"
             android:title="@string/rate" />
         <item
-            android:id="@+id/nav_install_user_app"
-            android:icon="@drawable/ic_install_user_app"
-            android:title="@string/install_user_app" />
+            android:id="@+id/nav_setting"
+            android:icon="@drawable/ic_settings"
+            android:title="@string/setting" />
         <item
             android:id="@+id/nav_exit"
             android:icon="@drawable/ic_exit_to_app"
