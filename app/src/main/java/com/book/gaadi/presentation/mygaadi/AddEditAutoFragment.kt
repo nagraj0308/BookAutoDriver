@@ -47,12 +47,14 @@ class AddEditAutoFragment : BaseFragment() {
                 val autoNumber = binding.tilAutoNumber.editText!!.text.trim().toString()
                 val driverName = binding.tilDriverName.editText!!.text.trim().toString()
                 val mobileNumber = binding.tilMobileNumber.editText!!.text.trim().toString()
+                val rate = binding.actvAutoType.text.trim().toString()
                 val autoType = binding.actvAutoType.text.trim().toString()
                 viewModel.insertFSImage(
-                    autoType,
+                    2,
                     autoNumber,
                     driverName,
                     mobileNumber,
+                    rate,
                     Utils.screenShot(binding.ivAutoPhoto)!!,
                     {
                         if (it) {
@@ -69,12 +71,14 @@ class AddEditAutoFragment : BaseFragment() {
                 val autoNumber = binding.tilAutoNumber.editText!!.text.trim().toString()
                 val driverName = binding.tilDriverName.editText!!.text.trim().toString()
                 val mobileNumber = binding.tilMobileNumber.editText!!.text.trim().toString()
+                val rate = binding.actvAutoType.text.trim().toString()
                 val autoType = binding.actvAutoType.text.trim().toString()
                 viewModel.updateFSImage(
-                    autoType,
+                    1,
                     autoNumber,
                     driverName,
                     mobileNumber,
+                    rate,
                     Utils.screenShot(binding.ivAutoPhoto)!!,
                     {
                         if (it) {
@@ -131,7 +135,10 @@ class AddEditAutoFragment : BaseFragment() {
             binding.tilAutoNumber.editText!!.setText(viewModel.vehicle.value!!.number)
             binding.tilDriverName.editText!!.setText(viewModel.vehicle.value!!.driver)
             binding.tilMobileNumber.editText!!.setText(viewModel.vehicle.value!!.mobileNo)
-            binding.actvAutoType.setText(viewModel.vehicle.value!!.type, false)
+            binding.actvAutoType.setText(
+                Constants.autoTypes[viewModel.vehicle.value!!.typeId],
+                false
+            )
 
 
             Glide.with(this).asBitmap().load(viewModel.vehicle.value!!.imageUrl)

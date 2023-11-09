@@ -71,7 +71,7 @@ class HomeFragment : BaseFragment() {
                             .icon(
                                 getMarkerIconFromDrawable(
                                     resources.getDrawable(
-                                        getDrawable(au.type),
+                                        getDrawable(au.typeId),
                                         null
                                     )
                                 )
@@ -108,20 +108,20 @@ class HomeFragment : BaseFragment() {
     private fun showDetails(auto: Vehicle) {
         val bundle = Bundle()
         bundle.putSerializable("item", auto)
-        findNavController().navigate(R.id.nav_my_gaadi, bundle)
+        findNavController().navigate(R.id.nav_view_gaadi, bundle)
     }
 
-    private fun getDrawable(type: String): Int {
-        return when (type) {
-            Constants.autoTypes[0] -> {
+    private fun getDrawable(typeId: Int): Int {
+        return when (typeId) {
+            0 -> {
                 R.drawable.w4
             }
 
-            Constants.autoTypes[1] -> {
+            1 -> {
                 R.drawable.w3
             }
 
-            Constants.autoTypes[2] -> {
+            2 -> {
                 R.drawable.w2
             }
 

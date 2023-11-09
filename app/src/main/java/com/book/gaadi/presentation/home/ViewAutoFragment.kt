@@ -11,6 +11,7 @@ import com.book.gaadi.data.remote.reqres.Vehicle
 import com.book.gaadi.databinding.FragmentViewDetailsBinding
 import com.book.gaadi.presentation.base.BaseFragment
 import com.book.gaadi.presentation.home.HomeViewModel
+import com.book.gaadi.utils.Constants
 import com.book.gaadi.utils.Utils
 import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
@@ -51,7 +52,7 @@ class ViewAutoFragment : BaseFragment() {
             }
             binding.tvType.text = buildString {
                 append(": ")
-                append(data!!.type)
+                append(Constants.autoTypes[data!!.typeId])
             }
             binding.tvDistance.text = buildString {
                 append(": ")

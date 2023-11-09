@@ -11,6 +11,6 @@ class Constants {
             "Hey!! I am using Book Gaadi app for search nearby vehicles, you can also try., link:- $PLAYSTORE_URL Thanks!!"
         const val IMG_WBH = 1.5
 
-        val autoTypes = listOf("1", "2", "3", "4")
+        val autoTypes = listOf("0", "1", "2", "3", "4")
     }
 }

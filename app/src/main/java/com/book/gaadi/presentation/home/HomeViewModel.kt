@@ -76,10 +76,11 @@ class HomeViewModel @Inject constructor(
 
 
     fun insertFSImage(
-        gType: String,
+        gTypeId: Int,
         gNumber: String,
         gDriver: String,
         gMobile: String,
+        gRate: String,
         bitmap: Bitmap, callback: (Boolean) -> Unit, msg: (String) -> Unit
     ) {
 
@@ -101,10 +102,11 @@ class HomeViewModel @Inject constructor(
                 ref.downloadUrl.addOnSuccessListener {
                     insertGaadi(
                         pm.gmail!!,
-                        gType,
+                        gTypeId,
                         gNumber,
                         gDriver,
                         gMobile,
+                        gRate,
                         it.toString(), {
                             CoroutineScope(Dispatchers.IO).launch {
                                 withContext(Dispatchers.Main) {
@@ -127,10 +129,11 @@ class HomeViewModel @Inject constructor(
 
     private fun insertGaadi(
         gId: String,
-        gType: String,
+        gTypeId: Int,
         gNumber: String,
         gDriver: String,
         gMobile: String,
+        gRate: String,
         url: String, callback: (Boolean) -> Unit, msg: (String) -> Unit
     ) {
         CoroutineScope(Dispatchers.IO).launch {
@@ -144,8 +147,8 @@ class HomeViewModel @Inject constructor(
                         _lat.value,
                         _lon.value,
                         gMobile,
-                        gNumber,
-                        gType
+                        gNumber, gRate,
+                        gTypeId
                     )
                 )
             }.onSuccess {
@@ -165,10 +168,11 @@ class HomeViewModel @Inject constructor(
 
 
     fun updateFSImage(
-        gType: String,
+        gTypeId: Int,
         gNumber: String,
         gDriver: String,
         gMobile: String,
+        gRate: String,
         bitmap: Bitmap, callback: (Boolean) -> Unit, msg: (String) -> Unit
     ) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -188,10 +192,11 @@ class HomeViewModel @Inject constructor(
                 ref.downloadUrl.addOnSuccessListener {
                     updateGaadiData(
                         pm.gmail!!,
-                        gType,
+                        gTypeId,
                         gNumber,
                         gDriver,
                         gMobile,
+                        gRate,
                         it.toString(), {
                             CoroutineScope(Dispatchers.IO).launch {
                                 withContext(Dispatchers.Main) {
@@ -215,10 +220,11 @@ class HomeViewModel @Inject constructor(
 
     private fun updateGaadiData(
         gId: String,
-        gType: String,
+        gTypeId: Int,
         gNumber: String,
         gDriver: String,
         gMobile: String,
+        gRate: String,
         url: String, callback: (Boolean) -> Unit, msg: (String) -> Unit
     ) {
         CoroutineScope(Dispatchers.IO).launch {
@@ -232,8 +238,8 @@ class HomeViewModel @Inject constructor(
                         _lat.value,
                         _lon.value,
                         gMobile,
-                        gNumber,
-                        gType
+                        gNumber, gRate,
+                        gTypeId
                     )
                 )
             }.onSuccess {
