@@ -159,6 +159,14 @@ class HomeFragment : BaseFragment() {
         _binding = null
     }
 
+    override fun showProgress() {
+        TODO("Not yet implemented")
+    }
+
+    override fun hideProgress() {
+        TODO("Not yet implemented")
+    }
+
     private fun getMarkerIconFromDrawable(drawable: Drawable): BitmapDescriptor {
         val canvas = Canvas()
         val bitmap = Bitmap.createBitmap(

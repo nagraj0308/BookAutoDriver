@@ -43,12 +43,14 @@ class AddEditAutoFragment : BaseFragment() {
     ): View {
         _binding = FragmentAddEditAutoDetailsBinding.inflate(inflater, container, false)
         val root: View = binding.root
+        hideProgress()
         binding.btnSubmit.setOnClickListener {
             if (validate()) {
                 val autoNumber = binding.tilAutoNumber.editText!!.text.trim().toString()
                 val driverName = binding.tilDriverName.editText!!.text.trim().toString()
                 val mobileNumber = binding.tilMobileNumber.editText!!.text.trim().toString()
                 val rate = binding.tilRate.editText!!.text.trim().toString()
+                showProgress()
                 viewModel.insertFSImage(pos,
                     autoNumber,
                     driverName,
@@ -56,6 +58,7 @@ class AddEditAutoFragment : BaseFragment() {
                     rate,
                     Utils.screenShot(binding.ivAutoPhoto)!!,
                     {
+                        hideProgress()
                         if (it) {
                             requireActivity().onBackPressed()
                         } else {
@@ -71,6 +74,7 @@ class AddEditAutoFragment : BaseFragment() {
                 val driverName = binding.tilDriverName.editText!!.text.trim().toString()
                 val mobileNumber = binding.tilMobileNumber.editText!!.text.trim().toString()
                 val rate = binding.tilRate.editText!!.text.trim().toString()
+                showProgress()
                 viewModel.updateFSImage(pos,
                     autoNumber,
                     driverName,
@@ -78,6 +82,7 @@ class AddEditAutoFragment : BaseFragment() {
                     rate,
                     Utils.screenShot(binding.ivAutoPhoto)!!,
                     {
+                        hideProgress()
                         if (it) {
                             requireActivity().onBackPressed()
                         } else {
@@ -89,7 +94,9 @@ class AddEditAutoFragment : BaseFragment() {
 
         }
         binding.btnDelete.setOnClickListener {
+            showProgress()
             viewModel.deleteAuto({
+                hideProgress()
                 if (it) {
                     activity?.finish()
                 }
@@ -136,8 +143,7 @@ class AddEditAutoFragment : BaseFragment() {
             binding.actvAutoType.setText(
                 Constants.autoTypes[pos], false
             )
-
-
+            binding.tilRate.editText!!.setText(viewModel.vehicle.value!!.rate)
             Glide.with(this).asBitmap().load(viewModel.vehicle.value!!.imageUrl)
                 .into(binding.ivAutoPhoto)
 
@@ -231,6 +237,16 @@ class AddEditAutoFragment : BaseFragment() {
         }
 
         return true
+    }
+
+    override fun showProgress() {
+        binding.content.visibility = View.GONE
+        binding.pbCpb.visibility = View.VISIBLE
+    }
+
+    override fun hideProgress() {
+        binding.content.visibility = View.VISIBLE
+        binding.pbCpb.visibility = View.GONE
     }
 
 

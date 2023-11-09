@@ -67,10 +67,23 @@ class ViewAutoFragment : BaseFragment() {
                 append(" KM")
             }
 
+            binding.tvRate.text = buildString {
+                append(": ")
+                append(data!!.rate)
+            }
+
             context?.let { Glide.with(it).asBitmap().load(data?.imageUrl).into(binding.ivPhoto) }
         }
 
         return root
+    }
+
+    override fun showProgress() {
+        TODO("Not yet implemented")
+    }
+
+    override fun hideProgress() {
+        TODO("Not yet implemented")
     }
 
 

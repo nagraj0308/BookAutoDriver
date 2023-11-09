@@ -150,6 +150,14 @@ class MyGaadiFragment : BaseFragment() {
         }
     }
 
+    override fun showProgress() {
+        TODO("Not yet implemented")
+    }
+
+    override fun hideProgress() {
+        TODO("Not yet implemented")
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
