@@ -53,9 +53,7 @@ class MyGaadiFragment : BaseFragment() {
             navController.navigate(R.id.nav_add_edit_gaadi, bundle)
         }
 
-        binding.sbDeactivated.setOnCheckedChangeListener { _, isChecked ->
-            viewModel.updateAutoActivation(isChecked)
-        };
+
 
         binding.btnEdit.setOnClickListener {
             val bundle = Bundle()
@@ -136,25 +134,19 @@ class MyGaadiFragment : BaseFragment() {
                 binding.cvContent.visibility = View.VISIBLE
                 binding.tvAutoNo.text = vehicle.number
                 binding.tvMobileNo.text = vehicle.mobileNo
-                binding.tvLive.text = getStatusMsg(vehicle.deactivated, vehicle.verificationState)
-                binding.sbDeactivated.setChecked(vehicle.deactivated)
-
+                binding.tvLive.text = getStatusMsg(vehicle.verificationState)
             }
         }
 
     }
 
-    private fun getStatusMsg(deactivated: Boolean, verificationState: String): String {
+    private fun getStatusMsg(verificationState: String): String {
         return if (verificationState == "U") {
             "System Verification Pending"
         } else if (verificationState == "R") {
             "Rejected in verification"
         } else {
-            if (deactivated) {
-                "Deactivated by you"
-            } else {
-                "Live"
-            }
+            "Live"
         }
     }
 

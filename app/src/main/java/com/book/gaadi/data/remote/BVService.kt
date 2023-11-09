@@ -8,7 +8,6 @@ import com.book.gaadi.data.remote.reqres.VehicleLocationRequest
 import com.book.gaadi.data.remote.reqres.VehicleRequest
 import com.book.gaadi.data.remote.reqres.VehicleResponse
 import com.book.gaadi.data.remote.reqres.VehiclesResponse
-import com.book.gaadi.data.remote.reqres.VerificationStatusRequest
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.Headers
@@ -22,28 +21,24 @@ interface BVService {
     suspend fun getAllVehicleV1(@Body request: GetVehicleRequest?): Response<VehiclesResponse>
 
     @Headers("Content-Type: application/json")
-    @POST("api/insertAuto/")
+    @POST("api/insertVehicleV1/")
     suspend fun insertVehicle(@Body request: VehicleRequest?): Response<VehicleResponse>
 
     @Headers("Content-Type: application/json")
-    @POST("api/updateAuto/")
+    @POST("api/updateVehicleV1/")
     suspend fun updateVehicle(@Body request: VehicleRequest?): Response<VehicleResponse>
 
     @Headers("Content-Type: application/json")
     @POST("api/updateAutoLocation/")
     suspend fun updateVehicleLocation(@Body request: VehicleLocationRequest?): Response<BasicResponse>
 
-    @Headers("Content-Type: application/json")
-    @POST("api/updateAutoActiveStatus/")
-    suspend fun updateAutoActiveStatus(@Body request: VerificationStatusRequest?): Response<BasicResponse>
-
 
     @Headers("Content-Type: application/json")
-    @POST("api/getAutoByGmailId/")
+    @POST("api/getVehicleByGmailId/")
     suspend fun getVehicleByGmailId(@Body request: GetVehicleByGmailIdRequest?): Response<VehicleResponse>
 
     @Headers("Content-Type: application/json")
-    @POST("api/deleteAutoById/")
+    @POST("api/deleteVehicleById/")
     suspend fun deleteVehicleById(@Body request: DeleteVehicleRequest?): Response<BasicResponse>
 
 }

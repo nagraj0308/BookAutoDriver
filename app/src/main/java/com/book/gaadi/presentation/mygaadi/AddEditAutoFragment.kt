@@ -35,6 +35,7 @@ class AddEditAutoFragment : BaseFragment() {
     private val viewModel: HomeViewModel by activityViewModels()
     private val binding get() = _binding!!
     private var isNew: Boolean = true
+    private var pos: Int = 0
 
 
     override fun onCreateView(
@@ -47,10 +48,8 @@ class AddEditAutoFragment : BaseFragment() {
                 val autoNumber = binding.tilAutoNumber.editText!!.text.trim().toString()
                 val driverName = binding.tilDriverName.editText!!.text.trim().toString()
                 val mobileNumber = binding.tilMobileNumber.editText!!.text.trim().toString()
-                val rate = binding.actvAutoType.text.trim().toString()
-                val autoType = binding.actvAutoType.text.trim().toString()
-                viewModel.insertFSImage(
-                    2,
+                val rate = binding.tilRate.editText!!.text.trim().toString()
+                viewModel.insertFSImage(pos,
                     autoNumber,
                     driverName,
                     mobileNumber,
@@ -71,10 +70,8 @@ class AddEditAutoFragment : BaseFragment() {
                 val autoNumber = binding.tilAutoNumber.editText!!.text.trim().toString()
                 val driverName = binding.tilDriverName.editText!!.text.trim().toString()
                 val mobileNumber = binding.tilMobileNumber.editText!!.text.trim().toString()
-                val rate = binding.actvAutoType.text.trim().toString()
-                val autoType = binding.actvAutoType.text.trim().toString()
-                viewModel.updateFSImage(
-                    1,
+                val rate = binding.tilRate.editText!!.text.trim().toString()
+                viewModel.updateFSImage(pos,
                     autoNumber,
                     driverName,
                     mobileNumber,
@@ -132,12 +129,12 @@ class AddEditAutoFragment : BaseFragment() {
             binding.llEdit.visibility = View.GONE
             binding.btnSubmit.visibility = View.VISIBLE
         } else {
+            pos = viewModel.vehicle.value!!.typeId
             binding.tilAutoNumber.editText!!.setText(viewModel.vehicle.value!!.number)
             binding.tilDriverName.editText!!.setText(viewModel.vehicle.value!!.driver)
             binding.tilMobileNumber.editText!!.setText(viewModel.vehicle.value!!.mobileNo)
             binding.actvAutoType.setText(
-                Constants.autoTypes[viewModel.vehicle.value!!.typeId],
-                false
+                Constants.autoTypes[pos], false
             )
 
 
@@ -159,11 +156,7 @@ class AddEditAutoFragment : BaseFragment() {
             val selectedImage: Uri = data!!.data!!
             val filePathColumn = arrayOf(MediaStore.Images.Media.DATA)
             val cursor = requireActivity().contentResolver.query(
-                selectedImage,
-                filePathColumn,
-                null,
-                null,
-                null
+                selectedImage, filePathColumn, null, null, null
             )
             cursor!!.moveToFirst()
             val columnIndex = cursor.getColumnIndex(filePathColumn[0])

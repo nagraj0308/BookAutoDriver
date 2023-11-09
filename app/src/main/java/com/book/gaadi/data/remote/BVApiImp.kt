@@ -8,7 +8,6 @@ import com.book.gaadi.data.remote.reqres.VehicleLocationRequest
 import com.book.gaadi.data.remote.reqres.VehicleRequest
 import com.book.gaadi.data.remote.reqres.VehicleResponse
 import com.book.gaadi.data.remote.reqres.VehiclesResponse
-import com.book.gaadi.data.remote.reqres.VerificationStatusRequest
 import com.book.gaadi.domain.BVApi
 import retrofit2.Response
 import javax.inject.Inject
@@ -32,10 +31,6 @@ class BVApiImp @Inject constructor(
 
     override suspend fun updateVehicleLocation(request: VehicleLocationRequest?): Response<BasicResponse> {
         return service.updateVehicleLocation(request)
-    }
-
-    override suspend fun updateAutoActiveStatus(request: VerificationStatusRequest?): Response<BasicResponse> {
-        return service.updateAutoActiveStatus(request)
     }
 
 

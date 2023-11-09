@@ -16,7 +16,6 @@ import com.book.gaadi.data.remote.reqres.GetVehicleRequest
 import com.book.gaadi.data.remote.reqres.Vehicle
 import com.book.gaadi.data.remote.reqres.VehicleLocationRequest
 import com.book.gaadi.data.remote.reqres.VehicleRequest
-import com.book.gaadi.data.remote.reqres.VerificationStatusRequest
 import com.book.gaadi.domain.BVApi
 import com.book.gaadi.utils.FBS
 import com.book.gaadi.utils.PermissionUtils
@@ -271,25 +270,6 @@ class HomeViewModel @Inject constructor(
             }.onSuccess {
                 withContext(Dispatchers.Main) {
 
-                }
-            }
-        }
-    }
-
-
-    fun updateAutoActivation(
-        deactivated: Boolean
-    ) {
-        CoroutineScope(Dispatchers.IO).launch {
-            runCatching {
-                api.updateAutoActiveStatus(
-                    VerificationStatusRequest(
-                        pm.gmail, deactivated
-                    )
-                )
-            }.onSuccess {
-                withContext(Dispatchers.Main) {
-                    getAutoDetails { }
                 }
             }
         }

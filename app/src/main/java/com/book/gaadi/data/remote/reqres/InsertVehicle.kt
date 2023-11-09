@@ -28,10 +28,6 @@ data class VehicleLocationRequest(
 )
 
 
-data class VerificationStatusRequest(
-    @SerializedName("vId") val vId: String?, @SerializedName("deactivated") val boolean: Boolean?
-)
-
 data class GetVehicleByGmailIdRequest(
     @SerializedName("vId") val gmailId: String?,
 )
