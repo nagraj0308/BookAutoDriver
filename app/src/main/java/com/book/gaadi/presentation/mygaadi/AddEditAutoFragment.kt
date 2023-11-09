@@ -114,7 +114,7 @@ class AddEditAutoFragment : BaseFragment() {
             requireContext(), R.layout.item_spinner, Constants.autoTypes
         )
         binding.actvAutoType.setAdapter(arrayAdapter)
-        binding.actvAutoType.setText(Constants.autoTypes[0], false)
+        binding.actvAutoType.setText(Constants.autoTypes[pos], false)
 
 
 
