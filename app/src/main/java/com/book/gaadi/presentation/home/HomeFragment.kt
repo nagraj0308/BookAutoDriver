@@ -46,20 +46,6 @@ class HomeFragment : BaseFragment() {
         }
 
 
-//            if (it != null) {
-//                val bundle = Bundle()
-////                bundle.putSerializable("item", mList[position])
-//                navController.navigate(R.id.nav_view, bundle)
-//            }
-
-
-//        binding.btnEdit.setOnClickListener {
-//            val bundle = Bundle()
-//            bundle.putBoolean("is_new", isNew)
-////            navController.navigate(R.id.nav_add_edit_auto, bundle)
-//        }
-
-
         //Maps View
         binding.mvCl.onCreate(savedInstanceState)
         binding.mvCl.getMapAsync()
