@@ -3,6 +3,7 @@ package com.book.gaadi.utils
 
 import android.graphics.Bitmap
 import android.graphics.Canvas
+import android.location.Location
 import android.view.View
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.StorageReference
@@ -33,6 +34,12 @@ class Utils {
                 return bitmap
             }
             return null
+        }
+
+        fun distance(lat1: Double, lon1: Double, lat2: Double, lon2: Double): Double {
+            val results = FloatArray(1)
+            Location.distanceBetween(lat1, lon1, lat2, lon2, results)
+            return String.format("%.2f", results[0] / 1000).toDouble()
         }
     }
 }

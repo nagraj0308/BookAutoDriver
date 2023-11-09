@@ -1,6 +1,7 @@
 package com.book.gaadi.data.remote.reqres
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 
 data class VehicleRequest(
@@ -59,5 +60,5 @@ data class Vehicle(
     val number: String = "",
     val type: String = "",
     val verificationState: String = "U"
-)
+) : Serializable
 

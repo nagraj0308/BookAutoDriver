@@ -1,4 +1,4 @@
-package com.book.gaadi.presentation.addeditauto
+package com.book.gaadi.presentation.mygaadi
 
 import android.app.Activity
 import android.content.Intent

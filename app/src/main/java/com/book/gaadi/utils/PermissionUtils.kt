@@ -14,11 +14,19 @@ import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.LocationSettingsRequest
 import com.google.android.gms.location.LocationSettingsResponse
 
+
+class RequestCode {
+    companion object {
+        const val LOCATION = 10
+        const val READ_STORAGE = 11
+
+    }
+}
+
 class PermissionUtils {
 
 
     companion object {
-        private const val REQUEST_CODE_READ_STORAGE = 13
 
 
         fun checkReadStoragePermission(context: Context): Boolean {
@@ -34,7 +42,7 @@ class PermissionUtils {
         fun requestReadStoragePermission(activity: Activity) {
             if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.S_V2) {
                 activity.requestPermissions(
-                    arrayOf(permission.READ_EXTERNAL_STORAGE), REQUEST_CODE_READ_STORAGE
+                    arrayOf(permission.READ_EXTERNAL_STORAGE), RequestCode.READ_STORAGE
                 )
             }
         }

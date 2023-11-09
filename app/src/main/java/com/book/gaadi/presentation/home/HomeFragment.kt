@@ -8,12 +8,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.book.gaadi.R
 import com.book.gaadi.data.remote.reqres.Vehicle
 import com.book.gaadi.databinding.FragmentHomeBinding
 import com.book.gaadi.presentation.base.BaseFragment
+import com.book.gaadi.utils.Constants
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapsInitializer
@@ -27,7 +27,6 @@ class HomeFragment : BaseFragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private val viewModel: HomeViewModel by activityViewModels()
-    private var isNew: Boolean = true
     private var map: GoogleMap? = null
     private var cl: LatLng? = null
 
@@ -40,67 +39,114 @@ class HomeFragment : BaseFragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         MapsInitializer.initialize(requireContext(), MapsInitializer.Renderer.LATEST) {}
         val root: View = binding.root
-        val navController = findNavController()
-        binding.btnUpdateLocation.setOnClickListener {
+        binding.btnRefresh.setOnClickListener {
             activity?.let { it1 ->
                 viewModel.updateLocation(it1)
             }
         }
-        binding.btnAddAuto.setOnClickListener {
-            val bundle = Bundle()
-            bundle.putBoolean("is_new", isNew)
-            navController.navigate(R.id.nav_add_edit_auto, bundle)
-        }
 
-        binding.sbDeactivated.setOnCheckedChangeListener { _, isChecked ->
-            viewModel.updateAutoActivation(isChecked)
-        };
 
-        binding.btnEdit.setOnClickListener {
-            val bundle = Bundle()
-            bundle.putBoolean("is_new", isNew)
-            navController.navigate(R.id.nav_add_edit_auto, bundle)
-        }
+//            if (it != null) {
+//                val bundle = Bundle()
+////                bundle.putSerializable("item", mList[position])
+//                navController.navigate(R.id.nav_view, bundle)
+//            }
 
-        viewModel.vehicle.observe(viewLifecycleOwner, Observer {
-            setContentState(it)
-        })
+
+//        binding.btnEdit.setOnClickListener {
+//            val bundle = Bundle()
+//            bundle.putBoolean("is_new", isNew)
+////            navController.navigate(R.id.nav_add_edit_auto, bundle)
+//        }
+
 
         //Maps View
         binding.mvCl.onCreate(savedInstanceState)
-        binding.mvCl.getMapAsync {
+        binding.mvCl.getMapAsync()
+        {
 
-            val circleDrawable = resources.getDrawable(R.drawable.ic_auto, null)
+            val circleDrawable = resources.getDrawable(R.drawable.user, null)
             val markerIcon: BitmapDescriptor = getMarkerIconFromDrawable(circleDrawable)
             map = it
-            viewModel.lat.observe(viewLifecycleOwner, Observer { it1 ->
-                map!!.clear()
-                cl = LatLng(it1, viewModel.lon.value!!)
-                val update = CameraUpdateFactory.newLatLngZoom(cl!!, 10f)
-                map!!.moveCamera(update)
-                map!!.addMarker(
-                    MarkerOptions().position(cl!!).title("Current Location").icon(markerIcon)
-                )
-            })
 
-            viewModel.lon.observe(viewLifecycleOwner, Observer { it1 ->
+
+            viewModel.vehicles.observe(viewLifecycleOwner) { list ->
                 map!!.clear()
-                cl = LatLng(viewModel.lat.value!!, it1)
+                cl = LatLng(viewModel.lat.value!!, viewModel.lon.value!!)
                 val update = CameraUpdateFactory.newLatLngZoom(cl!!, 10f)
                 map!!.moveCamera(update)
                 map!!.addMarker(
                     MarkerOptions().position(cl!!).title("Current Location").icon(markerIcon)
                 )
-            })
+
+                for (au in list) {
+                    map!!.addMarker(
+                        MarkerOptions().position(LatLng(au.lat, au.lon)).title(au.number)
+                            .icon(
+                                getMarkerIconFromDrawable(
+                                    resources.getDrawable(
+                                        getDrawable(au.type),
+                                        null
+                                    )
+                                )
+                            ).snippet(au._id)
+                    )
+                }
+
+                map!!.setOnMarkerClickListener { marker ->
+                    val auto = getAuto(marker.snippet, list)
+                    if (auto != null) {
+                        showDetails(auto)
+                        true
+                    } else {
+                        false
+
+                    }
+                }
+
+            }
+
         }
         return root
     }
 
+    private fun getAuto(id: String?, list: List<Vehicle>): Vehicle? {
+        for (au in list) {
+            if (au._id == id) {
+                return au
+            }
+        }
+        return null
+    }
+
+    private fun showDetails(auto: Vehicle) {
+        val bundle = Bundle()
+        bundle.putSerializable("item", auto)
+        findNavController().navigate(R.id.nav_my_gaadi, bundle)
+    }
+
+    private fun getDrawable(type: String): Int {
+        return when (type) {
+            Constants.autoTypes[0] -> {
+                R.drawable.w4
+            }
+
+            Constants.autoTypes[1] -> {
+                R.drawable.w3
+            }
+
+            Constants.autoTypes[2] -> {
+                R.drawable.w2
+            }
+
+            else -> {
+                R.drawable.wo
+            }
+        }
+    }
+
 
     override fun onStart() {
-        viewModel.getAutoDetails {
-
-        }
         super.onStart()
         binding.mvCl.onStart()
     }
@@ -121,41 +167,6 @@ class HomeFragment : BaseFragment() {
         binding.mvCl.onLowMemory()
     }
 
-
-    private fun setContentState(vehicle: Vehicle?) {
-        if (vehicle != null) {
-            if (vehicle._id == "") {
-                isNew = true
-                binding.btnAddAuto.visibility = View.VISIBLE
-                binding.cvContent.visibility = View.GONE
-
-            } else {
-                isNew = false
-                binding.btnAddAuto.visibility = View.GONE
-                binding.cvContent.visibility = View.VISIBLE
-                binding.tvAutoNo.text = vehicle.number
-                binding.tvMobileNo.text = vehicle.mobileNo
-                binding.tvLive.text = getStatusMsg(vehicle.deactivated, vehicle.verificationState)
-                binding.sbDeactivated.setChecked(vehicle.deactivated)
-
-            }
-        }
-
-    }
-
-    private fun getStatusMsg(deactivated: Boolean, verificationState: String): String {
-        return if (verificationState == "U") {
-            "System Verification Pending"
-        } else if (verificationState == "R") {
-            "Rejected in verification"
-        } else {
-            if (deactivated) {
-                "Deactivated by you"
-            } else {
-                "Live"
-            }
-        }
-    }
 
     override fun onDestroyView() {
         super.onDestroyView()

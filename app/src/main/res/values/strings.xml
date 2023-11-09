@@ -31,4 +31,18 @@
     <string name="update">Update</string>
     <string name="update_location">Update Location</string>
 
+
+    <string name="distance">Distance</string>
+    <string name="refresh">Refresh</string>
+    <string name="accepted">Accepted</string>
+    <string name="auto">Auto</string>
+    <string name="type">Type</string>
+    <string name="call">Call</string>
+    <string name="id">Id</string>
+    <string name="modify_time">Modify Time</string>
+    <string name="name">Name</string>
+    <string name="pending">Pending</string>
+    <string name="rejected">Rejected</string>
+    <string name="verification_status">Verification Status</string>
+
 </resources>

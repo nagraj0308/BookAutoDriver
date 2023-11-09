@@ -39,13 +39,15 @@ class HomeViewModel @Inject constructor(
     @Inject
     lateinit var pm: PM
 
+
     private val _vehicle = MutableLiveData(Vehicle())
+    private val _vehicles = MutableLiveData<List<Vehicle>>()
     private val _isLocationUpdated = MutableLiveData(false)
     private val _lat = MutableLiveData(0.0)
     private val _lon = MutableLiveData(0.0)
 
     val vehicle: LiveData<Vehicle> get() = _vehicle
-
+    val vehicles: LiveData<List<Vehicle>> get() = _vehicles
     val lat: LiveData<Double> get() = _lat
     val lon: LiveData<Double> get() = _lon
     val isLocationUpdated: LiveData<Boolean> get() = _isLocationUpdated
