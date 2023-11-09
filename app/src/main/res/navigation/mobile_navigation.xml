@@ -12,23 +12,23 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/nav_add_edit_auto"
-        android:name="com.book.gaadi.presentation.addeditauto.AddEditAutoFragment"
-        android:label="@string/auto_details"
-        tools:layout="@layout/fragment_add_edit_auto_details">
+        android:id="@+id/nav_view_gaadi"
+        android:name="com.book.gaadi.presentation.home.ViewAutoFragment"
+        android:label="@string/gaadi_details"
+        tools:layout="@layout/fragment_view_details">
 
     </fragment>
 
     <fragment
         android:id="@+id/nav_my_gaadi"
-        android:name="com.book.gaadi.presentation.home.HomeFragment"
-        android:label="@string/home"
-        tools:layout="@layout/fragment_home" />
+        android:name="com.book.gaadi.presentation.mygaadi.MyGaadiFragment"
+        android:label="@string/my_gaadi"
+        tools:layout="@layout/fragment_my_gaadi" />
 
     <fragment
-        android:id="@+id/nav_add_edit_aut"
-        android:name="com.book.gaadi.presentation.addeditauto.AddEditAutoFragment"
-        android:label="@string/auto_details"
+        android:id="@+id/nav_add_edit_gaadi"
+        android:name="com.book.gaadi.presentation.mygaadi.AddEditAutoFragment"
+        android:label="@string/gaadi_details"
         tools:layout="@layout/fragment_add_edit_auto_details">
 
     </fragment>

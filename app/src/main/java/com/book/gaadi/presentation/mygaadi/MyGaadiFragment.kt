@@ -50,7 +50,7 @@ class MyGaadiFragment : BaseFragment() {
         binding.btnAddAuto.setOnClickListener {
             val bundle = Bundle()
             bundle.putBoolean("is_new", isNew)
-            navController.navigate(R.id.nav_add_edit_auto, bundle)
+            navController.navigate(R.id.nav_add_edit_gaadi, bundle)
         }
 
         binding.sbDeactivated.setOnCheckedChangeListener { _, isChecked ->
@@ -60,7 +60,7 @@ class MyGaadiFragment : BaseFragment() {
         binding.btnEdit.setOnClickListener {
             val bundle = Bundle()
             bundle.putBoolean("is_new", isNew)
-            navController.navigate(R.id.nav_add_edit_auto, bundle)
+            navController.navigate(R.id.nav_add_edit_gaadi, bundle)
         }
 
         viewModel.vehicle.observe(viewLifecycleOwner, Observer {
