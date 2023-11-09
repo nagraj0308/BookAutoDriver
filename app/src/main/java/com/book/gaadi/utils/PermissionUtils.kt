@@ -7,6 +7,7 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.location.LocationManager
 import android.os.Build
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.LocationRequest
@@ -27,6 +28,17 @@ class PermissionUtils {
 
 
     companion object {
+
+        fun requestLocationAccessPermission(activity: Activity) {
+            ActivityCompat.requestPermissions(
+                activity,
+                arrayOf(
+                    permission.ACCESS_FINE_LOCATION,
+                    permission.ACCESS_FINE_LOCATION
+                ),
+                RequestCode.LOCATION
+            )
+        }
 
 
         fun checkReadStoragePermission(context: Context): Boolean {

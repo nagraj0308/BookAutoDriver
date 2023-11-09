@@ -12,6 +12,7 @@ import androidx.lifecycle.viewModelScope
 import com.book.gaadi.PM
 import com.book.gaadi.data.remote.reqres.DeleteVehicleRequest
 import com.book.gaadi.data.remote.reqres.GetVehicleByGmailIdRequest
+import com.book.gaadi.data.remote.reqres.GetVehicleRequest
 import com.book.gaadi.data.remote.reqres.Vehicle
 import com.book.gaadi.data.remote.reqres.VehicleLocationRequest
 import com.book.gaadi.data.remote.reqres.VehicleRequest
@@ -51,6 +52,27 @@ class HomeViewModel @Inject constructor(
     val lat: LiveData<Double> get() = _lat
     val lon: LiveData<Double> get() = _lon
     val isLocationUpdated: LiveData<Boolean> get() = _isLocationUpdated
+
+
+    private fun getAllVehicle() {
+        CoroutineScope(Dispatchers.IO).launch {
+            runCatching {
+                api.getAllVehicle(
+                    GetVehicleRequest(
+                        _lat.value,
+                        _lon.value
+                    )
+                )
+            }.onSuccess {
+                withContext(Dispatchers.Main) {
+                    _vehicles.value = emptyList()
+                    if (it.isSuccessful && it.body() != null) {
+                        _vehicles.value = it.body()!!.data
+                    }
+                }
+            }
+        }
+    }
 
 
     fun insertFSImage(
@@ -230,22 +252,19 @@ class HomeViewModel @Inject constructor(
     }
 
     private fun updateAutoLocation(
-        gId: String,
-        aLat: Double,
-        aLon: Double
+        gId: String
     ) {
         CoroutineScope(Dispatchers.IO).launch {
             runCatching {
                 api.updateVehicleLocation(
                     VehicleLocationRequest(
-                        gId, aLat, aLon
+                        gId, _lat.value,
+                        _lon.value
                     )
                 )
             }.onSuccess {
                 withContext(Dispatchers.Main) {
-                    _isLocationUpdated.value = true
-                    _lat.value = aLat
-                    _lon.value = aLon
+
                 }
             }
         }
@@ -302,9 +321,12 @@ class HomeViewModel @Inject constructor(
                         _isLocationUpdated.value = true
                         _lat.value = it.latitude
                         _lon.value = it.longitude
-                        updateAutoLocation(pm.gmail!!, it.latitude, it.longitude)
+                        getAllVehicle()
+                        updateAutoLocation(pm.gmail!!)
                     }
                 }
+            } else {
+                PermissionUtils.requestLocationAccessPermission(activity)
             }
         } else {
             PermissionUtils.requestLocationEnableRequest(activity)

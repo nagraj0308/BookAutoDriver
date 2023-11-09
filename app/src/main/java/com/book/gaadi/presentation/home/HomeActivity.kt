@@ -21,6 +21,8 @@ import com.book.gaadi.databinding.NavHeaderMainBinding
 import com.book.gaadi.presentation.base.BaseActivity
 import com.book.gaadi.presentation.login.LoginActivity
 import com.book.gaadi.utils.Constants
+import com.book.gaadi.utils.PermissionUtils
+import com.book.gaadi.utils.RequestCode
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
@@ -60,7 +62,7 @@ class HomeActivity : BaseActivity() {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_home,R.id.nav_my_gaadi, R.id.nav_about_us, R.id.nav_pnp
+                R.id.nav_home, R.id.nav_my_gaadi, R.id.nav_about_us, R.id.nav_pnp
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
@@ -106,16 +108,29 @@ class HomeActivity : BaseActivity() {
         remoteConfig.setConfigSettingsAsync(configSettings)
         remoteConfig.setDefaultsAsync(R.xml.remote_config_defaults)
         remoteConfig.fetchAndActivate().addOnCompleteListener(
-                this
-            ) { task ->
-                if (task.isSuccessful) {
-                    val minVersion = remoteConfig.getLong("min_version")
-                    if (BuildConfig.VERSION_CODE < minVersion) {
-                        showDialog()
-                    }
+            this
+        ) { task ->
+            if (task.isSuccessful) {
+                val minVersion = remoteConfig.getLong("min_version")
+                if (BuildConfig.VERSION_CODE < minVersion) {
+                    showDialog()
                 }
             }
+        }
     }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int, permissions: Array<out String>, grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == RequestCode.LOCATION && PermissionUtils.checkLocationAccessPermission(
+                this
+            )
+        ) {
+            viewModel.updateLocation(this)
+        }
+    }
+
 
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_content_main)

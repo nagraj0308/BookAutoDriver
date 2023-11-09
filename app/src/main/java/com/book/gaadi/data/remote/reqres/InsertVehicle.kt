@@ -16,6 +16,11 @@ data class VehicleRequest(
     @SerializedName("type") val type: String?
 )
 
+data class GetVehicleRequest(
+    @SerializedName("lat") val lat: Double?,
+    @SerializedName("lon") val lon: Double?
+)
+
 data class VehicleLocationRequest(
     @SerializedName("vId") val vId: String?,
     @SerializedName("lat") val lat: Double?,
@@ -38,6 +43,12 @@ data class DeleteVehicleRequest(
 
 data class VehicleResponse(
     val `data`: Vehicle,
+    val msg: String,
+    val isTrue: Int
+)
+
+data class VehiclesResponse(
+    val `data`: List<Vehicle>,
     val msg: String,
     val isTrue: Int
 )
