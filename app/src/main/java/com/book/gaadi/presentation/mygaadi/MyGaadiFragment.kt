@@ -123,7 +123,7 @@ class MyGaadiFragment : BaseFragment() {
 
     private fun setContentState(vehicle: Vehicle?) {
         if (vehicle != null) {
-            if (vehicle._id == "") {
+            if (vehicle._id == "" || vehicle.number == "") {
                 isNew = true
                 binding.btnAddAuto.visibility = View.VISIBLE
                 binding.cvContent.visibility = View.GONE
@@ -136,6 +136,9 @@ class MyGaadiFragment : BaseFragment() {
                 binding.tvMobileNo.text = vehicle.mobileNo
                 binding.tvLive.text = getStatusMsg(vehicle.verificationState)
             }
+        } else {
+            binding.btnAddAuto.visibility = View.VISIBLE
+            binding.cvContent.visibility = View.GONE
         }
 
     }
