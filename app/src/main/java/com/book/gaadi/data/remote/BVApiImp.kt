@@ -29,10 +29,6 @@ class BVApiImp @Inject constructor(
         return service.updateVehicle(request)
     }
 
-    override suspend fun updateVehicleLocation(request: VehicleLocationRequest?): Response<BasicResponse> {
-        return service.updateVehicleLocation(request)
-    }
-
 
     override suspend fun getVehicleByGmailId(request: GetVehicleByGmailIdRequest?): Response<VehicleResponse> {
         return service.getVehicleByGmailId(request)

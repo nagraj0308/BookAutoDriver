@@ -28,10 +28,6 @@ interface BVService {
     @POST("api/updateVehicleV1/")
     suspend fun updateVehicle(@Body request: VehicleRequest?): Response<VehicleResponse>
 
-    @Headers("Content-Type: application/json")
-    @POST("api/updateAutoLocation/")
-    suspend fun updateVehicleLocation(@Body request: VehicleLocationRequest?): Response<BasicResponse>
-
 
     @Headers("Content-Type: application/json")
     @POST("api/getVehicleByGmailId/")

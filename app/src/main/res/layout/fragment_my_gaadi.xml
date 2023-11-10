@@ -88,18 +88,5 @@
 
     </com.google.android.material.card.MaterialCardView>
 
-    <Button
-        android:id="@+id/btn_update_location"
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="20dp"
-        android:padding="10dp"
-        android:text="@string/update_location"
-        android:textAllCaps="false"
-        app:icon="@drawable/ic_refresh" />
-
 
 </RelativeLayout>

@@ -42,11 +42,6 @@ class MyGaadiFragment : BaseFragment() {
         MapsInitializer.initialize(requireContext(), MapsInitializer.Renderer.LATEST) {}
         val root: View = binding.root
         val navController = findNavController()
-        binding.btnUpdateLocation.setOnClickListener {
-            activity?.let { it1 ->
-                viewModel.updateLocation(it1)
-            }
-        }
         binding.btnAddAuto.setOnClickListener {
             val bundle = Bundle()
             bundle.putBoolean("is_new", isNew)

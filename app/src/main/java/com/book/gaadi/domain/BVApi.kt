@@ -15,7 +15,6 @@ interface BVApi {
     suspend fun getAllVehicle(request: GetVehicleRequest?): Response<VehiclesResponse>
     suspend fun insertVehicle(request: VehicleRequest?): Response<VehicleResponse>
     suspend fun updateVehicle(request: VehicleRequest?): Response<VehicleResponse>
-    suspend fun updateVehicleLocation(request: VehicleLocationRequest?): Response<BasicResponse>
     suspend fun getVehicleByGmailId(request: GetVehicleByGmailIdRequest?): Response<VehicleResponse>
     suspend fun deleteVehicleById(request: DeleteVehicleRequest?): Response<BasicResponse>
 

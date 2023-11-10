@@ -256,25 +256,6 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    private fun updateAutoLocation(
-        gId: String
-    ) {
-        CoroutineScope(Dispatchers.IO).launch {
-            runCatching {
-                api.updateVehicleLocation(
-                    VehicleLocationRequest(
-                        gId, _lat.value,
-                        _lon.value
-                    )
-                )
-            }.onSuccess {
-                withContext(Dispatchers.Main) {
-
-                }
-            }
-        }
-    }
-
 
     fun getAutoDetails(callback: (Boolean) -> Unit) {
         CoroutineScope(Dispatchers.IO).launch {
@@ -308,7 +289,6 @@ class HomeViewModel @Inject constructor(
                         _lat.value = it.latitude
                         _lon.value = it.longitude
                         getAllVehicle()
-                        updateAutoLocation(pm.gmail!!)
                     }
                 }
             } else {
