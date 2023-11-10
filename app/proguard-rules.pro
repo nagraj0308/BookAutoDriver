@@ -3,13 +3,12 @@
 -keep class com.book.gaadi.data.*{*;}
 -keep class com.book.gaadi.di.*{*;}
 -keep class com.book.gaadi.domain.*{*;}
--keep class com.book.gaadi.presentation.home.*{*;}
 -keep class com.book.gaadi.presentation.login.*{*;}
 -keep class com.book.gaadi.presentation.addeditauto.*{*;}
 -keep class com.book.gaadi.presentation.base.*{*;}
 -keep class com.book.gaadi.presentation.vehicle.*{*;}
 -keep class com.book.gaadi.presentation.home.*{*;}
--keep class com.book.gaadi.presentation.login.*{*;}
+-keep class com.book.gaadi.presentation.mygaadi.*{*;}
 -keep class com.book.gaadi.presentation.synclocation.*{*;}
 -keep class com.book.gaadi.presentation.*{*;}
 -keep class com.book.gaadi.utils.*{*;}

@@ -17,8 +17,8 @@ android {
         applicationId = "com.book.gaadi"
         minSdk = 28
         targetSdk = 34
-        versionCode = 20
-        versionName = "2.0"
+        versionCode = 21
+        versionName = "2.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -84,8 +84,6 @@ dependencies {
     implementation("com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.3")
     implementation("com.squareup.okhttp3:okhttp:4.10.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
-
-
 
 
     //firebase
