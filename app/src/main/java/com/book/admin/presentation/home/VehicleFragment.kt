@@ -34,22 +34,22 @@ class VehicleFragment : BaseFragment() {
         binding.bottomNav.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.bn_accepted -> {
-                    viewModel.getAutos(1)
+                    viewModel.getVehicles(1)
                     true
                 }
 
                 R.id.bn_pending -> {
-                    viewModel.getAutos(0)
+                    viewModel.getVehicles(0)
                     true
                 }
 
                 R.id.bn_rejected -> {
-                    viewModel.getAutos(2)
+                    viewModel.getVehicles(2)
                     true
                 }
 
                 else -> {
-                    viewModel.getAutos(1)
+                    viewModel.getVehicles(1)
                     true
                 }
             }

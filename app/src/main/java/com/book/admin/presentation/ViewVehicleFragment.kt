@@ -26,7 +26,6 @@ class ViewVehicleFragment : BaseFragment() {
 
     private val viewModel: HomeViewModel by activityViewModels()
     private val binding get() = _binding!!
-    private var isAuto: Boolean = true
     private var data: Vehicle? = null
 
 
@@ -76,7 +75,7 @@ class ViewVehicleFragment : BaseFragment() {
         if (code != Constants.vss[0].code) {
             binding.llStatus.visibility = View.GONE
             if (update) {
-                viewModel.changeAutoStatus(code, data!!._id) {
+                viewModel.changeVehicleStatus(code, data!!._id) {
                     navController.popBackStack()
                 }
             }
