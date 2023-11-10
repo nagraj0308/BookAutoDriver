@@ -1,5 +1,7 @@
 package com.book.admin.di
 
+import android.content.Context
+import android.content.SharedPreferences
 import com.book.admin.BuildConfig
 import com.book.admin.data.remote.BVApiImp
 import com.book.admin.data.remote.BVService
@@ -8,6 +10,7 @@ import com.book.admin.utils.Constants
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -53,5 +56,20 @@ object AppModule {
     fun provideBVApi(service: BVService): BVApi {
         return BVApiImp(service)
     }
+
+    @Provides
+    @Singleton
+    fun provideSharedPreferences(@ApplicationContext context: Context): SharedPreferences {
+        return context.getSharedPreferences(
+            PM.PM_FILE, Context.MODE_PRIVATE
+        )
+    }
+
+    @Provides
+    @Singleton
+    fun providePM(preferences: SharedPreferences): PM {
+        return PM(preferences)
+    }
+
 
 }
