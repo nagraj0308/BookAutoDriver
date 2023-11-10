@@ -2,6 +2,7 @@ package com.book.admin.data.remote
 
 import com.book.admin.data.remote.reqres.AutosResponse
 import com.book.admin.data.remote.reqres.BasicResponse
+import com.book.admin.data.remote.reqres.VehiclesResponse
 import com.book.admin.domain.BVApi
 import retrofit2.Response
 import javax.inject.Inject
@@ -24,8 +25,8 @@ class BVApiImp @Inject constructor(
     override suspend fun getAllVehicleAdmin(
         code: String,
         password: String
-    ): Response<AutosResponse> {
-        return service.getAllAutoAdmin(password, code)
+    ): Response<VehiclesResponse> {
+        return service.getAllVehicleAdmin(password, code)
     }
 
     override suspend fun changeVehicleStatusV1(

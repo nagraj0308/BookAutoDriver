@@ -13,6 +13,7 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.book.admin.BuildConfig
+import com.book.admin.PM
 import com.book.admin.R
 import com.book.admin.databinding.ActivityHomeBinding
 import com.book.admin.databinding.NavHeaderMainBinding
@@ -23,9 +24,13 @@ import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.ktx.remoteConfig
 import com.google.firebase.remoteconfig.ktx.remoteConfigSettings
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 open class HomeActivity : AppCompatActivity() {
+
+    @Inject
+    lateinit var pm: PM
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityHomeBinding
@@ -40,7 +45,6 @@ open class HomeActivity : AppCompatActivity() {
         setContentView(binding.root)
         headerBinding = NavHeaderMainBinding.bind(binding.navView.getHeaderView(0))
 
-        viewModel.initDataStore(this)
 
         setSupportActionBar(binding.appBarMain.toolbar)
 
@@ -57,7 +61,7 @@ open class HomeActivity : AppCompatActivity() {
         navView.setupWithNavController(navController)
 
         navView.menu.findItem(R.id.nav_exit).setOnMenuItemClickListener {
-            viewModel.logout()
+            pm.clearAll()
             finish()
             startActivity(Intent(this@HomeActivity, LoginActivity::class.java))
             true
@@ -68,9 +72,8 @@ open class HomeActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
 
-        viewModel.password.observe(this) {
-            headerBinding.tvName.text = it
-        }
+        headerBinding.tvName.text = pm.password
+
 
         remoteConfig = Firebase.remoteConfig
         val configSettings = remoteConfigSettings {
