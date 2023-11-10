@@ -12,17 +12,23 @@
         tools:layout="@layout/fragment_auto" />
 
     <fragment
-        android:id="@+id/nav_view"
-        android:name="com.book.admin.presentation.ViewFragment"
+        android:id="@+id/nav_view_auto"
+        android:name="com.book.admin.presentation.ViewAutoFragment"
         android:label="View"
-        tools:layout="@layout/fragment_view">
+        tools:layout="@layout/fragment_view" />
 
-    </fragment>
 
     <fragment
         android:id="@+id/nav_vehicle"
-        android:name="com.book.admin.presentation.vehicle.VehicleFragment"
+        android:name="com.book.admin.presentation.home.VehicleFragment"
         android:label="Gaadi"
         tools:layout="@layout/fragment_vehicle" />
+
+    <fragment
+        android:id="@+id/nav_view_vehicle"
+        android:name="com.book.admin.presentation.ViewVehicleFragment"
+        android:label="View"
+        tools:layout="@layout/fragment_view" />
+
 
 </navigation>

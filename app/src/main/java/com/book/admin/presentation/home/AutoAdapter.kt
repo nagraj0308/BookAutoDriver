@@ -28,12 +28,12 @@ class AutoAdapter(private val mList: List<Auto>, val nc: NavController) :
         holder.tvMobile.text = item.mobileNo
         holder.tvNumber.text = item.number
         holder.tvDate.text = Utils.convertLongToTime(item.modifyTime)
+        holder.tvLive.text = if (item.deactivated) "Deactivated" else "Live"
         Glide.with(holder.iv.context).asBitmap().load(item.imageUrl).into(holder.iv)
         holder.itemView.setOnClickListener {
             val bundle = Bundle()
-            bundle.putBoolean("is_auto", true)
             bundle.putSerializable("item", mList[position])
-            nc.navigate(R.id.nav_view, bundle)
+            nc.navigate(R.id.nav_view_auto, bundle)
         }
     }
 
@@ -48,5 +48,7 @@ class AutoAdapter(private val mList: List<Auto>, val nc: NavController) :
         val tvMobile: TextView = itemView.findViewById(R.id.tv_mobile)
         val tvNumber: TextView = itemView.findViewById(R.id.tv_number)
         val tvDate: TextView = itemView.findViewById(R.id.tv_date)
+        val tvLive: TextView = itemView.findViewById(R.id.tv_live)
+
     }
 }

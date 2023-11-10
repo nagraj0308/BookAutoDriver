@@ -8,7 +8,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.book.admin.R
-import com.book.admin.databinding.FragmentAutoBinding
+import com.book.admin.databinding.FragmentVehicleBinding
 import com.book.admin.utils.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -16,7 +16,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class VehicleFragment : BaseFragment() {
 
-    private var _binding: FragmentAutoBinding? = null
+    private var _binding: FragmentVehicleBinding? = null
     private val viewModel: HomeViewModel by activityViewModels()
 
     private val binding get() = _binding!!
@@ -26,7 +26,7 @@ class VehicleFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentAutoBinding.inflate(inflater, container, false)
+        _binding = FragmentVehicleBinding.inflate(inflater, container, false)
 
         val root: View = binding.root
         val navController = findNavController()
@@ -57,9 +57,9 @@ class VehicleFragment : BaseFragment() {
         binding.bottomNav.selectedItemId = R.id.bn_pending
 
         binding.rcv.layoutManager = LinearLayoutManager(context)
-        viewModel.autos.observe(viewLifecycleOwner) {
+        viewModel.vehicles.observe(viewLifecycleOwner) {
             if (it != null) {
-                val adapter = AutoAdapter(it, navController)
+                val adapter = VehicleAdapter(it, navController)
                 binding.rcv.adapter = adapter
             }
         }

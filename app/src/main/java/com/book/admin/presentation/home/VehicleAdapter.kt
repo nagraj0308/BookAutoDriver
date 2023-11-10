@@ -18,7 +18,7 @@ class VehicleAdapter(private val mList: List<Vehicle>, val nc: NavController) :
     RecyclerView.Adapter<VehicleAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_auto, parent, false)
+            .inflate(R.layout.item_vehicle, parent, false)
         return ViewHolder(view)
     }
 
@@ -31,9 +31,8 @@ class VehicleAdapter(private val mList: List<Vehicle>, val nc: NavController) :
         Glide.with(holder.iv.context).asBitmap().load(item.imageUrl).into(holder.iv)
         holder.itemView.setOnClickListener {
             val bundle = Bundle()
-            bundle.putBoolean("is_auto", true)
             bundle.putSerializable("item", mList[position])
-            nc.navigate(R.id.nav_view, bundle)
+            nc.navigate(R.id.nav_view_vehicle, bundle)
         }
     }
 

@@ -12,7 +12,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.book.admin.R
-import com.book.admin.data.remote.reqres.Auto
+import com.book.admin.data.remote.reqres.Vehicle
 import com.book.admin.databinding.FragmentViewBinding
 import com.book.admin.presentation.home.HomeViewModel
 import com.book.admin.utils.BaseFragment
@@ -20,15 +20,14 @@ import com.book.admin.utils.Constants
 import com.book.admin.utils.Utils
 import com.bumptech.glide.Glide
 
-
-class ViewFragment : BaseFragment() {
+class ViewVehicleFragment : BaseFragment() {
 
     private var _binding: FragmentViewBinding? = null
 
     private val viewModel: HomeViewModel by activityViewModels()
     private val binding get() = _binding!!
     private var isAuto: Boolean = true
-    private var data: Auto? = null
+    private var data: Vehicle? = null
 
 
     @SuppressLint("SetTextI18n")
@@ -40,8 +39,7 @@ class ViewFragment : BaseFragment() {
         val navController = findNavController()
 
         if (arguments != null) {
-            isAuto = requireArguments().getBoolean("is_auto")
-            data = requireArguments().getSerializable("item") as Auto?
+            data = requireArguments().getSerializable("item") as Vehicle?
         }
 
         if (data != null) {
@@ -58,7 +56,7 @@ class ViewFragment : BaseFragment() {
             binding.tvId.text = ": " + data!!._id
             binding.tvModTime.text = ": " + Utils.convertLongToTime(data!!.modifyTime)
             binding.tvDriverName.text = ": " + data!!.driver
-            binding.tvType.text = ": " + data!!.type
+            binding.tvType.text = ": " + data!!.typeId
 
             val arrayAdapter = ArrayAdapter(
                 requireContext(), R.layout.item_spinner, Constants.vss
