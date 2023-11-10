@@ -24,7 +24,6 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val api: BVApi
 ) : ViewModel() {
-    private lateinit var dataStore: DataStore
 
     private val _autos = MutableLiveData<List<Auto>>()
     private val _statePosAuto = MutableLiveData(1)
