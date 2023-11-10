@@ -8,6 +8,7 @@
 -keep class com.book.admin.presentation.home.*{*;}
 -keep class com.book.admin.presentation.login.*{*;}
 -keep class com.book.admin.presentation.vehicle.*{*;}
+-keep class com.book.admin.presentation.*{*;}
 -keep class com.book.admin.utils.*{*;}
 -keep class com.book.admin.*{*;}
 
