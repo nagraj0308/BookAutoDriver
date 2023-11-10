@@ -27,13 +27,14 @@ class HomeViewModel @Inject constructor(
     private lateinit var dataStore: DataStore
 
     private val _autos = MutableLiveData<List<Auto>>()
+    private val _statePosAuto = MutableLiveData(1)
+
     private val _password = MutableLiveData("")
-    private val _statePos = MutableLiveData(1)
 
 
     val autos: LiveData<List<Auto>> get() = _autos
     val password: LiveData<String> get() = _password
-    val statePos: LiveData<Int> get() = _statePos
+    val statePosAuto: LiveData<Int> get() = _statePosAuto
 
 
     @OptIn(DelicateCoroutinesApi::class)
@@ -58,7 +59,7 @@ class HomeViewModel @Inject constructor(
 
 
     fun getAutos(pos: Int) {
-        _statePos.value = pos
+        _statePosAuto.value = pos
         CoroutineScope(Dispatchers.IO).launch {
             runCatching {
                 api.getAllAutoAdmin(Constants.vss[pos].code, password.value!!)
@@ -84,7 +85,7 @@ class HomeViewModel @Inject constructor(
                 withContext(Dispatchers.Main) {
                     if (it.isSuccessful && it.body() != null) {
                         if (it.body()!!.isTrue == 1) {
-                            getAutos(_statePos.value!!)
+                            getAutos(_statePosAuto.value!!)
                             callback()
                         }
                     }
@@ -93,47 +94,5 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-
-//    private fun updateAutoLocation(
-//        gId: String,
-//        aLat: Double,
-//        aLon: Double
-//    ) {
-//        CoroutineScope(Dispatchers.IO).launch {
-//            runCatching {
-//                api.updateVehicleLocation(
-//                    VehicleLocationRequest(
-//                        gId, aLat, aLon
-//                    )
-//                )
-//            }.onSuccess {
-//                withContext(Dispatchers.Main) {
-//                    _isLocationUpdated.value = true
-//                    _lat.value = aLat
-//                    _lon.value = aLon
-//                }
-//            }
-//        }
-//    }
-
-
-//    private fun deleteGaadiData(gaadiId: String, callback: (Boolean) -> Unit) {
-//        CoroutineScope(Dispatchers.IO).launch {
-//            runCatching {
-//                api.deleteVehicleById(DeleteVehicleRequest(gaadiId))
-//            }.onSuccess {
-//                withContext(Dispatchers.Main) {
-//                    showToast("Gaadi deleted successfully")
-//                    getAutoDetails() {}
-//                    callback(true)
-//                }
-//            }.onFailure {
-//                withContext(Dispatchers.Main) {
-//                    showToast("Gaadi not deleted")
-//                    callback(false)
-//                }
-//            }
-//        }
-//    }
 
 }

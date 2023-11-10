@@ -21,4 +21,19 @@ class BVApiImp @Inject constructor(
         return service.changeAutoStatusV1(password, verificationState, vId)
     }
 
+    override suspend fun getAllVehicleAdmin(
+        code: String,
+        password: String
+    ): Response<AutosResponse> {
+        return service.getAllAutoAdmin(password, code)
+    }
+
+    override suspend fun changeVehicleStatusV1(
+        password: String,
+        verificationState: String,
+        vId: String
+    ): Response<BasicResponse> {
+        return service.changeVehicleStatusV1(password, verificationState, vId)
+    }
+
 }

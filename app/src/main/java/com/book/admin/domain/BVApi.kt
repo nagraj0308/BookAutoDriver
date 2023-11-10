@@ -15,4 +15,12 @@ interface BVApi {
         vId: String
     ): Response<BasicResponse>
 
+    suspend fun getAllVehicleAdmin(code: String, password: String): Response<AutosResponse>
+
+    suspend fun changeVehicleStatusV1(
+        password: String,
+        verificationState: String,
+        vId: String
+    ): Response<BasicResponse>
+
 }
