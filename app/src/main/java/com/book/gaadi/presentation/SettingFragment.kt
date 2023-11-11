@@ -38,6 +38,7 @@ class SettingFragment : BaseFragment() {
             Language.getLanguageFromCode(pm.lang)
         )
         binding.actvLanguage.setSelection(selectedLangPos)
+        binding.actvLanguage.setText(Language.values()[selectedLangPos], false)
 
 
         return root
