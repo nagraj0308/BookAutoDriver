@@ -35,23 +35,19 @@
                 android:layout_height="wrap_content"
                 android:padding="10dp">
 
-                <TextView
-                    android:id="@+id/tv_mobile_no"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/tv_auto_no"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/tv_mobile_no"
+                    android:textColor="@color/white"
                     android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/tv_live"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/white"
                     android:layout_below="@+id/tv_auto_no"
                     android:textSize="18sp" />
 
@@ -62,20 +58,14 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
-                    android:layout_gravity="bottom|right"
+                    android:layout_gravity="end"
                     android:layout_margin="10dp"
                     app:fabSize="mini"
                     app:srcCompat="@drawable/ic_edit" />
 
             </RelativeLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginBottom="15dp"
-                android:background="@color/lb_basic_card_title_text_color" />
+
 
             <com.google.android.gms.maps.MapView
                 android:id="@+id/mv_cl"
@@ -87,10 +77,11 @@
                 android:id="@+id/sb_deactivated"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
                 android:layout_margin="10dp"
+                android:layout_marginBottom="5dp"
                 android:checked="false"
-                android:text="@string/deactivated"
+                android:textColor="@color/white"
+                android:text="@string/activate"
                 android:textSize="18sp" />
         </LinearLayout>
 

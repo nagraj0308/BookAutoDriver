@@ -2,12 +2,14 @@ package com.book.auto.driver.presentation.home
 
 import android.graphics.Bitmap
 import android.graphics.Canvas
+import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CompoundButton
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -54,7 +56,7 @@ class HomeFragment : BaseFragment() {
         }
 
         binding.sbDeactivated.setOnCheckedChangeListener { _, isChecked ->
-            viewModel.updateAutoActivation(isChecked)
+            viewModel.updateAutoActivation(!isChecked)
         };
 
         binding.btnEdit.setOnClickListener {
@@ -135,9 +137,24 @@ class HomeFragment : BaseFragment() {
                 binding.btnAddAuto.visibility = View.GONE
                 binding.cvContent.visibility = View.VISIBLE
                 binding.tvAutoNo.text = vehicle.number
-                binding.tvMobileNo.text = vehicle.mobileNo
                 binding.tvLive.text = getStatusMsg(vehicle.deactivated, vehicle.verificationState)
-                binding.sbDeactivated.setChecked(vehicle.deactivated)
+                binding.sbDeactivated.isChecked = !vehicle.deactivated
+                if (getStatusMsg(vehicle.deactivated, vehicle.verificationState) == "Live") {
+                    binding.cvContent.setBackgroundColor(
+                        ContextCompat.getColor(
+                            requireContext(),
+                            R.color.green
+                        )
+                    );
+
+                } else {
+                    binding.cvContent.setBackgroundColor(
+                        ContextCompat.getColor(
+                            requireContext(),
+                            R.color.red
+                        )
+                    );
+                }
 
             }
         }

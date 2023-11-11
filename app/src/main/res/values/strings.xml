@@ -10,7 +10,7 @@
     <string name="auto_name">Auto Name</string>
     <string name="auto_number">Auto Number</string>
     <string name="auto_type">Auto Type</string>
-    <string name="deactivated">Deactivated</string>
+    <string name="activate">Activate</string>
     <string name="delete">Delete</string>
     <string name="driver_name">Driver Name</string>
     <string name="exit">Exit</string>
