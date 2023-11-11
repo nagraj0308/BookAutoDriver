@@ -42,8 +42,10 @@ class AddEditAutoFragment : BaseFragment() {
     ): View {
         _binding = FragmnetAddEditAutoDetailsBinding.inflate(inflater, container, false)
         val root: View = binding.root
+        hideProgress()
         binding.btnSubmit.setOnClickListener {
             if (validate()) {
+                showProgress()
                 val autoNumber = binding.tilAutoNumber.editText!!.text.trim().toString()
                 val driverName = binding.tilDriverName.editText!!.text.trim().toString()
                 val mobileNumber = binding.tilMobileNumber.editText!!.text.trim().toString()
@@ -53,19 +55,20 @@ class AddEditAutoFragment : BaseFragment() {
                     autoNumber,
                     driverName,
                     mobileNumber,
-                    Utils.screenShot(binding.ivAutoPhoto)!!,
-                    {
-                        if (it) {
-                            requireActivity().onBackPressed()
-                        } else {
-                            showToast("Try again")
-                        }
-                    },
-                    { showToast("") })
+                    Utils.screenShot(binding.ivAutoPhoto)!!
+                ) {
+                    hideProgress()
+                    if (it) {
+                        requireActivity().onBackPressed()
+                    } else {
+                        showToast("Try again")
+                    }
+                }
             }
         }
         binding.btnSave.setOnClickListener {
             if (validate()) {
+                showProgress()
                 val autoNumber = binding.tilAutoNumber.editText!!.text.trim().toString()
                 val driverName = binding.tilDriverName.editText!!.text.trim().toString()
                 val mobileNumber = binding.tilMobileNumber.editText!!.text.trim().toString()
@@ -75,26 +78,26 @@ class AddEditAutoFragment : BaseFragment() {
                     autoNumber,
                     driverName,
                     mobileNumber,
-                    Utils.screenShot(binding.ivAutoPhoto)!!,
-                    {
-                        if (it) {
-                            requireActivity().onBackPressed()
-                        } else {
-                            showToast("Try again")
-                        }
-                    },
-                    {})
+                    Utils.screenShot(binding.ivAutoPhoto)!!
+                ) {
+                    hideProgress()
+                    if (it) {
+                        requireActivity().onBackPressed()
+                    } else {
+                        showToast("Try again")
+                    }
+                }
             }
 
         }
         binding.btnDelete.setOnClickListener {
-            viewModel.deleteAuto({
+            showProgress()
+            viewModel.deleteAuto {
+                hideProgress()
                 if (it) {
                     activity?.finish()
                 }
-            }, {
-                showToast(it)
-            })
+            }
         }
 
         if (arguments != null) {
@@ -231,6 +234,16 @@ class AddEditAutoFragment : BaseFragment() {
         }
 
         return true
+    }
+
+    override fun showProgress() {
+        binding.content.visibility = View.GONE
+        binding.pbCpb.visibility = View.VISIBLE
+    }
+
+    override fun hideProgress() {
+        binding.content.visibility = View.VISIBLE
+        binding.pbCpb.visibility = View.GONE
     }
 
 

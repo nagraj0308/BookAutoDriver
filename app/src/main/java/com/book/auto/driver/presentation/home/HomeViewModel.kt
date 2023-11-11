@@ -56,7 +56,7 @@ class HomeViewModel @Inject constructor(
         gNumber: String,
         gDriver: String,
         gMobile: String,
-        bitmap: Bitmap, callback: (Boolean) -> Unit, msg: (String) -> Unit
+        bitmap: Bitmap, callback: (Boolean) -> Unit
     ) {
 
 
@@ -69,7 +69,6 @@ class HomeViewModel @Inject constructor(
             uploadTask.addOnFailureListener {
                 CoroutineScope(Dispatchers.IO).launch {
                     withContext(Dispatchers.Main) {
-                        msg(it.toString())
                         callback(false)
                     }
                 }
@@ -81,18 +80,17 @@ class HomeViewModel @Inject constructor(
                         gNumber,
                         gDriver,
                         gMobile,
-                        it.toString(), {
-                            CoroutineScope(Dispatchers.IO).launch {
-                                withContext(Dispatchers.Main) {
-                                    callback(it)
-                                }
+                        it.toString()
+                    ) {
+                        CoroutineScope(Dispatchers.IO).launch {
+                            withContext(Dispatchers.Main) {
+                                callback(it)
                             }
-                        }, {}
-                    )
+                        }
+                    }
                 }.addOnFailureListener {
                     CoroutineScope(Dispatchers.IO).launch {
                         withContext(Dispatchers.Main) {
-                            msg(it.toString())
                             callback(false)
                         }
                     }
@@ -107,7 +105,7 @@ class HomeViewModel @Inject constructor(
         gNumber: String,
         gDriver: String,
         gMobile: String,
-        url: String, callback: (Boolean) -> Unit, msg: (String) -> Unit
+        url: String, callback: (Boolean) -> Unit
     ) {
         CoroutineScope(Dispatchers.IO).launch {
             runCatching {
@@ -126,13 +124,11 @@ class HomeViewModel @Inject constructor(
                 )
             }.onSuccess {
                 withContext(Dispatchers.Main) {
-                    msg("Gaadi added successfully")
-                    getAutoDetails() {}
+                    getAutoDetails {}
                     callback(true)
                 }
             }.onFailure {
                 withContext(Dispatchers.Main) {
-                    msg("Gaadi not added")
                     callback(false)
                 }
             }
@@ -145,7 +141,7 @@ class HomeViewModel @Inject constructor(
         gNumber: String,
         gDriver: String,
         gMobile: String,
-        bitmap: Bitmap, callback: (Boolean) -> Unit, msg: (String) -> Unit
+        bitmap: Bitmap, callback: (Boolean) -> Unit
     ) {
         viewModelScope.launch(Dispatchers.IO) {
             val ref = FBS.getReference(pm.gmail!!)
@@ -156,7 +152,6 @@ class HomeViewModel @Inject constructor(
             uploadTask.addOnFailureListener {
                 CoroutineScope(Dispatchers.IO).launch {
                     withContext(Dispatchers.Main) {
-                        msg(it.toString())
                         callback(false)
                     }
                 }
@@ -168,18 +163,17 @@ class HomeViewModel @Inject constructor(
                         gNumber,
                         gDriver,
                         gMobile,
-                        it.toString(), {
-                            CoroutineScope(Dispatchers.IO).launch {
-                                withContext(Dispatchers.Main) {
-                                    callback(it)
-                                }
+                        it.toString()
+                    ) {
+                        CoroutineScope(Dispatchers.IO).launch {
+                            withContext(Dispatchers.Main) {
+                                callback(it)
                             }
-                        }, {}
-                    )
+                        }
+                    }
                 }.addOnFailureListener {
                     CoroutineScope(Dispatchers.IO).launch {
                         withContext(Dispatchers.Main) {
-                            msg(it.toString())
                             callback(false)
                         }
                     }
@@ -195,7 +189,7 @@ class HomeViewModel @Inject constructor(
         gNumber: String,
         gDriver: String,
         gMobile: String,
-        url: String, callback: (Boolean) -> Unit, msg: (String) -> Unit
+        url: String, callback: (Boolean) -> Unit
     ) {
         CoroutineScope(Dispatchers.IO).launch {
             runCatching {
@@ -214,13 +208,11 @@ class HomeViewModel @Inject constructor(
                 )
             }.onSuccess {
                 withContext(Dispatchers.Main) {
-                    msg("Gaadi updated successfully")
-                    getAutoDetails() {}
+                    getAutoDetails {}
                     callback(true)
                 }
             }.onFailure {
                 withContext(Dispatchers.Main) {
-                    msg("Gaadi not updated")
                     callback(false)
                 }
             }
@@ -310,11 +302,11 @@ class HomeViewModel @Inject constructor(
     }
 
 
-    fun deleteAuto(callback: (Boolean) -> Unit, msg: (String) -> Unit) {
+    fun deleteAuto(callback: (Boolean) -> Unit) {
         CoroutineScope(Dispatchers.IO).launch {
-            deleteGaadiImage(_vehicle.value!!._id, { result ->
+            deleteGaadiImage(_vehicle.value!!._id) { result ->
                 if (result) {
-                    deleteGaadiData(_vehicle.value!!._id, {
+                    deleteGaadiData(_vehicle.value!!._id) {
                         if (it) {
                             CoroutineScope(Dispatchers.IO).launch {
                                 withContext(Dispatchers.Main) {
@@ -329,7 +321,7 @@ class HomeViewModel @Inject constructor(
                                 }
                             }
                         }
-                    }, { msg(it) })
+                    }
                 } else {
                     CoroutineScope(Dispatchers.IO).launch {
                         withContext(Dispatchers.Main) {
@@ -337,15 +329,14 @@ class HomeViewModel @Inject constructor(
                         }
                     }
                 }
-            }, {})
+            }
         }
     }
 
 
     private fun deleteGaadiImage(
         gaadiId: String,
-        callback: (Boolean) -> Unit,
-        msg: (String) -> Unit
+        callback: (Boolean) -> Unit
     ) {
         viewModelScope.launch(Dispatchers.IO) {
             val ref = FBS.getReference(gaadiId)
@@ -353,40 +344,35 @@ class HomeViewModel @Inject constructor(
                 .addOnSuccessListener {
                     CoroutineScope(Dispatchers.IO).launch {
                         withContext(Dispatchers.Main) {
-                            msg("Related Image deleted successfully")
                             callback(true)
                         }
                     }
                 }.addOnFailureListener {
                     CoroutineScope(Dispatchers.IO).launch {
                         withContext(Dispatchers.Main) {
-                            msg("Could not Image deleted successfully")
                             callback(false)
                         }
                     }
 
-                };
+                }
         }
     }
 
 
     private fun deleteGaadiData(
         gaadiId: String,
-        callback: (Boolean) -> Unit,
-        msg: (String) -> Unit
+        callback: (Boolean) -> Unit
     ) {
         CoroutineScope(Dispatchers.IO).launch {
             runCatching {
                 api.deleteVehicleById(DeleteVehicleRequest(gaadiId))
             }.onSuccess {
                 withContext(Dispatchers.Main) {
-                    msg("Gaadi deleted successfully")
-                    getAutoDetails() {}
+                    getAutoDetails {}
                     callback(true)
                 }
             }.onFailure {
                 withContext(Dispatchers.Main) {
-                    msg("Gaadi not deleted")
                     callback(false)
                 }
             }

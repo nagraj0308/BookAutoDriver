@@ -183,6 +183,14 @@ class HomeFragment : BaseFragment() {
         }
     }
 
+    override fun hideProgress() {
+        TODO("Not yet implemented")
+    }
+
+    override fun showProgress() {
+        TODO("Not yet implemented")
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
