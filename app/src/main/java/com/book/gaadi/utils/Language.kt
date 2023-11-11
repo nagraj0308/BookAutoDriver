@@ -15,7 +15,7 @@ enum class Language(private val language: String) {
         fun getLanguageCode(language: Language?): String {
             return when (language) {
                 ENGLISH -> "en"
-                ODIA -> "od"
+                ODIA -> "or"
                 TAMIL -> "ta"
                 KANNADA -> "kn"
                 HINDI -> "hi"
@@ -28,7 +28,7 @@ enum class Language(private val language: String) {
         fun getLanguageFromCode(code: String?): Language {
             return when (code) {
                 "df" -> DEFAULT
-                "od" -> ODIA
+                "or" -> ODIA
                 "en" -> ENGLISH
                 "ta" -> TAMIL
                 "kn" -> KANNADA
