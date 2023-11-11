@@ -25,7 +25,6 @@ class AutoAdapter(private val mList: List<Auto>, val nc: NavController) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = mList[position]
         holder.tvName.text = item.driver
-        holder.tvMobile.text = item.mobileNo
         holder.tvNumber.text = item.number
         holder.tvDate.text = Utils.convertLongToTime(item.modifyTime)
         holder.tvLive.text = if (item.deactivated) "Deactivated" else "Live"
@@ -45,7 +44,6 @@ class AutoAdapter(private val mList: List<Auto>, val nc: NavController) :
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val iv: ImageView = itemView.findViewById(R.id.iv)
         val tvName: TextView = itemView.findViewById(R.id.tv_name)
-        val tvMobile: TextView = itemView.findViewById(R.id.tv_mobile)
         val tvNumber: TextView = itemView.findViewById(R.id.tv_number)
         val tvDate: TextView = itemView.findViewById(R.id.tv_date)
         val tvLive: TextView = itemView.findViewById(R.id.tv_live)
