@@ -79,7 +79,7 @@ class LoginActivity : BaseActivity() {
             if (account != null) {
                 runBlocking {
                     if (account.email == null) {
-                        showToast("There is some error!!")
+                        showToast(getString(R.string.there_is_some_error))
                     } else {
                         pm.isLoggedIn = true
                         pm.gmail = account.email.toString()
