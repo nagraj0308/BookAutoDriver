@@ -37,11 +37,23 @@ class SettingFragment : BaseFragment() {
         val selectedLangPos: Int = arrayAdapter.getPosition(
             Language.getLanguageFromCode(pm.lang)
         )
-        binding.actvLanguage.setSelection(selectedLangPos)
-        binding.actvLanguage.setText(Language.values()[selectedLangPos], false)
-
-
+        setLanguage(selectedLangPos)
+        binding.actvLanguage.setOnItemClickListener { _, _, position, _ ->
+            setLanguage(position)
+        }
         return root
+    }
+
+    private fun setLanguage(pos: Int) {
+        binding.actvLanguage.setText(Language.values()[pos].value(), false)
+
+        val prev: String? = pm.lang
+        val language = Language.values()[pos]
+        pm.lang = Language.getLanguageCode(language)
+
+        if (prev != pm.lang) {
+            activity?.finishAndRemoveTask()
+        }
     }
 
 

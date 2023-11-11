@@ -100,6 +100,7 @@ class HomeActivity : BaseActivity() {
 
     override fun onStart() {
         super.onStart()
+        setLangCode(pm.lang)
         viewModel.updateLocation(this) {
 
         }

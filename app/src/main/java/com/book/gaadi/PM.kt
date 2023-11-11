@@ -1,6 +1,7 @@
 package com.book.gaadi
 
 import android.content.SharedPreferences
+import com.book.gaadi.utils.Language
 
 class PM(private val preferences: SharedPreferences) {
     fun clearAll() {
@@ -26,9 +27,9 @@ class PM(private val preferences: SharedPreferences) {
         }
 
     var lang: String?
-        get() = preferences.getString(LANG, "df")
-        set(name) {
-            preferences.edit().putString(LANG, name).apply()
+        get() = preferences.getString(LANG, Language.getLanguageCode(Language.DEFAULT))
+        set(lang) {
+            preferences.edit().putString(LANG, lang).apply()
         }
 
 

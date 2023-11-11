@@ -1,0 +1,73 @@
+<resources>
+
+    <string name="about_us">परिचय</string>
+    <string name="accepted">Accepted</string>
+    <string name="add_vehicle">Add Vehicle</string>
+    <string name="added_successfully">Added Successfully</string>
+
+
+    <string name="call">Call</string>
+
+    <string name="deactivated">Deactivated</string>
+    <string name="delete">Delete</string>
+    <string name="deleted_successfully">Deleted Successfully</string>
+    <string name="driver_name">Driver Name</string>
+    <string name="distance">Distance</string>
+
+    <string name="exit">Exit</string>
+
+    <string name="vehicle_details">Vehicle Details</string>
+
+    <string name="id">Id</string>
+
+
+    <string name="home">Home</string>
+
+    <string name="install_user_app">Install User App</string>
+
+    <string name="mobile_number">Mobile Number</string>
+    <string name="my_vehicle">My Vehicle</string>
+    <string name="modify_time">Modify Time</string>
+
+    <string name="name">Name</string>
+    <string name="normal_rate">Normal Rate</string>
+
+    <string name="pending">Pending</string>
+    <string name="privacy_and_policy">Privacy and Policy</string>
+
+    <string name="rate">Rate</string>
+    <string name="rejected">Rejected</string>
+    <string name="refresh">Refresh</string>
+
+
+    <string name="save">Save</string>
+    <string name="share_app">Share App</string>
+    <string name="setting">Setting</string>
+    <string name="select_language">Select Language</string>
+    <string name="share">Share</string>
+    <string name="submit">Submit</string>
+
+    <string name="type">Type</string>
+    <string name="there_is_some_error">There is some error</string>
+    <string name="this_field_required">This field required!</string>
+    <string name="this_should_be_4_digits">This should be 4 digits</string>
+    <string name="this_should_be_10_digits">This should be 10 digits</string>
+
+    <string name="update">Update</string>
+    <string name="updated_successfully">Updated Successfully</string>
+    <string name="update_location">Update Location</string>
+
+    <string name="vehicle">Vehicle</string>
+    <string name="vehicle_image">Vehicle Image</string>
+    <string name="vehicle_name">Vehicle Name</string>
+    <string name="vehicle_number">Vehicle Number</string>
+    <string name="vehicle_type">Vehicle Type</string>
+
+    <string name="verification_status">Verification Status</string>
+    <string name="your_location">Your Location</string>
+
+    <string name="lm1">This version is outdated please update from google playstore to latest
+        version.</string>
+
+
+</resources>
