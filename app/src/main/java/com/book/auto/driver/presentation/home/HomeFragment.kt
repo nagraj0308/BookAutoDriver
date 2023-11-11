@@ -139,19 +139,17 @@ class HomeFragment : BaseFragment() {
                 binding.tvAutoNo.text = vehicle.number
                 binding.tvLive.text = getStatusMsg(vehicle.deactivated, vehicle.verificationState)
                 binding.sbDeactivated.isChecked = !vehicle.deactivated
-                if (getStatusMsg(vehicle.deactivated, vehicle.verificationState) == "Live") {
+                if (isActive(vehicle.deactivated, vehicle.verificationState)) {
                     binding.cvContent.setBackgroundColor(
                         ContextCompat.getColor(
-                            requireContext(),
-                            R.color.green
+                            requireContext(), R.color.green
                         )
                     );
 
                 } else {
                     binding.cvContent.setBackgroundColor(
                         ContextCompat.getColor(
-                            requireContext(),
-                            R.color.red
+                            requireContext(), R.color.red
                         )
                     );
                 }
@@ -172,6 +170,16 @@ class HomeFragment : BaseFragment() {
             } else {
                 "Live"
             }
+        }
+    }
+
+    private fun isActive(deactivated: Boolean, verificationState: String): Boolean {
+        return if (verificationState == "U") {
+            false
+        } else if (verificationState == "R") {
+            false
+        } else {
+            !deactivated
         }
     }
 
