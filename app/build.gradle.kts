@@ -59,6 +59,11 @@ android {
         viewBinding = true
         buildConfig = true
     }
+    bundle {
+        language {
+            enableSplit = false
+        }
+    }
 
 }
 
