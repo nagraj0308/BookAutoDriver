@@ -4,8 +4,7 @@ import java.util.Locale
 
 
 enum class Language(private val language: String) {
-    DEFAULT("Default"), HINDI("Hindi"), ODIA("Odia"), TAMIL("Tamil"),
-    KANNADA("Kannada"), TELUGU("Telugu");
+    DEFAULT("Default"), HINDI("Hindi");
 
     fun value(): String {
         return language
@@ -14,11 +13,7 @@ enum class Language(private val language: String) {
     companion object {
         fun getLanguageCode(language: Language?): String {
             return when (language) {
-                ODIA -> "or"
-                TAMIL -> "ta"
-                KANNADA -> "kn"
                 HINDI -> "hi"
-                TELUGU -> "te"
                 DEFAULT -> "df"
                 else -> Locale.getDefault().language
             }
@@ -27,11 +22,7 @@ enum class Language(private val language: String) {
         fun getLanguageFromCode(code: String?): Language {
             return when (code) {
                 "df" -> DEFAULT
-                "or" -> ODIA
-                "ta" -> TAMIL
-                "kn" -> KANNADA
                 "hi" -> HINDI
-                "te" -> TELUGU
                 else -> DEFAULT
             }
         }
