@@ -41,7 +41,7 @@ class HomeFragment : BaseFragment() {
         val root: View = binding.root
         binding.btnRefresh.setOnClickListener {
             activity?.let { it1 ->
-                viewModel.updateLocation(it1)
+                viewModel.updateLocation(it1) {}
             }
         }
 
@@ -62,7 +62,8 @@ class HomeFragment : BaseFragment() {
                 val update = CameraUpdateFactory.newLatLngZoom(cl!!, 10f)
                 map!!.moveCamera(update)
                 map!!.addMarker(
-                    MarkerOptions().position(cl!!).title("Current Location").icon(markerIcon)
+                    MarkerOptions().position(cl!!).title(getString(R.string.your_location))
+                        .icon(markerIcon)
                 )
 
                 for (au in list) {

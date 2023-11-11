@@ -62,7 +62,7 @@ class HomeActivity : BaseActivity() {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_home, R.id.nav_my_gaadi, R.id.nav_about_us, R.id.nav_pnp
+                R.id.nav_home, R.id.nav_my_gaadi, R.id.nav_about_us, R.id.nav_pnp, R.id.nav_setting
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
@@ -74,7 +74,7 @@ class HomeActivity : BaseActivity() {
                 putExtra(Intent.EXTRA_TEXT, Constants.APK_SHARE_MSG)
                 type = "text/plain"
             }
-            val shareIntent = Intent.createChooser(sendIntent, "Share app")
+            val shareIntent = Intent.createChooser(sendIntent, getString(R.string.share_app))
             startActivity(shareIntent)
             true
         }
@@ -100,7 +100,9 @@ class HomeActivity : BaseActivity() {
 
     override fun onStart() {
         super.onStart()
-        viewModel.updateLocation(this)
+        viewModel.updateLocation(this) {
+
+        }
         remoteConfig = Firebase.remoteConfig
         val configSettings = remoteConfigSettings {
             minimumFetchIntervalInSeconds = 300
@@ -127,7 +129,7 @@ class HomeActivity : BaseActivity() {
                 this
             )
         ) {
-            viewModel.updateLocation(this)
+            viewModel.updateLocation(this) {}
         }
     }
 

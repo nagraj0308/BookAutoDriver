@@ -51,21 +51,22 @@ class AddEditAutoFragment : BaseFragment() {
                 val mobileNumber = binding.tilMobileNumber.editText!!.text.trim().toString()
                 val rate = binding.tilRate.editText!!.text.trim().toString()
                 showProgress()
-                viewModel.insertFSImage(pos,
+                viewModel.insertFSImage(
+                    pos,
                     autoNumber,
                     driverName,
                     mobileNumber,
                     rate,
-                    Utils.screenShot(binding.ivAutoPhoto)!!,
-                    {
-                        hideProgress()
-                        if (it) {
-                            requireActivity().onBackPressed()
-                        } else {
-                            showToast("Try again")
-                        }
-                    },
-                    { showToast("") })
+                    Utils.screenShot(binding.ivAutoPhoto)!!
+                ) {
+                    hideProgress()
+                    if (it) {
+                        showToast(getString(R.string.added_successfully))
+                        requireActivity().onBackPressed()
+                    } else {
+                        showToast(getString(R.string.there_is_some_error))
+                    }
+                }
             }
         }
         binding.btnSave.setOnClickListener {
@@ -75,34 +76,36 @@ class AddEditAutoFragment : BaseFragment() {
                 val mobileNumber = binding.tilMobileNumber.editText!!.text.trim().toString()
                 val rate = binding.tilRate.editText!!.text.trim().toString()
                 showProgress()
-                viewModel.updateFSImage(pos,
+                viewModel.updateFSImage(
+                    pos,
                     autoNumber,
                     driverName,
                     mobileNumber,
                     rate,
-                    Utils.screenShot(binding.ivAutoPhoto)!!,
-                    {
-                        hideProgress()
-                        if (it) {
-                            requireActivity().onBackPressed()
-                        } else {
-                            showToast("Try again")
-                        }
-                    },
-                    {})
+                    Utils.screenShot(binding.ivAutoPhoto)!!
+                ) {
+                    hideProgress()
+                    if (it) {
+                        showToast(getString(R.string.updated_successfully))
+                        requireActivity().onBackPressed()
+                    } else {
+                        showToast(getString(R.string.there_is_some_error))
+                    }
+                }
             }
 
         }
         binding.btnDelete.setOnClickListener {
             showProgress()
-            viewModel.deleteAuto({
+            viewModel.deleteAuto {
                 hideProgress()
                 if (it) {
+                    showToast(getString(R.string.deleted_successfully))
                     activity?.finish()
+                } else {
+                    showToast(getString(R.string.there_is_some_error))
                 }
-            }, {
-                showToast(it)
-            })
+            }
         }
 
         if (arguments != null) {

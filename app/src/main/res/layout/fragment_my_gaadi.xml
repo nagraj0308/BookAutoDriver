@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="160dp"
-        android:text="@string/add_auto"
+        android:text="@string/add_vehicle"
         android:textAllCaps="false"
         app:icon="@drawable/ic_add" />
 

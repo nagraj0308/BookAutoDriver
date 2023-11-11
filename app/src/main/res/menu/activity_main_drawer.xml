@@ -11,7 +11,7 @@
         <item
             android:id="@+id/nav_my_gaadi"
             android:icon="@drawable/ic_auto"
-            android:title="@string/my_gaadi" />
+            android:title="@string/my_vehicle" />
         <item
             android:id="@+id/nav_about_us"
             android:icon="@drawable/ic_info"

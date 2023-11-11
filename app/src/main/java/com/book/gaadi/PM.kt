@@ -25,11 +25,18 @@ class PM(private val preferences: SharedPreferences) {
             preferences.edit().putString(NAME, name).apply()
         }
 
+    var lang: String?
+        get() = preferences.getString(LANG, "df")
+        set(name) {
+            preferences.edit().putString(LANG, name).apply()
+        }
+
 
     companion object {
         const val PM_FILE = "pm_file"
         private const val IS_LOGGED_IN = "is_logged_in"
         private const val GMAIL = "gmail"
         private const val NAME = "name"
+        private const val LANG = "lang"
     }
 }

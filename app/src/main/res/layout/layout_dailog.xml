@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:background="@android:color/white"
-            android:text="This version is outdated please update from google playstore to latest version."
+            android:text="@string/lm1"
             android:textColor="@color/black"
             android:textSize="18sp" />
 

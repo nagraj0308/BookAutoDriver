@@ -36,7 +36,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="5dp"
-                        android:hint="@string/auto_number"
+                        android:hint="@string/vehicle_number"
                         app:startIconDrawable="@drawable/ic_number">
 
                         <com.google.android.material.textfield.TextInputEditText
@@ -111,7 +111,7 @@
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="@string/auto_type"
+                            android:hint="@string/vehicle_type"
                             app:startIconDrawable="@drawable/ic_edit">
 
                             <AutoCompleteTextView
@@ -135,7 +135,7 @@
                             android:layout_height="wrap_content"
                             android:layout_alignParentStart="true"
                             android:layout_centerVertical="true"
-                            android:text="@string/auto_image"
+                            android:text="@string/vehicle_image"
                             android:textSize="18sp" />
 
                         <ImageButton
