@@ -83,7 +83,7 @@ class MyGaadiFragment : BaseFragment() {
                 val update = CameraUpdateFactory.newLatLngZoom(cl!!, 10f)
                 map!!.moveCamera(update)
                 map!!.addMarker(
-                    MarkerOptions().position(cl!!).title("Current Location").icon(markerIcon)
+                    MarkerOptions().position(cl!!).title(getString(R.string.your_location)).icon(markerIcon)
                 )
             })
         }

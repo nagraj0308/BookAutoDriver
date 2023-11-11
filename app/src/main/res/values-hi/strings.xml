@@ -1,73 +1,70 @@
 <resources>
 
     <string name="about_us">परिचय</string>
-    <string name="accepted">Accepted</string>
-    <string name="add_vehicle">Add Vehicle</string>
-    <string name="added_successfully">Added Successfully</string>
+    <string name="accepted">स्वीकृत</string>
+    <string name="add_vehicle">वाहन जोड़ें</string>
+    <string name="added_successfully">सफलतापूर्वक जोड़ा गया</string>
 
 
-    <string name="call">Call</string>
+    <string name="call">कॉल</string>
 
-    <string name="deactivated">Deactivated</string>
-    <string name="delete">Delete</string>
-    <string name="deleted_successfully">Deleted Successfully</string>
-    <string name="driver_name">Driver Name</string>
-    <string name="distance">Distance</string>
+    <string name="deactivated">निष्क्रिय</string>
+    <string name="delete">मिटाना</string>
+    <string name="deleted_successfully">सफलतापूर्वक मिटाया गया</string>
+    <string name="driver_name">चालक का नाम</string>
+    <string name="distance">दूरी</string>
 
-    <string name="exit">Exit</string>
+    <string name="exit">बाहर निकलना</string>
 
-    <string name="vehicle_details">Vehicle Details</string>
+    <string name="vehicle_details">वाहन की सूचना</string>
 
-    <string name="id">Id</string>
-
-
-    <string name="home">Home</string>
-
-    <string name="install_user_app">Install User App</string>
-
-    <string name="mobile_number">Mobile Number</string>
-    <string name="my_vehicle">My Vehicle</string>
-    <string name="modify_time">Modify Time</string>
-
-    <string name="name">Name</string>
-    <string name="normal_rate">Normal Rate</string>
-
-    <string name="pending">Pending</string>
-    <string name="privacy_and_policy">Privacy and Policy</string>
-
-    <string name="rate">Rate</string>
-    <string name="rejected">Rejected</string>
-    <string name="refresh">Refresh</string>
+    <string name="id">पहचान</string>
 
 
-    <string name="save">Save</string>
-    <string name="share_app">Share App</string>
-    <string name="setting">Setting</string>
-    <string name="select_language">Select Language</string>
-    <string name="share">Share</string>
-    <string name="submit">Submit</string>
+    <string name="home">घर</string>
 
-    <string name="type">Type</string>
-    <string name="there_is_some_error">There is some error</string>
-    <string name="this_field_required">This field required!</string>
-    <string name="this_should_be_4_digits">This should be 4 digits</string>
-    <string name="this_should_be_10_digits">This should be 10 digits</string>
+    <string name="mobile_number">मोबाइल नंबर</string>
+    <string name="my_vehicle">मेरा वाहन</string>
+    <string name="modify_time">समय संशोधित</string>
 
-    <string name="update">Update</string>
-    <string name="updated_successfully">Updated Successfully</string>
-    <string name="update_location">Update Location</string>
+    <string name="name">नाम</string>
+    <string name="normal_rate">सामान्य दर</string>
 
-    <string name="vehicle">Vehicle</string>
-    <string name="vehicle_image">Vehicle Image</string>
-    <string name="vehicle_name">Vehicle Name</string>
-    <string name="vehicle_number">Vehicle Number</string>
-    <string name="vehicle_type">Vehicle Type</string>
+    <string name="pending">लंबित</string>
+    <string name="privacy_and_policy">गोपनीयता और नीति</string>
 
-    <string name="verification_status">Verification Status</string>
-    <string name="your_location">Your Location</string>
+    <string name="rate">दर</string>
+    <string name="rejected">अस्वीकार कर दिया</string>
+    <string name="refresh">नया करना</string>
 
-    <string name="lm1">This version is outdated please update from google playstore to latest
-        version.</string>
+
+    <string name="save">सुरक्षित करो</string>
+    <string name="share_app">ऐप शेयर करें</string>
+    <string name="setting">सेटिंग</string>
+    <string name="select_language">भाषा चुने</string>
+    <string name="share">शेयर</string>
+    <string name="submit">जमा</string>
+
+    <string name="type">प्रकार</string>
+    <string name="there_is_some_error">कुछ त्रुटि है</string>
+    <string name="this_field_required">यह फ़ील्ड आवश्यक है!</string>
+    <string name="this_should_be_4_digits">यह 4 अंक का होना चाहिए</string>
+    <string name="this_should_be_10_digits">यह 10 अंक का होना चाहिए</string>
+
+    <string name="update">अद्यतन</string>
+    <string name="updated_successfully">सफलतापूर्वक अपडेट किया गया</string>
+    <string name="update_location">स्थान अद्यतन करें</string>
+
+    <string name="vehicle">वाहन</string>
+    <string name="vehicle_image">वाहन छवि</string>
+    <string name="vehicle_name">वाहन का नाम</string>
+    <string name="vehicle_number">गाडी नंबर</string>
+    <string name="vehicle_type">वाहन का प्रकार</string>
+
+    <string name="verification_status">सत्यापन स्थिति</string>
+    <string name="your_location">आपका स्थान</string>
+
+    <string name="lm1">यह संस्करण पुराना हो गया है कृपया Google Playstore से नवीनतम संस्करण में अपडेट करें।</string>
 
 
 </resources>
