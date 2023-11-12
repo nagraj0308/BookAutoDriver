@@ -117,7 +117,12 @@ class AddEditAutoFragment : BaseFragment() {
             requireContext(), R.layout.item_spinner, Constants.vehicleTypes
         )
         binding.actvAutoType.setAdapter(arrayAdapter)
-        binding.actvAutoType.setText(Constants.vehicleTypes[pos], false)
+        binding.actvAutoType.setOnItemClickListener { _, _, position, _ ->
+            pos = position
+            setVehicleType()
+        }
+
+
 
 
 
@@ -138,14 +143,12 @@ class AddEditAutoFragment : BaseFragment() {
             binding.tilDriverName.editText!!.setText(pm.name)
             binding.llEdit.visibility = View.GONE
             binding.btnSubmit.visibility = View.VISIBLE
+            pos = 0
         } else {
             pos = viewModel.vehicle.value!!.typeId
             binding.tilAutoNumber.editText!!.setText(viewModel.vehicle.value!!.number)
             binding.tilDriverName.editText!!.setText(viewModel.vehicle.value!!.driver)
             binding.tilMobileNumber.editText!!.setText(viewModel.vehicle.value!!.mobileNo)
-            binding.actvAutoType.setText(
-                Constants.vehicleTypes[pos], false
-            )
             binding.tilRate.editText!!.setText(viewModel.vehicle.value!!.rate)
             Glide.with(this).asBitmap().load(viewModel.vehicle.value!!.imageUrl)
                 .into(binding.ivAutoPhoto)
@@ -153,6 +156,7 @@ class AddEditAutoFragment : BaseFragment() {
             binding.llEdit.visibility = View.VISIBLE
             binding.btnSubmit.visibility = View.GONE
         }
+        setVehicleType()
         return root
     }
 
@@ -174,6 +178,10 @@ class AddEditAutoFragment : BaseFragment() {
             Glide.with(this).asBitmap().load(picturePath).into(binding.ivAutoPhoto)
             performCrop(selectedImage, 3, 2)
         }
+    }
+
+    private fun setVehicleType() {
+        binding.actvAutoType.setText(Constants.vehicleTypes[pos], false)
     }
 
 
