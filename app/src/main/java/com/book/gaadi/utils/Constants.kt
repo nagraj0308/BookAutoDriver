@@ -10,6 +10,6 @@ class Constants {
         const val APK_SHARE_MSG =
             "Book Gaadi, Nearby vehicle searching app for booking purpose, install from $PLAYSTORE_URL "
 
-        val autoTypes = listOf("Car", "Auto", "Bike", "Bus")
+        val vehicleTypes = listOf("Car", "Auto", "Bike", "Bus", "Pickup", "Truck", "Others")
     }
 }

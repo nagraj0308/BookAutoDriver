@@ -73,7 +73,8 @@ class MyGaadiFragment : BaseFragment() {
                 val update = CameraUpdateFactory.newLatLngZoom(cl!!, 10f)
                 map!!.moveCamera(update)
                 map!!.addMarker(
-                    MarkerOptions().position(cl!!).title("Current Location").icon(markerIcon)
+                    MarkerOptions().position(cl!!).title(getString(R.string.your_location))
+                        .icon(markerIcon)
                 )
             })
 
@@ -83,7 +84,8 @@ class MyGaadiFragment : BaseFragment() {
                 val update = CameraUpdateFactory.newLatLngZoom(cl!!, 10f)
                 map!!.moveCamera(update)
                 map!!.addMarker(
-                    MarkerOptions().position(cl!!).title(getString(R.string.your_location)).icon(markerIcon)
+                    MarkerOptions().position(cl!!).title(getString(R.string.your_location))
+                        .icon(markerIcon)
                 )
             })
         }
@@ -127,8 +129,6 @@ class MyGaadiFragment : BaseFragment() {
                 isNew = false
                 binding.btnAddAuto.visibility = View.GONE
                 binding.cvContent.visibility = View.VISIBLE
-                binding.tvAutoNo.text = vehicle.number
-                binding.tvMobileNo.text = vehicle.mobileNo
                 binding.tvLive.text = getStatusMsg(vehicle.verificationState)
             }
         } else {

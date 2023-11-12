@@ -52,7 +52,7 @@ class ViewAutoFragment : BaseFragment() {
             }
             binding.tvType.text = buildString {
                 append(": ")
-                append(Constants.autoTypes[data!!.typeId])
+                append(Constants.vehicleTypes[data!!.typeId])
             }
             binding.tvDistance.text = buildString {
                 append(": ")

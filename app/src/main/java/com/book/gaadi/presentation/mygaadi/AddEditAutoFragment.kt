@@ -114,10 +114,10 @@ class AddEditAutoFragment : BaseFragment() {
 
 
         val arrayAdapter = ArrayAdapter(
-            requireContext(), R.layout.item_spinner, Constants.autoTypes
+            requireContext(), R.layout.item_spinner, Constants.vehicleTypes
         )
         binding.actvAutoType.setAdapter(arrayAdapter)
-        binding.actvAutoType.setText(Constants.autoTypes[pos], false)
+        binding.actvAutoType.setText(Constants.vehicleTypes[pos], false)
 
 
 
@@ -144,7 +144,7 @@ class AddEditAutoFragment : BaseFragment() {
             binding.tilDriverName.editText!!.setText(viewModel.vehicle.value!!.driver)
             binding.tilMobileNumber.editText!!.setText(viewModel.vehicle.value!!.mobileNo)
             binding.actvAutoType.setText(
-                Constants.autoTypes[pos], false
+                Constants.vehicleTypes[pos], false
             )
             binding.tilRate.editText!!.setText(viewModel.vehicle.value!!.rate)
             Glide.with(this).asBitmap().load(viewModel.vehicle.value!!.imageUrl)

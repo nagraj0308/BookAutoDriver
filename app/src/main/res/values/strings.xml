@@ -24,7 +24,6 @@
 
     <string name="home">Home</string>
 
-    <string name="install_user_app">Install User App</string>
 
     <string name="mobile_number">Mobile Number</string>
     <string name="my_vehicle">My Vehicle</string>
@@ -36,7 +35,7 @@
     <string name="pending">Pending</string>
     <string name="privacy_and_policy">Privacy and Policy</string>
 
-    <string name="rate">Rate</string>
+    <string name="rate_us">Rate Us</string>
     <string name="rejected">Rejected</string>
     <string name="refresh">Refresh</string>
 
