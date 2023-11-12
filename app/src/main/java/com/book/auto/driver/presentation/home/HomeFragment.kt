@@ -2,16 +2,13 @@ package com.book.auto.driver.presentation.home
 
 import android.graphics.Bitmap
 import android.graphics.Canvas
-import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CompoundButton
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.book.auto.driver.R
 import com.book.auto.driver.data.remote.reqres.Vehicle
@@ -57,7 +54,7 @@ class HomeFragment : BaseFragment() {
 
         binding.sbDeactivated.setOnCheckedChangeListener { _, isChecked ->
             viewModel.updateAutoActivation(!isChecked)
-        };
+        }
 
         binding.btnEdit.setOnClickListener {
             val bundle = Bundle()
@@ -65,9 +62,9 @@ class HomeFragment : BaseFragment() {
             navController.navigate(R.id.nav_add_edit_auto, bundle)
         }
 
-        viewModel.vehicle.observe(viewLifecycleOwner, Observer {
+        viewModel.vehicle.observe(viewLifecycleOwner) {
             setContentState(it)
-        })
+        }
 
         //Maps View
         binding.mvCl.onCreate(savedInstanceState)
@@ -76,7 +73,7 @@ class HomeFragment : BaseFragment() {
             val circleDrawable = resources.getDrawable(R.drawable.ic_auto, null)
             val markerIcon: BitmapDescriptor = getMarkerIconFromDrawable(circleDrawable)
             map = it
-            viewModel.lat.observe(viewLifecycleOwner, Observer { it1 ->
+            viewModel.lat.observe(viewLifecycleOwner) { it1 ->
                 map!!.clear()
                 cl = LatLng(it1, viewModel.lon.value!!)
                 val update = CameraUpdateFactory.newLatLngZoom(cl!!, 10f)
@@ -84,9 +81,9 @@ class HomeFragment : BaseFragment() {
                 map!!.addMarker(
                     MarkerOptions().position(cl!!).title("Current Location").icon(markerIcon)
                 )
-            })
+            }
 
-            viewModel.lon.observe(viewLifecycleOwner, Observer { it1 ->
+            viewModel.lon.observe(viewLifecycleOwner) { it1 ->
                 map!!.clear()
                 cl = LatLng(viewModel.lat.value!!, it1)
                 val update = CameraUpdateFactory.newLatLngZoom(cl!!, 10f)
@@ -94,7 +91,7 @@ class HomeFragment : BaseFragment() {
                 map!!.addMarker(
                     MarkerOptions().position(cl!!).title("Current Location").icon(markerIcon)
                 )
-            })
+            }
         }
         return root
     }
@@ -136,7 +133,6 @@ class HomeFragment : BaseFragment() {
                 isNew = false
                 binding.btnAddAuto.visibility = View.GONE
                 binding.cvContent.visibility = View.VISIBLE
-                binding.tvAutoNo.text = vehicle.number
                 binding.tvLive.text = getStatusMsg(vehicle.deactivated, vehicle.verificationState)
                 binding.sbDeactivated.isChecked = !vehicle.deactivated
                 if (isActive(vehicle.deactivated, vehicle.verificationState)) {
@@ -144,14 +140,14 @@ class HomeFragment : BaseFragment() {
                         ContextCompat.getColor(
                             requireContext(), R.color.green
                         )
-                    );
+                    )
 
                 } else {
                     binding.cvContent.setBackgroundColor(
                         ContextCompat.getColor(
                             requireContext(), R.color.red
                         )
-                    );
+                    )
                 }
 
             }
@@ -174,12 +170,18 @@ class HomeFragment : BaseFragment() {
     }
 
     private fun isActive(deactivated: Boolean, verificationState: String): Boolean {
-        return if (verificationState == "U") {
-            false
-        } else if (verificationState == "R") {
-            false
-        } else {
-            !deactivated
+        return when (verificationState) {
+            "U" -> {
+                false
+            }
+
+            "R" -> {
+                false
+            }
+
+            else -> {
+                !deactivated
+            }
         }
     }
 
