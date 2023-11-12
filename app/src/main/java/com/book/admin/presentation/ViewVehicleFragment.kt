@@ -55,7 +55,7 @@ class ViewVehicleFragment : BaseFragment() {
             binding.tvId.text = ": " + data!!._id
             binding.tvModTime.text = ": " + Utils.convertLongToTime(data!!.modifyTime)
             binding.tvDriverName.text = ": " + data!!.driver
-            binding.tvType.text = ": " + Constants.autoTypes[data!!.typeId]
+            binding.tvType.text = ": " + Constants.vehicleTypes[data!!.typeId]
 
             val arrayAdapter = ArrayAdapter(
                 requireContext(), R.layout.item_spinner, Constants.vss

@@ -61,6 +61,17 @@ class VehicleFragment : BaseFragment() {
             if (it != null) {
                 val adapter = VehicleAdapter(it, navController)
                 binding.rcv.adapter = adapter
+                binding.tvTotal.text = buildString {
+                    append("Total : ")
+                    append(it.size)
+                    append(" Items")
+                }
+            } else {
+                binding.tvTotal.text = buildString {
+                    append("Total : ")
+                    append(0)
+                    append(" Items")
+                }
             }
         }
         return root

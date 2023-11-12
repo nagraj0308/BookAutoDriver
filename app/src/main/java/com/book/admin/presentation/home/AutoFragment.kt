@@ -63,6 +63,17 @@ class AutoFragment : BaseFragment() {
             if (it != null) {
                 val adapter = AutoAdapter(it, navController)
                 binding.rcv.adapter = adapter
+                binding.tvTotal.text = buildString {
+                    append("Total : ")
+                    append(it.size)
+                    append(" Items")
+                }
+            } else {
+                binding.tvTotal.text = buildString {
+                    append("Total : ")
+                    append(0)
+                    append(" Items")
+                }
             }
         }
         return root
