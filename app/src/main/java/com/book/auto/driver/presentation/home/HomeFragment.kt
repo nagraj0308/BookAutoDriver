@@ -136,17 +136,13 @@ class HomeFragment : BaseFragment() {
                 binding.tvLive.text = getStatusMsg(vehicle.deactivated, vehicle.verificationState)
                 binding.sbDeactivated.isChecked = !vehicle.deactivated
                 if (isActive(vehicle.deactivated, vehicle.verificationState)) {
-                    binding.cvContent.setBackgroundColor(
-                        ContextCompat.getColor(
-                            requireContext(), R.color.green
-                        )
+                    binding.cvContent.background = ContextCompat.getDrawable(
+                        requireContext(), R.drawable.bg_card_active
                     )
 
                 } else {
-                    binding.cvContent.setBackgroundColor(
-                        ContextCompat.getColor(
-                            requireContext(), R.color.red
-                        )
+                    binding.cvContent.background = ContextCompat.getDrawable(
+                        requireContext(), R.drawable.bg_card_deactive
                     )
                 }
 
