@@ -13,7 +13,6 @@ import com.book.gaadi.R
 import com.book.gaadi.data.remote.reqres.Vehicle
 import com.book.gaadi.databinding.FragmentHomeBinding
 import com.book.gaadi.presentation.base.BaseFragment
-import com.book.gaadi.utils.Constants
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapsInitializer
@@ -115,19 +114,31 @@ class HomeFragment : BaseFragment() {
     private fun getDrawable(typeId: Int): Int {
         return when (typeId) {
             0 -> {
-                R.drawable.w4
+                R.drawable.car
             }
 
             1 -> {
-                R.drawable.w3
+                R.drawable.auto
             }
 
             2 -> {
-                R.drawable.w2
+                R.drawable.bike
+            }
+
+            3 -> {
+                R.drawable.bus
+            }
+
+            4 -> {
+                R.drawable.pickup
+            }
+
+            5 -> {
+                R.drawable.truck
             }
 
             else -> {
-                R.drawable.wo
+                R.drawable.others
             }
         }
     }
