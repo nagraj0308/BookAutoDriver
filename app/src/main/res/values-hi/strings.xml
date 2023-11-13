@@ -16,12 +16,13 @@
 
     <string name="exit">बाहर निकले</string>
 
-    <string name="vehicle_details">वाहन की सूचना</string>
 
     <string name="id">पहचान</string>
 
 
     <string name="home">होम</string>
+    <string name="live">सक्रिय</string>
+
 
     <string name="mobile_number">मोबाइल नंबर</string>
     <string name="my_vehicle">मेरा वाहन</string>
@@ -35,6 +36,7 @@
 
     <string name="rate_us">हमें रेटिंग दें</string>
     <string name="rejected">अस्वीकार कर दिया</string>
+    <string name="rejected_in_verification">सत्यापन में अस्वीकृत</string>
     <string name="refresh">अपडेट</string>
 
 
@@ -44,6 +46,8 @@
     <string name="select_language">भाषा चुने</string>
     <string name="share">शेयर</string>
     <string name="submit">जमा</string>
+    <string name="system_verification_pending">सिस्टम सत्यापन लंबित</string>
+
 
     <string name="type">प्रकार</string>
     <string name="there_is_some_error">कुछ त्रुटि है</string>
@@ -60,8 +64,9 @@
     <string name="vehicle_name">वाहन का नाम</string>
     <string name="vehicle_number">गाडी नंबर</string>
     <string name="vehicle_type">वाहन का प्रकार</string>
-
+    <string name="vehicle_details">वाहन की सूचना</string>
     <string name="verification_status">सत्यापन स्थिति</string>
+
     <string name="your_location">आपका स्थान</string>
 
     <string name="lm1">यह संस्करण पुराना हो गया है कृपया Google Playstore से नवीनतम संस्करण में अपडेट करें।</string>

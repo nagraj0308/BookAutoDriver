@@ -17,8 +17,8 @@ android {
         applicationId = "com.book.gaadi"
         minSdk = 28
         targetSdk = 34
-        versionCode = 28
-        versionName = "2.8"
+        versionCode = 29
+        versionName = "2.9"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }

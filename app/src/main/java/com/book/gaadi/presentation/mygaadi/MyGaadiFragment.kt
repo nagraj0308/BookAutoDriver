@@ -138,14 +138,12 @@ class MyGaadiFragment : BaseFragment() {
 
     }
 
-    private fun getStatusMsg(verificationState: String): String {
-        return if (verificationState == "U") {
-            "System Verification Pending"
-        } else if (verificationState == "R") {
-            "Rejected in verification"
-        } else {
-            "Live"
-        }
+    private fun getStatusMsg(verificationState: String): String = if (verificationState == "U") {
+        getString(R.string.system_verification_pending)
+    } else if (verificationState == "R") {
+        getString(R.string.rejected_in_verification)
+    } else {
+        getString(R.string.live)
     }
 
     override fun showProgress() {

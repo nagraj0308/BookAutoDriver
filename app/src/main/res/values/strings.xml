@@ -17,13 +17,13 @@
 
     <string name="exit">Exit</string>
 
-    <string name="vehicle_details">Vehicle Details</string>
 
     <string name="id">Id</string>
 
 
     <string name="home">Home</string>
 
+    <string name="live">Live</string>
 
     <string name="mobile_number">Mobile Number</string>
     <string name="my_vehicle">My Vehicle</string>
@@ -37,6 +37,7 @@
 
     <string name="rate_us">Rate Us</string>
     <string name="rejected">Rejected</string>
+    <string name="rejected_in_verification">Rejected in verification</string>
     <string name="refresh">Refresh</string>
 
 
@@ -46,6 +47,7 @@
     <string name="select_language">Select Language</string>
     <string name="share">Share</string>
     <string name="submit">Submit</string>
+    <string name="system_verification_pending">System Verification Pending</string>
 
     <string name="type">Type</string>
     <string name="there_is_some_error">There is some error</string>
@@ -62,6 +64,8 @@
     <string name="vehicle_name">Vehicle Name</string>
     <string name="vehicle_number">Vehicle Number</string>
     <string name="vehicle_type">Vehicle Type</string>
+    <string name="vehicle_details">Vehicle Details</string>
+
 
     <string name="verification_status">Verification Status</string>
     <string name="your_location">Your Location</string>
