@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.book.gaadi.R
 import com.book.gaadi.data.remote.reqres.Vehicle
@@ -56,9 +55,9 @@ class MyGaadiFragment : BaseFragment() {
             navController.navigate(R.id.nav_add_edit_gaadi, bundle)
         }
 
-        viewModel.vehicle.observe(viewLifecycleOwner, Observer {
+        viewModel.vehicle.observe(viewLifecycleOwner) {
             setContentState(it)
-        })
+        }
 
         //Maps View
         binding.mvCl.onCreate(savedInstanceState)
@@ -67,7 +66,7 @@ class MyGaadiFragment : BaseFragment() {
             val circleDrawable = resources.getDrawable(R.drawable.ic_auto, null)
             val markerIcon: BitmapDescriptor = getMarkerIconFromDrawable(circleDrawable)
             map = it
-            viewModel.lat.observe(viewLifecycleOwner, Observer { it1 ->
+            viewModel.lat.observe(viewLifecycleOwner) { it1 ->
                 map!!.clear()
                 cl = LatLng(it1, viewModel.lon.value!!)
                 val update = CameraUpdateFactory.newLatLngZoom(cl!!, 10f)
@@ -76,9 +75,9 @@ class MyGaadiFragment : BaseFragment() {
                     MarkerOptions().position(cl!!).title(getString(R.string.your_location))
                         .icon(markerIcon)
                 )
-            })
+            }
 
-            viewModel.lon.observe(viewLifecycleOwner, Observer { it1 ->
+            viewModel.lon.observe(viewLifecycleOwner) { it1 ->
                 map!!.clear()
                 cl = LatLng(viewModel.lat.value!!, it1)
                 val update = CameraUpdateFactory.newLatLngZoom(cl!!, 10f)
@@ -87,7 +86,7 @@ class MyGaadiFragment : BaseFragment() {
                     MarkerOptions().position(cl!!).title(getString(R.string.your_location))
                         .icon(markerIcon)
                 )
-            })
+            }
         }
         return root
     }
@@ -138,12 +137,18 @@ class MyGaadiFragment : BaseFragment() {
 
     }
 
-    private fun getStatusMsg(verificationState: String): String = if (verificationState == "U") {
-        getString(R.string.system_verification_pending)
-    } else if (verificationState == "R") {
-        getString(R.string.rejected_in_verification)
-    } else {
-        getString(R.string.live)
+    private fun getStatusMsg(verificationState: String): String = when (verificationState) {
+        "U" -> {
+            getString(R.string.system_verification_pending)
+        }
+
+        "R" -> {
+            getString(R.string.rejected_in_verification)
+        }
+
+        else -> {
+            getString(R.string.live)
+        }
     }
 
     override fun showProgress() {

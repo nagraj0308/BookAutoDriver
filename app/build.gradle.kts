@@ -15,10 +15,10 @@ android {
 
     defaultConfig {
         applicationId = "com.book.gaadi"
-        minSdk = 28
+        minSdk = 27
         targetSdk = 34
-        versionCode = 29
-        versionName = "2.9"
+        versionCode = 30
+        versionName = "3.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }

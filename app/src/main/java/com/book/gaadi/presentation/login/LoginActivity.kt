@@ -11,6 +11,7 @@ import com.book.gaadi.R
 import com.book.gaadi.databinding.ActivityLoginBinding
 import com.book.gaadi.presentation.base.BaseActivity
 import com.book.gaadi.presentation.home.HomeActivity
+import com.book.gaadi.utils.RequestCode
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -29,7 +30,6 @@ class LoginActivity : BaseActivity() {
     private lateinit var binding: ActivityLoginBinding
 
     private lateinit var mGoogleSignInClient: GoogleSignInClient
-    val REQ_CODE: Int = 123
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -61,12 +61,12 @@ class LoginActivity : BaseActivity() {
 
     private fun signInGoogle() {
         val signInIntent: Intent = mGoogleSignInClient.signInIntent
-        startActivityForResult(signInIntent, REQ_CODE)
+        startActivityForResult(signInIntent, RequestCode.GOOGLE_SIGN_IN)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == REQ_CODE) {
+        if (requestCode == RequestCode.GOOGLE_SIGN_IN) {
             val task: Task<GoogleSignInAccount> = GoogleSignIn.getSignedInAccountFromIntent(data)
             handleResult(task)
         }

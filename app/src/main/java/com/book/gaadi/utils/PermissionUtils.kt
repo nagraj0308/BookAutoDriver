@@ -13,13 +13,14 @@ import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.LocationSettingsRequest
-import com.google.android.gms.location.LocationSettingsResponse
 
 
 class RequestCode {
     companion object {
         const val LOCATION = 10
         const val READ_STORAGE = 11
+        const val GOOGLE_SIGN_IN = 123
+
 
     }
 }
@@ -79,13 +80,13 @@ class PermissionUtils {
             LocationServices.getSettingsClient(activity).checkLocationSettings(builder.build())
                 .addOnSuccessListener(
                     activity
-                ) { response: LocationSettingsResponse? -> }.addOnFailureListener(
+                ) { }.addOnFailureListener(
                     activity
                 ) { ex: Exception? ->
                     if (ex is ResolvableApiException) {
                         try {
                             ex.startResolutionForResult(
-                                activity, 10
+                                activity, RequestCode.LOCATION
                             )
                         } catch (e: Exception) {
                             e.printStackTrace()
