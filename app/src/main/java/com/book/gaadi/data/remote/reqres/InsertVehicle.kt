@@ -61,6 +61,7 @@ data class Vehicle(
     val number: String = "",
     val typeId: Int = 0,
     val rate: String = "",
-    val verificationState: String = "U"
+    val verificationState: String = "U",
+    val adminRemark: String = ""
 ) : Serializable
 

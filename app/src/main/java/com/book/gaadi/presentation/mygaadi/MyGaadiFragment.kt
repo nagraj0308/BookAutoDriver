@@ -129,6 +129,7 @@ class MyGaadiFragment : BaseFragment() {
                 binding.btnAddAuto.visibility = View.GONE
                 binding.cvContent.visibility = View.VISIBLE
                 binding.tvLive.text = getStatusMsg(vehicle.verificationState)
+                binding.tvAdminRemark.text = vehicle.adminRemark
             }
         } else {
             binding.btnAddAuto.visibility = View.VISIBLE
