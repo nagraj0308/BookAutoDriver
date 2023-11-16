@@ -32,7 +32,8 @@ data class Auto(
     val modifyTime: Long = 0,
     val number: String = "",
     val type: String = "",
-    val verificationState: String = "U"
+    val verificationState: String = "U",
+    val adminRemark: String = ""
 ) : Serializable
 
 data class Vehicle(
@@ -46,7 +47,8 @@ data class Vehicle(
     val modifyTime: Long = 0,
     val number: String = "",
     val typeId: Int = 0,
-    val verificationState: String = "U"
+    val verificationState: String = "U",
+    val adminRemark: String = ""
 ) : Serializable
 
 
