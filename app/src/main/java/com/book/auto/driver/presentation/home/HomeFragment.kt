@@ -135,6 +135,7 @@ class HomeFragment : BaseFragment() {
                 binding.cvContent.visibility = View.VISIBLE
                 binding.tvLive.text = getStatusMsg(vehicle.deactivated, vehicle.verificationState)
                 binding.sbDeactivated.isChecked = !vehicle.deactivated
+                binding.tvAdminRemark.text = vehicle.adminRemark
                 if (isActive(vehicle.deactivated, vehicle.verificationState)) {
                     binding.cvContent.background = ContextCompat.getDrawable(
                         requireContext(), R.drawable.bg_card_active

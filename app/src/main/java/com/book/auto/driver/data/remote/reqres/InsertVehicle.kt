@@ -58,6 +58,7 @@ data class Vehicle(
     val modifyTime: String = "0",
     val number: String = "",
     val type: String = "",
-    val verificationState: String = "U"
+    val verificationState: String = "U",
+    val adminRemark: String = ""
 )
 
