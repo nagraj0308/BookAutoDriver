@@ -1,16 +1,13 @@
 package com.book.auto.presentation.home
 
-import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.book.auto.R
 import com.book.auto.data.remote.reqres.Auto
@@ -47,20 +44,6 @@ class HomeFragment : BaseFragment() {
                 viewModel.updateLocation(it1)
             }
         }
-
-
-//            if (it != null) {
-//                val bundle = Bundle()
-////                bundle.putSerializable("item", mList[position])
-//                navController.navigate(R.id.nav_view, bundle)
-//            }
-
-
-//        binding.btnEdit.setOnClickListener {
-//            val bundle = Bundle()
-//            bundle.putBoolean("is_new", isNew)
-////            navController.navigate(R.id.nav_add_edit_auto, bundle)
-//        }
 
 
         //Maps View
