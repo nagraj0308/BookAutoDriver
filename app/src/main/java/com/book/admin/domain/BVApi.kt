@@ -16,6 +16,12 @@ interface BVApi {
         vId: String
     ): Response<BasicResponse>
 
+    suspend fun changeAutoAdminRemark(
+        password: String,
+        adminRemark: String,
+        vId: String
+    ): Response<BasicResponse>
+
     suspend fun getAllVehicleAdmin(code: String, password: String): Response<VehiclesResponse>
 
     suspend fun changeVehicleStatusV1(
@@ -23,5 +29,12 @@ interface BVApi {
         verificationState: String,
         vId: String
     ): Response<BasicResponse>
+
+    suspend fun changeVehicleAdminRemark(
+        password: String,
+        adminRemark: String,
+        vId: String
+    ): Response<BasicResponse>
+
 
 }

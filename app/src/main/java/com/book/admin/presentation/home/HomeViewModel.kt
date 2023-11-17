@@ -108,5 +108,45 @@ class HomeViewModel @Inject constructor(
         }
     }
 
+    fun changeVehicleAdminRemark(
+        adminRemark: String,
+        vId: String, callback: () -> Unit
+    ) {
+        CoroutineScope(Dispatchers.IO).launch {
+            runCatching {
+                api.changeVehicleAdminRemark(pm.password!!, adminRemark, vId)
+            }.onSuccess {
+                withContext(Dispatchers.Main) {
+                    if (it.isSuccessful && it.body() != null) {
+                        if (it.body()!!.isTrue == 1) {
+                            getVehicles(_statePosVehicle.value!!)
+                            callback()
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    fun changeAutoAdminRemark(
+        adminRemark: String,
+        vId: String, callback: () -> Unit
+    ) {
+        CoroutineScope(Dispatchers.IO).launch {
+            runCatching {
+                api.changeAutoAdminRemark(pm.password!!, adminRemark, vId)
+            }.onSuccess {
+                withContext(Dispatchers.Main) {
+                    if (it.isSuccessful && it.body() != null) {
+                        if (it.body()!!.isTrue == 1) {
+                            getAutos(_statePosAuto.value!!)
+                            callback()
+                        }
+                    }
+                }
+            }
+        }
+    }
+
 
 }

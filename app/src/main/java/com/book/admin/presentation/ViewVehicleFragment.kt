@@ -56,6 +56,8 @@ class ViewVehicleFragment : BaseFragment() {
             binding.tvModTime.text = ": " + Utils.convertLongToTime(data!!.modifyTime)
             binding.tvDriverName.text = ": " + data!!.driver
             binding.tvType.text = ": " + Constants.vehicleTypes[data!!.typeId]
+            binding.tilAdminRemark.editText!!.setText(data!!.adminRemark)
+            
 
             val arrayAdapter = ArrayAdapter(
                 requireContext(), R.layout.item_spinner, Constants.vss
@@ -66,6 +68,16 @@ class ViewVehicleFragment : BaseFragment() {
             }
             setStatus(data!!.verificationState, navController, false)
             context?.let { Glide.with(it).asBitmap().load(data?.imageUrl).into(binding.ivPhoto) }
+
+
+            binding.btnSave.setOnClickListener {
+                viewModel.changeVehicleAdminRemark(
+                    binding.tilAdminRemark.editText!!.text.toString(),
+                    data!!._id
+                ) {
+                    navController.popBackStack()
+                }
+            }
         }
         return root
     }

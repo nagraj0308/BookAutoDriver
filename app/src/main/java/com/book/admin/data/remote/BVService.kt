@@ -22,6 +22,13 @@ interface BVService {
         @Query("vId") vId: String
     ): Response<BasicResponse>
 
+    @GET("api/changeAutoAdminRemark")
+    suspend fun changeAutoAdminRemark(
+        @Query("password") password: String,
+        @Query("adminRemark") adminRemark: String,
+        @Query("vId") vId: String
+    ): Response<BasicResponse>
+
 
     @GET("api/getAllVehicleAdminV1")
     suspend fun getAllVehicleAdmin(
@@ -33,6 +40,13 @@ interface BVService {
     suspend fun changeVehicleStatusV1(
         @Query("password") password: String,
         @Query("verificationState") verificationState: String,
+        @Query("vId") vId: String
+    ): Response<BasicResponse>
+
+    @GET("api/changeVehicleAdminRemark")
+    suspend fun changeVehicleAdminRemark(
+        @Query("password") password: String,
+        @Query("adminRemark") adminRemark: String,
         @Query("vId") vId: String
     ): Response<BasicResponse>
 

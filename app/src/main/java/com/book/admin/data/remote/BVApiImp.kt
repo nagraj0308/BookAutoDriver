@@ -22,19 +22,28 @@ class BVApiImp @Inject constructor(
         return service.changeAutoStatusV1(password, verificationState, vId)
     }
 
+    override suspend fun changeAutoAdminRemark(
+        password: String, adminRemark: String, vId: String
+    ): Response<BasicResponse> {
+        return service.changeAutoAdminRemark(password, adminRemark, vId)
+    }
+
     override suspend fun getAllVehicleAdmin(
-        code: String,
-        password: String
+        code: String, password: String
     ): Response<VehiclesResponse> {
         return service.getAllVehicleAdmin(password, code)
     }
 
     override suspend fun changeVehicleStatusV1(
-        password: String,
-        verificationState: String,
-        vId: String
+        password: String, verificationState: String, vId: String
     ): Response<BasicResponse> {
         return service.changeVehicleStatusV1(password, verificationState, vId)
+    }
+
+    override suspend fun changeVehicleAdminRemark(
+        password: String, adminRemark: String, vId: String
+    ): Response<BasicResponse> {
+        return service.changeVehicleAdminRemark(password, adminRemark, vId)
     }
 
 }
