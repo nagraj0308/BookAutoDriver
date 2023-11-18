@@ -1,18 +1,18 @@
--keep class com.book.gaadi.data.remote.reqres.*{*;}
--keep class com.book.gaadi.data.remote.*{*;}
--keep class com.book.gaadi.data.*{*;}
--keep class com.book.gaadi.di.*{*;}
--keep class com.book.gaadi.domain.*{*;}
--keep class com.book.gaadi.presentation.login.*{*;}
--keep class com.book.gaadi.presentation.addeditauto.*{*;}
--keep class com.book.gaadi.presentation.base.*{*;}
--keep class com.book.gaadi.presentation.vehicle.*{*;}
--keep class com.book.gaadi.presentation.home.*{*;}
--keep class com.book.gaadi.presentation.mygaadi.*{*;}
--keep class com.book.gaadi.presentation.synclocation.*{*;}
--keep class com.book.gaadi.presentation.*{*;}
--keep class com.book.gaadi.utils.*{*;}
--keep class com.book.gaadi.*{*;}
+-keep class com.rent.house.data.remote.reqres.*{*;}
+-keep class com.rent.house.data.remote.*{*;}
+-keep class com.rent.house.data.*{*;}
+-keep class com.rent.house.di.*{*;}
+-keep class com.rent.house.domain.*{*;}
+-keep class com.rent.house.presentation.login.*{*;}
+-keep class com.rent.house.presentation.addeditauto.*{*;}
+-keep class com.rent.house.presentation.base.*{*;}
+-keep class com.rent.house.presentation.vehicle.*{*;}
+-keep class com.rent.house.presentation.home.*{*;}
+-keep class com.rent.house.presentation.mygaadi.*{*;}
+-keep class com.rent.house.presentation.synclocation.*{*;}
+-keep class com.rent.house.presentation.*{*;}
+-keep class com.rent.house.utils.*{*;}
+-keep class com.rent.house.*{*;}
 
 
 -keep,allowobfuscation,allowshrinking class kotlin.coroutines.Continuation

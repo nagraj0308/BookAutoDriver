@@ -202,6 +202,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "620168446799-fkseeh3ubd1uh9pal8abho76f5v78mu8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rent.house",
+            "certificate_hash": "400c11d4efca27b7721b821ba521e3a43860072f"
+          }
+        },
+        {
+          "client_id": "620168446799-sag4nnsbdbnrqb3hg0ha677504d41o4c.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rent.house",
+            "certificate_hash": "91b5e82e740953ebcf8a8f85dbe7e4aa4e272e55"
+          }
+        },
+        {
           "client_id": "620168446799-2d4p855qeg3h5hn73asqt2bk7t75j2nc.apps.googleusercontent.com",
           "client_type": 3
         }

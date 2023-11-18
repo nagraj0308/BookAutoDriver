@@ -10,11 +10,11 @@ plugins {
 }
 
 android {
-    namespace = "com.book.gaadi"
+    namespace = "com.rent.house"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.book.gaadi"
+        applicationId = "com.rent.house"
         minSdk = 27
         targetSdk = 34
         versionCode = 31
