@@ -7,45 +7,45 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.book.gaadi.presentation.home.HomeFragment"
+        android:name="com.rent.house.presentation.home.HomeFragment"
         android:label="@string/home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/nav_view_gaadi"
-        android:name="com.book.gaadi.presentation.home.ViewAutoFragment"
+        android:name="com.rent.house.presentation.home.ViewAutoFragment"
         android:label="@string/vehicle_details"
         tools:layout="@layout/fragment_view_details" />
 
 
     <fragment
         android:id="@+id/nav_my_gaadi"
-        android:name="com.book.gaadi.presentation.mygaadi.MyGaadiFragment"
+        android:name="com.rent.house.presentation.mygaadi.MyGaadiFragment"
         android:label="@string/my_vehicle"
         tools:layout="@layout/fragment_my_gaadi" />
 
     <fragment
         android:id="@+id/nav_add_edit_gaadi"
-        android:name="com.book.gaadi.presentation.mygaadi.AddEditAutoFragment"
+        android:name="com.rent.house.presentation.mygaadi.AddEditAutoFragment"
         android:label="@string/vehicle_details"
         tools:layout="@layout/fragment_add_edit_auto_details" />
 
     <fragment
         android:id="@+id/nav_setting"
-        android:name="com.book.gaadi.presentation.SettingFragment"
+        android:name="com.rent.house.presentation.SettingFragment"
         android:label="@string/setting"
         tools:layout="@layout/fragment_setting" />
 
 
     <fragment
         android:id="@+id/nav_about_us"
-        android:name="com.book.gaadi.presentation.AboutUsFragment"
+        android:name="com.rent.house.presentation.AboutUsFragment"
         android:label="@string/about_us"
         tools:layout="@layout/fragment_web_view" />
 
     <fragment
         android:id="@+id/nav_pnp"
-        android:name="com.book.gaadi.presentation.PnPFragment"
+        android:name="com.rent.house.presentation.PnPFragment"
         android:label="@string/privacy_and_policy"
         tools:layout="@layout/fragment_web_view" />
 </navigation>

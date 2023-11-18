@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">Book Gaadi</string>
+    <string name="app_name" translatable="false">Rent House</string>
 
     <string name="about_us">About Us</string>
     <string name="accepted">Accepted</string>
@@ -46,6 +46,7 @@
     <string name="setting">Setting</string>
     <string name="select_language">Select Language</string>
     <string name="share">Share</string>
+    <string name="sign_in">Sign In</string>
     <string name="submit">Submit</string>
     <string name="system_verification_pending">System Verification Pending</string>
 
