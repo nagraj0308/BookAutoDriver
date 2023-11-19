@@ -145,12 +145,12 @@ class EditFragment : BaseFragment() {
             binding.btnSubmit.visibility = View.VISIBLE
             pos = 0
         } else {
-            pos = viewModel.vehicle.value!!.typeId
-            binding.tilAutoNumber.editText!!.setText(viewModel.vehicle.value!!.number)
-            binding.tilDriverName.editText!!.setText(viewModel.vehicle.value!!.driver)
-            binding.tilMobileNumber.editText!!.setText(viewModel.vehicle.value!!.mobileNo)
-            binding.tilRate.editText!!.setText(viewModel.vehicle.value!!.rate)
-            Glide.with(this).asBitmap().load(viewModel.vehicle.value!!.imageUrl)
+            pos = viewModel.house.value!!.typeId
+            binding.tilAutoNumber.editText!!.setText(viewModel.house.value!!.number)
+            binding.tilDriverName.editText!!.setText(viewModel.house.value!!.driver)
+            binding.tilMobileNumber.editText!!.setText(viewModel.house.value!!.mobileNo)
+            binding.tilRate.editText!!.setText(viewModel.house.value!!.rate)
+            Glide.with(this).asBitmap().load(viewModel.house.value!!.imageUrl)
                 .into(binding.ivAutoPhoto)
 
             binding.llEdit.visibility = View.VISIBLE

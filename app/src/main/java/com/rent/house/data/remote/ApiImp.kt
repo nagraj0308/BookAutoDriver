@@ -1,12 +1,12 @@
 package com.rent.house.data.remote
 
 import com.rent.house.data.remote.reqres.BasicResponse
-import com.rent.house.data.remote.reqres.DeleteVehicleRequest
-import com.rent.house.data.remote.reqres.GetVehicleByGmailIdRequest
-import com.rent.house.data.remote.reqres.GetVehicleRequest
-import com.rent.house.data.remote.reqres.VehicleRequest
-import com.rent.house.data.remote.reqres.VehicleResponse
-import com.rent.house.data.remote.reqres.VehiclesResponse
+import com.rent.house.data.remote.reqres.DeleteRequest
+import com.rent.house.data.remote.reqres.GetHouseByIdRequest
+import com.rent.house.data.remote.reqres.GetHouseRequest
+import com.rent.house.data.remote.reqres.HouseRequest
+import com.rent.house.data.remote.reqres.HouseResponse
+import com.rent.house.data.remote.reqres.HousesResponse
 import com.rent.house.domain.Api
 import retrofit2.Response
 import javax.inject.Inject
@@ -16,25 +16,25 @@ class ApiImp @Inject constructor(
     private val service: Service
 ) : Api {
 
-    override suspend fun getAllVehicle(request: GetVehicleRequest?): Response<VehiclesResponse> {
-        return service.getAllVehicleV1(request)
+    override suspend fun getAllActiveHouse(request: GetHouseRequest?): Response<HousesResponse> {
+        return service.getAllActiveHouse(request)
     }
 
-    override suspend fun insertVehicle(request: VehicleRequest?): Response<VehicleResponse> {
-        return service.insertVehicle(request)
+    override suspend fun insertHouse(request: HouseRequest?): Response<HouseResponse> {
+        return service.insertHouse(request)
     }
 
-    override suspend fun updateVehicle(request: VehicleRequest?): Response<VehicleResponse> {
-        return service.updateVehicle(request)
+    override suspend fun updateHouse(request: HouseRequest?): Response<HouseResponse> {
+        return service.updateHouse(request)
     }
 
 
-    override suspend fun getVehicleByGmailId(request: GetVehicleByGmailIdRequest?): Response<VehicleResponse> {
-        return service.getVehicleByGmailId(request)
+    override suspend fun getHouseById(request: GetHouseByIdRequest?): Response<HouseResponse> {
+        return service.getHouseByGmailId(request)
     }
 
-    override suspend fun deleteVehicleById(request: DeleteVehicleRequest?): Response<BasicResponse> {
-        return service.deleteVehicleById(request)
+    override suspend fun deleteHouseById(request: DeleteRequest?): Response<BasicResponse> {
+        return service.deleteHouseById(request)
     }
 
 }

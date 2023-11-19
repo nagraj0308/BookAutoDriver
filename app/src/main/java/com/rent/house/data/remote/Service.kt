@@ -1,12 +1,12 @@
 package com.rent.house.data.remote
 
 import com.rent.house.data.remote.reqres.BasicResponse
-import com.rent.house.data.remote.reqres.DeleteVehicleRequest
-import com.rent.house.data.remote.reqres.GetVehicleByGmailIdRequest
-import com.rent.house.data.remote.reqres.GetVehicleRequest
-import com.rent.house.data.remote.reqres.VehicleRequest
-import com.rent.house.data.remote.reqres.VehicleResponse
-import com.rent.house.data.remote.reqres.VehiclesResponse
+import com.rent.house.data.remote.reqres.DeleteRequest
+import com.rent.house.data.remote.reqres.GetHouseByIdRequest
+import com.rent.house.data.remote.reqres.GetHouseRequest
+import com.rent.house.data.remote.reqres.HouseRequest
+import com.rent.house.data.remote.reqres.HouseResponse
+import com.rent.house.data.remote.reqres.HousesResponse
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.Headers
@@ -16,24 +16,24 @@ import retrofit2.http.POST
 interface Service {
 
     @Headers("Content-Type: application/json")
-    @POST("api/getAllVehicleV1/")
-    suspend fun getAllVehicleV1(@Body request: GetVehicleRequest?): Response<VehiclesResponse>
+    @POST("api/getAllActiveHouse/")
+    suspend fun getAllActiveHouse(@Body request: GetHouseRequest?): Response<HousesResponse>
 
     @Headers("Content-Type: application/json")
-    @POST("api/insertVehicleV1/")
-    suspend fun insertVehicle(@Body request: VehicleRequest?): Response<VehicleResponse>
+    @POST("api/insertHouse/")
+    suspend fun insertHouse(@Body request: HouseRequest?): Response<HouseResponse>
 
     @Headers("Content-Type: application/json")
-    @POST("api/updateVehicleV1/")
-    suspend fun updateVehicle(@Body request: VehicleRequest?): Response<VehicleResponse>
+    @POST("api/updateHouse/")
+    suspend fun updateHouse(@Body request: HouseRequest?): Response<HouseResponse>
 
 
     @Headers("Content-Type: application/json")
-    @POST("api/getVehicleByGmailId/")
-    suspend fun getVehicleByGmailId(@Body request: GetVehicleByGmailIdRequest?): Response<VehicleResponse>
+    @POST("api/getHouseById/")
+    suspend fun getHouseByGmailId(@Body request: GetHouseByIdRequest?): Response<HouseResponse>
 
     @Headers("Content-Type: application/json")
-    @POST("api/deleteVehicleById/")
-    suspend fun deleteVehicleById(@Body request: DeleteVehicleRequest?): Response<BasicResponse>
+    @POST("api/deleteHouseById/")
+    suspend fun deleteHouseById(@Body request: DeleteRequest?): Response<BasicResponse>
 
 }

@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import com.bumptech.glide.Glide
-import com.rent.house.data.remote.reqres.Vehicle
+import com.rent.house.data.remote.reqres.House
 import com.rent.house.databinding.FragmentViewDetailsBinding
 import com.rent.house.presentation.base.BaseFragment
 import com.rent.house.utils.Constants
@@ -20,7 +20,7 @@ class ViewFragment : BaseFragment() {
     private val viewModel: HomeViewModel by activityViewModels()
     private var _binding: FragmentViewDetailsBinding? = null
     private val binding get() = _binding!!
-    private var data: Vehicle? = null
+    private var data: House? = null
 
 
     override fun onCreateView(
@@ -29,7 +29,7 @@ class ViewFragment : BaseFragment() {
         _binding = FragmentViewDetailsBinding.inflate(inflater, container, false)
         val root: View = binding.root
         if (arguments != null) {
-            data = requireArguments().getSerializable("item") as Vehicle?
+            data = requireArguments().getSerializable("item") as House?
         }
         if (data != null) {
             binding.btnCall.setOnClickListener {

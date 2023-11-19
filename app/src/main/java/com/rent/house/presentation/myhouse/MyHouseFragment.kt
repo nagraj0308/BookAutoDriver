@@ -17,7 +17,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.rent.house.R
-import com.rent.house.data.remote.reqres.Vehicle
+import com.rent.house.data.remote.reqres.House
 import com.rent.house.databinding.FragmentMyHouseBinding
 import com.rent.house.presentation.base.BaseFragment
 import com.rent.house.presentation.home.HomeViewModel
@@ -55,7 +55,7 @@ class MyHouseFragment : BaseFragment() {
             navController.navigate(R.id.nav_add_edit_gaadi, bundle)
         }
 
-        viewModel.vehicle.observe(viewLifecycleOwner) {
+        viewModel.house.observe(viewLifecycleOwner) {
             setContentState(it)
         }
 
@@ -117,9 +117,9 @@ class MyHouseFragment : BaseFragment() {
     }
 
 
-    private fun setContentState(vehicle: Vehicle?) {
-        if (vehicle != null) {
-            if (vehicle._id == "" || vehicle.number == "") {
+    private fun setContentState(house: House?) {
+        if (house != null) {
+            if (house._id == "" || house.number == "") {
                 isNew = true
                 binding.btnAddAuto.visibility = View.VISIBLE
                 binding.cvContent.visibility = View.GONE
@@ -128,8 +128,8 @@ class MyHouseFragment : BaseFragment() {
                 isNew = false
                 binding.btnAddAuto.visibility = View.GONE
                 binding.cvContent.visibility = View.VISIBLE
-                binding.tvLive.text = getStatusMsg(vehicle.verificationState)
-                binding.tvAdminRemark.text = vehicle.adminRemark
+                binding.tvLive.text = getStatusMsg(house.verificationState)
+                binding.tvAdminRemark.text = house.adminRemark
             }
         } else {
             binding.btnAddAuto.visibility = View.VISIBLE

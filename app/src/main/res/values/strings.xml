@@ -3,7 +3,7 @@
 
     <string name="about_us">About Us</string>
     <string name="accepted">Accepted</string>
-    <string name="add_vehicle">Add House</string>
+    <string name="add_house">Add House</string>
     <string name="added_successfully">Added Successfully</string>
 
 
@@ -26,7 +26,7 @@
     <string name="live">Live</string>
 
     <string name="mobile_number">Mobile Number</string>
-    <string name="my_vehicle">My Vehicle</string>
+    <string name="my_house">My House</string>
     <string name="modify_time">Modify Time</string>
 
     <string name="name">Name</string>
@@ -50,22 +50,17 @@
     <string name="submit">Submit</string>
     <string name="system_verification_pending">System Verification Pending</string>
 
-    <string name="type">Type</string>
     <string name="there_is_some_error">There is some error</string>
     <string name="this_field_required">This field required!</string>
-    <string name="this_should_be_4_digits">This should be 4 digits</string>
     <string name="this_should_be_10_digits">This should be 10 digits</string>
 
     <string name="update">Update</string>
     <string name="updated_successfully">Updated Successfully</string>
     <string name="update_location">Update Location</string>
 
-    <string name="vehicle">Vehicle</string>
-    <string name="vehicle_image">Vehicle Image</string>
-    <string name="vehicle_name">Vehicle Name</string>
-    <string name="vehicle_number">Vehicle Number</string>
-    <string name="vehicle_type">Vehicle Type</string>
-    <string name="vehicle_details">Vehicle Details</string>
+    <string name="house">House</string>
+    <string name="house_image">House Image</string>
+    <string name="house_details">House Details</string>
 
 
     <string name="verification_status">Verification Status</string>
