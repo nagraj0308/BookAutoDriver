@@ -8,7 +8,7 @@
 -keep class com.rent.house.presentation.base.*{*;}
 -keep class com.rent.house.presentation.vehicle.*{*;}
 -keep class com.rent.house.presentation.home.*{*;}
--keep class com.rent.house.presentation.mygaadi.*{*;}
+-keep class com.rent.house.presentation.myhouse.*{*;}
 -keep class com.rent.house.presentation.synclocation.*{*;}
 -keep class com.rent.house.presentation.*{*;}
 -keep class com.rent.house.utils.*{*;}

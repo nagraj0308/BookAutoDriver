@@ -1,4 +1,4 @@
-package com.rent.house.presentation.mygaadi
+package com.rent.house.presentation.myhouse
 
 import android.graphics.Bitmap
 import android.graphics.Canvas
@@ -18,14 +18,14 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.rent.house.R
 import com.rent.house.data.remote.reqres.Vehicle
-import com.rent.house.databinding.FragmentMyGaadiBinding
+import com.rent.house.databinding.FragmentMyHouseBinding
 import com.rent.house.presentation.base.BaseFragment
 import com.rent.house.presentation.home.HomeViewModel
 
 
-class MyGaadiFragment : BaseFragment() {
+class MyHouseFragment : BaseFragment() {
 
-    private var _binding: FragmentMyGaadiBinding? = null
+    private var _binding: FragmentMyHouseBinding? = null
     private val viewModel: HomeViewModel by activityViewModels()
     private var isNew: Boolean = true
     private var map: GoogleMap? = null
@@ -37,7 +37,7 @@ class MyGaadiFragment : BaseFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentMyGaadiBinding.inflate(inflater, container, false)
+        _binding = FragmentMyHouseBinding.inflate(inflater, container, false)
         MapsInitializer.initialize(requireContext(), MapsInitializer.Renderer.LATEST) {}
         val root: View = binding.root
         val navController = findNavController()

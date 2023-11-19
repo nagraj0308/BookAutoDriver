@@ -7,14 +7,14 @@ import com.rent.house.data.remote.reqres.GetVehicleRequest
 import com.rent.house.data.remote.reqres.VehicleRequest
 import com.rent.house.data.remote.reqres.VehicleResponse
 import com.rent.house.data.remote.reqres.VehiclesResponse
-import com.rent.house.domain.BVApi
+import com.rent.house.domain.Api
 import retrofit2.Response
 import javax.inject.Inject
 
 
-class BVApiImp @Inject constructor(
-    private val service: BVService
-) : BVApi {
+class ApiImp @Inject constructor(
+    private val service: Service
+) : Api {
 
     override suspend fun getAllVehicle(request: GetVehicleRequest?): Response<VehiclesResponse> {
         return service.getAllVehicleV1(request)

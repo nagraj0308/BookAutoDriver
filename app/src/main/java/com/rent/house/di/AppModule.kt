@@ -4,9 +4,9 @@ import android.content.Context
 import android.content.SharedPreferences
 import com.rent.house.BuildConfig
 import com.rent.house.PM
-import com.rent.house.data.remote.BVApiImp
-import com.rent.house.data.remote.BVService
-import com.rent.house.domain.BVApi
+import com.rent.house.data.remote.ApiImp
+import com.rent.house.data.remote.Service
+import com.rent.house.domain.Api
 import com.rent.house.utils.Constants
 import dagger.Module
 import dagger.Provides
@@ -48,14 +48,14 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideBVService(retrofit: Retrofit): BVService {
-        return retrofit.create(BVService::class.java)
+    fun provideBVService(retrofit: Retrofit): Service {
+        return retrofit.create(Service::class.java)
     }
 
     @Provides
     @Singleton
-    fun provideBVApi(service: BVService): BVApi {
-        return BVApiImp(service)
+    fun provideBVApi(service: Service): Api {
+        return ApiImp(service)
     }
 
     @Provides

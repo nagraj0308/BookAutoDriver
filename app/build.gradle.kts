@@ -17,8 +17,8 @@ android {
         applicationId = "com.rent.house"
         minSdk = 27
         targetSdk = 34
-        versionCode = 31
-        versionName = "3.1"
+        versionCode = 1
+        versionName = "0.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }

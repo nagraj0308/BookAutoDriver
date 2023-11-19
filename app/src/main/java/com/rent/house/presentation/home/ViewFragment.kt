@@ -16,7 +16,7 @@ import com.rent.house.utils.Utils
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ViewAutoFragment : BaseFragment() {
+class ViewFragment : BaseFragment() {
     private val viewModel: HomeViewModel by activityViewModels()
     private var _binding: FragmentViewDetailsBinding? = null
     private val binding get() = _binding!!

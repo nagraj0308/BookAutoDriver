@@ -17,7 +17,7 @@ import com.rent.house.data.remote.reqres.GetVehicleByGmailIdRequest
 import com.rent.house.data.remote.reqres.GetVehicleRequest
 import com.rent.house.data.remote.reqres.Vehicle
 import com.rent.house.data.remote.reqres.VehicleRequest
-import com.rent.house.domain.BVApi
+import com.rent.house.domain.Api
 import com.rent.house.utils.FBS
 import com.rent.house.utils.PermissionUtils
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -32,7 +32,7 @@ import javax.inject.Inject
 @SuppressLint("MissingPermission")
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val api: BVApi
+    private val api: Api
 ) : ViewModel() {
 
     @Inject

@@ -13,22 +13,22 @@
 
     <fragment
         android:id="@+id/nav_view_gaadi"
-        android:name="com.rent.house.presentation.home.ViewAutoFragment"
+        android:name="com.rent.house.presentation.home.ViewFragment"
         android:label="@string/vehicle_details"
         tools:layout="@layout/fragment_view_details" />
 
 
     <fragment
         android:id="@+id/nav_my_gaadi"
-        android:name="com.rent.house.presentation.mygaadi.MyGaadiFragment"
+        android:name="com.rent.house.presentation.myhouse.MyHouseFragment"
         android:label="@string/my_vehicle"
-        tools:layout="@layout/fragment_my_gaadi" />
+        tools:layout="@layout/fragment_my_house" />
 
     <fragment
         android:id="@+id/nav_add_edit_gaadi"
-        android:name="com.rent.house.presentation.mygaadi.AddEditAutoFragment"
+        android:name="com.rent.house.presentation.myhouse.EditFragment"
         android:label="@string/vehicle_details"
-        tools:layout="@layout/fragment_add_edit_auto_details" />
+        tools:layout="@layout/fragment_edit_details" />
 
     <fragment
         android:id="@+id/nav_setting"

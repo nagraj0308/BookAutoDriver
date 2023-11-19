@@ -9,7 +9,7 @@ import com.rent.house.data.remote.reqres.VehicleResponse
 import com.rent.house.data.remote.reqres.VehiclesResponse
 import retrofit2.Response
 
-interface BVApi {
+interface Api {
 
     suspend fun getAllVehicle(request: GetVehicleRequest?): Response<VehiclesResponse>
     suspend fun insertVehicle(request: VehicleRequest?): Response<VehicleResponse>

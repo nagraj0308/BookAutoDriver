@@ -13,7 +13,7 @@ import retrofit2.http.Headers
 import retrofit2.http.POST
 
 
-interface BVService {
+interface Service {
 
     @Headers("Content-Type: application/json")
     @POST("api/getAllVehicleV1/")

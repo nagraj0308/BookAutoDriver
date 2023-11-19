@@ -1,4 +1,4 @@
-package com.rent.house.presentation.mygaadi
+package com.rent.house.presentation.myhouse
 
 import android.app.Activity
 import android.content.Intent
@@ -16,7 +16,7 @@ import androidx.fragment.app.activityViewModels
 import com.bumptech.glide.Glide
 import com.rent.house.PM
 import com.rent.house.R
-import com.rent.house.databinding.FragmentAddEditAutoDetailsBinding
+import com.rent.house.databinding.FragmentEditDetailsBinding
 import com.rent.house.presentation.base.BaseFragment
 import com.rent.house.presentation.home.HomeViewModel
 import com.rent.house.utils.Constants
@@ -26,11 +26,11 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class AddEditAutoFragment : BaseFragment() {
+class EditFragment : BaseFragment() {
     @Inject
     lateinit var pm: PM
 
-    private var _binding: FragmentAddEditAutoDetailsBinding? = null
+    private var _binding: FragmentEditDetailsBinding? = null
 
     private val viewModel: HomeViewModel by activityViewModels()
     private val binding get() = _binding!!
@@ -41,7 +41,7 @@ class AddEditAutoFragment : BaseFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentAddEditAutoDetailsBinding.inflate(inflater, container, false)
+        _binding = FragmentEditDetailsBinding.inflate(inflater, container, false)
         val root: View = binding.root
         hideProgress()
         binding.btnSubmit.setOnClickListener {
