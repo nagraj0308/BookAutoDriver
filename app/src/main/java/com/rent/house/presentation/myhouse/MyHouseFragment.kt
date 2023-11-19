@@ -44,7 +44,7 @@ class MyHouseFragment : BaseFragment() {
         binding.btnAddAuto.setOnClickListener {
             val bundle = Bundle()
             bundle.putBoolean("is_new", isNew)
-            navController.navigate(R.id.nav_add_edit_gaadi, bundle)
+            navController.navigate(R.id.nav_edit_house, bundle)
         }
 
 
@@ -52,7 +52,7 @@ class MyHouseFragment : BaseFragment() {
         binding.btnEdit.setOnClickListener {
             val bundle = Bundle()
             bundle.putBoolean("is_new", isNew)
-            navController.navigate(R.id.nav_add_edit_gaadi, bundle)
+            navController.navigate(R.id.nav_edit_house, bundle)
         }
 
         viewModel.house.observe(viewLifecycleOwner) {
@@ -119,7 +119,7 @@ class MyHouseFragment : BaseFragment() {
 
     private fun setContentState(house: House?) {
         if (house != null) {
-            if (house._id == "" || house.number == "") {
+            if (house._id == "" || house.mobileNo == "") {
                 isNew = true
                 binding.btnAddAuto.visibility = View.VISIBLE
                 binding.cvContent.visibility = View.GONE

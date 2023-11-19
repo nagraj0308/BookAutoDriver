@@ -31,38 +31,19 @@
 
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/til_auto_number"
+                        android:id="@+id/til_name"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="5dp"
-                        android:hint="@string/vehicle_number"
-                        app:startIconDrawable="@drawable/ic_number">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:digits="1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-                            android:inputType="textCapCharacters"
-                            android:maxLength="10"
-                            android:maxLines="1" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/til_driver_name"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="5dp"
-                        android:hint="@string/driver_name"
+                        android:hint="@string/name"
                         app:startIconDrawable="@drawable/ic_person">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:inputType="text"
-                            android:maxLength="18"
+                            android:maxLength="30"
                             android:maxLines="1" />
 
                     </com.google.android.material.textfield.TextInputLayout>
@@ -101,30 +82,6 @@
 
                     </com.google.android.material.textfield.TextInputLayout>
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="5dp">
-
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/til_auto_type"
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="@string/vehicle_type"
-                            app:startIconDrawable="@drawable/ic_edit">
-
-                            <AutoCompleteTextView
-                                android:id="@+id/actv_auto_type"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:focusable="false"
-                                android:inputType="none" />
-
-                        </com.google.android.material.textfield.TextInputLayout>
-
-                    </LinearLayout>
-
 
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -135,7 +92,7 @@
                             android:layout_height="wrap_content"
                             android:layout_alignParentStart="true"
                             android:layout_centerVertical="true"
-                            android:text="@string/vehicle_image"
+                            android:text="@string/house_image"
                             android:textSize="18sp" />
 
                         <ImageButton
@@ -152,7 +109,58 @@
                         android:layout_height="wrap_content">
 
                         <ImageView
-                            android:id="@+id/iv_auto_photo"
+                            android:id="@+id/iv_auto_photo1"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:background="@drawable/no_image"
+                            android:scaleType="fitXY"
+                            app:layout_constraintDimensionRatio="3:2"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            tools:ignore="MissingConstraints" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:id="@+id/iv_auto_photo2"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:background="@drawable/no_image"
+                            android:scaleType="fitXY"
+                            app:layout_constraintDimensionRatio="3:2"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            tools:ignore="MissingConstraints" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:id="@+id/iv_auto_photo3"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:background="@drawable/no_image"
+                            android:scaleType="fitXY"
+                            app:layout_constraintDimensionRatio="3:2"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            tools:ignore="MissingConstraints" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:id="@+id/iv_auto_photo4"
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
                             android:background="@drawable/no_image"

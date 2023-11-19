@@ -41,17 +41,14 @@ class ViewFragment : BaseFragment() {
 
                 }
             }
-            binding.tvNumber.text = buildString {
+
+            binding.tvName.text = buildString {
                 append(": ")
-                append(data!!.number)
+                append(data!!.name)
             }
-            binding.tvDriverName.text = buildString {
+            binding.tvAddress.text = buildString {
                 append(": ")
-                append(data!!.driver)
-            }
-            binding.tvType.text = buildString {
-                append(": ")
-                append(Constants.vehicleTypes[data!!.typeId])
+                append(data!!.address)
             }
             binding.tvDistance.text = buildString {
                 append(": ")
@@ -71,7 +68,7 @@ class ViewFragment : BaseFragment() {
                 append(data!!.rate)
             }
 
-            context?.let { Glide.with(it).asBitmap().load(data?.imageUrl).into(binding.ivPhoto) }
+            context?.let { Glide.with(it).asBitmap().load(data?.imageUrl1).into(binding.ivPhoto) }
         }
 
         return root

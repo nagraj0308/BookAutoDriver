@@ -7,6 +7,7 @@ import java.io.Serializable
 data class HouseRequest(
     @SerializedName("vId") val vId: String?,
     @SerializedName("name") val name: String?,
+    @SerializedName("address") val address: String?,
     @SerializedName("lat") val lat: Double?,
     @SerializedName("lon") val lon: Double?,
     @SerializedName("mobileNo") val mobileNo: String?,
@@ -47,6 +48,7 @@ data class House(
     val _id: String = "",
     val deactivated: Boolean = false,
     val name: String = "",
+    val address: String = "",
     val lat: Double = 0.0,
     val lon: Double = 0.0,
     val mobileNo: String = "",

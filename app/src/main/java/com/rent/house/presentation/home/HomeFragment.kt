@@ -55,7 +55,7 @@ class HomeFragment : BaseFragment() {
             map = it
 
 
-            viewModel.vehicles.observe(viewLifecycleOwner) { list ->
+            viewModel.houses.observe(viewLifecycleOwner) { list ->
                 map!!.clear()
                 cl = LatLng(viewModel.lat.value!!, viewModel.lon.value!!)
                 val update = CameraUpdateFactory.newLatLngZoom(cl!!, 10f)
@@ -67,11 +67,11 @@ class HomeFragment : BaseFragment() {
 
                 for (au in list) {
                     map!!.addMarker(
-                        MarkerOptions().position(LatLng(au.lat, au.lon)).title(au.number)
+                        MarkerOptions().position(LatLng(au.lat, au.lon)).title(au.rate)
                             .icon(
                                 getMarkerIconFromDrawable(
                                     resources.getDrawable(
-                                        getDrawable(au.typeId),
+                                        getDrawable(),
                                         null
                                     )
                                 )
@@ -108,39 +108,11 @@ class HomeFragment : BaseFragment() {
     private fun showDetails(auto: House) {
         val bundle = Bundle()
         bundle.putSerializable("item", auto)
-        findNavController().navigate(R.id.nav_view_gaadi, bundle)
+        findNavController().navigate(R.id.nav_view_house, bundle)
     }
 
-    private fun getDrawable(typeId: Int): Int {
-        return when (typeId) {
-            0 -> {
-                R.drawable.car
-            }
-
-            1 -> {
-                R.drawable.auto
-            }
-
-            2 -> {
-                R.drawable.bike
-            }
-
-            3 -> {
-                R.drawable.bus
-            }
-
-            4 -> {
-                R.drawable.pickup
-            }
-
-            5 -> {
-                R.drawable.truck
-            }
-
-            else -> {
-                R.drawable.others
-            }
-        }
+    private fun getDrawable(): Int {
+        return R.drawable.car
     }
 
 

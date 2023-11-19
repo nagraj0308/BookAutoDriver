@@ -73,59 +73,9 @@ class HomeViewModel @Inject constructor(
     }
 
 
-    fun insertFSImage(
-        gTypeId: Int,
-        gNumber: String,
-        gDriver: String,
-        gMobile: String,
-        gRate: String,
-        bitmap: Bitmap, callback: (Boolean) -> Unit
-    ) {
-
-
-        viewModelScope.launch(Dispatchers.IO) {
-            val ref = FBS.getReference(pm.gmail!!)
-            val baos = ByteArrayOutputStream()
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 60, baos)
-            val data = baos.toByteArray()
-            val uploadTask: UploadTask = ref.putBytes(data)
-            uploadTask.addOnFailureListener {
-                CoroutineScope(Dispatchers.IO).launch {
-                    withContext(Dispatchers.Main) {
-                        callback(false)
-                    }
-                }
-            }.addOnSuccessListener {
-                ref.downloadUrl.addOnSuccessListener {
-                    insertGaadi(
-                        pm.gmail!!,
-                        gTypeId,
-                        gNumber,
-                        gDriver,
-                        gMobile,
-                        gRate,
-                        it.toString()
-                    ) {
-                        CoroutineScope(Dispatchers.IO).launch {
-                            withContext(Dispatchers.Main) {
-                                callback(it)
-                            }
-                        }
-                    }
-                }.addOnFailureListener {
-                    CoroutineScope(Dispatchers.IO).launch {
-                        withContext(Dispatchers.Main) {
-                            callback(false)
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    private fun insertGaadi(
-        gId: String,
+    fun insertHouse(
         gName: String,
+        gAddress: String,
         gMobile: String,
         gRate: String,
         gImg1: String,
@@ -138,7 +88,7 @@ class HomeViewModel @Inject constructor(
             runCatching {
                 api.insertHouse(
                     HouseRequest(
-                        gId, gName,
+                        pm.gmail, gName, gAddress,
                         _lat.value,
                         _lon.value,
                         gMobile,
@@ -163,49 +113,9 @@ class HomeViewModel @Inject constructor(
     }
 
 
-    fun updateFSImage(
-        gMobile: String,
-        gRate: String,
-        bitmap1: Bitmap,
-        bitmap2: Bitmap,
-        bitmap3: Bitmap,
-        bitmap4: Bitmap,
-        callback: (Boolean) -> Unit
-    ) {
-        var img1:String
-        viewModelScope.launch(Dispatchers.IO) {
-            val ref = FBS.getReference(pm.gmail!! + "1")
-            val baos = ByteArrayOutputStream()
-            bitmap1.compress(Bitmap.CompressFormat.JPEG, 60, baos)
-            val data = baos.toByteArray()
-            val uploadTask: UploadTask = ref.putBytes(data)
-            uploadTask.addOnSuccessListener {
-                ref.downloadUrl.addOnSuccessListener {
-
-                }
-            }
-        }
-    }
-
-    updateGaadiData(
-    pm.gmail!!,
-    gMobile,
-    gRate,
-    it.toString(),
-    "",
-    "",
-    "",
-    ) {
-        CoroutineScope(Dispatchers.IO).launch {
-            withContext(Dispatchers.Main) {
-                callback(it)
-            }
-        }
-    }
-
-
-    private fun updateGaadiData(
+    fun updateHouseData(
         gName: String,
+        gAddress: String,
         gMobile: String,
         gRate: String,
         gImg1: String,
@@ -218,7 +128,7 @@ class HomeViewModel @Inject constructor(
             runCatching {
                 api.updateHouse(
                     HouseRequest(
-                        pm.gmail, gName,
+                        pm.gmail, gName, gAddress,
                         _lat.value,
                         _lon.value,
                         gMobile,
