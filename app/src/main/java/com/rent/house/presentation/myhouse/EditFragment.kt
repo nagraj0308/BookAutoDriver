@@ -52,15 +52,10 @@ class EditFragment : BaseFragment() {
                 val name = binding.tilName.editText!!.text.trim().toString()
                 val mobileNumber = binding.tilMobileNumber.editText!!.text.trim().toString()
                 val rate = binding.tilRate.editText!!.text.trim().toString()
+                val address = binding.tilAddress.editText!!.text.trim().toString()
                 showProgress()
                 viewModel.insertHouse(
-                    name, "",
-                    mobileNumber,
-                    rate,
-                    "",
-                    "",
-                    "",
-                    ""
+                    name, address, mobileNumber, rate
                 ) {
                     hideProgress()
                     if (it) {
@@ -77,15 +72,10 @@ class EditFragment : BaseFragment() {
                 val name = binding.tilName.editText!!.text.trim().toString()
                 val mobileNumber = binding.tilMobileNumber.editText!!.text.trim().toString()
                 val rate = binding.tilRate.editText!!.text.trim().toString()
+                val address = binding.tilAddress.editText!!.text.trim().toString()
                 showProgress()
                 viewModel.updateHouseData(
-                    name, "",
-                    mobileNumber,
-                    rate,
-                    "",
-                    "",
-                    "",
-                    ""
+                    name, address, mobileNumber, rate
                 ) {
                     hideProgress()
                     if (it) {
@@ -116,9 +106,47 @@ class EditFragment : BaseFragment() {
         }
 
 
-        binding.btnEditPhoto.setOnClickListener {
+        binding.ivAutoPhoto1.setOnClickListener {
             if (PermissionUtils.checkReadStoragePermission(requireContext())) {
-                startForResult.launch(
+                startForResult1.launch(
+                    Intent(
+                        Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+                    )
+                )
+            } else {
+                PermissionUtils.requestReadStoragePermission(requireActivity())
+            }
+        }
+
+
+        binding.ivAutoPhoto2.setOnClickListener {
+            if (PermissionUtils.checkReadStoragePermission(requireContext())) {
+                startForResult2.launch(
+                    Intent(
+                        Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+                    )
+                )
+            } else {
+                PermissionUtils.requestReadStoragePermission(requireActivity())
+            }
+        }
+
+        binding.ivAutoPhoto3.setOnClickListener {
+            if (PermissionUtils.checkReadStoragePermission(requireContext())) {
+                startForResult3.launch(
+                    Intent(
+                        Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+                    )
+                )
+            } else {
+                PermissionUtils.requestReadStoragePermission(requireActivity())
+            }
+        }
+
+
+        binding.ivAutoPhoto4.setOnClickListener {
+            if (PermissionUtils.checkReadStoragePermission(requireContext())) {
+                startForResult4.launch(
                     Intent(
                         Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI
                     )
@@ -136,6 +164,11 @@ class EditFragment : BaseFragment() {
             binding.tilName.editText!!.setText(viewModel.house.value!!.name)
             binding.tilMobileNumber.editText!!.setText(viewModel.house.value!!.mobileNo)
             binding.tilRate.editText!!.setText(viewModel.house.value!!.rate)
+            binding.tilAddress.editText!!.setText(viewModel.house.value!!.address)
+            viewModel.setImg1(viewModel.house.value!!.imageUrl1)
+            viewModel.setImg2(viewModel.house.value!!.imageUrl2)
+            viewModel.setImg3(viewModel.house.value!!.imageUrl3)
+            viewModel.setImg4(viewModel.house.value!!.imageUrl4)
             Glide.with(this).asBitmap().load(viewModel.house.value!!.imageUrl1)
                 .into(binding.ivAutoPhoto1)
             Glide.with(this).asBitmap().load(viewModel.house.value!!.imageUrl2)
@@ -144,18 +177,15 @@ class EditFragment : BaseFragment() {
                 .into(binding.ivAutoPhoto3)
             Glide.with(this).asBitmap().load(viewModel.house.value!!.imageUrl4)
                 .into(binding.ivAutoPhoto4)
-
-
             binding.llEdit.visibility = View.VISIBLE
             binding.btnSubmit.visibility = View.GONE
         }
         return root
     }
 
-    private val startForResult = registerForActivityResult(
+    private val startForResult1 = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) { result: ActivityResult ->
-
         if (result.resultCode == Activity.RESULT_OK && null != result.data) {
             val data = result.data
             val selectedImage: Uri = data!!.data!!
@@ -168,12 +198,69 @@ class EditFragment : BaseFragment() {
             val picturePath = cursor.getString(columnIndex)
             cursor.close()
             Glide.with(this).asBitmap().load(picturePath).into(binding.ivAutoPhoto1)
-            performCrop(selectedImage, 3, 2)
+            performCrop(selectedImage, 3, 2, 1)
+        }
+    }
+
+    private val startForResult2 = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result: ActivityResult ->
+        if (result.resultCode == Activity.RESULT_OK && null != result.data) {
+            val data = result.data
+            val selectedImage: Uri = data!!.data!!
+            val filePathColumn = arrayOf(MediaStore.Images.Media.DATA)
+            val cursor = requireActivity().contentResolver.query(
+                selectedImage, filePathColumn, null, null, null
+            )
+            cursor!!.moveToFirst()
+            val columnIndex = cursor.getColumnIndex(filePathColumn[0])
+            val picturePath = cursor.getString(columnIndex)
+            cursor.close()
+            Glide.with(this).asBitmap().load(picturePath).into(binding.ivAutoPhoto2)
+            performCrop(selectedImage, 3, 2, 2)
+        }
+    }
+
+    private val startForResult3 = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result: ActivityResult ->
+        if (result.resultCode == Activity.RESULT_OK && null != result.data) {
+            val data = result.data
+            val selectedImage: Uri = data!!.data!!
+            val filePathColumn = arrayOf(MediaStore.Images.Media.DATA)
+            val cursor = requireActivity().contentResolver.query(
+                selectedImage, filePathColumn, null, null, null
+            )
+            cursor!!.moveToFirst()
+            val columnIndex = cursor.getColumnIndex(filePathColumn[0])
+            val picturePath = cursor.getString(columnIndex)
+            cursor.close()
+            Glide.with(this).asBitmap().load(picturePath).into(binding.ivAutoPhoto3)
+            performCrop(selectedImage, 3, 2, 3)
+        }
+    }
+
+    private val startForResult4 = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result: ActivityResult ->
+        if (result.resultCode == Activity.RESULT_OK && null != result.data) {
+            val data = result.data
+            val selectedImage: Uri = data!!.data!!
+            val filePathColumn = arrayOf(MediaStore.Images.Media.DATA)
+            val cursor = requireActivity().contentResolver.query(
+                selectedImage, filePathColumn, null, null, null
+            )
+            cursor!!.moveToFirst()
+            val columnIndex = cursor.getColumnIndex(filePathColumn[0])
+            val picturePath = cursor.getString(columnIndex)
+            cursor.close()
+            Glide.with(this).asBitmap().load(picturePath).into(binding.ivAutoPhoto4)
+            performCrop(selectedImage, 3, 2, 4)
         }
     }
 
 
-    private val startForCropResult = registerForActivityResult(
+    private val startForCropResult1 = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) { result: ActivityResult ->
         if (result.resultCode == Activity.RESULT_OK && null != result.data) {
@@ -182,12 +269,68 @@ class EditFragment : BaseFragment() {
                 val extras: Bundle = data!!.extras!!
                 val croppedPic = extras.getParcelable<Bitmap>("data")
                 Glide.with(this).asBitmap().load(croppedPic).into(binding.ivAutoPhoto1)
+                if (croppedPic != null) {
+                    uploadImage(croppedPic, 1)
+                }
             } catch (_: Exception) {
             }
         }
     }
 
-    private fun performCrop(picUri: Uri, arx: Int, ary: Int) {
+    private val startForCropResult2 = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result: ActivityResult ->
+        if (result.resultCode == Activity.RESULT_OK && null != result.data) {
+            val data = result.data
+            try {
+                val extras: Bundle = data!!.extras!!
+                val croppedPic = extras.getParcelable<Bitmap>("data")
+                Glide.with(this).asBitmap().load(croppedPic).into(binding.ivAutoPhoto2)
+                if (croppedPic != null) {
+                    uploadImage(croppedPic, 2)
+                }
+            } catch (_: Exception) {
+            }
+        }
+    }
+
+    private val startForCropResult3 = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result: ActivityResult ->
+        if (result.resultCode == Activity.RESULT_OK && null != result.data) {
+            val data = result.data
+            try {
+                val extras: Bundle = data!!.extras!!
+                val croppedPic = extras.getParcelable<Bitmap>("data")
+                Glide.with(this).asBitmap().load(croppedPic).into(binding.ivAutoPhoto3)
+                if (croppedPic != null) {
+                    uploadImage(croppedPic, 3)
+                }
+            } catch (_: Exception) {
+            }
+        }
+    }
+
+    private val startForCropResult4 = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result: ActivityResult ->
+        if (result.resultCode == Activity.RESULT_OK && null != result.data) {
+            val data = result.data
+            try {
+                val extras: Bundle = data!!.extras!!
+                val croppedPic = extras.getParcelable<Bitmap>("data")
+                Glide.with(this).asBitmap().load(croppedPic).into(binding.ivAutoPhoto4)
+                if (croppedPic != null) {
+                    uploadImage(croppedPic, 4)
+                }
+
+            } catch (_: Exception) {
+            }
+        }
+    }
+
+
+    private fun performCrop(picUri: Uri, arx: Int, ary: Int, imgNo: Int) {
         val cropIntent = Intent("com.android.camera.action.CROP")
         cropIntent.setDataAndType(picUri, "image/*")
         cropIntent.putExtra("crop", "true")
@@ -196,11 +339,31 @@ class EditFragment : BaseFragment() {
         cropIntent.putExtra("outputX", 256)
         cropIntent.putExtra("outputY", 256)
         cropIntent.putExtra("return-data", true)
-        startForCropResult.launch(
-            Intent(
-                cropIntent
+        if (imgNo == 1) {
+            startForCropResult1.launch(
+                Intent(
+                    cropIntent
+                )
             )
-        )
+        } else if (imgNo == 2) {
+            startForCropResult2.launch(
+                Intent(
+                    cropIntent
+                )
+            )
+        } else if (imgNo == 3) {
+            startForCropResult3.launch(
+                Intent(
+                    cropIntent
+                )
+            )
+        } else if (imgNo == 4) {
+            startForCropResult4.launch(
+                Intent(
+                    cropIntent
+                )
+            )
+        }
     }
 
 
@@ -247,17 +410,24 @@ class EditFragment : BaseFragment() {
         _binding = null
     }
 
-    fun uploadImage(bitmap1: Bitmap) {
-        var img1: String
+    private fun uploadImage(bitmap1: Bitmap, imgNo: Int) {
         lifecycleScope.launch(Dispatchers.IO) {
-            val ref = FBS.getReference(pm.gmail!! + "1")
+            val ref = FBS.getReference(pm.gmail!! + imgNo)
             val baos = ByteArrayOutputStream()
             bitmap1.compress(Bitmap.CompressFormat.JPEG, 60, baos)
             val data = baos.toByteArray()
             val uploadTask: UploadTask = ref.putBytes(data)
             uploadTask.addOnSuccessListener {
                 ref.downloadUrl.addOnSuccessListener {
-
+                    if (imgNo == 1) {
+                        viewModel.setImg1(it.toString())
+                    } else if (imgNo == 2) {
+                        viewModel.setImg2(it.toString())
+                    } else if (imgNo == 3) {
+                        viewModel.setImg3(it.toString())
+                    } else if (imgNo == 4) {
+                        viewModel.setImg4(it.toString())
+                    }
                 }
             }
         }
