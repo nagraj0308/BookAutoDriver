@@ -71,7 +71,7 @@ class HomeFragment : BaseFragment() {
                             .icon(
                                 getMarkerIconFromDrawable(
                                     resources.getDrawable(
-                                        getDrawable(),
+                                        R.drawable.user_home,
                                         null
                                     )
                                 )
@@ -109,10 +109,6 @@ class HomeFragment : BaseFragment() {
         val bundle = Bundle()
         bundle.putSerializable("item", auto)
         findNavController().navigate(R.id.nav_view_house, bundle)
-    }
-
-    private fun getDrawable(): Int {
-        return R.drawable.car
     }
 
 
