@@ -8,6 +8,7 @@ import android.view.Window
 import android.widget.Button
 import androidx.activity.viewModels
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
@@ -23,12 +24,21 @@ import com.book.gaadi.presentation.login.LoginActivity
 import com.book.gaadi.utils.Constants
 import com.book.gaadi.utils.PermissionUtils
 import com.book.gaadi.utils.RequestCode
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
+import com.google.android.gms.location.Priority
+import com.google.android.gms.maps.MapsInitializer
+import com.google.android.gms.tasks.CancellationTokenSource
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.ktx.remoteConfig
 import com.google.firebase.remoteconfig.ktx.remoteConfigSettings
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 
@@ -42,12 +52,16 @@ class HomeActivity : BaseActivity() {
     private lateinit var headerBinding: NavHeaderMainBinding
     private var remoteConfig: FirebaseRemoteConfig = Firebase.remoteConfig
     private val viewModel: HomeViewModel by viewModels()
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        MapsInitializer.initialize(this, MapsInitializer.Renderer.LATEST) {}
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         headerBinding = NavHeaderMainBinding.bind(binding.navView.getHeaderView(0))
 
 
@@ -101,9 +115,7 @@ class HomeActivity : BaseActivity() {
     override fun onStart() {
         super.onStart()
         setLangCode(pm.lang)
-        viewModel.updateLocation(this) {
-
-        }
+        updateLocation()
         remoteConfig = Firebase.remoteConfig
         val configSettings = remoteConfigSettings {
             minimumFetchIntervalInSeconds = 300
@@ -130,7 +142,7 @@ class HomeActivity : BaseActivity() {
                 this
             )
         ) {
-            viewModel.updateLocation(this) {}
+            updateLocation()
         }
     }
 
@@ -155,5 +167,28 @@ class HomeActivity : BaseActivity() {
             )
         }
         dialog.show()
+    }
+
+    fun updateLocation() {
+        if (PermissionUtils.checkLocationEnabled(this)) {
+            if (PermissionUtils.checkLocationAccessPermission(this)) {
+                lifecycleScope.launch(Dispatchers.IO) {
+                    val result = fusedLocationClient.getCurrentLocation(
+                        Priority.PRIORITY_BALANCED_POWER_ACCURACY,
+                        CancellationTokenSource().token,
+                    ).await()
+                    result?.let {
+                        withContext(Dispatchers.Main) {
+                            viewModel.onLocationUpdated(it.latitude, it.longitude)
+                        }
+
+                    }
+                }
+            } else {
+                PermissionUtils.requestLocationAccessPermission(this)
+            }
+        } else {
+            PermissionUtils.requestLocationEnableRequest(this)
+        }
     }
 }

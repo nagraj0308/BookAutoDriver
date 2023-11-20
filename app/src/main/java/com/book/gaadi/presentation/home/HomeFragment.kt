@@ -36,11 +36,10 @@ class HomeFragment : BaseFragment() {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        MapsInitializer.initialize(requireContext(), MapsInitializer.Renderer.LATEST) {}
         val root: View = binding.root
         binding.btnRefresh.setOnClickListener {
-            activity?.let { it1 ->
-                viewModel.updateLocation(it1) {}
+            activity?.let {
+                (activity as HomeActivity).updateLocation()
             }
         }
 

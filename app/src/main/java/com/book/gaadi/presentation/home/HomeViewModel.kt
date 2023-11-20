@@ -2,9 +2,7 @@ package com.book.gaadi.presentation.home
 
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.graphics.Bitmap
-import android.location.Location
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -17,8 +15,6 @@ import com.book.gaadi.data.remote.reqres.Vehicle
 import com.book.gaadi.data.remote.reqres.VehicleRequest
 import com.book.gaadi.domain.BVApi
 import com.book.gaadi.utils.FBS
-import com.book.gaadi.utils.PermissionUtils
-import com.google.android.gms.location.LocationServices
 import com.google.firebase.storage.UploadTask
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
@@ -70,6 +66,13 @@ class HomeViewModel @Inject constructor(
                 }
             }
         }
+    }
+
+    fun onLocationUpdated(lat: Double, lon: Double) {
+        _isLocationUpdated.value = true
+        _lat.value = lat
+        _lon.value = lon
+        getAllVehicle()
     }
 
 
@@ -266,28 +269,6 @@ class HomeViewModel @Inject constructor(
                     callback(true)
                 }
             }
-        }
-    }
-
-
-    fun updateLocation(activity: Activity, callback: (Boolean) -> Unit) {
-        if (PermissionUtils.checkLocationEnabled(activity)) {
-            if (PermissionUtils.checkLocationAccessPermission(activity)) {
-                val fusedLocationClient = LocationServices.getFusedLocationProviderClient(activity)
-                fusedLocationClient.lastLocation.addOnSuccessListener { location: Location? ->
-                    location?.let {
-                        _isLocationUpdated.value = true
-                        _lat.value = it.latitude
-                        _lon.value = it.longitude
-                        getAllVehicle()
-                        callback(true)
-                    }
-                }
-            } else {
-                PermissionUtils.requestLocationAccessPermission(activity)
-            }
-        } else {
-            PermissionUtils.requestLocationEnableRequest(activity)
         }
     }
 
