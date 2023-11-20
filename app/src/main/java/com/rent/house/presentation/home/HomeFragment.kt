@@ -40,15 +40,14 @@ class HomeFragment : BaseFragment() {
         val root: View = binding.root
         binding.btnRefresh.setOnClickListener {
             activity?.let { it1 ->
-                viewModel.updateLocation(it1) {}
+                (activity as HomeActivity).updateLocation()
             }
         }
 
 
         //Maps View
         binding.mvCl.onCreate(savedInstanceState)
-        binding.mvCl.getMapAsync()
-        {
+        binding.mvCl.getMapAsync() {
 
             val circleDrawable = resources.getDrawable(R.drawable.user, null)
             val markerIcon: BitmapDescriptor = getMarkerIconFromDrawable(circleDrawable)
@@ -67,12 +66,10 @@ class HomeFragment : BaseFragment() {
 
                 for (au in list) {
                     map!!.addMarker(
-                        MarkerOptions().position(LatLng(au.lat, au.lon)).title(au.rate)
-                            .icon(
+                        MarkerOptions().position(LatLng(au.lat, au.lon)).title(au.rate).icon(
                                 getMarkerIconFromDrawable(
                                     resources.getDrawable(
-                                        R.drawable.user_home,
-                                        null
+                                        R.drawable.user_home, null
                                     )
                                 )
                             ).snippet(au._id)

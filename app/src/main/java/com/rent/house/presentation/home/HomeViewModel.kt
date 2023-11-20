@@ -82,13 +82,15 @@ class HomeViewModel @Inject constructor(
         }
     }
 
+    fun onLocationUpdated(lat: Double, lon: Double) {
+        _isLocationUpdated.value = true
+        _lat.value = lat
+        _lon.value = lon
+        getAllHouse()
+    }
 
     fun insertHouse(
-        gName: String,
-        gAddress: String,
-        gMobile: String,
-        gRate: String,
-        callback: (Boolean) -> Unit
+        gName: String, gAddress: String, gMobile: String, gRate: String, callback: (Boolean) -> Unit
     ) {
         CoroutineScope(Dispatchers.IO).launch {
             runCatching {
@@ -193,48 +195,20 @@ class HomeViewModel @Inject constructor(
     }
 
 
-    fun updateLocation(activity: Activity, callback: (Boolean) -> Unit) {
-        if (PermissionUtils.checkLocationEnabled(activity)) {
-            if (PermissionUtils.checkLocationAccessPermission(activity)) {
-                val fusedLocationClient = LocationServices.getFusedLocationProviderClient(activity)
-                fusedLocationClient.lastLocation.addOnSuccessListener { location: Location? ->
-                    location?.let {
-                        _isLocationUpdated.value = true
-                        _lat.value = it.latitude
-                        _lon.value = it.longitude
-                        getAllHouse()
-                        callback(true)
-                    }
-                }
-            } else {
-                PermissionUtils.requestLocationAccessPermission(activity)
-            }
-        } else {
-            PermissionUtils.requestLocationEnableRequest(activity)
-        }
-    }
-
-
     fun deleteAuto(callback: (Boolean) -> Unit) {
         CoroutineScope(Dispatchers.IO).launch {
-            deleteGaadiImage(_house.value!!._id + "1") {
-
-            }
+            deleteHouseImage(_house.value!!._id + "1") {}
         }
         CoroutineScope(Dispatchers.IO).launch {
-            deleteGaadiImage(_house.value!!._id + "2") {
-            }
+            deleteHouseImage(_house.value!!._id + "2") {}
         }
         CoroutineScope(Dispatchers.IO).launch {
-            deleteGaadiImage(_house.value!!._id + "3") {
-
-            }
+            deleteHouseImage(_house.value!!._id + "3") {}
         }
         CoroutineScope(Dispatchers.IO).launch {
-            deleteGaadiImage(_house.value!!._id + "4") {
-            }
+            deleteHouseImage(_house.value!!._id + "4") {}
         }
-        deleteGaadiData(_house.value!!._id) {
+        deleteHouseData {
             if (it) {
                 CoroutineScope(Dispatchers.IO).launch {
                     withContext(Dispatchers.Main) {
@@ -252,12 +226,12 @@ class HomeViewModel @Inject constructor(
     }
 
 
-    private fun deleteGaadiImage(
-        gaadiId: String,
+    private fun deleteHouseImage(
+        gId: String,
         callback: (Boolean) -> Unit,
     ) {
         viewModelScope.launch(Dispatchers.IO) {
-            val ref = FBS.getReference(gaadiId)
+            val ref = FBS.getReference(gId)
             ref.delete().addOnSuccessListener {
                 CoroutineScope(Dispatchers.IO).launch {
                     withContext(Dispatchers.Main) {
@@ -276,12 +250,12 @@ class HomeViewModel @Inject constructor(
     }
 
 
-    private fun deleteGaadiData(
-        gaadiId: String, callback: (Boolean) -> Unit
+    private fun deleteHouseData(
+        callback: (Boolean) -> Unit
     ) {
         CoroutineScope(Dispatchers.IO).launch {
             runCatching {
-                api.deleteHouseById(DeleteRequest(gaadiId))
+                api.deleteHouseById(DeleteRequest(pm.gmail))
             }.onSuccess {
                 withContext(Dispatchers.Main) {
                     getAutoDetails() {}
