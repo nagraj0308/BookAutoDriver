@@ -36,6 +36,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
+import kotlinx.coroutines.withContext
 
 
 @AndroidEntryPoint
@@ -165,11 +166,14 @@ class HomeActivity : BaseActivity() {
             if (PermissionUtils.checkLocationAccessPermission(this)) {
                 lifecycleScope.launch(Dispatchers.IO) {
                     val result = fusedLocationClient.getCurrentLocation(
-                        Priority.PRIORITY_HIGH_ACCURACY,
+                        Priority.PRIORITY_BALANCED_POWER_ACCURACY,
                         CancellationTokenSource().token,
                     ).await()
                     result?.let {
-                        viewModel.onLocationUpdated(it.latitude, it.longitude)
+                        withContext(Dispatchers.Main) {
+                            viewModel.onLocationUpdated(it.latitude, it.longitude)
+                        }
+
                     }
                 }
             } else {
