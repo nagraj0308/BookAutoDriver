@@ -2,7 +2,7 @@ package com.book.auto.presentation.home
 
 import android.app.Dialog
 import android.content.Intent
-import android.content.pm.PackageManager
+import android.location.Location
 import android.net.Uri
 import android.os.Bundle
 import android.view.Window
@@ -22,14 +22,15 @@ import com.book.auto.presentation.base.BaseActivity
 import com.book.auto.utils.Constants
 import com.book.auto.utils.PermissionUtils
 import com.book.auto.utils.RequestCode
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
+import com.google.android.gms.maps.MapsInitializer
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.ktx.remoteConfig
 import com.google.firebase.remoteconfig.ktx.remoteConfigSettings
 import dagger.hilt.android.AndroidEntryPoint
-import java.security.Permission
-import java.security.Permissions
 
 
 @AndroidEntryPoint
@@ -39,12 +40,15 @@ class HomeActivity : BaseActivity() {
     private lateinit var headerBinding: NavHeaderMainBinding
     private var remoteConfig: FirebaseRemoteConfig = Firebase.remoteConfig
     private val viewModel: HomeViewModel by viewModels()
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        viewModel.updateLocation(this)
+        MapsInitializer.initialize(this, MapsInitializer.Renderer.LATEST) {}
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         headerBinding = NavHeaderMainBinding.bind(binding.navView.getHeaderView(0))
 
 
@@ -96,6 +100,7 @@ class HomeActivity : BaseActivity() {
 
     override fun onStart() {
         super.onStart()
+        updateLocation()
         remoteConfig = Firebase.remoteConfig
         val configSettings = remoteConfigSettings {
             minimumFetchIntervalInSeconds = 300
@@ -118,12 +123,12 @@ class HomeActivity : BaseActivity() {
         requestCode: Int, permissions: Array<out String>, grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == RequestCode.LOCATION && PermissionUtils.checkLocationAccessPermission(
                 this
             )
         ) {
-            viewModel.updateLocation(this)
-
+            updateLocation()
         }
     }
 
@@ -148,4 +153,22 @@ class HomeActivity : BaseActivity() {
         }
         dialog.show()
     }
+
+
+    fun updateLocation() {
+        if (PermissionUtils.checkLocationEnabled(this)) {
+            if (PermissionUtils.checkLocationAccessPermission(this)) {
+                fusedLocationClient.lastLocation.addOnSuccessListener { location: Location? ->
+                    location?.let {
+                        viewModel.onLocationUpdated(it.latitude, it.longitude)
+                    }
+                }
+            } else {
+                PermissionUtils.requestLocationAccessPermission(this)
+            }
+        } else {
+            PermissionUtils.requestLocationEnableRequest(this)
+        }
+    }
+
 }
