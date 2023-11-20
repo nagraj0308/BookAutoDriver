@@ -2,13 +2,13 @@ package com.book.auto.presentation.home
 
 import android.app.Dialog
 import android.content.Intent
-import android.location.Location
 import android.net.Uri
 import android.os.Bundle
 import android.view.Window
 import android.widget.Button
 import androidx.activity.viewModels
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
@@ -24,13 +24,18 @@ import com.book.auto.utils.PermissionUtils
 import com.book.auto.utils.RequestCode
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
+import com.google.android.gms.location.Priority
 import com.google.android.gms.maps.MapsInitializer
+import com.google.android.gms.tasks.CancellationTokenSource
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.ktx.remoteConfig
 import com.google.firebase.remoteconfig.ktx.remoteConfigSettings
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
 
 
 @AndroidEntryPoint
@@ -158,8 +163,12 @@ class HomeActivity : BaseActivity() {
     fun updateLocation() {
         if (PermissionUtils.checkLocationEnabled(this)) {
             if (PermissionUtils.checkLocationAccessPermission(this)) {
-                fusedLocationClient.lastLocation.addOnSuccessListener { location: Location? ->
-                    location?.let {
+                lifecycleScope.launch(Dispatchers.IO) {
+                    val result = fusedLocationClient.getCurrentLocation(
+                        Priority.PRIORITY_HIGH_ACCURACY,
+                        CancellationTokenSource().token,
+                    ).await()
+                    result?.let {
                         viewModel.onLocationUpdated(it.latitude, it.longitude)
                     }
                 }
