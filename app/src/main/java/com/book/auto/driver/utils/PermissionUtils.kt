@@ -7,6 +7,7 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.location.LocationManager
 import android.os.Build
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.LocationRequest
@@ -14,13 +15,15 @@ import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.LocationSettingsRequest
 import com.google.android.gms.location.LocationSettingsResponse
 
-class PermissionUtils {
-
-
+class RequestCode {
     companion object {
-        private const val REQUEST_CODE_READ_STORAGE = 13
+        const val LOCATION = 10
+        const val READ_STORAGE = 13
+    }
+}
 
-
+class PermissionUtils {
+    companion object {
         fun checkReadStoragePermission(context: Context): Boolean {
             return if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.S_V2) {
                 val readPermission: Int =
@@ -34,7 +37,7 @@ class PermissionUtils {
         fun requestReadStoragePermission(activity: Activity) {
             if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.S_V2) {
                 activity.requestPermissions(
-                    arrayOf(permission.READ_EXTERNAL_STORAGE), REQUEST_CODE_READ_STORAGE
+                    arrayOf(permission.READ_EXTERNAL_STORAGE), RequestCode.READ_STORAGE
                 )
             }
         }
@@ -53,19 +56,30 @@ class PermissionUtils {
         }
 
 
+        fun requestLocationAccessPermission(activity: Activity) {
+            ActivityCompat.requestPermissions(
+                activity,
+                arrayOf(
+                    permission.ACCESS_FINE_LOCATION,
+                    permission.ACCESS_FINE_LOCATION
+                ),
+                RequestCode.LOCATION
+            )
+        }
+
         fun requestLocationEnableRequest(activity: Activity) {
             val locationRequest: LocationRequest = LocationRequest.create()
             val builder = LocationSettingsRequest.Builder().addLocationRequest(locationRequest)
             LocationServices.getSettingsClient(activity).checkLocationSettings(builder.build())
                 .addOnSuccessListener(
                     activity
-                ) { response: LocationSettingsResponse? -> }.addOnFailureListener(
+                ) { }.addOnFailureListener(
                     activity
                 ) { ex: Exception? ->
                     if (ex is ResolvableApiException) {
                         try {
                             ex.startResolutionForResult(
-                                activity, 10
+                                activity, RequestCode.LOCATION
                             )
                         } catch (e: Exception) {
                             e.printStackTrace()

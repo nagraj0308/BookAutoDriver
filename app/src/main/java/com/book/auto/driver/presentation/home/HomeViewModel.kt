@@ -99,6 +99,13 @@ class HomeViewModel @Inject constructor(
         }
     }
 
+    fun onLocationUpdated(lat: Double, lon: Double) {
+        _isLocationUpdated.value = true
+        _lat.value = lat
+        _lon.value = lon
+        updateAutoLocation(pm.gmail!!, lat, lon)
+    }
+
     private fun insertGaadi(
         gId: String,
         gType: String,
@@ -279,25 +286,6 @@ class HomeViewModel @Inject constructor(
                     callback(true)
                 }
             }
-        }
-    }
-
-
-    fun updateLocation(activity: Activity) {
-        if (PermissionUtils.checkLocationEnabled(activity)) {
-            if (PermissionUtils.checkLocationAccessPermission(activity)) {
-                val fusedLocationClient = LocationServices.getFusedLocationProviderClient(activity)
-                fusedLocationClient.lastLocation.addOnSuccessListener { location: Location? ->
-                    location?.let {
-                        _isLocationUpdated.value = true
-                        _lat.value = it.latitude
-                        _lon.value = it.longitude
-                        updateAutoLocation(pm.gmail!!, it.latitude, it.longitude)
-                    }
-                }
-            }
-        } else {
-            PermissionUtils.requestLocationEnableRequest(activity)
         }
     }
 

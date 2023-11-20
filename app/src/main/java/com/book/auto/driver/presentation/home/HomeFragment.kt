@@ -42,8 +42,8 @@ class HomeFragment : BaseFragment() {
         val root: View = binding.root
         val navController = findNavController()
         binding.btnUpdateLocation.setOnClickListener {
-            activity?.let { it1 ->
-                viewModel.updateLocation(it1)
+            activity?.let {
+                (activity as HomeActivity).updateLocation()
             }
         }
         binding.btnAddAuto.setOnClickListener {

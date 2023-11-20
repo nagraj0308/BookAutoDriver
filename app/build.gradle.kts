@@ -15,10 +15,10 @@ android {
 
     defaultConfig {
         applicationId = "com.book.auto.driver"
-        minSdk = 28
+        minSdk = 27
         targetSdk = 34
-        versionCode = 9
-        versionName = "0.9"
+        versionCode = 10
+        versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -115,7 +115,6 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.7.1")
 
-    implementation("pub.devrel:easypermissions:3.0.0")
 
 
     implementation("com.github.bumptech.glide:glide:4.16.0")
