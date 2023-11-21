@@ -7,11 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import com.bumptech.glide.Glide
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.rent.house.data.remote.reqres.House
 import com.rent.house.databinding.FragmentViewDetailsBinding
 import com.rent.house.presentation.base.BaseFragment
-import com.rent.house.utils.Constants
 import com.rent.house.utils.Utils
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -68,7 +68,15 @@ class ViewFragment : BaseFragment() {
                 append(data!!.rate)
             }
 
-            context?.let { Glide.with(it).asBitmap().load(data?.imageUrl1).into(binding.ivPhoto) }
+            binding.rcvImage.layoutManager =
+                LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+            val images = ArrayList<String>()
+            if (data!!.imageUrl1.isNotEmpty()) images.add(data!!.imageUrl1)
+            if (data!!.imageUrl2.isNotEmpty()) images.add(data!!.imageUrl2)
+            if (data!!.imageUrl3.isNotEmpty()) images.add(data!!.imageUrl3)
+            if (data!!.imageUrl4.isNotEmpty()) images.add(data!!.imageUrl4)
+            val adapter = ImageAdapter(images)
+            binding.rcvImage.adapter = adapter
         }
 
         return root
