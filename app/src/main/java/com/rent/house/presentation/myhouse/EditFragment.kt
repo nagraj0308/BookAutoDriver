@@ -22,7 +22,6 @@ import com.rent.house.presentation.base.BaseFragment
 import com.rent.house.presentation.home.HomeViewModel
 import com.rent.house.utils.FBS
 import com.rent.house.utils.PermissionUtils
-import com.rent.house.utils.Utils
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -90,7 +89,7 @@ class EditFragment : BaseFragment() {
         }
         binding.btnDelete.setOnClickListener {
             showProgress()
-            viewModel.deleteAuto {
+            viewModel.deleteHouse {
                 hideProgress()
                 if (it) {
                     showToast(getString(R.string.deleted_successfully))
@@ -165,10 +164,6 @@ class EditFragment : BaseFragment() {
             binding.tilMobileNumber.editText!!.setText(viewModel.house.value!!.mobileNo)
             binding.tilRate.editText!!.setText(viewModel.house.value!!.rate)
             binding.tilAddress.editText!!.setText(viewModel.house.value!!.address)
-            viewModel.setImg1(viewModel.house.value!!.imageUrl1)
-            viewModel.setImg2(viewModel.house.value!!.imageUrl2)
-            viewModel.setImg3(viewModel.house.value!!.imageUrl3)
-            viewModel.setImg4(viewModel.house.value!!.imageUrl4)
             Glide.with(this).asBitmap().load(viewModel.house.value!!.imageUrl1)
                 .into(binding.ivAutoPhoto1)
             Glide.with(this).asBitmap().load(viewModel.house.value!!.imageUrl2)

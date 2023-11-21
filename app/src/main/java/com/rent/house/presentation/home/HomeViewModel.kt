@@ -2,30 +2,27 @@ package com.rent.house.presentation.home
 
 
 import android.annotation.SuppressLint
-import android.app.Activity
-import android.graphics.Bitmap
-import android.location.Location
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.google.android.gms.location.LocationServices
-import com.google.firebase.storage.UploadTask
 import com.rent.house.PM
 import com.rent.house.data.remote.reqres.DeleteRequest
 import com.rent.house.data.remote.reqres.GetHouseByIdRequest
 import com.rent.house.data.remote.reqres.GetHouseRequest
 import com.rent.house.data.remote.reqres.House
 import com.rent.house.data.remote.reqres.HouseRequest
+import com.rent.house.data.remote.reqres.Img1Request
+import com.rent.house.data.remote.reqres.Img2Request
+import com.rent.house.data.remote.reqres.Img3Request
+import com.rent.house.data.remote.reqres.Img4Request
 import com.rent.house.domain.Api
 import com.rent.house.utils.FBS
-import com.rent.house.utils.PermissionUtils
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.io.ByteArrayOutputStream
 import javax.inject.Inject
 
 
@@ -89,6 +86,26 @@ class HomeViewModel @Inject constructor(
         getAllHouse()
     }
 
+    fun setImg1(url: String) {
+        _imgUrl1.value = url
+        updateHouseImg1()
+    }
+
+    fun setImg2(url: String) {
+        _imgUrl2.value = url
+        updateHouseImg2()
+    }
+
+    fun setImg3(url: String) {
+        _imgUrl3.value = url
+        updateHouseImg3()
+    }
+
+    fun setImg4(url: String) {
+        _imgUrl4.value = url
+        updateHouseImg4()
+    }
+
     fun insertHouse(
         gName: String, gAddress: String, gMobile: String, gRate: String, callback: (Boolean) -> Unit
     ) {
@@ -111,7 +128,7 @@ class HomeViewModel @Inject constructor(
                 )
             }.onSuccess {
                 withContext(Dispatchers.Main) {
-                    getAutoDetails() {}
+                    getAutoHouse() {}
                     callback(true)
                 }
             }.onFailure {
@@ -120,22 +137,6 @@ class HomeViewModel @Inject constructor(
                 }
             }
         }
-    }
-
-    fun setImg1(url: String) {
-        _imgUrl1.value = url
-    }
-
-    fun setImg2(url: String) {
-        _imgUrl2.value = url
-    }
-
-    fun setImg3(url: String) {
-        _imgUrl3.value = url
-    }
-
-    fun setImg4(url: String) {
-        _imgUrl4.value = url
     }
 
 
@@ -146,22 +147,12 @@ class HomeViewModel @Inject constructor(
             runCatching {
                 api.updateHouse(
                     HouseRequest(
-                        pm.gmail,
-                        gName,
-                        gAddress,
-                        _lat.value,
-                        _lon.value,
-                        gMobile,
-                        gRate,
-                        _imgUrl1.value,
-                        _imgUrl2.value,
-                        _imgUrl3.value,
-                        _imgUrl4.value
+                        pm.gmail, gName, gAddress, 0.0, 0.0, gMobile, gRate, "", "", "", ""
                     )
                 )
             }.onSuccess {
                 withContext(Dispatchers.Main) {
-                    getAutoDetails() {}
+                    getAutoHouse() {}
                     callback(true)
                 }
             }.onFailure {
@@ -173,7 +164,7 @@ class HomeViewModel @Inject constructor(
     }
 
 
-    fun getAutoDetails(callback: (Boolean) -> Unit) {
+    fun getAutoHouse(callback: (Boolean) -> Unit) {
         CoroutineScope(Dispatchers.IO).launch {
             runCatching {
                 api.getHouseById(GetHouseByIdRequest(pm.gmail))
@@ -195,7 +186,7 @@ class HomeViewModel @Inject constructor(
     }
 
 
-    fun deleteAuto(callback: (Boolean) -> Unit) {
+    fun deleteHouse(callback: (Boolean) -> Unit) {
         CoroutineScope(Dispatchers.IO).launch {
             deleteHouseImage(_house.value!!._id + "1") {}
         }
@@ -258,12 +249,60 @@ class HomeViewModel @Inject constructor(
                 api.deleteHouseById(DeleteRequest(pm.gmail))
             }.onSuccess {
                 withContext(Dispatchers.Main) {
-                    getAutoDetails() {}
+                    getAutoHouse() {}
                     callback(true)
                 }
             }.onFailure {
                 withContext(Dispatchers.Main) {
                     callback(false)
+                }
+            }
+        }
+    }
+
+    private fun updateHouseImg1() {
+        CoroutineScope(Dispatchers.IO).launch {
+            runCatching {
+                api.updateImg1(Img1Request(pm.gmail, _imgUrl1.value))
+            }.onSuccess {
+                withContext(Dispatchers.Main) {
+                    getAutoHouse() {}
+                }
+            }
+        }
+    }
+
+    private fun updateHouseImg2() {
+        CoroutineScope(Dispatchers.IO).launch {
+            runCatching {
+                api.updateImg2(Img2Request(pm.gmail, _imgUrl2.value))
+            }.onSuccess {
+                withContext(Dispatchers.Main) {
+                    getAutoHouse() {}
+                }
+            }
+        }
+    }
+
+    private fun updateHouseImg3() {
+        CoroutineScope(Dispatchers.IO).launch {
+            runCatching {
+                api.updateImg3(Img3Request(pm.gmail, _imgUrl3.value))
+            }.onSuccess {
+                withContext(Dispatchers.Main) {
+                    getAutoHouse() {}
+                }
+            }
+        }
+    }
+
+    private fun updateHouseImg4() {
+        CoroutineScope(Dispatchers.IO).launch {
+            runCatching {
+                api.updateImg4(Img4Request(pm.gmail, _imgUrl4.value))
+            }.onSuccess {
+                withContext(Dispatchers.Main) {
+                    getAutoHouse() {}
                 }
             }
         }

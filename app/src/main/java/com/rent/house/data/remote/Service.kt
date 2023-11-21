@@ -7,6 +7,10 @@ import com.rent.house.data.remote.reqres.GetHouseRequest
 import com.rent.house.data.remote.reqres.HouseRequest
 import com.rent.house.data.remote.reqres.HouseResponse
 import com.rent.house.data.remote.reqres.HousesResponse
+import com.rent.house.data.remote.reqres.Img1Request
+import com.rent.house.data.remote.reqres.Img2Request
+import com.rent.house.data.remote.reqres.Img3Request
+import com.rent.house.data.remote.reqres.Img4Request
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.Headers
@@ -31,6 +35,22 @@ interface Service {
     @Headers("Content-Type: application/json")
     @POST("api/getHouseById/")
     suspend fun getHouseByGmailId(@Body request: GetHouseByIdRequest?): Response<HouseResponse>
+
+    @Headers("Content-Type: application/json")
+    @POST("api/updateHouseImg1/")
+    suspend fun updateImg1(@Body request: Img1Request?): Response<BasicResponse>
+
+    @Headers("Content-Type: application/json")
+    @POST("api/updateHouseImg2/")
+    suspend fun updateImg2(@Body request: Img2Request?): Response<BasicResponse>
+
+    @Headers("Content-Type: application/json")
+    @POST("api/updateHouseImg3/")
+    suspend fun updateImg3(@Body request: Img3Request?): Response<BasicResponse>
+
+    @Headers("Content-Type: application/json")
+    @POST("api/updateHouseImg4/")
+    suspend fun updateImg4(@Body request: Img4Request?): Response<BasicResponse>
 
     @Headers("Content-Type: application/json")
     @POST("api/deleteHouseById/")

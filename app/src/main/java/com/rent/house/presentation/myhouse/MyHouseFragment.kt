@@ -93,7 +93,7 @@ class MyHouseFragment : BaseFragment() {
 
 
     override fun onStart() {
-        viewModel.getAutoDetails {
+        viewModel.getAutoHouse {
 
         }
         super.onStart()

@@ -27,6 +27,26 @@ data class GetHouseByIdRequest(
     @SerializedName("vId") val gmailId: String?,
 )
 
+data class Img1Request(
+    @SerializedName("vId") val id: String?,
+    @SerializedName("imageUrl1") val imageUrl1: String?,
+)
+
+data class Img2Request(
+    @SerializedName("vId") val id: String?,
+    @SerializedName("imageUrl2") val imageUrl2: String?,
+)
+
+data class Img3Request(
+    @SerializedName("vId") val id: String?,
+    @SerializedName("imageUrl3") val imageUrl3: String?,
+)
+
+data class Img4Request(
+    @SerializedName("vId") val id: String?,
+    @SerializedName("imageUrl4") val imageUrl4: String?,
+)
+
 data class DeleteRequest(
     @SerializedName("vId") val vId: String?,
 )

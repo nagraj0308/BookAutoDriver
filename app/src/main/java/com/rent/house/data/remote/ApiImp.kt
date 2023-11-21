@@ -7,6 +7,10 @@ import com.rent.house.data.remote.reqres.GetHouseRequest
 import com.rent.house.data.remote.reqres.HouseRequest
 import com.rent.house.data.remote.reqres.HouseResponse
 import com.rent.house.data.remote.reqres.HousesResponse
+import com.rent.house.data.remote.reqres.Img1Request
+import com.rent.house.data.remote.reqres.Img2Request
+import com.rent.house.data.remote.reqres.Img3Request
+import com.rent.house.data.remote.reqres.Img4Request
 import com.rent.house.domain.Api
 import retrofit2.Response
 import javax.inject.Inject
@@ -28,6 +32,21 @@ class ApiImp @Inject constructor(
         return service.updateHouse(request)
     }
 
+    override suspend fun updateImg1(request: Img1Request?): Response<BasicResponse> {
+        return service.updateImg1(request)
+    }
+
+    override suspend fun updateImg2(request: Img2Request?): Response<BasicResponse> {
+        return service.updateImg2(request)
+    }
+
+    override suspend fun updateImg3(request: Img3Request?): Response<BasicResponse> {
+        return service.updateImg3(request)
+    }
+
+    override suspend fun updateImg4(request: Img4Request?): Response<BasicResponse> {
+        return service.updateImg4(request)
+    }
 
     override suspend fun getHouseById(request: GetHouseByIdRequest?): Response<HouseResponse> {
         return service.getHouseByGmailId(request)
