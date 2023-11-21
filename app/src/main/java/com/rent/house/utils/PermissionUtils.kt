@@ -20,8 +20,6 @@ class RequestCode {
         const val LOCATION = 10
         const val READ_STORAGE = 11
         const val GOOGLE_SIGN_IN = 123
-
-
     }
 }
 
