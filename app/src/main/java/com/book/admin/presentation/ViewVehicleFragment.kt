@@ -57,7 +57,7 @@ class ViewVehicleFragment : BaseFragment() {
             binding.tvDriverName.text = ": " + data!!.driver
             binding.tvType.text = ": " + Constants.vehicleTypes[data!!.typeId]
             binding.tilAdminRemark.editText!!.setText(data!!.adminRemark)
-            
+
 
             val arrayAdapter = ArrayAdapter(
                 requireContext(), R.layout.item_spinner, Constants.vss
@@ -88,7 +88,7 @@ class ViewVehicleFragment : BaseFragment() {
             binding.llStatus.visibility = View.GONE
             if (update) {
                 viewModel.changeVehicleStatus(code, data!!._id) {
-                    navController.popBackStack()
+                    showToast("Changed Successfully")
                 }
             }
         }

@@ -90,7 +90,7 @@ class ViewAutoFragment : BaseFragment() {
             binding.llStatus.visibility = View.GONE
             if (update) {
                 viewModel.changeAutoStatus(code, data!!._id) {
-                    navController.popBackStack()
+                    showToast("Changed Successfully")
                 }
             }
         }
