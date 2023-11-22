@@ -1,7 +1,16 @@
 package com.book.auto.data.remote.reqres
 
+import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
+data class CountRequest(
+    @SerializedName("vId") val vId: String?,
+)
+
+data class BasicResponse(
+    val msg: String,
+    val isTrue: Int
+)
 
 data class VehiclesResponse(
     val `data`: List<Auto>,

@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.book.auto.data.remote.reqres.Auto
+import com.book.auto.data.remote.reqres.CountRequest
 import com.book.auto.domain.BVApi
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
@@ -49,5 +50,29 @@ class HomeViewModel @Inject constructor(
         _lat.value = lat
         _lon.value = lon
         getAutos()
+    }
+
+    fun incAutoSelectCount(id: String) {
+        CoroutineScope(Dispatchers.IO).launch {
+            runCatching {
+                api.incAutoSelectCount(CountRequest(id))
+            }.onSuccess {
+                withContext(Dispatchers.Main) {
+
+                }
+            }
+        }
+    }
+
+    fun incAutoCallCount(id: String) {
+        CoroutineScope(Dispatchers.IO).launch {
+            runCatching {
+                api.incAutoCallCount(CountRequest(id))
+            }.onSuccess {
+                withContext(Dispatchers.Main) {
+
+                }
+            }
+        }
     }
 }

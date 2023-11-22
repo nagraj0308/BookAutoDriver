@@ -44,8 +44,7 @@ class HomeFragment : BaseFragment() {
 
         //Maps View
         binding.mvCl.onCreate(savedInstanceState)
-        binding.mvCl.getMapAsync()
-        {
+        binding.mvCl.getMapAsync() {
 
             val circleDrawable = resources.getDrawable(R.drawable.user, null)
             val markerIcon: BitmapDescriptor = getMarkerIconFromDrawable(circleDrawable)
@@ -63,15 +62,13 @@ class HomeFragment : BaseFragment() {
 
                 for (au in list) {
                     map!!.addMarker(
-                        MarkerOptions().position(LatLng(au.lat, au.lon)).title(au.number)
-                            .icon(
-                                getMarkerIconFromDrawable(
-                                    resources.getDrawable(
-                                        getDrawable(au.type),
-                                        null
-                                    )
+                        MarkerOptions().position(LatLng(au.lat, au.lon)).title(au.number).icon(
+                            getMarkerIconFromDrawable(
+                                resources.getDrawable(
+                                    getDrawable(au.type), null
                                 )
-                            ).snippet(au._id)
+                            )
+                        ).snippet(au._id)
                     )
                 }
 
@@ -102,6 +99,7 @@ class HomeFragment : BaseFragment() {
     }
 
     private fun showDetails(auto: Auto) {
+        viewModel.incAutoSelectCount(auto._id)
         val bundle = Bundle()
         bundle.putSerializable("item", auto)
         findNavController().navigate(R.id.nav_view_auto_details, bundle)

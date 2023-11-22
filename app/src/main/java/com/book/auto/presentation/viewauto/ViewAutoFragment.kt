@@ -36,6 +36,7 @@ class ViewAutoFragment : BaseFragment() {
                 val u = Uri.parse("tel:" + data!!.mobileNo)
                 val i = Intent(Intent.ACTION_DIAL, u)
                 try {
+                    viewModel.incAutoCallCount(data!!._id)
                     context?.startActivity(i)
                 } catch (_: Exception) {
 
@@ -57,10 +58,7 @@ class ViewAutoFragment : BaseFragment() {
                 append(": ")
                 append(
                     Utils.distance(
-                        data!!.lat,
-                        data!!.lon,
-                        viewModel.lat.value!!,
-                        viewModel.lon.value!!
+                        data!!.lat, data!!.lon, viewModel.lat.value!!, viewModel.lon.value!!
                     ).toString()
                 )
                 append(" KM")
