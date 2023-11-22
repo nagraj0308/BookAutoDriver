@@ -12,7 +12,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.book.admin.R
-import com.book.admin.data.remote.reqres.Vehicle
+import com.book.admin.data.remote.reqres.House
 import com.book.admin.databinding.FragmentViewHouseBinding
 import com.book.admin.presentation.home.HomeViewModel
 import com.book.admin.utils.BaseFragment
@@ -27,7 +27,7 @@ class ViewHouseFragment : BaseFragment() {
 
     private val viewModel: HomeViewModel by activityViewModels()
     private val binding get() = _binding!!
-    private var data: Vehicle? = null
+    private var data: House? = null
 
 
     @SuppressLint("SetTextI18n")
@@ -39,7 +39,7 @@ class ViewHouseFragment : BaseFragment() {
         val navController = findNavController()
 
         if (arguments != null) {
-            data = requireArguments().getSerializable("item") as Vehicle?
+            data = requireArguments().getSerializable("item") as House?
         }
 
         if (data != null) {
@@ -52,11 +52,11 @@ class ViewHouseFragment : BaseFragment() {
 
                 }
             }
-            binding.tvNumber.text = ": " + data!!.number
             binding.tvId.text = ": " + data!!._id
             binding.tvModTime.text = ": " + Utils.convertLongToTime(data!!.modifyTime)
-            binding.tvDriverName.text = ": " + data!!.driver
-            binding.tvType.text = ": " + Constants.vehicleTypes[data!!.typeId]
+            binding.tvName.text = ": " + data!!.name
+            binding.tvRate.text = ": " + data!!.rate
+            binding.tvAddress.text = ": " + data!!.address
             binding.tilAdminRemark.editText!!.setText(data!!.adminRemark)
 
 
@@ -68,15 +68,15 @@ class ViewHouseFragment : BaseFragment() {
                 setStatus(Constants.vss[position].code, navController, true)
             }
             setStatus(data!!.verificationState, navController, false)
-            context?.let { Glide.with(it).asBitmap().load(data?.imageUrl).into(binding.ivPhoto) }
+            context?.let { Glide.with(it).asBitmap().load(data?.imageUrl1).into(binding.ivPhoto) }
 
 
             binding.btnSave.setOnClickListener {
-                viewModel.changeVehicleAdminRemark(
+                viewModel.changeHouseAdminRemark(
                     binding.tilAdminRemark.editText!!.text.toString(),
                     data!!._id
                 ) {
-                    navController.popBackStack()
+                    showToast("Changed Successfully")
                 }
             }
         }

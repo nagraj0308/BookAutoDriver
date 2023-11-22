@@ -34,22 +34,22 @@ class HouseFragment : BaseFragment() {
         binding.bottomNav.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.bn_accepted -> {
-                    viewModel.getVehicles(1)
+                    viewModel.getHouses(1)
                     true
                 }
 
                 R.id.bn_pending -> {
-                    viewModel.getVehicles(0)
+                    viewModel.getHouses(0)
                     true
                 }
 
                 R.id.bn_rejected -> {
-                    viewModel.getVehicles(2)
+                    viewModel.getHouses(2)
                     true
                 }
 
                 else -> {
-                    viewModel.getVehicles(1)
+                    viewModel.getHouses(1)
                     true
                 }
             }
@@ -57,9 +57,9 @@ class HouseFragment : BaseFragment() {
         binding.bottomNav.selectedItemId = R.id.bn_pending
 
         binding.rcv.layoutManager = LinearLayoutManager(context)
-        viewModel.vehicles.observe(viewLifecycleOwner) {
+        viewModel.houses.observe(viewLifecycleOwner) {
             if (it != null) {
-                val adapter = VehicleAdapter(it, navController)
+                val adapter = HouseAdapter(it, navController)
                 binding.rcv.adapter = adapter
                 binding.tvTotal.text = buildString {
                     append("Total : ")

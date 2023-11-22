@@ -65,7 +65,7 @@ data class House(
     val lat: Double = 0.0,
     val lon: Double = 0.0,
     val mobileNo: String = "",
-    val modifyTime: String = "0",
+    val modifyTime: Long = 0,
     val rate: String = "",
     val verificationState: String = "U",
     val adminRemark: String = "",

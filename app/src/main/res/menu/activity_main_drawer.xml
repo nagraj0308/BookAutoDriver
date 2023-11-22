@@ -14,7 +14,7 @@
             android:title="@string/gaadi" />
         <item
             android:id="@+id/nav_house"
-            android:icon="@drawable/ic_auto"
+            android:icon="@drawable/ic_home"
             android:title="@string/house" />
         <item
             android:id="@+id/nav_exit"

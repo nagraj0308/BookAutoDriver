@@ -77,7 +77,7 @@ class HomeViewModel @Inject constructor(
         _statePosHouse.value = pos
         CoroutineScope(Dispatchers.IO).launch {
             runCatching {
-                api.getAllHouseAdmin(Constants.vss[pos].code, pm.password!!)
+                api.getAllHouseAdmin(pm.password!!, Constants.vss[pos].code)
             }.onSuccess {
                 withContext(Dispatchers.Main) {
                     _houses.value = emptyList()

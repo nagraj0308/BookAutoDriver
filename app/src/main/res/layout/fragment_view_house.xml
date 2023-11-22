@@ -63,27 +63,6 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="0.6"
-                            android:text="@string/auto_number" />
-
-                        <TextView
-                            android:id="@+id/tv_number"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1.4"
-                            android:text="" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="5dp"
-                        android:orientation="horizontal"
-                        android:weightSum="2">
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0.6"
                             android:text="@string/id" />
 
                         <TextView
@@ -126,10 +105,10 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="0.6"
-                            android:text="@string/driver_name" />
+                            android:text="@string/name" />
 
                         <TextView
-                            android:id="@+id/tv_driver_name"
+                            android:id="@+id/tv_name"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1.4"
@@ -148,10 +127,31 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="0.6"
-                            android:text="@string/type" />
+                            android:text="@string/normal_rate" />
 
                         <TextView
-                            android:id="@+id/tv_type"
+                            android:id="@+id/tv_rate"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1.4"
+                            android:text="" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.6"
+                            android:text="Address" />
+
+                        <TextView
+                            android:id="@+id/tv_address"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1.4"
@@ -212,9 +212,9 @@
                             android:id="@+id/btn_save"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="3"
-                            android:layout_marginStart="2dp"
                             android:layout_gravity="center"
+                            android:layout_marginStart="2dp"
+                            android:layout_weight="3"
                             android:text="Save" />
 
                     </LinearLayout>
