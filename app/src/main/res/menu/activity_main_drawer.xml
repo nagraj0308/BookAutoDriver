@@ -13,6 +13,10 @@
             android:icon="@drawable/ic_auto"
             android:title="@string/gaadi" />
         <item
+            android:id="@+id/nav_house"
+            android:icon="@drawable/ic_auto"
+            android:title="@string/house" />
+        <item
             android:id="@+id/nav_exit"
             android:icon="@drawable/ic_exit_to_app"
             android:title="@string/exit" />
