@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.book.admin.PM
 import com.book.admin.data.remote.reqres.Auto
+import com.book.admin.data.remote.reqres.House
 import com.book.admin.data.remote.reqres.Vehicle
 import com.book.admin.domain.BVApi
 import com.book.admin.utils.Constants
@@ -31,9 +32,13 @@ class HomeViewModel @Inject constructor(
     private val _vehicles = MutableLiveData<List<Vehicle>>()
     private val _statePosVehicle = MutableLiveData(1)
 
+    private val _houses = MutableLiveData<List<House>>()
+    private val _statePosHouse = MutableLiveData(1)
+
 
     val autos: LiveData<List<Auto>> get() = _autos
     val vehicles: LiveData<List<Vehicle>> get() = _vehicles
+    val houses: LiveData<List<House>> get() = _houses
 
 
     fun getAutos(pos: Int) {
@@ -46,26 +51,6 @@ class HomeViewModel @Inject constructor(
                     _autos.value = emptyList()
                     if (it.isSuccessful && it.body() != null) {
                         _autos.value = it.body()!!.data
-                    }
-                }
-            }
-        }
-    }
-
-    fun changeAutoStatus(
-        verificationState: String,
-        vId: String, callback: () -> Unit
-    ) {
-        CoroutineScope(Dispatchers.IO).launch {
-            runCatching {
-                api.changeAutoStatusV1(pm.password!!, verificationState, vId)
-            }.onSuccess {
-                withContext(Dispatchers.Main) {
-                    if (it.isSuccessful && it.body() != null) {
-                        if (it.body()!!.isTrue == 1) {
-                            getAutos(_statePosAuto.value!!)
-                            callback()
-                        }
                     }
                 }
             }
@@ -88,9 +73,44 @@ class HomeViewModel @Inject constructor(
         }
     }
 
+    fun getHouses(pos: Int) {
+        _statePosHouse.value = pos
+        CoroutineScope(Dispatchers.IO).launch {
+            runCatching {
+                api.getAllHouseAdmin(Constants.vss[pos].code, pm.password!!)
+            }.onSuccess {
+                withContext(Dispatchers.Main) {
+                    _houses.value = emptyList()
+                    if (it.isSuccessful && it.body() != null) {
+                        _houses.value = it.body()!!.data
+                    }
+                }
+            }
+        }
+    }
+
+    fun changeAutoStatus(
+        verificationState: String, vId: String, callback: () -> Unit
+    ) {
+        CoroutineScope(Dispatchers.IO).launch {
+            runCatching {
+                api.changeAutoStatusV1(pm.password!!, verificationState, vId)
+            }.onSuccess {
+                withContext(Dispatchers.Main) {
+                    if (it.isSuccessful && it.body() != null) {
+                        if (it.body()!!.isTrue == 1) {
+                            getAutos(_statePosAuto.value!!)
+                            callback()
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
     fun changeVehicleStatus(
-        verificationState: String,
-        vId: String, callback: () -> Unit
+        verificationState: String, vId: String, callback: () -> Unit
     ) {
         CoroutineScope(Dispatchers.IO).launch {
             runCatching {
@@ -108,9 +128,46 @@ class HomeViewModel @Inject constructor(
         }
     }
 
+    fun changeHouseStatus(
+        verificationState: String, vId: String, callback: () -> Unit
+    ) {
+        CoroutineScope(Dispatchers.IO).launch {
+            runCatching {
+                api.changeHouseStatus(pm.password!!, verificationState, vId)
+            }.onSuccess {
+                withContext(Dispatchers.Main) {
+                    if (it.isSuccessful && it.body() != null) {
+                        if (it.body()!!.isTrue == 1) {
+                            getHouses(_statePosHouse.value!!)
+                            callback()
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    fun changeAutoAdminRemark(
+        adminRemark: String, vId: String, callback: () -> Unit
+    ) {
+        CoroutineScope(Dispatchers.IO).launch {
+            runCatching {
+                api.changeAutoAdminRemark(pm.password!!, adminRemark, vId)
+            }.onSuccess {
+                withContext(Dispatchers.Main) {
+                    if (it.isSuccessful && it.body() != null) {
+                        if (it.body()!!.isTrue == 1) {
+                            getAutos(_statePosAuto.value!!)
+                            callback()
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     fun changeVehicleAdminRemark(
-        adminRemark: String,
-        vId: String, callback: () -> Unit
+        adminRemark: String, vId: String, callback: () -> Unit
     ) {
         CoroutineScope(Dispatchers.IO).launch {
             runCatching {
@@ -128,18 +185,17 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    fun changeAutoAdminRemark(
-        adminRemark: String,
-        vId: String, callback: () -> Unit
+    fun changeHouseAdminRemark(
+        adminRemark: String, vId: String, callback: () -> Unit
     ) {
         CoroutineScope(Dispatchers.IO).launch {
             runCatching {
-                api.changeAutoAdminRemark(pm.password!!, adminRemark, vId)
+                api.changeHouseAdminRemark(pm.password!!, adminRemark, vId)
             }.onSuccess {
                 withContext(Dispatchers.Main) {
                     if (it.isSuccessful && it.body() != null) {
                         if (it.body()!!.isTrue == 1) {
-                            getAutos(_statePosAuto.value!!)
+                            getHouses(_statePosHouse.value!!)
                             callback()
                         }
                     }

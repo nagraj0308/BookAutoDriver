@@ -8,7 +8,7 @@ class Constants {
     companion object {
         const val BASE_URL = "https://server0308.azurewebsites.net/"
         val vss = listOf(VS("Pending", "U"), VS("Accepted", "A"), VS("Rejected", "R"))
-        val vehicleTypes = listOf("Car", "Auto", "Bike", "Bus", "Pickup", "Truck", "Others")
+        val vehicleTypes = listOf("Car", "Auto", "Bus", "Pickup", "Truck", "Others")
         fun status(code: String): VS {
             return when (code) {
                 "U" -> {
