@@ -66,13 +66,13 @@ class HomeFragment : BaseFragment() {
 
                 for (au in list) {
                     map!!.addMarker(
-                        MarkerOptions().position(LatLng(au.lat, au.lon)).title(au.rate).icon(
-                                getMarkerIconFromDrawable(
-                                    resources.getDrawable(
-                                        R.drawable.user_home, null
-                                    )
+                        MarkerOptions().position(LatLng(au.lat, au.lon)).icon(
+                            getMarkerIconFromDrawable(
+                                resources.getDrawable(
+                                    R.drawable.user_home, null
                                 )
-                            ).snippet(au._id)
+                            )
+                        ).snippet(au._id)
                     )
                 }
 

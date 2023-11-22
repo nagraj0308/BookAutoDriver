@@ -30,11 +30,11 @@
     <string name="modify_time">समय संशोधित</string>
 
     <string name="name">नाम</string>
-    <string name="normal_rate">सामान्य दर</string>
 
     <string name="pending">लंबित</string>
     <string name="privacy_and_policy">गोपनीयता और नीति</string>
 
+    <string name="rate_description">दर और विवरण</string>
     <string name="rate_us">हमें रेटिंग दें</string>
     <string name="rejected">अस्वीकार कर दिया</string>
     <string name="rejected_in_verification">सत्यापन में अस्वीकृत</string>

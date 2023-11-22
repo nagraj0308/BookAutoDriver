@@ -31,11 +31,11 @@
     <string name="modify_time">Modify Time</string>
 
     <string name="name">Name</string>
-    <string name="normal_rate">Normal Rate</string>
 
     <string name="pending">Pending</string>
     <string name="privacy_and_policy">Privacy and Policy</string>
 
+    <string name="rate_description">Rate and Description</string>
     <string name="rate_us">Rate Us</string>
     <string name="rejected">Rejected</string>
     <string name="rejected_in_verification">Rejected in verification</string>

@@ -108,7 +108,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="0.6"
-                            android:text="@string/normal_rate" />
+                            android:text="@string/rate_description" />
 
                         <TextView
                             android:id="@+id/tv_rate"
