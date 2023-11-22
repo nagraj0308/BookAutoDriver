@@ -10,6 +10,6 @@ class Constants {
         const val APK_SHARE_MSG =
             "शादी, टूर और किराए पर वाहन को बुक करना या अपने वाहन को इन सभी काम के लिए पंजीकृत करना ।  Book Gaadi ऐप इंस्टॉल करें। $PLAYSTORE_URL "
 
-        val vehicleTypes = listOf("Car", "Auto", "Bike", "Bus", "Pickup", "Truck", "Others")
+        val vehicleTypes = listOf("Car", "Auto", "Bus", "Pickup", "Truck", "Others")
     }
 }

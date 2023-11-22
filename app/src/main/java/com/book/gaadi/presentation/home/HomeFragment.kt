@@ -15,7 +15,6 @@ import com.book.gaadi.databinding.FragmentHomeBinding
 import com.book.gaadi.presentation.base.BaseFragment
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.MapsInitializer
 import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
@@ -121,18 +120,14 @@ class HomeFragment : BaseFragment() {
             }
 
             2 -> {
-                R.drawable.bike
-            }
-
-            3 -> {
                 R.drawable.bus
             }
 
-            4 -> {
+            3 -> {
                 R.drawable.pickup
             }
 
-            5 -> {
+            4 -> {
                 R.drawable.truck
             }
 
