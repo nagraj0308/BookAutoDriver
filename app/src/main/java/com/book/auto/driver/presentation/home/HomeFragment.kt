@@ -136,6 +136,12 @@ class HomeFragment : BaseFragment() {
                 binding.tvLive.text = getStatusMsg(vehicle.deactivated, vehicle.verificationState)
                 binding.sbDeactivated.isChecked = !vehicle.deactivated
                 binding.tvAdminRemark.text = vehicle.adminRemark
+                binding.tvSelectCount.text = vehicle.selectCount.toString()
+                binding.tvCallCount.text = vehicle.callCount.toString()
+
+                if (vehicle.adminRemark.isEmpty()) {
+                    binding.tvAdminRemark.visibility = View.GONE
+                }
                 if (isActive(vehicle.deactivated, vehicle.verificationState)) {
                     binding.cvContent.background = ContextCompat.getDrawable(
                         requireContext(), R.drawable.bg_card_active

@@ -23,8 +23,7 @@ data class VehicleLocationRequest(
 
 
 data class VerificationStatusRequest(
-    @SerializedName("vId") val vId: String?,
-    @SerializedName("deactivated") val boolean: Boolean?
+    @SerializedName("vId") val vId: String?, @SerializedName("deactivated") val boolean: Boolean?
 )
 
 data class GetVehicleByGmailIdRequest(
@@ -36,14 +35,11 @@ data class DeleteVehicleRequest(
 )
 
 data class VehicleResponse(
-    val `data`: Vehicle,
-    val msg: String,
-    val isTrue: Int
+    val `data`: Vehicle, val msg: String, val isTrue: Int
 )
 
 data class BasicResponse(
-    val msg: String,
-    val isTrue: Int
+    val msg: String, val isTrue: Int
 )
 
 
@@ -59,6 +55,8 @@ data class Vehicle(
     val number: String = "",
     val type: String = "",
     val verificationState: String = "U",
-    val adminRemark: String = ""
+    val adminRemark: String = "",
+    val selectCount: Long = 0,
+    val callCount: Long = 0
 )
 
