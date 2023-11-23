@@ -19,8 +19,7 @@ import com.bumptech.glide.Glide
 class AutoAdapter(private val mList: List<Auto>, val nc: NavController) :
     RecyclerView.Adapter<AutoAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_auto, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_auto, parent, false)
         return ViewHolder(view)
     }
 
@@ -30,10 +29,24 @@ class AutoAdapter(private val mList: List<Auto>, val nc: NavController) :
         holder.tvNumber.text = item.number
         holder.tvDate.text = Utils.convertLongToTime(item.modifyTime)
         if (item.deactivated) {
-            holder.tvLive.text = "Deactivated"
+            holder.tvLive.text = buildString {
+                append("Deactivated ")
+                append("(")
+                append(item.selectCount)
+                append(",")
+                append(item.callCount)
+                append(")")
+            }
             holder.llBG.setBackgroundColor(Color.RED);
         } else {
-            holder.tvLive.text = "Live"
+            holder.tvLive.text = buildString {
+                append("Live ")
+                append("(")
+                append(item.selectCount)
+                append(",")
+                append(item.callCount)
+                append(")")
+            }
             holder.llBG.setBackgroundColor(Color.TRANSPARENT);
         }
         Glide.with(holder.iv.context).asBitmap().load(item.imageUrl).into(holder.iv)

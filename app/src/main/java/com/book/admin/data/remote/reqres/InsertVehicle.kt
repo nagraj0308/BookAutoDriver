@@ -4,26 +4,19 @@ import java.io.Serializable
 
 
 data class AutosResponse(
-    val `data`: List<Auto>,
-    val msg: String,
-    val isTrue: Int
+    val `data`: List<Auto>, val msg: String, val isTrue: Int
 )
 
 data class VehiclesResponse(
-    val `data`: List<Vehicle>,
-    val msg: String,
-    val isTrue: Int
+    val `data`: List<Vehicle>, val msg: String, val isTrue: Int
 )
 
 data class HousesResponse(
-    val `data`: List<House>,
-    val msg: String,
-    val isTrue: Int
+    val `data`: List<House>, val msg: String, val isTrue: Int
 )
 
 data class BasicResponse(
-    val msg: String,
-    val isTrue: Int
+    val msg: String, val isTrue: Int
 )
 
 
@@ -39,7 +32,10 @@ data class Auto(
     val number: String = "",
     val type: String = "",
     val verificationState: String = "U",
-    val adminRemark: String = ""
+    val adminRemark: String = "",
+    val selectCount: Long = 0,
+    val callCount: Long = 0
+
 ) : Serializable
 
 data class Vehicle(
@@ -77,8 +73,7 @@ data class House(
 
 
 data class VS(
-    val name: String,
-    val code: String
+    val name: String, val code: String
 ) {
     override fun toString(): String {
         return name
