@@ -88,7 +88,7 @@ class ViewHouseFragment : BaseFragment() {
         if (code != Constants.vss[0].code) {
             binding.llStatus.visibility = View.GONE
             if (update) {
-                viewModel.changeVehicleStatus(code, data!!._id) {
+                viewModel.changeHouseStatus(code, data!!._id) {
                     navController.popBackStack()
                 }
             }
