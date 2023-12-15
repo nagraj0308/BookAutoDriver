@@ -75,8 +75,16 @@ class ViewFragment : BaseFragment() {
             if (data!!.imageUrl2.isNotEmpty()) images.add(data!!.imageUrl2)
             if (data!!.imageUrl3.isNotEmpty()) images.add(data!!.imageUrl3)
             if (data!!.imageUrl4.isNotEmpty()) images.add(data!!.imageUrl4)
+
             val adapter = ImageAdapter(images)
             binding.rcvImage.adapter = adapter
+            if (images.size == 0) {
+                binding.rcvImage.visibility = View.GONE
+                binding.clNoImg.visibility = View.VISIBLE
+            } else {
+                binding.rcvImage.visibility = View.VISIBLE
+                binding.clNoImg.visibility = View.GONE
+            }
         }
 
         return root

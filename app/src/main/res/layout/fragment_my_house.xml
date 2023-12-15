@@ -53,6 +53,7 @@
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:layout_gravity="bottom|right"
+                    app:backgroundTint="@color/purple_200"
                     app:fabSize="mini"
                     app:srcCompat="@drawable/ic_edit" />
 
