@@ -42,6 +42,16 @@ class ViewFragment : BaseFragment() {
                 }
             }
 
+            binding.btnNavMap.setOnClickListener {
+                val strUri =
+                    "http://maps.google.com/maps?q=loc:${data!!.lat},${data!!.lon} (${data!!.name})"
+                val intent = Intent(
+                    Intent.ACTION_VIEW, Uri.parse(strUri)
+                )
+                startActivity(intent)
+
+            }
+
             binding.tvName.text = buildString {
                 append(": ")
                 append(data!!.name)
@@ -54,10 +64,7 @@ class ViewFragment : BaseFragment() {
                 append(": ")
                 append(
                     Utils.distance(
-                        data!!.lat,
-                        data!!.lon,
-                        viewModel.lat.value!!,
-                        viewModel.lon.value!!
+                        data!!.lat, data!!.lon, viewModel.lat.value!!, viewModel.lon.value!!
                     ).toString()
                 )
                 append(" KM")
@@ -92,10 +99,6 @@ class ViewFragment : BaseFragment() {
 
     override fun showProgress() {
         TODO("Not yet implemented")
-
-//        val uri = java.lang.String.format(Locale.ENGLISH, "geo:%f,%f", 2, 3)
-//        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(uri))
-//        context!!.startActivity(intent)
     }
 
     override fun hideProgress() {

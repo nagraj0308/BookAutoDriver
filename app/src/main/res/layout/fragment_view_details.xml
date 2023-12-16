@@ -158,9 +158,11 @@
             style="@style/Widget.MaterialComponents.Button.Icon"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="2dp"
             android:layout_weight="1"
-            android:padding="1dp"
+            android:padding="10dp"
             android:text="@string/call"
+            android:textAllCaps="false"
             app:icon="@drawable/ic_call"
             app:iconGravity="textStart" />
 
@@ -169,10 +171,12 @@
             style="@style/Widget.MaterialComponents.Button.Icon"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
             android:layout_weight="1"
-            android:padding="1dp"
-            android:text="@string/call"
-            app:icon="@drawable/ic_call"
+            android:padding="10dp"
+            android:text="@string/direction"
+            android:textAllCaps="false"
+            app:icon="@drawable/ic_directions"
             app:iconGravity="textStart" />
 
     </LinearLayout>

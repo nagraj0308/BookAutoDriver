@@ -14,6 +14,7 @@
     <string name="delete">Delete</string>
     <string name="deleted_successfully">Deleted Successfully</string>
     <string name="driver_name">Driver Name</string>
+    <string name="direction">Direction</string>
     <string name="distance">Distance</string>
 
     <string name="exit">Exit</string>

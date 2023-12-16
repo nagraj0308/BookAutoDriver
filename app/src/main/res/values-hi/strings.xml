@@ -13,6 +13,7 @@
     <string name="delete">मिटाए</string>
     <string name="deleted_successfully">सफलतापूर्वक मिटाया गया</string>
     <string name="driver_name">चालक का नाम</string>
+    <string name="direction">दिशा</string>
     <string name="distance">दूरी</string>
 
     <string name="exit">बाहर निकले</string>
