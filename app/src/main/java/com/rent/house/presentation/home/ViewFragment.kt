@@ -92,6 +92,10 @@ class ViewFragment : BaseFragment() {
 
     override fun showProgress() {
         TODO("Not yet implemented")
+
+//        val uri = java.lang.String.format(Locale.ENGLISH, "geo:%f,%f", 2, 3)
+//        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(uri))
+//        context!!.startActivity(intent)
     }
 
     override fun hideProgress() {

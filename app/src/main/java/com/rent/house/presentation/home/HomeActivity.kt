@@ -85,7 +85,7 @@ class HomeActivity : BaseActivity() {
         navView.menu.findItem(R.id.nav_share).setOnMenuItemClickListener {
             val sendIntent: Intent = Intent().apply {
                 action = Intent.ACTION_SEND
-                putExtra(Intent.EXTRA_TEXT, Constants.APK_SHARE_MSG)
+                putExtra(Intent.EXTRA_TEXT, getString(R.string.lm2) + " " + Constants.PLAYSTORE_URL)
                 type = "text/plain"
             }
             val shareIntent = Intent.createChooser(sendIntent, getString(R.string.share_app))
