@@ -63,7 +63,7 @@ class MyHouseFragment : BaseFragment() {
         binding.mvCl.onCreate(savedInstanceState)
         binding.mvCl.getMapAsync {
 
-            val circleDrawable = resources.getDrawable(R.drawable.ic_house, null)
+            val circleDrawable = resources.getDrawable(R.drawable.ic_home, null)
             val markerIcon: BitmapDescriptor = getMarkerIconFromDrawable(circleDrawable)
             map = it
             viewModel.lat.observe(viewLifecycleOwner) { it1 ->

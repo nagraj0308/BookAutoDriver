@@ -2,7 +2,8 @@
 
     <string name="about_us">परिचय</string>
     <string name="accepted">स्वीकृत</string>
-    <string name="add_house">घर जोड़ें</string>
+    <string name="add_house"></string>
+    <string name="add_flat">फ्लैट जोड़ें</string>
     <string name="address">पता</string>
     <string name="added_successfully">सफलतापूर्वक जोड़ा गया</string>
 
@@ -23,11 +24,14 @@
 
 
     <string name="home">होम</string>
+    <string name="house">घर</string>
+    <string name="house_image">घर छवि</string>
+    <string name="house_details">घर की सूचना</string>
     <string name="live">सक्रिय</string>
 
 
     <string name="mobile_number">मोबाइल नंबर</string>
-    <string name="my_house">मेरा घर</string>
+    <string name="my_flat">मेरा फ्लैट</string>
     <string name="modify_time">समय संशोधित</string>
 
     <string name="name">नाम</string>
@@ -60,10 +64,10 @@
     <string name="updated_successfully">सफलतापूर्वक अपडेट किया गया</string>
     <string name="update_location">स्थान अद्यतन करें</string>
 
-    <string name="house">घर</string>
-    <string name="house_image">घर छवि</string>
-    <string name="house_details">घर की सूचना</string>
+
     <string name="verification_status">सत्यापन स्थिति</string>
+    <string name="welcome_to">स्वागतम्!</string>
+
 
     <string name="your_location">आपका स्थान</string>
 

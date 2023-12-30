@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
         android:padding="20dp"
-        android:text="Welcome to ..."
+        android:text="@string/welcome_to"
         android:textAlignment="center"
         android:textSize="18sp"
         android:textStyle="italic" />

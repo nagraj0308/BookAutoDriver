@@ -10,9 +10,10 @@
         style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="160dp"
-        android:text="@string/add_house"
+        android:layout_marginBottom="80dp"
+        android:text="@string/add_flat"
         android:textAllCaps="false"
         app:icon="@drawable/ic_add" />
 

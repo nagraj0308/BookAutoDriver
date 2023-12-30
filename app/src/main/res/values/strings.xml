@@ -3,7 +3,7 @@
 
     <string name="about_us">About Us</string>
     <string name="accepted">Accepted</string>
-    <string name="add_house">Add House</string>
+    <string name="add_flat">Add Flat</string>
     <string name="address">Address</string>
     <string name="added_successfully">Added Successfully</string>
 
@@ -24,11 +24,14 @@
 
 
     <string name="home">Home</string>
+    <string name="house">House</string>
+    <string name="house_image">House Image</string>
+    <string name="house_details">House Details</string>
 
     <string name="live">Live</string>
 
     <string name="mobile_number">Mobile Number</string>
-    <string name="my_house">My House</string>
+    <string name="my_flat">My Flat</string>
     <string name="modify_time">Modify Time</string>
 
     <string name="name">Name</string>
@@ -60,12 +63,9 @@
     <string name="updated_successfully">Updated Successfully</string>
     <string name="update_location">Update Location</string>
 
-    <string name="house">House</string>
-    <string name="house_image">House Image</string>
-    <string name="house_details">House Details</string>
-
 
     <string name="verification_status">Verification Status</string>
+    <string name="welcome_to">Welcome to …</string>
     <string name="your_location">Your Location</string>
 
     <string name="lm1">This version is outdated please update from google playstore to latest
