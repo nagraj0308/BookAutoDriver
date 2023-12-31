@@ -53,15 +53,12 @@ class ViewFragment : BaseFragment() {
             }
 
             binding.tvName.text = buildString {
-                append(": ")
                 append(data!!.name)
             }
             binding.tvAddress.text = buildString {
-                append(": ")
                 append(data!!.address)
             }
             binding.tvDistance.text = buildString {
-                append(": ")
                 append(
                     Utils.distance(
                         data!!.lat, data!!.lon, viewModel.lat.value!!, viewModel.lon.value!!
@@ -71,7 +68,6 @@ class ViewFragment : BaseFragment() {
             }
 
             binding.tvRate.text = buildString {
-                append(": ")
                 append(data!!.rate)
             }
 
