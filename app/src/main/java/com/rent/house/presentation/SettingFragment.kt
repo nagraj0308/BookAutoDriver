@@ -9,6 +9,7 @@ import com.rent.house.PM
 import com.rent.house.R
 import com.rent.house.databinding.FragmentSettingBinding
 import com.rent.house.presentation.base.BaseFragment
+import com.rent.house.presentation.home.HomeActivity
 import com.rent.house.utils.Language
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -50,7 +51,7 @@ class SettingFragment : BaseFragment() {
         val prev: String? = pm.lang
         val language = Language.values()[pos]
         pm.lang = Language.getLanguageCode(language)
-
+        (activity as HomeActivity).setLangCode(pm.lang!!)
         if (prev != pm.lang) {
             activity?.finishAndRemoveTask()
         }

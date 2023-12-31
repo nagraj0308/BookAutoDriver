@@ -10,7 +10,7 @@ open class BaseActivity : AppCompatActivity() {
         Toast.makeText(this, string, Toast.LENGTH_LONG).show()
     }
 
-    protected open fun setLangCode(code: String?) {
+    open fun setLangCode(code: String) {
         val locale = Locale(code)
         val config = baseContext.resources.configuration
         config.locale = locale

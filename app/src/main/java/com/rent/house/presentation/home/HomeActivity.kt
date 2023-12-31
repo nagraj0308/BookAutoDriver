@@ -114,7 +114,7 @@ class HomeActivity : BaseActivity() {
 
     override fun onStart() {
         super.onStart()
-        setLangCode(pm.lang)
+        pm.lang?.let { setLangCode(it) }
         updateLocation()
         remoteConfig = Firebase.remoteConfig
         val configSettings = remoteConfigSettings {

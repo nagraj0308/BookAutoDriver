@@ -96,7 +96,7 @@ class LoginActivity : BaseActivity() {
 
 
     private fun login() {
-        setLangCode(pm.lang)
+        pm.lang?.let { setLangCode(it) }
         finish()
         startActivity(Intent(this@LoginActivity, HomeActivity::class.java))
     }
