@@ -5,7 +5,9 @@ import com.rent.house.utils.Language
 
 class PM(private val preferences: SharedPreferences) {
     fun clearAll() {
-        preferences.edit().clear().apply()
+        preferences.edit().putBoolean(IS_LOGGED_IN, false).apply()
+        preferences.edit().putString(GMAIL, "").apply()
+        preferences.edit().putString(NAME, "").apply()
     }
 
     var isLoggedIn: Boolean
@@ -32,6 +34,12 @@ class PM(private val preferences: SharedPreferences) {
             preferences.edit().putString(LANG, lang).apply()
         }
 
+    var langSet: Boolean
+        get() = preferences.getBoolean(LANG_SET, false)
+        set(value) {
+            preferences.edit().putBoolean(LANG_SET, value).apply()
+        }
+
 
     companion object {
         const val PM_FILE = "pm_file"
@@ -39,5 +47,6 @@ class PM(private val preferences: SharedPreferences) {
         private const val GMAIL = "gmail"
         private const val NAME = "name"
         private const val LANG = "lang"
+        private const val LANG_SET = "lang_set"
     }
 }
