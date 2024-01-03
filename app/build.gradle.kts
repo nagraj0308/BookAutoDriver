@@ -10,11 +10,11 @@ plugins {
 }
 
 android {
-    namespace = "com.rent.house"
+    namespace = "com.book.homestay"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.rent.house"
+        applicationId = "com.book.homestay"
         minSdk = 27
         targetSdk = 34
         versionCode = 7

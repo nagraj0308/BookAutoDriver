@@ -14,7 +14,7 @@ class FBS {
     companion object {
         fun getReference(gId: String): StorageReference {
             val storageRef = Firebase.storage.reference;
-            return storageRef.child("RentHouse/$gId")
+            return storageRef.child("BookHomestay/$gId")
         }
     }
 }

@@ -1,16 +1,16 @@
-package com.rent.house.presentation
+package com.book.homestay.presentation
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import com.rent.house.PM
-import com.rent.house.R
-import com.rent.house.databinding.FragmentSettingBinding
-import com.rent.house.presentation.base.BaseFragment
-import com.rent.house.presentation.home.HomeActivity
-import com.rent.house.utils.Language
+import com.book.homestay.PM
+import com.book.homestay.R
+import com.book.homestay.databinding.FragmentSettingBinding
+import com.book.homestay.presentation.base.BaseFragment
+import com.book.homestay.presentation.home.HomeActivity
+import com.book.homestay.utils.Language
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
