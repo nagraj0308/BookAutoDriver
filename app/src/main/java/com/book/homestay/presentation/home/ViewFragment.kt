@@ -1,4 +1,4 @@
-package com.rent.house.presentation.home
+package com.book.homestay.presentation.home
 
 import android.content.Intent
 import android.net.Uri
@@ -9,10 +9,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.rent.house.data.remote.reqres.House
-import com.rent.house.databinding.FragmentViewDetailsBinding
-import com.rent.house.presentation.base.BaseFragment
-import com.rent.house.utils.Utils
+import com.book.homestay.data.remote.reqres.House
+import com.book.homestay.databinding.FragmentViewDetailsBinding
+import com.book.homestay.presentation.base.BaseFragment
+import com.book.homestay.utils.Utils
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

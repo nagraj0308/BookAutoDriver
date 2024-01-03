@@ -1,4 +1,4 @@
-package com.rent.house.presentation.home
+package com.book.homestay.presentation.home
 
 import android.app.Dialog
 import android.content.Intent
@@ -24,16 +24,16 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.ktx.remoteConfig
 import com.google.firebase.remoteconfig.ktx.remoteConfigSettings
-import com.rent.house.BuildConfig
-import com.rent.house.PM
-import com.rent.house.R
-import com.rent.house.databinding.ActivityHomeBinding
-import com.rent.house.databinding.NavHeaderMainBinding
-import com.rent.house.presentation.base.BaseActivity
-import com.rent.house.presentation.login.LoginActivity
-import com.rent.house.utils.Constants
-import com.rent.house.utils.PermissionUtils
-import com.rent.house.utils.RequestCode
+import com.book.homestay.BuildConfig
+import com.book.homestay.PM
+import com.book.homestay.R
+import com.book.homestay.databinding.ActivityHomeBinding
+import com.book.homestay.databinding.NavHeaderMainBinding
+import com.book.homestay.presentation.base.BaseActivity
+import com.book.homestay.presentation.login.LoginActivity
+import com.book.homestay.utils.Constants
+import com.book.homestay.utils.PermissionUtils
+import com.book.homestay.utils.RequestCode
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

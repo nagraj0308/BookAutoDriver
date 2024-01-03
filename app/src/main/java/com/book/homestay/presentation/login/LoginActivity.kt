@@ -1,4 +1,4 @@
-package com.rent.house.presentation.login
+package com.book.homestay.presentation.login
 
 import android.Manifest
 import android.content.Intent
@@ -12,12 +12,12 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
-import com.rent.house.PM
-import com.rent.house.R
-import com.rent.house.databinding.ActivityLoginBinding
-import com.rent.house.presentation.base.BaseActivity
-import com.rent.house.presentation.home.HomeActivity
-import com.rent.house.utils.RequestCode
+import com.book.homestay.PM
+import com.book.homestay.R
+import com.book.homestay.databinding.ActivityLoginBinding
+import com.book.homestay.presentation.base.BaseActivity
+import com.book.homestay.presentation.home.HomeActivity
+import com.book.homestay.utils.RequestCode
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.runBlocking
 import javax.inject.Inject

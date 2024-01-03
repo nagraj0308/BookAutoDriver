@@ -1,4 +1,4 @@
-package com.rent.house.utils
+package com.book.homestay.utils
 
 import java.util.Locale
 

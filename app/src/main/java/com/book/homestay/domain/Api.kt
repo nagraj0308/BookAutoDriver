@@ -1,16 +1,16 @@
-package com.rent.house.domain
+package com.book.homestay.domain
 
-import com.rent.house.data.remote.reqres.BasicResponse
-import com.rent.house.data.remote.reqres.DeleteRequest
-import com.rent.house.data.remote.reqres.GetHouseByIdRequest
-import com.rent.house.data.remote.reqres.GetHouseRequest
-import com.rent.house.data.remote.reqres.HouseRequest
-import com.rent.house.data.remote.reqres.HouseResponse
-import com.rent.house.data.remote.reqres.HousesResponse
-import com.rent.house.data.remote.reqres.Img1Request
-import com.rent.house.data.remote.reqres.Img2Request
-import com.rent.house.data.remote.reqres.Img3Request
-import com.rent.house.data.remote.reqres.Img4Request
+import com.book.homestay.data.remote.reqres.BasicResponse
+import com.book.homestay.data.remote.reqres.DeleteRequest
+import com.book.homestay.data.remote.reqres.GetHouseByIdRequest
+import com.book.homestay.data.remote.reqres.GetHouseRequest
+import com.book.homestay.data.remote.reqres.HouseRequest
+import com.book.homestay.data.remote.reqres.HouseResponse
+import com.book.homestay.data.remote.reqres.HousesResponse
+import com.book.homestay.data.remote.reqres.Img1Request
+import com.book.homestay.data.remote.reqres.Img2Request
+import com.book.homestay.data.remote.reqres.Img3Request
+import com.book.homestay.data.remote.reqres.Img4Request
 import retrofit2.Response
 
 interface Api {

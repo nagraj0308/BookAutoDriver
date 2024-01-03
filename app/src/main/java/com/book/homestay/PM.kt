@@ -1,7 +1,7 @@
-package com.rent.house
+package com.book.homestay
 
 import android.content.SharedPreferences
-import com.rent.house.utils.Language
+import com.book.homestay.utils.Language
 
 class PM(private val preferences: SharedPreferences) {
     fun clearAll() {

@@ -1,4 +1,4 @@
-package com.rent.house.presentation.base
+package com.book.homestay.presentation.base
 
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity

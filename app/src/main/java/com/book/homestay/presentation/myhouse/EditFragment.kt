@@ -1,4 +1,4 @@
-package com.rent.house.presentation.myhouse
+package com.book.homestay.presentation.myhouse
 
 import android.app.Activity
 import android.content.Intent
@@ -15,13 +15,13 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.google.firebase.storage.UploadTask
-import com.rent.house.PM
-import com.rent.house.R
-import com.rent.house.databinding.FragmentEditDetailsBinding
-import com.rent.house.presentation.base.BaseFragment
-import com.rent.house.presentation.home.HomeViewModel
-import com.rent.house.utils.FBS
-import com.rent.house.utils.PermissionUtils
+import com.book.homestay.PM
+import com.book.homestay.R
+import com.book.homestay.databinding.FragmentEditDetailsBinding
+import com.book.homestay.presentation.base.BaseFragment
+import com.book.homestay.presentation.home.HomeViewModel
+import com.book.homestay.utils.FBS
+import com.book.homestay.utils.PermissionUtils
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

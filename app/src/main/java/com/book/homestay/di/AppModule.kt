@@ -1,13 +1,13 @@
-package com.rent.house.di
+package com.book.homestay.di
 
 import android.content.Context
 import android.content.SharedPreferences
-import com.rent.house.BuildConfig
-import com.rent.house.PM
-import com.rent.house.data.remote.ApiImp
-import com.rent.house.data.remote.Service
-import com.rent.house.domain.Api
-import com.rent.house.utils.Constants
+import com.book.homestay.BuildConfig
+import com.book.homestay.PM
+import com.book.homestay.data.remote.ApiImp
+import com.book.homestay.data.remote.Service
+import com.book.homestay.domain.Api
+import com.book.homestay.utils.Constants
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

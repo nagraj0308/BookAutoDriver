@@ -1,4 +1,4 @@
-package com.rent.house.presentation
+package com.book.homestay.presentation
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,8 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebViewClient
 import androidx.fragment.app.Fragment
-import com.rent.house.databinding.FragmentWebViewBinding
-import com.rent.house.utils.Constants
+import com.book.homestay.databinding.FragmentWebViewBinding
+import com.book.homestay.utils.Constants
 
 
 class PnPFragment : Fragment() {

@@ -1,4 +1,4 @@
-package com.rent.house.presentation.home
+package com.book.homestay.presentation.home
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.rent.house.R
+import com.book.homestay.R
 
 class ImageAdapter(private val mList: List<String>) :
     RecyclerView.Adapter<ImageAdapter.ViewHolder>() {

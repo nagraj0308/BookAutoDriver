@@ -1,4 +1,4 @@
-package com.rent.house.presentation.myhouse
+package com.book.homestay.presentation.myhouse
 
 import android.graphics.Bitmap
 import android.graphics.Canvas
@@ -16,11 +16,11 @@ import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
-import com.rent.house.R
-import com.rent.house.data.remote.reqres.House
-import com.rent.house.databinding.FragmentMyHouseBinding
-import com.rent.house.presentation.base.BaseFragment
-import com.rent.house.presentation.home.HomeViewModel
+import com.book.homestay.R
+import com.book.homestay.data.remote.reqres.House
+import com.book.homestay.databinding.FragmentMyHouseBinding
+import com.book.homestay.presentation.base.BaseFragment
+import com.book.homestay.presentation.home.HomeViewModel
 
 
 class MyHouseFragment : BaseFragment() {

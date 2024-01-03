@@ -1,4 +1,4 @@
-package com.rent.house.data.remote.reqres
+package com.book.homestay.data.remote.reqres
 
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable

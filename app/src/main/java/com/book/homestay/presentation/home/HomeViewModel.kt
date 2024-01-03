@@ -1,4 +1,4 @@
-package com.rent.house.presentation.home
+package com.book.homestay.presentation.home
 
 
 import android.annotation.SuppressLint
@@ -6,18 +6,18 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.rent.house.PM
-import com.rent.house.data.remote.reqres.DeleteRequest
-import com.rent.house.data.remote.reqres.GetHouseByIdRequest
-import com.rent.house.data.remote.reqres.GetHouseRequest
-import com.rent.house.data.remote.reqres.House
-import com.rent.house.data.remote.reqres.HouseRequest
-import com.rent.house.data.remote.reqres.Img1Request
-import com.rent.house.data.remote.reqres.Img2Request
-import com.rent.house.data.remote.reqres.Img3Request
-import com.rent.house.data.remote.reqres.Img4Request
-import com.rent.house.domain.Api
-import com.rent.house.utils.FBS
+import com.book.homestay.PM
+import com.book.homestay.data.remote.reqres.DeleteRequest
+import com.book.homestay.data.remote.reqres.GetHouseByIdRequest
+import com.book.homestay.data.remote.reqres.GetHouseRequest
+import com.book.homestay.data.remote.reqres.House
+import com.book.homestay.data.remote.reqres.HouseRequest
+import com.book.homestay.data.remote.reqres.Img1Request
+import com.book.homestay.data.remote.reqres.Img2Request
+import com.book.homestay.data.remote.reqres.Img3Request
+import com.book.homestay.data.remote.reqres.Img4Request
+import com.book.homestay.domain.Api
+import com.book.homestay.utils.FBS
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
