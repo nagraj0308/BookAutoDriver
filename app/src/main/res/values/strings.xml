@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">Rent House</string>
+    <string name="app_name" translatable="false">Book Homestay</string>
 
     <string name="about_us">About Us</string>
     <string name="accepted">Accepted</string>
