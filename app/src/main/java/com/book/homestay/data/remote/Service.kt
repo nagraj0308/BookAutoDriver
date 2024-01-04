@@ -20,40 +20,40 @@ import retrofit2.http.POST
 interface Service {
 
     @Headers("Content-Type: application/json")
-    @POST("api/getAllActiveHouse/")
-    suspend fun getAllActiveHouse(@Body request: GetHomestayRequest?): Response<HomestaysResponse>
+    @POST("api/getAllActiveHomestay/")
+    suspend fun getAllActiveHomestay(@Body request: GetHomestayRequest?): Response<HomestaysResponse>
 
     @Headers("Content-Type: application/json")
-    @POST("api/insertHouse/")
-    suspend fun insertHouse(@Body request: HomestayRequest?): Response<HomestayResponse>
+    @POST("api/insertHomestay/")
+    suspend fun insertHomestay(@Body request: HomestayRequest?): Response<HomestayResponse>
 
     @Headers("Content-Type: application/json")
-    @POST("api/updateHouse/")
-    suspend fun updateHouse(@Body request: HomestayRequest?): Response<HomestayResponse>
+    @POST("api/updateHomestay/")
+    suspend fun updateHomestay(@Body request: HomestayRequest?): Response<HomestayResponse>
 
 
     @Headers("Content-Type: application/json")
-    @POST("api/getHouseById/")
-    suspend fun getHouseByGmailId(@Body request: GetHomestayByIdRequest?): Response<HomestayResponse>
+    @POST("api/getHomestayById/")
+    suspend fun getHomestayByGmailId(@Body request: GetHomestayByIdRequest?): Response<HomestayResponse>
 
     @Headers("Content-Type: application/json")
-    @POST("api/updateHouseImg1/")
+    @POST("api/updateHomestayImg1/")
     suspend fun updateImg1(@Body request: Img1Request?): Response<BasicResponse>
 
     @Headers("Content-Type: application/json")
-    @POST("api/updateHouseImg2/")
+    @POST("api/updateHomestayImg2/")
     suspend fun updateImg2(@Body request: Img2Request?): Response<BasicResponse>
 
     @Headers("Content-Type: application/json")
-    @POST("api/updateHouseImg3/")
+    @POST("api/updateHomestayImg3/")
     suspend fun updateImg3(@Body request: Img3Request?): Response<BasicResponse>
 
     @Headers("Content-Type: application/json")
-    @POST("api/updateHouseImg4/")
+    @POST("api/updateHomestayImg4/")
     suspend fun updateImg4(@Body request: Img4Request?): Response<BasicResponse>
 
     @Headers("Content-Type: application/json")
-    @POST("api/deleteHouseById/")
-    suspend fun deleteHouseById(@Body request: DeleteRequest?): Response<BasicResponse>
+    @POST("api/deleteHomestayById/")
+    suspend fun deleteHomestayById(@Body request: DeleteRequest?): Response<BasicResponse>
 
 }

@@ -20,16 +20,16 @@ class ApiImp @Inject constructor(
     private val service: Service
 ) : Api {
 
-    override suspend fun getAllActiveHouse(request: GetHomestayRequest?): Response<HomestaysResponse> {
-        return service.getAllActiveHouse(request)
+    override suspend fun getAllActiveHomestay(request: GetHomestayRequest?): Response<HomestaysResponse> {
+        return service.getAllActiveHomestay(request)
     }
 
-    override suspend fun insertHouse(request: HomestayRequest?): Response<HomestayResponse> {
-        return service.insertHouse(request)
+    override suspend fun insertHomestay(request: HomestayRequest?): Response<HomestayResponse> {
+        return service.insertHomestay(request)
     }
 
-    override suspend fun updateHouse(request: HomestayRequest?): Response<HomestayResponse> {
-        return service.updateHouse(request)
+    override suspend fun updateHomestay(request: HomestayRequest?): Response<HomestayResponse> {
+        return service.updateHomestay(request)
     }
 
     override suspend fun updateImg1(request: Img1Request?): Response<BasicResponse> {
@@ -48,12 +48,12 @@ class ApiImp @Inject constructor(
         return service.updateImg4(request)
     }
 
-    override suspend fun getHouseById(request: GetHomestayByIdRequest?): Response<HomestayResponse> {
-        return service.getHouseByGmailId(request)
+    override suspend fun getHomestayById(request: GetHomestayByIdRequest?): Response<HomestayResponse> {
+        return service.getHomestayByGmailId(request)
     }
 
-    override suspend fun deleteHouseById(request: DeleteRequest?): Response<BasicResponse> {
-        return service.deleteHouseById(request)
+    override suspend fun deleteHomestayById(request: DeleteRequest?): Response<BasicResponse> {
+        return service.deleteHomestayById(request)
     }
 
 }

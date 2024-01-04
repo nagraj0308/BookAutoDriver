@@ -18,14 +18,14 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.book.homestay.R
 import com.book.homestay.data.remote.reqres.Homestay
-import com.book.homestay.databinding.FragmentMyHouseBinding
+import com.book.homestay.databinding.FragmentMyHomestayBinding
 import com.book.homestay.presentation.base.BaseFragment
 import com.book.homestay.presentation.home.HomeViewModel
 
 
 class MyHomestayFragment : BaseFragment() {
 
-    private var _binding: FragmentMyHouseBinding? = null
+    private var _binding: FragmentMyHomestayBinding? = null
     private val viewModel: HomeViewModel by activityViewModels()
     private var isNew: Boolean = true
     private var map: GoogleMap? = null
@@ -37,7 +37,7 @@ class MyHomestayFragment : BaseFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentMyHouseBinding.inflate(inflater, container, false)
+        _binding = FragmentMyHomestayBinding.inflate(inflater, container, false)
         MapsInitializer.initialize(requireContext(), MapsInitializer.Renderer.LATEST) {}
         val root: View = binding.root
         val navController = findNavController()
@@ -93,7 +93,7 @@ class MyHomestayFragment : BaseFragment() {
 
 
     override fun onStart() {
-        viewModel.getAutoHouse {
+        viewModel.getAutoHomestay {
 
         }
         super.onStart()

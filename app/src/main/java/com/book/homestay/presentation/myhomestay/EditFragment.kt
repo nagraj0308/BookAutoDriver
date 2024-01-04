@@ -53,7 +53,7 @@ class EditFragment : BaseFragment() {
                 val rate = binding.tilRate.editText!!.text.trim().toString()
                 val address = binding.tilAddress.editText!!.text.trim().toString()
                 showProgress()
-                viewModel.insertHouse(
+                viewModel.insertHomestay(
                     name, address, mobileNumber, rate
                 ) {
                     hideProgress()
@@ -73,7 +73,7 @@ class EditFragment : BaseFragment() {
                 val rate = binding.tilRate.editText!!.text.trim().toString()
                 val address = binding.tilAddress.editText!!.text.trim().toString()
                 showProgress()
-                viewModel.updateHouseData(
+                viewModel.updateHomestayData(
                     name, address, mobileNumber, rate
                 ) {
                     hideProgress()
@@ -89,7 +89,7 @@ class EditFragment : BaseFragment() {
         }
         binding.btnDelete.setOnClickListener {
             showProgress()
-            viewModel.deleteHouse {
+            viewModel.deleteHomestay {
                 hideProgress()
                 if (it) {
                     showToast(getString(R.string.deleted_successfully))

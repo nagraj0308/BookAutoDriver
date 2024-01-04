@@ -15,14 +15,14 @@ import retrofit2.Response
 
 interface Api {
 
-    suspend fun getAllActiveHouse(request: GetHomestayRequest?): Response<HomestaysResponse>
-    suspend fun insertHouse(request: HomestayRequest?): Response<HomestayResponse>
-    suspend fun updateHouse(request: HomestayRequest?): Response<HomestayResponse>
+    suspend fun getAllActiveHomestay(request: GetHomestayRequest?): Response<HomestaysResponse>
+    suspend fun insertHomestay(request: HomestayRequest?): Response<HomestayResponse>
+    suspend fun updateHomestay(request: HomestayRequest?): Response<HomestayResponse>
     suspend fun updateImg1(request: Img1Request?): Response<BasicResponse>
     suspend fun updateImg2(request: Img2Request?): Response<BasicResponse>
     suspend fun updateImg3(request: Img3Request?): Response<BasicResponse>
     suspend fun updateImg4(request: Img4Request?): Response<BasicResponse>
-    suspend fun getHouseById(request: GetHomestayByIdRequest?): Response<HomestayResponse>
-    suspend fun deleteHouseById(request: DeleteRequest?): Response<BasicResponse>
+    suspend fun getHomestayById(request: GetHomestayByIdRequest?): Response<HomestayResponse>
+    suspend fun deleteHomestayById(request: DeleteRequest?): Response<BasicResponse>
 
 }

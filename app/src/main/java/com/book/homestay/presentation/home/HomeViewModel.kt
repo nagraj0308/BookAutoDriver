@@ -60,10 +60,10 @@ class HomeViewModel @Inject constructor(
     val isLocationUpdated: LiveData<Boolean> get() = _isLocationUpdated
 
 
-    private fun getAllHouse() {
+    private fun getAllHomestay() {
         CoroutineScope(Dispatchers.IO).launch {
             runCatching {
-                api.getAllActiveHouse(
+                api.getAllActiveHomestay(
                     GetHomestayRequest(
                         _lat.value, _lon.value
                     )
@@ -83,35 +83,35 @@ class HomeViewModel @Inject constructor(
         _isLocationUpdated.value = true
         _lat.value = lat
         _lon.value = lon
-        getAllHouse()
+        getAllHomestay()
     }
 
     fun setImg1(url: String) {
         _imgUrl1.value = url
-        updateHouseImg1()
+        updateHomestayImg1()
     }
 
     fun setImg2(url: String) {
         _imgUrl2.value = url
-        updateHouseImg2()
+        updateHomestayImg2()
     }
 
     fun setImg3(url: String) {
         _imgUrl3.value = url
-        updateHouseImg3()
+        updateHomestayImg3()
     }
 
     fun setImg4(url: String) {
         _imgUrl4.value = url
-        updateHouseImg4()
+        updateHomestayImg4()
     }
 
-    fun insertHouse(
+    fun insertHomestay(
         gName: String, gAddress: String, gMobile: String, gRate: String, callback: (Boolean) -> Unit
     ) {
         CoroutineScope(Dispatchers.IO).launch {
             runCatching {
-                api.insertHouse(
+                api.insertHomestay(
                     HomestayRequest(
                         pm.gmail,
                         gName,
@@ -128,7 +128,7 @@ class HomeViewModel @Inject constructor(
                 )
             }.onSuccess {
                 withContext(Dispatchers.Main) {
-                    getAutoHouse() {}
+                    getAutoHomestay() {}
                     callback(true)
                 }
             }.onFailure {
@@ -140,19 +140,19 @@ class HomeViewModel @Inject constructor(
     }
 
 
-    fun updateHouseData(
+    fun updateHomestayData(
         gName: String, gAddress: String, gMobile: String, gRate: String, callback: (Boolean) -> Unit
     ) {
         CoroutineScope(Dispatchers.IO).launch {
             runCatching {
-                api.updateHouse(
+                api.updateHomestay(
                     HomestayRequest(
                         pm.gmail, gName, gAddress, 0.0, 0.0, gMobile, gRate, "", "", "", ""
                     )
                 )
             }.onSuccess {
                 withContext(Dispatchers.Main) {
-                    getAutoHouse() {}
+                    getAutoHomestay() {}
                     callback(true)
                 }
             }.onFailure {
@@ -164,10 +164,10 @@ class HomeViewModel @Inject constructor(
     }
 
 
-    fun getAutoHouse(callback: (Boolean) -> Unit) {
+    fun getAutoHomestay(callback: (Boolean) -> Unit) {
         CoroutineScope(Dispatchers.IO).launch {
             runCatching {
-                api.getHouseById(GetHomestayByIdRequest(pm.gmail))
+                api.getHomestayById(GetHomestayByIdRequest(pm.gmail))
             }.onSuccess {
                 withContext(Dispatchers.Main) {
                     if (it.isSuccessful) {
@@ -186,20 +186,20 @@ class HomeViewModel @Inject constructor(
     }
 
 
-    fun deleteHouse(callback: (Boolean) -> Unit) {
+    fun deleteHomestay(callback: (Boolean) -> Unit) {
         CoroutineScope(Dispatchers.IO).launch {
-            deleteHouseImage(_homestay.value!!._id + "1") {}
+            deleteHomestayImage(_homestay.value!!._id + "1") {}
         }
         CoroutineScope(Dispatchers.IO).launch {
-            deleteHouseImage(_homestay.value!!._id + "2") {}
+            deleteHomestayImage(_homestay.value!!._id + "2") {}
         }
         CoroutineScope(Dispatchers.IO).launch {
-            deleteHouseImage(_homestay.value!!._id + "3") {}
+            deleteHomestayImage(_homestay.value!!._id + "3") {}
         }
         CoroutineScope(Dispatchers.IO).launch {
-            deleteHouseImage(_homestay.value!!._id + "4") {}
+            deleteHomestayImage(_homestay.value!!._id + "4") {}
         }
-        deleteHouseData {
+        deleteHomestayData {
             if (it) {
                 CoroutineScope(Dispatchers.IO).launch {
                     withContext(Dispatchers.Main) {
@@ -217,7 +217,7 @@ class HomeViewModel @Inject constructor(
     }
 
 
-    private fun deleteHouseImage(
+    private fun deleteHomestayImage(
         gId: String,
         callback: (Boolean) -> Unit,
     ) {
@@ -241,15 +241,15 @@ class HomeViewModel @Inject constructor(
     }
 
 
-    private fun deleteHouseData(
+    private fun deleteHomestayData(
         callback: (Boolean) -> Unit
     ) {
         CoroutineScope(Dispatchers.IO).launch {
             runCatching {
-                api.deleteHouseById(DeleteRequest(pm.gmail))
+                api.deleteHomestayById(DeleteRequest(pm.gmail))
             }.onSuccess {
                 withContext(Dispatchers.Main) {
-                    getAutoHouse() {}
+                    getAutoHomestay() {}
                     callback(true)
                 }
             }.onFailure {
@@ -260,49 +260,49 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    private fun updateHouseImg1() {
+    private fun updateHomestayImg1() {
         CoroutineScope(Dispatchers.IO).launch {
             runCatching {
                 api.updateImg1(Img1Request(pm.gmail, _imgUrl1.value))
             }.onSuccess {
                 withContext(Dispatchers.Main) {
-                    getAutoHouse() {}
+                    getAutoHomestay() {}
                 }
             }
         }
     }
 
-    private fun updateHouseImg2() {
+    private fun updateHomestayImg2() {
         CoroutineScope(Dispatchers.IO).launch {
             runCatching {
                 api.updateImg2(Img2Request(pm.gmail, _imgUrl2.value))
             }.onSuccess {
                 withContext(Dispatchers.Main) {
-                    getAutoHouse() {}
+                    getAutoHomestay() {}
                 }
             }
         }
     }
 
-    private fun updateHouseImg3() {
+    private fun updateHomestayImg3() {
         CoroutineScope(Dispatchers.IO).launch {
             runCatching {
                 api.updateImg3(Img3Request(pm.gmail, _imgUrl3.value))
             }.onSuccess {
                 withContext(Dispatchers.Main) {
-                    getAutoHouse() {}
+                    getAutoHomestay() {}
                 }
             }
         }
     }
 
-    private fun updateHouseImg4() {
+    private fun updateHomestayImg4() {
         CoroutineScope(Dispatchers.IO).launch {
             runCatching {
                 api.updateImg4(Img4Request(pm.gmail, _imgUrl4.value))
             }.onSuccess {
                 withContext(Dispatchers.Main) {
-                    getAutoHouse() {}
+                    getAutoHomestay() {}
                 }
             }
         }
