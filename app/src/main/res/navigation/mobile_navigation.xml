@@ -14,20 +14,20 @@
     <fragment
         android:id="@+id/nav_view_house"
         android:name="com.book.homestay.presentation.home.ViewFragment"
-        android:label="@string/house_details"
+        android:label="@string/homestay_details"
         tools:layout="@layout/fragment_view_details" />
 
 
     <fragment
         android:id="@+id/nav_my_house"
         android:name="com.book.homestay.presentation.myhomestay.MyHomestayFragment"
-        android:label="@string/my_flat"
+        android:label="@string/my_homestay"
         tools:layout="@layout/fragment_my_house" />
 
     <fragment
         android:id="@+id/nav_edit_house"
         android:name="com.book.homestay.presentation.myhomestay.EditFragment"
-        android:label="@string/house_details"
+        android:label="@string/homestay_details"
         tools:layout="@layout/fragment_edit_details" />
 
     <fragment
