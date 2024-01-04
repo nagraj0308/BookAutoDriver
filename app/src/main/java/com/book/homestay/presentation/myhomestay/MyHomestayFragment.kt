@@ -1,4 +1,4 @@
-package com.book.homestay.presentation.myhouse
+package com.book.homestay.presentation.myhomestay
 
 import android.graphics.Bitmap
 import android.graphics.Canvas
@@ -23,7 +23,7 @@ import com.book.homestay.presentation.base.BaseFragment
 import com.book.homestay.presentation.home.HomeViewModel
 
 
-class MyHouseFragment : BaseFragment() {
+class MyHomestayFragment : BaseFragment() {
 
     private var _binding: FragmentMyHouseBinding? = null
     private val viewModel: HomeViewModel by activityViewModels()

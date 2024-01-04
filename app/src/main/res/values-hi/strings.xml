@@ -2,7 +2,7 @@
 
     <string name="about_us">परिचय</string>
     <string name="accepted">स्वीकृत</string>
-    <string name="add_flat">फ्लैट जोड़ें</string>
+    <string name="add_homestay">होमस्टे जोड़ें</string>
     <string name="address">पता</string>
     <string name="added_successfully">सफलतापूर्वक जोड़ा गया</string>
 
@@ -12,7 +12,6 @@
     <string name="deactivated">निष्क्रिय</string>
     <string name="delete">मिटाए</string>
     <string name="deleted_successfully">सफलतापूर्वक मिटाया गया</string>
-    <string name="driver_name">चालक का नाम</string>
     <string name="direction">दिशा</string>
     <string name="distance">दूरी</string>
 
@@ -23,9 +22,9 @@
 
 
     <string name="home">होम</string>
-    <string name="house">घर</string>
-    <string name="house_image">घर छवि</string>
-    <string name="house_details">घर की सूचना</string>
+    <string name="homestay">होमस्टे</string>
+    <string name="homestay_image">होमस्टे छवि</string>
+    <string name="homestay_details">होमस्टे की सूचना</string>
     <string name="live">सक्रिय</string>
 
 
@@ -57,7 +56,7 @@
 
     <string name="there_is_some_error">कुछ त्रुटि है</string>
     <string name="this_field_required">यह फ़ील्ड आवश्यक है!</string>
-    <string name="this_should_be_10_digits">यह 10 अंक का होना चाहिए</string>
+    <string name="this_should_be_n_digits">यह 10 अंक का होना चाहिए</string>
 
     <string name="update">अपडेट</string>
     <string name="updated_successfully">सफलतापूर्वक अपडेट किया गया</string>
@@ -71,7 +70,7 @@
     <string name="your_location">आपका स्थान</string>
 
     <string name="lm1">यह संस्करण पुराना हो गया है कृपया Google Playstore से नवीनतम संस्करण में अपडेट करें।</string>
-    <string name="lm2">अपने आस-पास किराय पर हो फ्लैट लेना या अपने फ्लैट को किराए पर देना, डाउनलोड करें Rent House ऐप। </string>
+    <string name="lm2">अपने आस-पास हो होमस्टे बुक करना या अपने होमस्टे को बुकिंग पर देना, डाउनलोड करें Book Homestay ऐप। </string>
 
 
 </resources>

@@ -1,4 +1,4 @@
-package com.book.homestay.presentation.myhouse
+package com.book.homestay.presentation.myhomestay
 
 import android.app.Activity
 import android.content.Intent

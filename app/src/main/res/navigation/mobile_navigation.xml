@@ -20,13 +20,13 @@
 
     <fragment
         android:id="@+id/nav_my_house"
-        android:name="com.book.homestay.presentation.myhouse.MyHouseFragment"
+        android:name="com.book.homestay.presentation.myhomestay.MyHomestayFragment"
         android:label="@string/my_flat"
         tools:layout="@layout/fragment_my_house" />
 
     <fragment
         android:id="@+id/nav_edit_house"
-        android:name="com.book.homestay.presentation.myhouse.EditFragment"
+        android:name="com.book.homestay.presentation.myhomestay.EditFragment"
         android:label="@string/house_details"
         tools:layout="@layout/fragment_edit_details" />
 

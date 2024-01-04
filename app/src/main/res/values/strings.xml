@@ -3,7 +3,7 @@
 
     <string name="about_us">About Us</string>
     <string name="accepted">Accepted</string>
-    <string name="add_flat">Add Flat</string>
+    <string name="add_homestay">Add Homestay</string>
     <string name="address">Address</string>
     <string name="added_successfully">Added Successfully</string>
 
@@ -13,7 +13,6 @@
     <string name="deactivated">Deactivated</string>
     <string name="delete">Delete</string>
     <string name="deleted_successfully">Deleted Successfully</string>
-    <string name="driver_name">Driver Name</string>
     <string name="direction">Direction</string>
     <string name="distance">Distance</string>
 
@@ -24,9 +23,9 @@
 
 
     <string name="home">Home</string>
-    <string name="house">House</string>
-    <string name="house_image">House Image</string>
-    <string name="house_details">House Details</string>
+    <string name="homestay">Homestay</string>
+    <string name="homestay_image">Homestay Image</string>
+    <string name="homestay_details">Homestay Details</string>
 
     <string name="live">Live</string>
 
@@ -57,7 +56,7 @@
 
     <string name="there_is_some_error">There is some error</string>
     <string name="this_field_required">This field required!</string>
-    <string name="this_should_be_10_digits">This should be 10 digits</string>
+    <string name="this_should_be_n_digits">This should be 10 digits</string>
 
     <string name="update">Update</string>
     <string name="updated_successfully">Updated Successfully</string>
@@ -70,7 +69,7 @@
 
     <string name="lm1">This version is outdated please update from google playstore to latest
         version.</string>
-    <string name="lm2">Rent and List flats at your fingerprints, Explore, list, rent and connect with the perfect rental space. It\'s all in the palm of your hand.</string>
+    <string name="lm2">Book and List homestays and hostels at your fingerprints, Explore, list, book and connect with the perfect booking space. It\'s all in the palm of your hand.</string>
 
 
 </resources>
