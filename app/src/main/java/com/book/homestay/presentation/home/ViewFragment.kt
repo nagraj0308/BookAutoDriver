@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.book.homestay.data.remote.reqres.House
+import com.book.homestay.data.remote.reqres.Homestay
 import com.book.homestay.databinding.FragmentViewDetailsBinding
 import com.book.homestay.presentation.base.BaseFragment
 import com.book.homestay.utils.Utils
@@ -20,7 +20,7 @@ class ViewFragment : BaseFragment() {
     private val viewModel: HomeViewModel by activityViewModels()
     private var _binding: FragmentViewDetailsBinding? = null
     private val binding get() = _binding!!
-    private var data: House? = null
+    private var data: Homestay? = null
 
 
     override fun onCreateView(
@@ -29,7 +29,7 @@ class ViewFragment : BaseFragment() {
         _binding = FragmentViewDetailsBinding.inflate(inflater, container, false)
         val root: View = binding.root
         if (arguments != null) {
-            data = requireArguments().getSerializable("item") as House?
+            data = requireArguments().getSerializable("item") as Homestay?
         }
         if (data != null) {
             binding.btnCall.setOnClickListener {

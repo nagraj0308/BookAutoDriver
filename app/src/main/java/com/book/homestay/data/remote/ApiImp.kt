@@ -2,11 +2,11 @@ package com.book.homestay.data.remote
 
 import com.book.homestay.data.remote.reqres.BasicResponse
 import com.book.homestay.data.remote.reqres.DeleteRequest
-import com.book.homestay.data.remote.reqres.GetHouseByIdRequest
-import com.book.homestay.data.remote.reqres.GetHouseRequest
-import com.book.homestay.data.remote.reqres.HouseRequest
-import com.book.homestay.data.remote.reqres.HouseResponse
-import com.book.homestay.data.remote.reqres.HousesResponse
+import com.book.homestay.data.remote.reqres.GetHomestayByIdRequest
+import com.book.homestay.data.remote.reqres.GetHomestayRequest
+import com.book.homestay.data.remote.reqres.HomestayRequest
+import com.book.homestay.data.remote.reqres.HomestayResponse
+import com.book.homestay.data.remote.reqres.HomestaysResponse
 import com.book.homestay.data.remote.reqres.Img1Request
 import com.book.homestay.data.remote.reqres.Img2Request
 import com.book.homestay.data.remote.reqres.Img3Request
@@ -20,15 +20,15 @@ class ApiImp @Inject constructor(
     private val service: Service
 ) : Api {
 
-    override suspend fun getAllActiveHouse(request: GetHouseRequest?): Response<HousesResponse> {
+    override suspend fun getAllActiveHouse(request: GetHomestayRequest?): Response<HomestaysResponse> {
         return service.getAllActiveHouse(request)
     }
 
-    override suspend fun insertHouse(request: HouseRequest?): Response<HouseResponse> {
+    override suspend fun insertHouse(request: HomestayRequest?): Response<HomestayResponse> {
         return service.insertHouse(request)
     }
 
-    override suspend fun updateHouse(request: HouseRequest?): Response<HouseResponse> {
+    override suspend fun updateHouse(request: HomestayRequest?): Response<HomestayResponse> {
         return service.updateHouse(request)
     }
 
@@ -48,7 +48,7 @@ class ApiImp @Inject constructor(
         return service.updateImg4(request)
     }
 
-    override suspend fun getHouseById(request: GetHouseByIdRequest?): Response<HouseResponse> {
+    override suspend fun getHouseById(request: GetHomestayByIdRequest?): Response<HomestayResponse> {
         return service.getHouseByGmailId(request)
     }
 

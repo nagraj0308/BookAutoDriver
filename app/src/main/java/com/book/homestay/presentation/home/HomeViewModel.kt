@@ -8,10 +8,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.book.homestay.PM
 import com.book.homestay.data.remote.reqres.DeleteRequest
-import com.book.homestay.data.remote.reqres.GetHouseByIdRequest
-import com.book.homestay.data.remote.reqres.GetHouseRequest
-import com.book.homestay.data.remote.reqres.House
-import com.book.homestay.data.remote.reqres.HouseRequest
+import com.book.homestay.data.remote.reqres.GetHomestayByIdRequest
+import com.book.homestay.data.remote.reqres.GetHomestayRequest
+import com.book.homestay.data.remote.reqres.Homestay
+import com.book.homestay.data.remote.reqres.HomestayRequest
 import com.book.homestay.data.remote.reqres.Img1Request
 import com.book.homestay.data.remote.reqres.Img2Request
 import com.book.homestay.data.remote.reqres.Img3Request
@@ -36,8 +36,8 @@ class HomeViewModel @Inject constructor(
     lateinit var pm: PM
 
 
-    private val _house = MutableLiveData(House())
-    private val _houses = MutableLiveData<List<House>>()
+    private val _homestay = MutableLiveData(Homestay())
+    private val _houses = MutableLiveData<List<Homestay>>()
     private val _isLocationUpdated = MutableLiveData(false)
     private val _lat = MutableLiveData(0.0)
     private val _lon = MutableLiveData(0.0)
@@ -47,8 +47,8 @@ class HomeViewModel @Inject constructor(
     private val _imgUrl4 = MutableLiveData("")
 
 
-    val house: LiveData<House> get() = _house
-    val houses: LiveData<List<House>> get() = _houses
+    val homestay: LiveData<Homestay> get() = _homestay
+    val houses: LiveData<List<Homestay>> get() = _houses
     val lat: LiveData<Double> get() = _lat
     val lon: LiveData<Double> get() = _lon
     val img1: LiveData<String> get() = _imgUrl1
@@ -64,7 +64,7 @@ class HomeViewModel @Inject constructor(
         CoroutineScope(Dispatchers.IO).launch {
             runCatching {
                 api.getAllActiveHouse(
-                    GetHouseRequest(
+                    GetHomestayRequest(
                         _lat.value, _lon.value
                     )
                 )
@@ -112,7 +112,7 @@ class HomeViewModel @Inject constructor(
         CoroutineScope(Dispatchers.IO).launch {
             runCatching {
                 api.insertHouse(
-                    HouseRequest(
+                    HomestayRequest(
                         pm.gmail,
                         gName,
                         gAddress,
@@ -146,7 +146,7 @@ class HomeViewModel @Inject constructor(
         CoroutineScope(Dispatchers.IO).launch {
             runCatching {
                 api.updateHouse(
-                    HouseRequest(
+                    HomestayRequest(
                         pm.gmail, gName, gAddress, 0.0, 0.0, gMobile, gRate, "", "", "", ""
                     )
                 )
@@ -167,13 +167,13 @@ class HomeViewModel @Inject constructor(
     fun getAutoHouse(callback: (Boolean) -> Unit) {
         CoroutineScope(Dispatchers.IO).launch {
             runCatching {
-                api.getHouseById(GetHouseByIdRequest(pm.gmail))
+                api.getHouseById(GetHomestayByIdRequest(pm.gmail))
             }.onSuccess {
                 withContext(Dispatchers.Main) {
                     if (it.isSuccessful) {
                         if (it.body() != null) {
                             callback(true)
-                            _house.value = it.body()!!.data
+                            _homestay.value = it.body()!!.data
                         }
                     }
                 }
@@ -188,16 +188,16 @@ class HomeViewModel @Inject constructor(
 
     fun deleteHouse(callback: (Boolean) -> Unit) {
         CoroutineScope(Dispatchers.IO).launch {
-            deleteHouseImage(_house.value!!._id + "1") {}
+            deleteHouseImage(_homestay.value!!._id + "1") {}
         }
         CoroutineScope(Dispatchers.IO).launch {
-            deleteHouseImage(_house.value!!._id + "2") {}
+            deleteHouseImage(_homestay.value!!._id + "2") {}
         }
         CoroutineScope(Dispatchers.IO).launch {
-            deleteHouseImage(_house.value!!._id + "3") {}
+            deleteHouseImage(_homestay.value!!._id + "3") {}
         }
         CoroutineScope(Dispatchers.IO).launch {
-            deleteHouseImage(_house.value!!._id + "4") {}
+            deleteHouseImage(_homestay.value!!._id + "4") {}
         }
         deleteHouseData {
             if (it) {

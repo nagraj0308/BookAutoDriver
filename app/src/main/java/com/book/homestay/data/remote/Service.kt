@@ -2,11 +2,11 @@ package com.book.homestay.data.remote
 
 import com.book.homestay.data.remote.reqres.BasicResponse
 import com.book.homestay.data.remote.reqres.DeleteRequest
-import com.book.homestay.data.remote.reqres.GetHouseByIdRequest
-import com.book.homestay.data.remote.reqres.GetHouseRequest
-import com.book.homestay.data.remote.reqres.HouseRequest
-import com.book.homestay.data.remote.reqres.HouseResponse
-import com.book.homestay.data.remote.reqres.HousesResponse
+import com.book.homestay.data.remote.reqres.GetHomestayByIdRequest
+import com.book.homestay.data.remote.reqres.GetHomestayRequest
+import com.book.homestay.data.remote.reqres.HomestayRequest
+import com.book.homestay.data.remote.reqres.HomestayResponse
+import com.book.homestay.data.remote.reqres.HomestaysResponse
 import com.book.homestay.data.remote.reqres.Img1Request
 import com.book.homestay.data.remote.reqres.Img2Request
 import com.book.homestay.data.remote.reqres.Img3Request
@@ -21,20 +21,20 @@ interface Service {
 
     @Headers("Content-Type: application/json")
     @POST("api/getAllActiveHouse/")
-    suspend fun getAllActiveHouse(@Body request: GetHouseRequest?): Response<HousesResponse>
+    suspend fun getAllActiveHouse(@Body request: GetHomestayRequest?): Response<HomestaysResponse>
 
     @Headers("Content-Type: application/json")
     @POST("api/insertHouse/")
-    suspend fun insertHouse(@Body request: HouseRequest?): Response<HouseResponse>
+    suspend fun insertHouse(@Body request: HomestayRequest?): Response<HomestayResponse>
 
     @Headers("Content-Type: application/json")
     @POST("api/updateHouse/")
-    suspend fun updateHouse(@Body request: HouseRequest?): Response<HouseResponse>
+    suspend fun updateHouse(@Body request: HomestayRequest?): Response<HomestayResponse>
 
 
     @Headers("Content-Type: application/json")
     @POST("api/getHouseById/")
-    suspend fun getHouseByGmailId(@Body request: GetHouseByIdRequest?): Response<HouseResponse>
+    suspend fun getHouseByGmailId(@Body request: GetHomestayByIdRequest?): Response<HomestayResponse>
 
     @Headers("Content-Type: application/json")
     @POST("api/updateHouseImg1/")

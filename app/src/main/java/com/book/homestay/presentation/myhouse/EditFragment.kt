@@ -160,17 +160,17 @@ class EditFragment : BaseFragment() {
             binding.llEdit.visibility = View.GONE
             binding.btnSubmit.visibility = View.VISIBLE
         } else {
-            binding.tilName.editText!!.setText(viewModel.house.value!!.name)
-            binding.tilMobileNumber.editText!!.setText(viewModel.house.value!!.mobileNo)
-            binding.tilRate.editText!!.setText(viewModel.house.value!!.rate)
-            binding.tilAddress.editText!!.setText(viewModel.house.value!!.address)
-            Glide.with(this).asBitmap().load(viewModel.house.value!!.imageUrl1)
+            binding.tilName.editText!!.setText(viewModel.homestay.value!!.name)
+            binding.tilMobileNumber.editText!!.setText(viewModel.homestay.value!!.mobileNo)
+            binding.tilRate.editText!!.setText(viewModel.homestay.value!!.rate)
+            binding.tilAddress.editText!!.setText(viewModel.homestay.value!!.address)
+            Glide.with(this).asBitmap().load(viewModel.homestay.value!!.imageUrl1)
                 .into(binding.ivAutoPhoto1)
-            Glide.with(this).asBitmap().load(viewModel.house.value!!.imageUrl2)
+            Glide.with(this).asBitmap().load(viewModel.homestay.value!!.imageUrl2)
                 .into(binding.ivAutoPhoto2)
-            Glide.with(this).asBitmap().load(viewModel.house.value!!.imageUrl3)
+            Glide.with(this).asBitmap().load(viewModel.homestay.value!!.imageUrl3)
                 .into(binding.ivAutoPhoto3)
-            Glide.with(this).asBitmap().load(viewModel.house.value!!.imageUrl4)
+            Glide.with(this).asBitmap().load(viewModel.homestay.value!!.imageUrl4)
                 .into(binding.ivAutoPhoto4)
             binding.llEdit.visibility = View.VISIBLE
             binding.btnSubmit.visibility = View.GONE

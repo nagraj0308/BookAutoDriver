@@ -17,7 +17,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.book.homestay.R
-import com.book.homestay.data.remote.reqres.House
+import com.book.homestay.data.remote.reqres.Homestay
 import com.book.homestay.databinding.FragmentHomeBinding
 import com.book.homestay.presentation.base.BaseFragment
 
@@ -93,7 +93,7 @@ class HomeFragment : BaseFragment() {
         return root
     }
 
-    private fun getAuto(id: String?, list: List<House>): House? {
+    private fun getAuto(id: String?, list: List<Homestay>): Homestay? {
         for (au in list) {
             if (au._id == id) {
                 return au
@@ -102,7 +102,7 @@ class HomeFragment : BaseFragment() {
         return null
     }
 
-    private fun showDetails(auto: House) {
+    private fun showDetails(auto: Homestay) {
         val bundle = Bundle()
         bundle.putSerializable("item", auto)
         findNavController().navigate(R.id.nav_view_house, bundle)

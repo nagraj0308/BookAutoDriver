@@ -17,7 +17,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.book.homestay.R
-import com.book.homestay.data.remote.reqres.House
+import com.book.homestay.data.remote.reqres.Homestay
 import com.book.homestay.databinding.FragmentMyHouseBinding
 import com.book.homestay.presentation.base.BaseFragment
 import com.book.homestay.presentation.home.HomeViewModel
@@ -55,7 +55,7 @@ class MyHouseFragment : BaseFragment() {
             navController.navigate(R.id.nav_edit_house, bundle)
         }
 
-        viewModel.house.observe(viewLifecycleOwner) {
+        viewModel.homestay.observe(viewLifecycleOwner) {
             setContentState(it)
         }
 
@@ -117,9 +117,9 @@ class MyHouseFragment : BaseFragment() {
     }
 
 
-    private fun setContentState(house: House?) {
-        if (house != null) {
-            if (house._id == "" || house.mobileNo == "") {
+    private fun setContentState(homestay: Homestay?) {
+        if (homestay != null) {
+            if (homestay._id == "" || homestay.mobileNo == "") {
                 isNew = true
                 binding.btnAddAuto.visibility = View.VISIBLE
                 binding.cvContent.visibility = View.GONE
@@ -128,8 +128,8 @@ class MyHouseFragment : BaseFragment() {
                 isNew = false
                 binding.btnAddAuto.visibility = View.GONE
                 binding.cvContent.visibility = View.VISIBLE
-                binding.tvLive.text = getStatusMsg(house.verificationState)
-                binding.tvAdminRemark.text = house.adminRemark
+                binding.tvLive.text = getStatusMsg(homestay.verificationState)
+                binding.tvAdminRemark.text = homestay.adminRemark
             }
         } else {
             binding.btnAddAuto.visibility = View.VISIBLE
