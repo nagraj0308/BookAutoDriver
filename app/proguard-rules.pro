@@ -1,18 +1,18 @@
--keep class com.rent.house.data.remote.reqres.*{*;}
--keep class com.rent.house.data.remote.*{*;}
--keep class com.rent.house.data.*{*;}
--keep class com.rent.house.di.*{*;}
--keep class com.rent.house.domain.*{*;}
--keep class com.rent.house.presentation.login.*{*;}
--keep class com.rent.house.presentation.addeditauto.*{*;}
--keep class com.rent.house.presentation.base.*{*;}
--keep class com.rent.house.presentation.vehicle.*{*;}
--keep class com.rent.house.presentation.home.*{*;}
--keep class com.rent.house.presentation.myhouse.*{*;}
--keep class com.rent.house.presentation.synclocation.*{*;}
--keep class com.rent.house.presentation.*{*;}
--keep class com.rent.house.utils.*{*;}
--keep class com.rent.house.*{*;}
+-keep class com.book.homestay.data.remote.reqres.*{*;}
+-keep class com.book.homestay.data.remote.*{*;}
+-keep class com.book.homestay.data.*{*;}
+-keep class com.book.homestay.di.*{*;}
+-keep class com.book.homestay.domain.*{*;}
+-keep class com.book.homestay.presentation.login.*{*;}
+-keep class com.book.homestay.presentation.addeditauto.*{*;}
+-keep class com.book.homestay.presentation.base.*{*;}
+-keep class com.book.homestay.presentation.vehicle.*{*;}
+-keep class com.book.homestay.presentation.home.*{*;}
+-keep class com.book.homestay.presentation.myhomestay.*{*;}
+-keep class com.book.homestay.presentation.synclocation.*{*;}
+-keep class com.book.homestay.presentation.*{*;}
+-keep class com.book.homestay.utils.*{*;}
+-keep class com.book.homestay.*{*;}
 
 
 -keep,allowobfuscation,allowshrinking class kotlin.coroutines.Continuation
