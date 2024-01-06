@@ -31,7 +31,7 @@ class HomestayAdapter(private val mList: List<Homestay>, val nc: NavController) 
         holder.itemView.setOnClickListener {
             val bundle = Bundle()
             bundle.putSerializable("item", mList[position])
-            nc.navigate(R.id.nav_view_house, bundle)
+            nc.navigate(R.id.nav_view_homestay, bundle)
         }
     }
 

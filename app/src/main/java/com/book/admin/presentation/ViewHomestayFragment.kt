@@ -72,7 +72,7 @@ class ViewHomestayFragment : BaseFragment() {
 
 
             binding.btnSave.setOnClickListener {
-                viewModel.changeHouseAdminRemark(
+                viewModel.changeHomestayAdminRemark(
                     binding.tilAdminRemark.editText!!.text.toString(),
                     data!!._id
                 ) {
@@ -88,7 +88,7 @@ class ViewHomestayFragment : BaseFragment() {
         if (code != Constants.vss[0].code) {
             binding.llStatus.visibility = View.GONE
             if (update) {
-                viewModel.changeHouseStatus(code, data!!._id) {
+                viewModel.changeHomestayStatus(code, data!!._id) {
                     navController.popBackStack()
                 }
             }
