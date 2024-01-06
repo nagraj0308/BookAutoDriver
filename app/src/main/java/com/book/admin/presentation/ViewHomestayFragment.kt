@@ -12,7 +12,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.book.admin.R
-import com.book.admin.data.remote.reqres.House
+import com.book.admin.data.remote.reqres.Homestay
 import com.book.admin.databinding.FragmentViewHomestayBinding
 import com.book.admin.presentation.home.HomeViewModel
 import com.book.admin.utils.BaseFragment
@@ -27,7 +27,7 @@ class ViewHomestayFragment : BaseFragment() {
 
     private val viewModel: HomeViewModel by activityViewModels()
     private val binding get() = _binding!!
-    private var data: House? = null
+    private var data: Homestay? = null
 
 
     @SuppressLint("SetTextI18n")
@@ -39,7 +39,7 @@ class ViewHomestayFragment : BaseFragment() {
         val navController = findNavController()
 
         if (arguments != null) {
-            data = requireArguments().getSerializable("item") as House?
+            data = requireArguments().getSerializable("item") as Homestay?
         }
 
         if (data != null) {

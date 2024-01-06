@@ -8,10 +8,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.navigation.NavController
 import androidx.recyclerview.widget.RecyclerView
+import com.book.admin.R
 import com.book.admin.data.remote.reqres.Homestay
-import com.book.admin.data.remote.reqres.House
 import com.book.admin.utils.Utils
-import com.book.homestay.R
 import com.bumptech.glide.Glide
 
 
