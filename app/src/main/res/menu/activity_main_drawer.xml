@@ -16,6 +16,11 @@
             android:id="@+id/nav_house"
             android:icon="@drawable/ic_home"
             android:title="@string/house" />
+
+        <item
+            android:id="@+id/nav_homestay"
+            android:icon="@drawable/ic_home"
+            android:title="@string/homestay" />
         <item
             android:id="@+id/nav_exit"
             android:icon="@drawable/ic_exit_to_app"

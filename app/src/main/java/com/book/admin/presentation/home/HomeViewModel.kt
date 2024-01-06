@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.book.admin.PM
 import com.book.admin.data.remote.reqres.Auto
+import com.book.admin.data.remote.reqres.Homestay
 import com.book.admin.data.remote.reqres.House
 import com.book.admin.data.remote.reqres.Vehicle
 import com.book.admin.domain.BVApi
@@ -35,10 +36,14 @@ class HomeViewModel @Inject constructor(
     private val _houses = MutableLiveData<List<House>>()
     private val _statePosHouse = MutableLiveData(1)
 
+    private val _homestays = MutableLiveData<List<Homestay>>()
+    private val _statePosHomestay = MutableLiveData(1)
+
 
     val autos: LiveData<List<Auto>> get() = _autos
     val vehicles: LiveData<List<Vehicle>> get() = _vehicles
     val houses: LiveData<List<House>> get() = _houses
+    val homestays: LiveData<List<Homestay>> get() = _homestays
 
 
     fun getAutos(pos: Int) {
@@ -83,6 +88,23 @@ class HomeViewModel @Inject constructor(
                     _houses.value = emptyList()
                     if (it.isSuccessful && it.body() != null) {
                         _houses.value = it.body()!!.data
+                    }
+                }
+            }
+        }
+    }
+
+
+    fun getHomestays(pos: Int) {
+        _statePosHouse.value = pos
+        CoroutineScope(Dispatchers.IO).launch {
+            runCatching {
+                api.getAllHomestayAdmin(pm.password!!, Constants.vss[pos].code)
+            }.onSuccess {
+                withContext(Dispatchers.Main) {
+                    _homestays.value = emptyList()
+                    if (it.isSuccessful && it.body() != null) {
+                        _homestays.value = it.body()!!.data
                     }
                 }
             }
@@ -147,6 +169,25 @@ class HomeViewModel @Inject constructor(
         }
     }
 
+    fun changeHomestayStatus(
+        verificationState: String, vId: String, callback: () -> Unit
+    ) {
+        CoroutineScope(Dispatchers.IO).launch {
+            runCatching {
+                api.changeHomestayStatus(pm.password!!, verificationState, vId)
+            }.onSuccess {
+                withContext(Dispatchers.Main) {
+                    if (it.isSuccessful && it.body() != null) {
+                        if (it.body()!!.isTrue == 1) {
+                            getHomestays(_statePosHomestay.value!!)
+                            callback()
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     fun changeAutoAdminRemark(
         adminRemark: String, vId: String, callback: () -> Unit
     ) {
@@ -196,6 +237,25 @@ class HomeViewModel @Inject constructor(
                     if (it.isSuccessful && it.body() != null) {
                         if (it.body()!!.isTrue == 1) {
                             getHouses(_statePosHouse.value!!)
+                            callback()
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    fun changeHomestayAdminRemark(
+        adminRemark: String, vId: String, callback: () -> Unit
+    ) {
+        CoroutineScope(Dispatchers.IO).launch {
+            runCatching {
+                api.changeHomestayAdminRemark(pm.password!!, adminRemark, vId)
+            }.onSuccess {
+                withContext(Dispatchers.Main) {
+                    if (it.isSuccessful && it.body() != null) {
+                        if (it.body()!!.isTrue == 1) {
+                            getHomestays(_statePosHomestay.value!!)
                             callback()
                         }
                     }

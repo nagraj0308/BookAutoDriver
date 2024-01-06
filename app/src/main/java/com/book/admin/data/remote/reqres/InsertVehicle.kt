@@ -15,6 +15,10 @@ data class HousesResponse(
     val `data`: List<House>, val msg: String, val isTrue: Int
 )
 
+data class HomestaysResponse(
+    val `data`: List<Homestay>, val msg: String, val isTrue: Int
+)
+
 data class BasicResponse(
     val msg: String, val isTrue: Int
 )
@@ -54,6 +58,24 @@ data class Vehicle(
 ) : Serializable
 
 data class House(
+    val _id: String = "",
+    val deactivated: Boolean = false,
+    val name: String = "",
+    val address: String = "",
+    val lat: Double = 0.0,
+    val lon: Double = 0.0,
+    val mobileNo: String = "",
+    val modifyTime: Long = 0,
+    val rate: String = "",
+    val verificationState: String = "U",
+    val adminRemark: String = "",
+    val imageUrl1: String = "",
+    val imageUrl2: String = "",
+    val imageUrl3: String = "",
+    val imageUrl4: String = ""
+) : Serializable
+
+data class Homestay(
     val _id: String = "",
     val deactivated: Boolean = false,
     val name: String = "",

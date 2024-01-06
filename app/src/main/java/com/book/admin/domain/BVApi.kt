@@ -2,6 +2,7 @@ package com.book.admin.domain
 
 import com.book.admin.data.remote.reqres.AutosResponse
 import com.book.admin.data.remote.reqres.BasicResponse
+import com.book.admin.data.remote.reqres.HomestaysResponse
 import com.book.admin.data.remote.reqres.HousesResponse
 import com.book.admin.data.remote.reqres.VehiclesResponse
 import retrofit2.Response
@@ -14,6 +15,11 @@ interface BVApi {
         password: String,
         verificationState: String
     ): Response<HousesResponse>
+
+    suspend fun getAllHomestayAdmin(
+        password: String,
+        verificationState: String
+    ): Response<HomestaysResponse>
 
 
     suspend fun changeAutoStatusV1(
@@ -34,6 +40,13 @@ interface BVApi {
         vId: String
     ): Response<BasicResponse>
 
+
+    suspend fun changeHomestayStatus(
+        password: String,
+        verificationState: String,
+        vId: String
+    ): Response<BasicResponse>
+
     suspend fun changeAutoAdminRemark(
         password: String,
         adminRemark: String,
@@ -48,6 +61,12 @@ interface BVApi {
     ): Response<BasicResponse>
 
     suspend fun changeHouseAdminRemark(
+        password: String,
+        adminRemark: String,
+        vId: String
+    ): Response<BasicResponse>
+
+    suspend fun changeHomestayAdminRemark(
         password: String,
         adminRemark: String,
         vId: String

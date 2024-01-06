@@ -2,6 +2,7 @@ package com.book.admin.data.remote
 
 import com.book.admin.data.remote.reqres.AutosResponse
 import com.book.admin.data.remote.reqres.BasicResponse
+import com.book.admin.data.remote.reqres.HomestaysResponse
 import com.book.admin.data.remote.reqres.HousesResponse
 import com.book.admin.data.remote.reqres.VehiclesResponse
 import com.book.admin.domain.BVApi
@@ -30,6 +31,13 @@ class BVApiImp @Inject constructor(
         return service.getAllHouseAdmin(password, verificationState)
     }
 
+    override suspend fun getAllHomestayAdmin(
+        password: String,
+        verificationState: String
+    ): Response<HomestaysResponse> {
+        return service.getAllHomestayAdmin(password, verificationState)
+    }
+
     override suspend fun changeAutoStatusV1(
         password: String, verificationState: String, vId: String
     ): Response<BasicResponse> {
@@ -48,6 +56,14 @@ class BVApiImp @Inject constructor(
         vId: String
     ): Response<BasicResponse> {
         return service.changeHouseStatus(password, verificationState, vId)
+    }
+
+    override suspend fun changeHomestayStatus(
+        password: String,
+        verificationState: String,
+        vId: String
+    ): Response<BasicResponse> {
+        return service.changeHomestayStatus(password, verificationState, vId)
     }
 
     override suspend fun changeAutoAdminRemark(
@@ -70,5 +86,14 @@ class BVApiImp @Inject constructor(
     ): Response<BasicResponse> {
         return service.changeHouseAdminRemark(password, adminRemark, vId)
     }
+
+    override suspend fun changeHomestayAdminRemark(
+        password: String,
+        adminRemark: String,
+        vId: String
+    ): Response<BasicResponse> {
+        return service.changeHomestayAdminRemark(password, adminRemark, vId)
+    }
+
 
 }

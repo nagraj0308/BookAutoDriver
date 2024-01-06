@@ -2,6 +2,7 @@ package com.book.admin.data.remote
 
 import com.book.admin.data.remote.reqres.AutosResponse
 import com.book.admin.data.remote.reqres.BasicResponse
+import com.book.admin.data.remote.reqres.HomestaysResponse
 import com.book.admin.data.remote.reqres.HousesResponse
 import com.book.admin.data.remote.reqres.VehiclesResponse
 import retrofit2.Response
@@ -28,6 +29,12 @@ interface BVService {
         @Query("verificationState") verificationState: String
     ): Response<HousesResponse>
 
+    @GET("api/getAllHomestayAdminV1")
+    suspend fun getAllHomestayAdmin(
+        @Query("password") password: String,
+        @Query("verificationState") verificationState: String
+    ): Response<HomestaysResponse>
+
     @GET("api/changeAutoStatusV1")
     suspend fun changeAutoStatusV1(
         @Query("password") password: String,
@@ -44,6 +51,13 @@ interface BVService {
 
     @GET("api/changeHouseStatus")
     suspend fun changeHouseStatus(
+        @Query("password") password: String,
+        @Query("verificationState") verificationState: String,
+        @Query("vId") vId: String
+    ): Response<BasicResponse>
+
+    @GET("api/changeHomestayStatus")
+    suspend fun changeHomestayStatus(
         @Query("password") password: String,
         @Query("verificationState") verificationState: String,
         @Query("vId") vId: String
@@ -66,6 +80,13 @@ interface BVService {
 
     @GET("api/changeHouseAdminRemark")
     suspend fun changeHouseAdminRemark(
+        @Query("password") password: String,
+        @Query("adminRemark") adminRemark: String,
+        @Query("vId") vId: String
+    ): Response<BasicResponse>
+
+    @GET("api/changeHomestayAdminRemark")
+    suspend fun changeHomestayAdminRemark(
         @Query("password") password: String,
         @Query("adminRemark") adminRemark: String,
         @Query("vId") vId: String

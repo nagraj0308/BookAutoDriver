@@ -42,5 +42,17 @@
         android:label="View"
         tools:layout="@layout/fragment_view_house" />
 
+    <fragment
+        android:id="@+id/nav_homestay"
+        android:name="com.book.admin.presentation.home.HomestayFragment"
+        android:label="House"
+        tools:layout="@layout/fragment_homestay" />
+
+    <fragment
+        android:id="@+id/nav_view_homestay"
+        android:name="com.book.admin.presentation.ViewHomestayFragment"
+        android:label="View"
+        tools:layout="@layout/fragment_view_homestay" />
+
 
 </navigation>

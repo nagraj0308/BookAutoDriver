@@ -8,17 +8,18 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.navigation.NavController
 import androidx.recyclerview.widget.RecyclerView
+import com.book.admin.data.remote.reqres.Homestay
 import com.book.admin.data.remote.reqres.House
 import com.book.admin.utils.Utils
 import com.book.homestay.R
 import com.bumptech.glide.Glide
 
 
-class HouseAdapter(private val mList: List<House>, val nc: NavController) :
-    RecyclerView.Adapter<HouseAdapter.ViewHolder>() {
+class HomestayAdapter(private val mList: List<Homestay>, val nc: NavController) :
+    RecyclerView.Adapter<HomestayAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_house, parent, false)
+            .inflate(R.layout.item_homestay, parent, false)
         return ViewHolder(view)
     }
 
