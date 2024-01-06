@@ -374,8 +374,8 @@ class EditFragment : BaseFragment() {
         }
 
         val mobileNumber = binding.tilMobileNumber.editText!!.text.trim().toString()
-        if (mobileNumber.length < 10) {
-            binding.tilMobileNumber.error = getString(R.string.this_should_be_10_digits)
+        if (mobileNumber.length < 5) {
+            binding.tilMobileNumber.error = getString(R.string.this_should_be_n_digits)
             return false
         } else {
             binding.tilMobileNumber.isErrorEnabled = false

@@ -57,7 +57,7 @@
 
     <string name="there_is_some_error">There is some error</string>
     <string name="this_field_required">This field required!</string>
-    <string name="this_should_be_10_digits">This should be 10 digits</string>
+    <string name="this_should_be_n_digits">This should be 5 digits</string>
 
     <string name="update">Update</string>
     <string name="updated_successfully">Updated Successfully</string>

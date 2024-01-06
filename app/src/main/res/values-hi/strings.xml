@@ -57,7 +57,7 @@
 
     <string name="there_is_some_error">कुछ त्रुटि है</string>
     <string name="this_field_required">यह फ़ील्ड आवश्यक है!</string>
-    <string name="this_should_be_10_digits">यह 10 अंक का होना चाहिए</string>
+    <string name="this_should_be_n_digits">यह 5 अंक का होना चाहिए</string>
 
     <string name="update">अपडेट</string>
     <string name="updated_successfully">सफलतापूर्वक अपडेट किया गया</string>
