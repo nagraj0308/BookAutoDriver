@@ -87,13 +87,15 @@ dependencies {
 
 
     //firebase
-    implementation(platform("com.google.firebase:firebase-bom:32.7.4"))
+    implementation(platform("com.google.firebase:firebase-bom:33.0.0"))
     implementation("com.google.firebase:firebase-analytics-ktx")
     implementation("com.google.firebase:firebase-crashlytics-ktx")
     implementation("com.google.firebase:firebase-perf-ktx")
     implementation("com.google.firebase:firebase-config-ktx")
     implementation("com.google.firebase:firebase-storage-ktx")
     implementation("com.google.firebase:firebase-auth-ktx")
+    implementation("com.google.firebase:firebase-inappmessaging-display-ktx")
+
 
     // Also add the dependency for the Google Play services library and specify its version
     implementation("com.google.android.gms:play-services-auth:21.0.0")
@@ -101,6 +103,8 @@ dependencies {
     implementation("com.google.android.gms:play-services-location:21.2.0")
     implementation("com.google.maps.android:maps-ktx:3.3.0")
     implementation("com.google.maps.android:maps-utils-ktx:3.0.0")
+    implementation("com.google.android.play:app-update:2.0.1")
+    implementation("com.google.android.play:app-update-ktx:2.0.1")
 
 
 

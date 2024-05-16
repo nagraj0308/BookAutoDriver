@@ -1,12 +1,18 @@
 package com.book.auto.presentation.home
 
+import android.Manifest
 import android.app.Dialog
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.view.Window
 import android.widget.Button
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
+import androidx.core.content.ContextCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
@@ -101,6 +107,7 @@ class HomeActivity : BaseActivity() {
             )
             true
         }
+        askNotificationPermission();
     }
 
 
@@ -128,7 +135,6 @@ class HomeActivity : BaseActivity() {
     override fun onRequestPermissionsResult(
         requestCode: Int, permissions: Array<out String>, grantResults: IntArray
     ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == RequestCode.LOCATION && PermissionUtils.checkLocationAccessPermission(
                 this
@@ -181,6 +187,23 @@ class HomeActivity : BaseActivity() {
             }
         } else {
             PermissionUtils.requestLocationEnableRequest(this)
+        }
+    }
+
+    private val requestPermissionLauncher: ActivityResultLauncher<String> =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
+            if (isGranted) {
+            }
+            updateLocation()
+        }
+
+    private fun askNotificationPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS)
+                != PackageManager.PERMISSION_GRANTED
+            ) {
+                requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+            }
         }
     }
 
