@@ -202,6 +202,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "620168446799-7bpbfhhceee89as99emd15pi8e3k3369.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.book.homestay",
+            "certificate_hash": "92d3f092f7a375ef113cd13f52c979a344e2a59a"
+          }
+        },
+        {
           "client_id": "620168446799-d8vi7tolc88rc0t9pdvij8fao6eat23f.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

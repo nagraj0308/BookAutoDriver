@@ -17,9 +17,8 @@ android {
         applicationId = "com.book.homestay"
         minSdk = 27
         targetSdk = 34
-        versionCode = 4
-        versionName = "0.4"
-
+        versionCode = 6
+        versionName = "0.6"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -100,6 +99,8 @@ dependencies {
     implementation("com.google.firebase:firebase-storage-ktx")
     implementation("com.google.firebase:firebase-auth-ktx")
     implementation("com.google.firebase:firebase-inappmessaging-display-ktx")
+    implementation("com.google.firebase:firebase-messaging-ktx")
+
 
 
     // Also add the dependency for the Google Play services library and specify its version
