@@ -10,6 +10,7 @@ import android.media.RingtoneManager
 import android.os.Build
 import androidx.core.app.NotificationCompat
 import com.book.homestay.presentation.home.HomeActivity
+import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 
@@ -22,6 +23,7 @@ class FCMService : FirebaseMessagingService() {
 
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         super.onMessageReceived(remoteMessage)
+        FirebaseMessaging.getInstance().subscribeToTopic("general")
         if (remoteMessage.data.isNotEmpty()) {
             val title = remoteMessage.data[TITLE]
             val imageUrl = remoteMessage.data[IMAGE_URL]
@@ -76,6 +78,11 @@ class FCMService : FirebaseMessagingService() {
             notificationManager.notify(notifyId, builder.build())
         } catch (e: Exception) {
         }
+    }
+
+    override fun onNewToken(token: String) {
+        super.onNewToken(token)
+        FirebaseMessaging.getInstance().subscribeToTopic("general")
     }
 
 
