@@ -19,7 +19,6 @@ class FCMService : FirebaseMessagingService() {
     val TITLE: String = "title"
     val IMAGE_URL: String = "image"
     val MESSAGE: String = "message"
-    val SUB_TEXT: String = "sub_text"
 
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         super.onMessageReceived(remoteMessage)
@@ -28,13 +27,12 @@ class FCMService : FirebaseMessagingService() {
             val title = remoteMessage.data[TITLE]
             val imageUrl = remoteMessage.data[IMAGE_URL]
             val message = remoteMessage.data[MESSAGE]
-            val subText = remoteMessage.data[SUB_TEXT]
-            notifyUser(title, imageUrl, message, subText)
+            notifyUser(title, imageUrl, message)
         }
     }
 
 
-    private fun notifyUser(title: String?, imageUrl: String?, message: String?, subText: String?) {
+    private fun notifyUser(title: String?, imageUrl: String?, message: String?) {
 
         val notifyId = 1
         val intent = Intent()
@@ -42,7 +40,6 @@ class FCMService : FirebaseMessagingService() {
         intent.putExtra(TITLE, title)
         intent.putExtra(IMAGE_URL, imageUrl)
         intent.putExtra(MESSAGE, message)
-        intent.putExtra(SUB_TEXT, subText)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
         val pendingIntent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             PendingIntent.getActivity(this, 1, intent, PendingIntent.FLAG_IMMUTABLE)
@@ -59,7 +56,7 @@ class FCMService : FirebaseMessagingService() {
         builder.setStyle(
             NotificationCompat.BigTextStyle().setBigContentTitle(title)
                 .bigText(message)
-                .setSummaryText(subText)
+                .setSummaryText(message)
         )
 
         builder.setSmallIcon(R.mipmap.ic_launcher)
@@ -84,6 +81,5 @@ class FCMService : FirebaseMessagingService() {
         super.onNewToken(token)
         FirebaseMessaging.getInstance().subscribeToTopic("general")
     }
-
 
 }
