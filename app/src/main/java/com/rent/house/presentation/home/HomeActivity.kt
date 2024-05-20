@@ -70,7 +70,7 @@ class HomeActivity : BaseActivity() {
     private val viewModel: HomeViewModel by viewModels()
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var appUpdateManager: AppUpdateManager
-    private val updateType = AppUpdateType.FLEXIBLE
+    private val updateType = AppUpdateType.IMMEDIATE
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
