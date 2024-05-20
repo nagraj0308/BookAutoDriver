@@ -17,8 +17,8 @@ android {
         applicationId = "com.book.auto.driver"
         minSdk = 27
         targetSdk = 34
-        versionCode = 15
-        versionName = "1.5"
+        versionCode = 16
+        versionName = "1.6"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -59,6 +59,11 @@ android {
         viewBinding = true
         buildConfig = true
     }
+    bundle {
+        language {
+            enableSplit = false
+        }
+    }
 
 }
 
@@ -97,6 +102,8 @@ dependencies {
     implementation("com.google.firebase:firebase-storage-ktx")
     implementation("com.google.firebase:firebase-auth-ktx")
     implementation("com.google.firebase:firebase-inappmessaging-display-ktx")
+    implementation("com.google.firebase:firebase-messaging-ktx")
+
 
 
     // Also add the dependency for the Google Play services library and specify its version
@@ -107,7 +114,6 @@ dependencies {
     implementation("com.google.maps.android:maps-utils-ktx:3.0.0")
     implementation("com.google.android.play:app-update:2.1.0")
     implementation("com.google.android.play:app-update-ktx:2.1.0")
-
 
 
 
