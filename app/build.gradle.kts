@@ -59,6 +59,11 @@ android {
         viewBinding = true
         buildConfig = true
     }
+    bundle {
+        language {
+            enableSplit = false
+        }
+    }
 
 }
 
@@ -95,6 +100,8 @@ dependencies {
     implementation("com.google.firebase:firebase-storage-ktx")
     implementation("com.google.firebase:firebase-auth-ktx")
     implementation("com.google.firebase:firebase-inappmessaging-display-ktx")
+    implementation("com.google.firebase:firebase-messaging-ktx")
+
 
 
     // Also add the dependency for the Google Play services library and specify its version
