@@ -17,8 +17,8 @@ android {
         applicationId = "com.book.gaadi"
         minSdk = 27
         targetSdk = 34
-        versionCode = 35
-        versionName = "3.5"
+        versionCode = 36
+        versionName = "3.6"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -102,6 +102,8 @@ dependencies {
     implementation("com.google.firebase:firebase-storage-ktx")
     implementation("com.google.firebase:firebase-auth-ktx")
     implementation("com.google.firebase:firebase-inappmessaging-display-ktx")
+    implementation("com.google.firebase:firebase-messaging-ktx")
+
 
 
     // Also add the dependency for the Google Play services library and specify its version
@@ -112,7 +114,6 @@ dependencies {
     implementation("com.google.maps.android:maps-utils-ktx:3.0.0")
     implementation("com.google.android.play:app-update:2.1.0")
     implementation("com.google.android.play:app-update-ktx:2.1.0")
-
 
 
 
