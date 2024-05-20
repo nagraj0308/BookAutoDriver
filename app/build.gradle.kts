@@ -17,8 +17,8 @@ android {
         applicationId = "com.book.homestay"
         minSdk = 27
         targetSdk = 34
-        versionCode = 4
-        versionName = "0.4"
+        versionCode = 6
+        versionName = "0.6"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
