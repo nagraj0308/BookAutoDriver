@@ -20,6 +20,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.Priority
@@ -49,6 +50,7 @@ import com.rent.house.utils.Constants
 import com.rent.house.utils.PermissionUtils
 import com.rent.house.utils.RequestCode
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -78,6 +80,12 @@ class HomeActivity : BaseActivity() {
 
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val backgroundScope = CoroutineScope(Dispatchers.IO)
+        backgroundScope.launch {
+            MobileAds.initialize(this@HomeActivity) {}
+        }
+
         MapsInitializer.initialize(this, MapsInitializer.Renderer.LATEST) {}
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         headerBinding = NavHeaderMainBinding.bind(binding.navView.getHeaderView(0))

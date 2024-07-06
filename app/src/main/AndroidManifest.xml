@@ -64,6 +64,10 @@
         </provider>
 
         <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-8309769930611097~4166985188" />
+
+        <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCsbv5QqoEoZgaCgQjqbZ-v_vBYsSVXwsY" />
 
