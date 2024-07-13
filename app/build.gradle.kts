@@ -102,9 +102,9 @@ dependencies {
     implementation("com.google.firebase:firebase-inappmessaging-display-ktx")
     implementation("com.google.firebase:firebase-messaging-ktx")
 
-    implementation("androidx.lifecycle:lifecycle-extensions:2.3.1")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.3")
-    annotationProcessor("androidx.lifecycle:lifecycle-compiler:2.8.3")
+    implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.2.0")
+    annotationProcessor("androidx.lifecycle:lifecycle-compiler:2.2.0")
 
 
     // Also add the dependency for the Google Play services library and specify its version
