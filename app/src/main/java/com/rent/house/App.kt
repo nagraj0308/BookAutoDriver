@@ -51,7 +51,7 @@ class App : Application(), Application.ActivityLifecycleCallbacks, LifecycleObse
     fun onMoveToForeground() {
         // Show the ad (if available) when the app moves to foreground.
         currentActivity?.let {
-            appOpenAdManager.showAdIfAvailable(it)
+            appOpenAdManager.loadAd(it)
         }
     }
 
@@ -66,7 +66,6 @@ class App : Application(), Application.ActivityLifecycleCallbacks, LifecycleObse
     /** Inner class that loads and shows app open ads. */
     private inner class AppOpenAdManager {
         private var appOpenAd: AppOpenAd? = null
-        private var isLoadingAd = false
         var isShowingAd = false
 
         /** Keep track of the time an app open ad is loaded to ensure you don't show an expired ad. */
@@ -75,12 +74,6 @@ class App : Application(), Application.ActivityLifecycleCallbacks, LifecycleObse
 
         /** Request an ad. */
         fun loadAd(activity: Activity) {
-            // Do not load ad if there is an unused ad or one is already loading.
-            if (isLoadingAd || isAdAvailable()) {
-                return
-            }
-
-            isLoadingAd = true
             val request = AdRequest.Builder().build()
             AppOpenAd.load(
                 activity, "ca-app-pub-8309769930611097/6419491853", request,
@@ -91,7 +84,6 @@ class App : Application(), Application.ActivityLifecycleCallbacks, LifecycleObse
                         // Called when an app open ad has loaded.
                         Log.d("NAGRAJ", "Ad was loaded.")
                         appOpenAd = ad
-                        isLoadingAd = false
                         loadTime = Date().time
                         showAdIfAvailable(activity)
                     }
@@ -99,7 +91,6 @@ class App : Application(), Application.ActivityLifecycleCallbacks, LifecycleObse
                     override fun onAdFailedToLoad(loadAdError: LoadAdError) {
                         // Called when an app open ad has failed to load.
                         Log.d("NAGRAJ", loadAdError.message)
-                        isLoadingAd = false;
                     }
                 })
         }
@@ -142,9 +133,7 @@ class App : Application(), Application.ActivityLifecycleCallbacks, LifecycleObse
                     Log.d("NAGRAJ", "Ad dismissed fullscreen content.")
                     appOpenAd = null
                     isShowingAd = false
-
                     onShowAdCompleteListener.onShowAdComplete()
-                    loadAd(activity)
                 }
 
                 override fun onAdFailedToShowFullScreenContent(adError: AdError) {
@@ -153,9 +142,7 @@ class App : Application(), Application.ActivityLifecycleCallbacks, LifecycleObse
                     Log.d("NAGRAJ", adError.message)
                     appOpenAd = null
                     isShowingAd = false
-
                     onShowAdCompleteListener.onShowAdComplete()
-                    loadAd(activity)
                 }
 
                 override fun onAdShowedFullScreenContent() {
