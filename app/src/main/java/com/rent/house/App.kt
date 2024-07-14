@@ -32,7 +32,7 @@ class App : Application(), Application.ActivityLifecycleCallbacks {
         }
         appOpenAdManager = AppOpenAdManager()
 
-        val testDeviceIds = listOf("33BE2250B43518CCDA7DE426D04EE231")
+        val testDeviceIds = listOf("6C438043FBAE987EE0BA45F40294826C")
         val configuration = RequestConfiguration.Builder().setTestDeviceIds(testDeviceIds).build()
         MobileAds.setRequestConfiguration(configuration)
     }
