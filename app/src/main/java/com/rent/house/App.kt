@@ -74,7 +74,7 @@ class App : Application(), Application.ActivityLifecycleCallbacks, LifecycleObse
 
 
         /** Request an ad. */
-        fun loadAd(context: Context) {
+        fun loadAd(activity: Activity) {
             // Do not load ad if there is an unused ad or one is already loading.
             if (isLoadingAd || isAdAvailable()) {
                 return
@@ -83,7 +83,7 @@ class App : Application(), Application.ActivityLifecycleCallbacks, LifecycleObse
             isLoadingAd = true
             val request = AdRequest.Builder().build()
             AppOpenAd.load(
-                context, "ca-app-pub-8309769930611097/6419491853", request,
+                activity, "ca-app-pub-8309769930611097/6419491853", request,
                 AppOpenAd.APP_OPEN_AD_ORIENTATION_PORTRAIT,
                 object : AppOpenAd.AppOpenAdLoadCallback() {
 
@@ -93,6 +93,7 @@ class App : Application(), Application.ActivityLifecycleCallbacks, LifecycleObse
                         appOpenAd = ad
                         isLoadingAd = false
                         loadTime = Date().time
+                        showAdIfAvailable(activity)
                     }
 
                     override fun onAdFailedToLoad(loadAdError: LoadAdError) {
@@ -133,36 +134,35 @@ class App : Application(), Application.ActivityLifecycleCallbacks, LifecycleObse
                 return
             }
 
-            appOpenAd?.setFullScreenContentCallback(
-                object : FullScreenContentCallback() {
+            appOpenAd?.fullScreenContentCallback = object : FullScreenContentCallback() {
 
-                    override fun onAdDismissedFullScreenContent() {
-                        // Called when full screen content is dismissed.
-                        // Set the reference to null so isAdAvailable() returns false.
-                        Log.d("NAGRAJ", "Ad dismissed fullscreen content.")
-                        appOpenAd = null
-                        isShowingAd = false
+                override fun onAdDismissedFullScreenContent() {
+                    // Called when full screen content is dismissed.
+                    // Set the reference to null so isAdAvailable() returns false.
+                    Log.d("NAGRAJ", "Ad dismissed fullscreen content.")
+                    appOpenAd = null
+                    isShowingAd = false
 
-                        onShowAdCompleteListener.onShowAdComplete()
-                        loadAd(activity)
-                    }
+                    onShowAdCompleteListener.onShowAdComplete()
+                    loadAd(activity)
+                }
 
-                    override fun onAdFailedToShowFullScreenContent(adError: AdError) {
-                        // Called when fullscreen content failed to show.
-                        // Set the reference to null so isAdAvailable() returns false.
-                        Log.d("NAGRAJ", adError.message)
-                        appOpenAd = null
-                        isShowingAd = false
+                override fun onAdFailedToShowFullScreenContent(adError: AdError) {
+                    // Called when fullscreen content failed to show.
+                    // Set the reference to null so isAdAvailable() returns false.
+                    Log.d("NAGRAJ", adError.message)
+                    appOpenAd = null
+                    isShowingAd = false
 
-                        onShowAdCompleteListener.onShowAdComplete()
-                        loadAd(activity)
-                    }
+                    onShowAdCompleteListener.onShowAdComplete()
+                    loadAd(activity)
+                }
 
-                    override fun onAdShowedFullScreenContent() {
-                        // Called when fullscreen content is shown.
-                        Log.d("NAGRAJ", "Ad showed fullscreen content.")
-                    }
-                })
+                override fun onAdShowedFullScreenContent() {
+                    // Called when fullscreen content is shown.
+                    Log.d("NAGRAJ", "Ad showed fullscreen content.")
+                }
+            }
             isShowingAd = true
             appOpenAd?.show(activity)
         }
