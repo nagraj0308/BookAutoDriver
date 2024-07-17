@@ -78,9 +78,6 @@ class HomeActivity : BaseActivity() {
 
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-
-
         MapsInitializer.initialize(this, MapsInitializer.Renderer.LATEST) {}
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         headerBinding = NavHeaderMainBinding.bind(binding.navView.getHeaderView(0))
