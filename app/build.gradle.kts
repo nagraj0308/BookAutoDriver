@@ -17,8 +17,8 @@ android {
         applicationId = "com.book.auto"
         minSdk = 27
         targetSdk = 34
-        versionCode = 13
-        versionName = "1.3"
+        versionCode = 14
+        versionName = "1.4"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -105,9 +105,10 @@ dependencies {
 
 
     // Also add the dependency for the Google Play services library and specify its version
-    implementation("com.google.android.gms:play-services-auth:21.1.1")
-    implementation("com.google.android.gms:play-services-maps:18.2.0")
-    implementation("com.google.android.gms:play-services-location:21.2.0")
+    implementation("com.google.android.gms:play-services-auth:21.2.0")
+    implementation("com.google.android.gms:play-services-maps:19.0.0")
+    implementation("com.google.android.gms:play-services-location:21.3.0")
+    implementation("com.google.android.gms:play-services-ads:23.2.0")
     implementation("com.google.maps.android:maps-ktx:3.3.0")
     implementation("com.google.maps.android:maps-utils-ktx:3.0.0")
     implementation("com.google.android.play:app-update:2.1.0")
