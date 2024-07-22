@@ -7,6 +7,35 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:620168446799:android:e775bce95a8a0f0c06bb3a",
+        "android_client_info": {
+          "package_name": "com.bluetooth.printer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "620168446799-2d4p855qeg3h5hn73asqt2bk7t75j2nc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBpAwDfiBGJwnrBNqvlVpSbX3o4BHdPuTU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "620168446799-2d4p855qeg3h5hn73asqt2bk7t75j2nc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:620168446799:android:6c1d4fa05ce1e99e06bb3a",
         "android_client_info": {
           "package_name": "com.book.admin"
@@ -210,19 +239,19 @@
           }
         },
         {
-          "client_id": "620168446799-d8vi7tolc88rc0t9pdvij8fao6eat23f.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.book.homestay",
-            "certificate_hash": "91b5e82e740953ebcf8a8f85dbe7e4aa4e272e55"
-          }
-        },
-        {
           "client_id": "620168446799-p3h577as840lplglujn9samo9d4fe6kh.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.book.homestay",
             "certificate_hash": "400c11d4efca27b7721b821ba521e3a43860072f"
+          }
+        },
+        {
+          "client_id": "620168446799-t8krqjulqldrtjtts2rq0vh4e61qpa6h.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.book.homestay",
+            "certificate_hash": "d84e319d3101298e68172698a6adae425a45fe29"
           }
         },
         {
@@ -254,6 +283,14 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "620168446799-1eh9eh3a7mni3huc15coq3pr5oknhfj7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rent.house",
+            "certificate_hash": "db2e80d94fb58f0163b291433cd81e4cdb63548f"
+          }
+        },
         {
           "client_id": "620168446799-fkseeh3ubd1uh9pal8abho76f5v78mu8.apps.googleusercontent.com",
           "client_type": 1,

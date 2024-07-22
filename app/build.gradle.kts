@@ -10,15 +10,15 @@ plugins {
 }
 
 android {
-    namespace = "com.rent.house"
+    namespace = "com.bluetooth.printer"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.rent.house"
+        applicationId = "com.bluetooth.printer"
         minSdk = 27
         targetSdk = 34
-        versionCode = 13
-        versionName = "1.3"
+        versionCode = 1
+        versionName = "0.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -97,8 +97,6 @@ dependencies {
     implementation("com.google.firebase:firebase-crashlytics-ktx")
     implementation("com.google.firebase:firebase-perf-ktx")
     implementation("com.google.firebase:firebase-config-ktx")
-    implementation("com.google.firebase:firebase-storage-ktx")
-    implementation("com.google.firebase:firebase-auth-ktx")
     implementation("com.google.firebase:firebase-inappmessaging-display-ktx")
     implementation("com.google.firebase:firebase-messaging-ktx")
 
