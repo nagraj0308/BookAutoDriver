@@ -51,17 +51,7 @@ class EditFragment : BaseFragment() {
                 val rate = binding.tilRate.editText!!.text.trim().toString()
                 val address = binding.tilAddress.editText!!.text.trim().toString()
                 showProgress()
-                viewModel.insertHouse(
-                    name, address, mobileNumber, rate
-                ) {
-                    hideProgress()
-                    if (it) {
-                        showToast(getString(R.string.added_successfully))
-                        requireActivity().onBackPressed()
-                    } else {
-                        showToast(getString(R.string.there_is_some_error))
-                    }
-                }
+
             }
         }
         binding.btnSave.setOnClickListener {
@@ -71,31 +61,13 @@ class EditFragment : BaseFragment() {
                 val rate = binding.tilRate.editText!!.text.trim().toString()
                 val address = binding.tilAddress.editText!!.text.trim().toString()
                 showProgress()
-                viewModel.updateHouseData(
-                    name, address, mobileNumber, rate
-                ) {
-                    hideProgress()
-                    if (it) {
-                        showToast(getString(R.string.updated_successfully))
-                        requireActivity().onBackPressed()
-                    } else {
-                        showToast(getString(R.string.there_is_some_error))
-                    }
-                }
+
             }
 
         }
         binding.btnDelete.setOnClickListener {
             showProgress()
-            viewModel.deleteHouse {
-                hideProgress()
-                if (it) {
-                    showToast(getString(R.string.deleted_successfully))
-                    activity?.finish()
-                } else {
-                    showToast(getString(R.string.there_is_some_error))
-                }
-            }
+
         }
 
         if (arguments != null) {
@@ -157,18 +129,7 @@ class EditFragment : BaseFragment() {
             binding.llEdit.visibility = View.GONE
             binding.btnSubmit.visibility = View.VISIBLE
         } else {
-            binding.tilName.editText!!.setText(viewModel.house.value!!.name)
-            binding.tilMobileNumber.editText!!.setText(viewModel.house.value!!.mobileNo)
-            binding.tilRate.editText!!.setText(viewModel.house.value!!.rate)
-            binding.tilAddress.editText!!.setText(viewModel.house.value!!.address)
-            Glide.with(this).asBitmap().load(viewModel.house.value!!.imageUrl1)
-                .into(binding.ivAutoPhoto1)
-            Glide.with(this).asBitmap().load(viewModel.house.value!!.imageUrl2)
-                .into(binding.ivAutoPhoto2)
-            Glide.with(this).asBitmap().load(viewModel.house.value!!.imageUrl3)
-                .into(binding.ivAutoPhoto3)
-            Glide.with(this).asBitmap().load(viewModel.house.value!!.imageUrl4)
-                .into(binding.ivAutoPhoto4)
+
             binding.llEdit.visibility = View.VISIBLE
             binding.btnSubmit.visibility = View.GONE
         }

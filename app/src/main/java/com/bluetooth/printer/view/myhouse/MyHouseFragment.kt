@@ -54,8 +54,7 @@ class MyHouseFragment : BaseFragment() {
             navController.navigate(R.id.nav_edit_house, bundle)
         }
 
-        viewModel.house.observe(viewLifecycleOwner) {
-        }
+
 
         //Maps View
         binding.mvCl.onCreate(savedInstanceState)
@@ -91,9 +90,6 @@ class MyHouseFragment : BaseFragment() {
 
 
     override fun onStart() {
-        viewModel.getAutoHouse {
-
-        }
         super.onStart()
         binding.mvCl.onStart()
     }
