@@ -15,7 +15,7 @@ android {
 
     defaultConfig {
         applicationId = "com.bluetooth.printer"
-        minSdk = 27
+        minSdk = 24
         targetSdk = 34
         versionCode = 1
         versionName = "0.1"
@@ -83,13 +83,6 @@ dependencies {
     implementation("androidx.leanback:leanback:1.0.0")
     implementation("androidx.fragment:fragment-ktx:1.8.1")
 
-    // Retrofit
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation("com.squareup.okhttp3:okhttp:5.0.0-alpha.3")
-    implementation("com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.3")
-    implementation("com.squareup.okhttp3:okhttp:4.10.0")
-    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
-
 
     //firebase
     implementation(platform("com.google.firebase:firebase-bom:33.0.0"))
@@ -97,21 +90,17 @@ dependencies {
     implementation("com.google.firebase:firebase-crashlytics-ktx")
     implementation("com.google.firebase:firebase-perf-ktx")
     implementation("com.google.firebase:firebase-config-ktx")
-    implementation("com.google.firebase:firebase-inappmessaging-display-ktx")
-    implementation("com.google.firebase:firebase-messaging-ktx")
 
     implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.2.0")
     annotationProcessor("androidx.lifecycle:lifecycle-compiler:2.2.0")
 
 
-    // Also add the dependency for the Google Play services library and specify its version
-    implementation("com.google.android.gms:play-services-auth:21.2.0")
-    implementation("com.google.android.gms:play-services-maps:19.0.0")
-    implementation("com.google.android.gms:play-services-location:21.3.0")
+    
+    //ads
     implementation("com.google.android.gms:play-services-ads:23.2.0")
-    implementation("com.google.maps.android:maps-ktx:3.3.0")
-    implementation("com.google.maps.android:maps-utils-ktx:3.0.0")
+
+    //in app update
     implementation("com.google.android.play:app-update:2.1.0")
     implementation("com.google.android.play:app-update-ktx:2.1.0")
 

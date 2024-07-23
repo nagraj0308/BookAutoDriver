@@ -12,7 +12,6 @@ import android.view.ViewGroup
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.lifecycleScope
 import com.bluetooth.printer.PM
 import com.bluetooth.printer.R
 import com.bluetooth.printer.databinding.FragmentEditDetailsBinding
@@ -21,9 +20,6 @@ import com.bluetooth.printer.view.home.HomeViewModel
 import com.bluetooth.printer.view.utils.PermissionUtils
 import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import java.io.ByteArrayOutputStream
 import javax.inject.Inject
 
 @AndroidEntryPoint
