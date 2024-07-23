@@ -9,6 +9,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.bluetooth.printer.R
+import com.bluetooth.printer.databinding.FragmentMyHouseBinding
+import com.bluetooth.printer.view.base.BaseFragment
+import com.bluetooth.printer.view.home.HomeViewModel
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapsInitializer
@@ -16,11 +20,6 @@ import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
-import com.rent.house.R
-import com.rent.house.data.remote.reqres.House
-import com.rent.house.databinding.FragmentMyHouseBinding
-import com.rent.house.presentation.base.BaseFragment
-import com.rent.house.presentation.home.HomeViewModel
 
 
 class MyHouseFragment : BaseFragment() {
@@ -56,7 +55,6 @@ class MyHouseFragment : BaseFragment() {
         }
 
         viewModel.house.observe(viewLifecycleOwner) {
-            setContentState(it)
         }
 
         //Maps View
@@ -117,26 +115,7 @@ class MyHouseFragment : BaseFragment() {
     }
 
 
-    private fun setContentState(house: House?) {
-        if (house != null) {
-            if (house._id == "" || house.mobileNo == "") {
-                isNew = true
-                binding.btnAddAuto.visibility = View.VISIBLE
-                binding.cvContent.visibility = View.GONE
 
-            } else {
-                isNew = false
-                binding.btnAddAuto.visibility = View.GONE
-                binding.cvContent.visibility = View.VISIBLE
-                binding.tvLive.text = getStatusMsg(house.verificationState)
-                binding.tvAdminRemark.text = house.adminRemark
-            }
-        } else {
-            binding.btnAddAuto.visibility = View.VISIBLE
-            binding.cvContent.visibility = View.GONE
-        }
-
-    }
 
     private fun getStatusMsg(verificationState: String): String = when (verificationState) {
         "U" -> {

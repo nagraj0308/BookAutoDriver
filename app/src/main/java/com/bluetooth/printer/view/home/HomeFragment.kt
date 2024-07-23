@@ -9,6 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.bluetooth.printer.R
+import com.bluetooth.printer.databinding.FragmentHomeBinding
+import com.bluetooth.printer.view.base.BaseFragment
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapsInitializer
@@ -16,10 +19,6 @@ import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
-import com.rent.house.R
-import com.rent.house.data.remote.reqres.House
-import com.rent.house.databinding.FragmentHomeBinding
-import com.rent.house.presentation.base.BaseFragment
 
 
 class HomeFragment : BaseFragment() {
@@ -54,59 +53,12 @@ class HomeFragment : BaseFragment() {
             map = it
 
 
-            viewModel.houses.observe(viewLifecycleOwner) { list ->
-                map!!.clear()
-                cl = LatLng(viewModel.lat.value!!, viewModel.lon.value!!)
-                val update = CameraUpdateFactory.newLatLngZoom(cl!!, 10f)
-                map!!.moveCamera(update)
-                map!!.addMarker(
-                    MarkerOptions().position(cl!!).title(getString(R.string.your_location))
-                        .icon(markerIcon)
-                )
-
-                for (au in list) {
-                    map!!.addMarker(
-                        MarkerOptions().position(LatLng(au.lat, au.lon)).icon(
-                            getMarkerIconFromDrawable(
-                                resources.getDrawable(
-                                    R.drawable.user_home, null
-                                )
-                            )
-                        ).snippet(au._id)
-                    )
-                }
-
-                map!!.setOnMarkerClickListener { marker ->
-                    val auto = getAuto(marker.snippet, list)
-                    if (auto != null) {
-                        showDetails(auto)
-                        true
-                    } else {
-                        false
-
-                    }
-                }
-
-            }
 
         }
         return root
     }
 
-    private fun getAuto(id: String?, list: List<House>): House? {
-        for (au in list) {
-            if (au._id == id) {
-                return au
-            }
-        }
-        return null
-    }
 
-    private fun showDetails(auto: House) {
-        val bundle = Bundle()
-        bundle.putSerializable("item", auto)
-        findNavController().navigate(R.id.nav_view_house, bundle)
-    }
 
 
     override fun onStart() {

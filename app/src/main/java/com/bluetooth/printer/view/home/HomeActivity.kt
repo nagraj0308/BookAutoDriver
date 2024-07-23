@@ -20,6 +20,15 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.bluetooth.printer.BuildConfig
+import com.bluetooth.printer.PM
+import com.bluetooth.printer.R
+import com.bluetooth.printer.databinding.ActivityHomeBinding
+import com.bluetooth.printer.databinding.NavHeaderMainBinding
+import com.bluetooth.printer.view.base.BaseActivity
+import com.bluetooth.printer.view.utils.Constants
+import com.bluetooth.printer.view.utils.PermissionUtils
+import com.bluetooth.printer.view.utils.RequestCode
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.Priority
@@ -38,16 +47,6 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.ktx.remoteConfig
 import com.google.firebase.remoteconfig.ktx.remoteConfigSettings
-import com.rent.house.BuildConfig
-import com.rent.house.PM
-import com.rent.house.R
-import com.rent.house.databinding.ActivityHomeBinding
-import com.rent.house.databinding.NavHeaderMainBinding
-import com.rent.house.presentation.base.BaseActivity
-import com.rent.house.presentation.login.LoginActivity
-import com.rent.house.utils.Constants
-import com.rent.house.utils.PermissionUtils
-import com.rent.house.utils.RequestCode
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -86,8 +85,6 @@ class HomeActivity : BaseActivity() {
         setSupportActionBar(binding.appBarMain.toolbar)
 
 
-        headerBinding.tvName.text = pm.name ?: ""
-        headerBinding.tvGmail.text = pm.gmail ?: ""
 
         val drawerLayout: DrawerLayout = binding.drawerLayout
         val navView: NavigationView = binding.navView
@@ -121,12 +118,6 @@ class HomeActivity : BaseActivity() {
 
 
 
-        navView.menu.findItem(R.id.nav_exit).setOnMenuItemClickListener {
-            pm.clearAll()
-            finish()
-            startActivity(Intent(this@HomeActivity, LoginActivity::class.java))
-            true
-        }
 
         appUpdateManager = AppUpdateManagerFactory.create(applicationContext)
         if (updateType == AppUpdateType.FLEXIBLE) {
@@ -140,7 +131,6 @@ class HomeActivity : BaseActivity() {
 
     override fun onStart() {
         super.onStart()
-        pm.lang?.let { setLangCode(it) }
         updateLocation()
         remoteConfig = Firebase.remoteConfig
         val configSettings = remoteConfigSettings {

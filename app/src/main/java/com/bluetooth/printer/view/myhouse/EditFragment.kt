@@ -13,15 +13,13 @@ import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
+import com.bluetooth.printer.PM
+import com.bluetooth.printer.R
+import com.bluetooth.printer.databinding.FragmentEditDetailsBinding
+import com.bluetooth.printer.view.base.BaseFragment
+import com.bluetooth.printer.view.home.HomeViewModel
+import com.bluetooth.printer.view.utils.PermissionUtils
 import com.bumptech.glide.Glide
-import com.google.firebase.storage.UploadTask
-import com.rent.house.PM
-import com.rent.house.R
-import com.rent.house.databinding.FragmentEditDetailsBinding
-import com.rent.house.presentation.base.BaseFragment
-import com.rent.house.presentation.home.HomeViewModel
-import com.rent.house.utils.FBS
-import com.rent.house.utils.PermissionUtils
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -156,7 +154,6 @@ class EditFragment : BaseFragment() {
         }
 
         if (isNew) {
-            binding.tilName.editText!!.setText(pm.name)
             binding.llEdit.visibility = View.GONE
             binding.btnSubmit.visibility = View.VISIBLE
         } else {
@@ -265,7 +262,6 @@ class EditFragment : BaseFragment() {
                 val croppedPic = extras.getParcelable<Bitmap>("data")
                 Glide.with(this).asBitmap().load(croppedPic).into(binding.ivAutoPhoto1)
                 if (croppedPic != null) {
-                    uploadImage(croppedPic, 1)
                 }
             } catch (_: Exception) {
             }
@@ -282,7 +278,6 @@ class EditFragment : BaseFragment() {
                 val croppedPic = extras.getParcelable<Bitmap>("data")
                 Glide.with(this).asBitmap().load(croppedPic).into(binding.ivAutoPhoto2)
                 if (croppedPic != null) {
-                    uploadImage(croppedPic, 2)
                 }
             } catch (_: Exception) {
             }
@@ -299,7 +294,6 @@ class EditFragment : BaseFragment() {
                 val croppedPic = extras.getParcelable<Bitmap>("data")
                 Glide.with(this).asBitmap().load(croppedPic).into(binding.ivAutoPhoto3)
                 if (croppedPic != null) {
-                    uploadImage(croppedPic, 3)
                 }
             } catch (_: Exception) {
             }
@@ -316,7 +310,6 @@ class EditFragment : BaseFragment() {
                 val croppedPic = extras.getParcelable<Bitmap>("data")
                 Glide.with(this).asBitmap().load(croppedPic).into(binding.ivAutoPhoto4)
                 if (croppedPic != null) {
-                    uploadImage(croppedPic, 4)
                 }
 
             } catch (_: Exception) {
@@ -405,28 +398,7 @@ class EditFragment : BaseFragment() {
         _binding = null
     }
 
-    private fun uploadImage(bitmap1: Bitmap, imgNo: Int) {
-        lifecycleScope.launch(Dispatchers.IO) {
-            val ref = FBS.getReference(pm.gmail!! + imgNo)
-            val baos = ByteArrayOutputStream()
-            bitmap1.compress(Bitmap.CompressFormat.JPEG, 60, baos)
-            val data = baos.toByteArray()
-            val uploadTask: UploadTask = ref.putBytes(data)
-            uploadTask.addOnSuccessListener {
-                ref.downloadUrl.addOnSuccessListener {
-                    if (imgNo == 1) {
-                        viewModel.setImg1(it.toString())
-                    } else if (imgNo == 2) {
-                        viewModel.setImg2(it.toString())
-                    } else if (imgNo == 3) {
-                        viewModel.setImg3(it.toString())
-                    } else if (imgNo == 4) {
-                        viewModel.setImg4(it.toString())
-                    }
-                }
-            }
-        }
-    }
+
 
 
 }

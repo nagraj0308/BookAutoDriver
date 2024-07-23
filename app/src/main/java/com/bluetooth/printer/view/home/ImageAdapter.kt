@@ -5,8 +5,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
+import com.bluetooth.printer.R
 import com.bumptech.glide.Glide
-import com.rent.house.R
 
 class ImageAdapter(private val mList: List<String>) :
     RecyclerView.Adapter<ImageAdapter.ViewHolder>() {

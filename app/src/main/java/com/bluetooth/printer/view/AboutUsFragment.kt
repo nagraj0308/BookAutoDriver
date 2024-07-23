@@ -6,8 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebViewClient
 import androidx.fragment.app.Fragment
-import com.rent.house.databinding.FragmentWebViewBinding
-import com.rent.house.utils.Constants
+import com.bluetooth.printer.databinding.FragmentWebViewBinding
+import com.bluetooth.printer.view.utils.Constants
 
 
 class AboutUsFragment : Fragment() {
