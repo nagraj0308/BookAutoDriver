@@ -11,7 +11,6 @@ import androidx.core.content.ContextCompat
 
 class RequestCode {
     companion object {
-        const val LOCATION = 10
         const val READ_STORAGE = 11
     }
 }

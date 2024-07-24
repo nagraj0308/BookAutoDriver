@@ -50,7 +50,7 @@ class App : Application(), Application.ActivityLifecycleCallbacks, LifecycleObse
     fun onMoveToForeground() {
         // Show the ad (if available) when the app moves to foreground.
         currentActivity?.let {
-            appOpenAdManager.loadAd(it)
+//            appOpenAdManager.loadAd(it)
         }
     }
 
@@ -120,7 +120,7 @@ class App : Application(), Application.ActivityLifecycleCallbacks, LifecycleObse
             if (!isAdAvailable()) {
                 Log.d("NAGRAJ", "The app open ad is not ready yet.")
                 onShowAdCompleteListener.onShowAdComplete()
-                loadAd(activity)
+//                loadAd(activity)
                 return
             }
 
