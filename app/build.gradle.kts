@@ -96,9 +96,9 @@ dependencies {
     annotationProcessor("androidx.lifecycle:lifecycle-compiler:2.2.0")
 
 
-    
+
     //ads
-    implementation("com.google.android.gms:play-services-ads:23.2.0")
+//    implementation("com.google.android.gms:play-services-ads:23.2.0")
 
     //in app update
     implementation("com.google.android.play:app-update:2.1.0")
