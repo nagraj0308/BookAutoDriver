@@ -22,12 +22,15 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.Date
+import javax.inject.Inject
 
 @HiltAndroidApp
 class App : Application(), Application.ActivityLifecycleCallbacks, LifecycleObserver {
     private lateinit var appOpenAdManager: AppOpenAdManager
     private var currentActivity: Activity? = null
 
+    @Inject
+    lateinit var pm: PM
 
     override fun onCreate() {
         super.onCreate()
@@ -74,7 +77,11 @@ class App : Application(), Application.ActivityLifecycleCallbacks, LifecycleObse
 
         /** Request an ad. */
         fun loadAd(activity: Activity) {
+            if (!pm.isLoggedIn) {
+                return;
+            }
             val request = AdRequest.Builder().build()
+
             AppOpenAd.load(
                 activity, "ca-app-pub-8309769930611097/6419491853", request,
                 AppOpenAd.APP_OPEN_AD_ORIENTATION_PORTRAIT,
