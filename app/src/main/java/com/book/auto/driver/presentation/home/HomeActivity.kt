@@ -113,6 +113,7 @@ class HomeActivity : BaseActivity() {
             true
         }
         navView.menu.findItem(R.id.nav_rate).setOnMenuItemClickListener {
+            updateLocation()
             startActivity(
                 Intent(
                     Intent.ACTION_VIEW, Uri.parse(Constants.PLAYSTORE_URL)
@@ -122,6 +123,7 @@ class HomeActivity : BaseActivity() {
         }
 
         navView.menu.findItem(R.id.nav_install_user_app).setOnMenuItemClickListener {
+            updateLocation()
             startActivity(
                 Intent(
                     Intent.ACTION_VIEW, Uri.parse(Constants.PLAYSTORE_URL_USER)
@@ -131,6 +133,7 @@ class HomeActivity : BaseActivity() {
         }
 
         navView.menu.findItem(R.id.nav_exit).setOnMenuItemClickListener {
+            updateLocation()
             pm.clearAll()
             finish()
             startActivity(Intent(this@HomeActivity, LoginActivity::class.java))
@@ -143,6 +146,7 @@ class HomeActivity : BaseActivity() {
         }
         checkForAppUpdates()
         askNotificationPermission();
+        updateLocation()
     }
 
     override fun onRequestPermissionsResult(
@@ -178,6 +182,8 @@ class HomeActivity : BaseActivity() {
             }
         }
     }
+
+
 
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
@@ -245,6 +251,7 @@ class HomeActivity : BaseActivity() {
 
     override fun onResume() {
         super.onResume()
+        updateLocation()
         if (updateType == AppUpdateType.IMMEDIATE) {
             appUpdateManager.appUpdateInfo.addOnSuccessListener { info ->
                 if (info.updateAvailability() == UpdateAvailability.DEVELOPER_TRIGGERED_UPDATE_IN_PROGRESS) {
