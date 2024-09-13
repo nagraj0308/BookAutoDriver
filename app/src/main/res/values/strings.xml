@@ -9,6 +9,7 @@
     <string name="auto_image">Auto Image</string>
     <string name="auto_name">Auto Name</string>
     <string name="auto_number">Auto Number</string>
+    <string name="auto_rate_list">Auto Rate List</string>
     <string name="distance">Distance</string>
     <string name="auto_type">Auto Type</string>
 
@@ -18,6 +19,7 @@
     <string name="install_driver_app">Install Driver App</string>
     <string name="privacy_and_policy">Privacy and Policy</string>
     <string name="rate">Rate</string>
+    <string name="rate_app">Rate App</string>
     <string name="refresh">Refresh</string>
     <string name="save">Save</string>
     <string name="share">Share</string>

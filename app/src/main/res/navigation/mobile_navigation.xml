@@ -12,6 +12,13 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
+        android:id="@+id/nav_auto_rate_list"
+        android:name="com.book.auto.presentation.AutoRateListFragment"
+        android:label="@string/auto_rate_list"
+        tools:layout="@layout/fragment_auto_rate_list" />
+
+
+    <fragment
         android:id="@+id/nav_view_auto_details"
         android:name="com.book.auto.presentation.viewauto.ViewAutoFragment"
         android:label="@string/auto_details"
