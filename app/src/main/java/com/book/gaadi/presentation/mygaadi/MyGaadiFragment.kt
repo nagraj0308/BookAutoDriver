@@ -14,6 +14,7 @@ import com.book.gaadi.data.remote.reqres.Vehicle
 import com.book.gaadi.databinding.FragmentMyGaadiBinding
 import com.book.gaadi.presentation.base.BaseFragment
 import com.book.gaadi.presentation.home.HomeViewModel
+import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapsInitializer
@@ -175,6 +176,10 @@ class MyGaadiFragment : BaseFragment() {
         drawable.draw(canvas)
         return BitmapDescriptorFactory.fromBitmap(bitmap)
     }
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val adRequest: AdRequest = AdRequest.Builder().build()
+        binding.bannerAd.loadAd(adRequest)
+    }
 
 }

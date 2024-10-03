@@ -14,6 +14,7 @@ import com.book.gaadi.presentation.home.HomeViewModel
 import com.book.gaadi.utils.Constants
 import com.book.gaadi.utils.Utils
 import com.bumptech.glide.Glide
+import com.google.android.gms.ads.AdRequest
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -91,6 +92,10 @@ class ViewAutoFragment : BaseFragment() {
         super.onDestroyView()
         _binding = null
     }
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val adRequest: AdRequest = AdRequest.Builder().build()
+        binding.bannerAd.loadAd(adRequest)
+    }
 
 }

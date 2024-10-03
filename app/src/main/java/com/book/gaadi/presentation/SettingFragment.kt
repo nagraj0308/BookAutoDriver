@@ -10,6 +10,7 @@ import com.book.gaadi.R
 import com.book.gaadi.databinding.FragmentSettingBinding
 import com.book.gaadi.presentation.base.BaseFragment
 import com.book.gaadi.utils.Language
+import com.google.android.gms.ads.AdRequest
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -68,6 +69,10 @@ class SettingFragment : BaseFragment() {
         super.onDestroyView()
         _binding = null
     }
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val adRequest: AdRequest = AdRequest.Builder().build()
+        binding.bannerAd.loadAd(adRequest)
+    }
 
 }
