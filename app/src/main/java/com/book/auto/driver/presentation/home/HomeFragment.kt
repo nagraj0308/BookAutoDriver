@@ -14,6 +14,7 @@ import com.book.auto.driver.R
 import com.book.auto.driver.data.remote.reqres.Vehicle
 import com.book.auto.driver.databinding.FragmentHomeBinding
 import com.book.auto.driver.presentation.base.BaseFragment
+import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapsInitializer
@@ -212,5 +213,9 @@ class HomeFragment : BaseFragment() {
         return BitmapDescriptorFactory.fromBitmap(bitmap)
     }
 
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val adRequest: AdRequest = AdRequest.Builder().build()
+        binding.bannerAd.loadAd(adRequest)
+    }
 }

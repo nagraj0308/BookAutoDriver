@@ -22,6 +22,7 @@ import com.book.auto.driver.utils.Constants
 import com.book.auto.driver.utils.PermissionUtils
 import com.book.auto.driver.utils.Utils
 import com.bumptech.glide.Glide
+import com.google.android.gms.ads.AdRequest
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -251,6 +252,10 @@ class AddEditAutoFragment : BaseFragment() {
         super.onDestroyView()
         _binding = null
     }
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val adRequest: AdRequest = AdRequest.Builder().build()
+        binding.bannerAd.loadAd(adRequest)
+    }
 
 }

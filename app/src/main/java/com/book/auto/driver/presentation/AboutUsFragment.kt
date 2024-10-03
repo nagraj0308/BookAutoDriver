@@ -8,6 +8,7 @@ import android.webkit.WebViewClient
 import androidx.fragment.app.Fragment
 import com.book.auto.driver.databinding.FragmentWebViewBinding
 import com.book.auto.driver.utils.Constants
+import com.google.android.gms.ads.AdRequest
 
 
 class AboutUsFragment : Fragment() {
@@ -34,5 +35,10 @@ class AboutUsFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val adRequest: AdRequest = AdRequest.Builder().build()
+        binding.bannerAd.loadAd(adRequest)
     }
 }
