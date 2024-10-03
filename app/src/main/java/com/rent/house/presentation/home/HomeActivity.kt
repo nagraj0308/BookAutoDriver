@@ -54,6 +54,7 @@ import com.rent.house.presentation.login.LoginActivity
 import com.rent.house.utils.Constants
 import com.rent.house.utils.PermissionUtils
 import com.rent.house.utils.RequestCode
+import com.rent.house.utils.Utils
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -93,16 +94,11 @@ class HomeActivity : BaseActivity() {
         backgroundScope.launch {
             // Initialize the Google Mobile Ads SDK on a background thread.
             MobileAds.initialize(this@HomeActivity) {
-                val testDeviceIds = listOf("6C438043FBAE987EE0BA45F40294826C")
-                val configuration = RequestConfiguration.Builder().setTestDeviceIds(testDeviceIds).build()
-                MobileAds.setRequestConfiguration(configuration)
-
                 val adRequest: AdRequest =AdRequest.Builder().build()
                 val mAdView = findViewById<AdView>(R.id.banner_ad)
                 mAdView.loadAd(adRequest)
             }
         }
-
 
         setSupportActionBar(binding.appBarMain.toolbar)
 
