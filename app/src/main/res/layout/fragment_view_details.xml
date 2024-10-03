@@ -4,11 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/banner_ad"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+        app:adSize="BANNER"
+        app:adUnitId="ca-app-pub-8309769930611097/2575893225">
+    </com.google.android.gms.ads.AdView>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true">
+        android:layout_below="@+id/banner_ad"
+        >
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cv_content"

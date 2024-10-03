@@ -4,12 +4,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/banner_ad"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+        app:adSize="BANNER"
+        app:adUnitId="ca-app-pub-8309769930611097/2575893225">
+    </com.google.android.gms.ads.AdView>
+
 
     <com.google.android.gms.maps.MapView
         android:id="@+id/mv_cl"
         android:layout_width="match_parent"
+        android:layout_below="@id/banner_ad"
         android:layout_height="match_parent"
-        android:layout_alignParentTop="true" />
+        />
 
     <Button
         android:id="@+id/btn_refresh"

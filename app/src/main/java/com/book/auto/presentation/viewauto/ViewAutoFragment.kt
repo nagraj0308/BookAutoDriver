@@ -13,6 +13,7 @@ import com.book.auto.presentation.base.BaseFragment
 import com.book.auto.presentation.home.HomeViewModel
 import com.book.auto.utils.Utils
 import com.bumptech.glide.Glide
+import com.google.android.gms.ads.AdRequest
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -74,6 +75,12 @@ class ViewAutoFragment : BaseFragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val adRequest: AdRequest = AdRequest.Builder().build()
+        binding.bannerAd.loadAd(adRequest)
     }
 
 

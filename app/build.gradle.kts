@@ -17,8 +17,8 @@ android {
         applicationId = "com.book.auto"
         minSdk = 27
         targetSdk = 34
-        versionCode = 16
-        versionName = "1.6"
+        versionCode = 18
+        versionName = "1.8"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }

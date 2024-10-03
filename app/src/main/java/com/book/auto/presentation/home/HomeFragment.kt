@@ -14,6 +14,7 @@ import com.book.auto.data.remote.reqres.Auto
 import com.book.auto.databinding.FragmentHomeBinding
 import com.book.auto.presentation.base.BaseFragment
 import com.book.auto.utils.Constants
+import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.BitmapDescriptor
@@ -162,6 +163,12 @@ class HomeFragment : BaseFragment() {
         drawable.setBounds(0, 0, drawable.intrinsicWidth, drawable.intrinsicHeight)
         drawable.draw(canvas)
         return BitmapDescriptorFactory.fromBitmap(bitmap)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val adRequest: AdRequest = AdRequest.Builder().build()
+        binding.bannerAd.loadAd(adRequest)
     }
 
 }

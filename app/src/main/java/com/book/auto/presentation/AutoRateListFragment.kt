@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import com.book.auto.databinding.FragmentAutoRateListBinding;
 import com.book.auto.presentation.base.BaseFragment
 import com.bumptech.glide.Glide
+import com.google.android.gms.ads.AdRequest
 
 import dagger.hilt.android.AndroidEntryPoint;
 
@@ -32,5 +33,10 @@ class AutoRateListFragment : BaseFragment() {
         _binding = null
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val adRequest: AdRequest = AdRequest.Builder().build()
+        binding.bannerAd.loadAd(adRequest)
+    }
 
 }

@@ -37,10 +37,6 @@ class App : Application(), Application.ActivityLifecycleCallbacks, LifecycleObse
         }
         ProcessLifecycleOwner.get().lifecycle.addObserver(this)
         appOpenAdManager = AppOpenAdManager()
-
-        val testDeviceIds = listOf("6C438043FBAE987EE0BA45F40294826C")
-        val configuration = RequestConfiguration.Builder().setTestDeviceIds(testDeviceIds).build()
-        MobileAds.setRequestConfiguration(configuration)
     }
 
 
