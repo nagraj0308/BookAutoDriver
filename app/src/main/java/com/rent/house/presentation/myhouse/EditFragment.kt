@@ -14,6 +14,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
+import com.google.android.gms.ads.AdRequest
 import com.google.firebase.storage.UploadTask
 import com.rent.house.PM
 import com.rent.house.R
@@ -359,6 +360,12 @@ class EditFragment : BaseFragment() {
                 )
             )
         }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val adRequest: AdRequest = AdRequest.Builder().build()
+        binding.bannerAd.loadAd(adRequest)
     }
 
 

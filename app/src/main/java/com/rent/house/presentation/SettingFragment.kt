@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import com.google.android.gms.ads.AdRequest
 import com.rent.house.PM
 import com.rent.house.R
 import com.rent.house.databinding.FragmentSettingBinding
@@ -56,7 +57,11 @@ class SettingFragment : BaseFragment() {
             activity?.finishAndRemoveTask()
         }
     }
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val adRequest: AdRequest = AdRequest.Builder().build()
+        binding.bannerAd.loadAd(adRequest)
+    }
 
     override fun showProgress() {
     }

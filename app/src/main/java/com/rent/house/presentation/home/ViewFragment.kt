@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.gms.ads.AdRequest
 import com.rent.house.data.remote.reqres.House
 import com.rent.house.databinding.FragmentViewDetailsBinding
 import com.rent.house.presentation.base.BaseFragment
@@ -100,7 +101,11 @@ class ViewFragment : BaseFragment() {
     override fun hideProgress() {
         TODO("Not yet implemented")
     }
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val adRequest: AdRequest = AdRequest.Builder().build()
+        binding.bannerAd.loadAd(adRequest)
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()

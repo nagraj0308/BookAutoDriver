@@ -20,9 +20,6 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.AdView
-import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.Priority
@@ -52,7 +49,6 @@ import com.rent.house.utils.Constants
 import com.rent.house.utils.PermissionUtils
 import com.rent.house.utils.RequestCode
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -85,16 +81,6 @@ class HomeActivity : BaseActivity() {
         MapsInitializer.initialize(this, MapsInitializer.Renderer.LATEST) {}
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         headerBinding = NavHeaderMainBinding.bind(binding.navView.getHeaderView(0))
-
-        val backgroundScope = CoroutineScope(Dispatchers.IO)
-        backgroundScope.launch {
-            // Initialize the Google Mobile Ads SDK on a background thread.
-            MobileAds.initialize(this@HomeActivity) {
-                val adRequest: AdRequest =AdRequest.Builder().build()
-                val mAdView = findViewById<AdView>(R.id.banner_ad)
-                mAdView.loadAd(adRequest)
-            }
-        }
 
         setSupportActionBar(binding.appBarMain.toolbar)
 
