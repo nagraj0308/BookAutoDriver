@@ -5,6 +5,16 @@
     android:layout_height="match_parent">
 
 
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/banner_ad"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+        app:adSize="BANNER"
+        app:adUnitId="ca-app-pub-8309769930611097/8624031484">
+    </com.google.android.gms.ads.AdView>
+
     <Button
         android:id="@+id/btn_add_auto"
         style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
@@ -20,6 +30,7 @@
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cv_content"
         android:layout_width="match_parent"
+        android:layout_below="@+id/banner_ad"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         app:cardCornerRadius="20dp"

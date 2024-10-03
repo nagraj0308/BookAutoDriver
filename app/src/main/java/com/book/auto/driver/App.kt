@@ -30,17 +30,10 @@ class App : Application(), Application.ActivityLifecycleCallbacks, LifecycleObse
     override fun onCreate() {
         super.onCreate()
         registerActivityLifecycleCallbacks(this)
-        val backgroundScope = CoroutineScope(Dispatchers.IO)
-        backgroundScope.launch {
-            // Initialize the Google Mobile Ads SDK on a background thread.
-            MobileAds.initialize(this@App) {}
+        MobileAds.initialize(this@App) {
         }
         ProcessLifecycleOwner.get().lifecycle.addObserver(this)
         appOpenAdManager = AppOpenAdManager()
-
-        val testDeviceIds = listOf("6C438043FBAE987EE0BA45F40294826C")
-        val configuration = RequestConfiguration.Builder().setTestDeviceIds(testDeviceIds).build()
-        MobileAds.setRequestConfiguration(configuration)
     }
 
 
