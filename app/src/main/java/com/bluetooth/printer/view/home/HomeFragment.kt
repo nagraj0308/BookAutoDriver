@@ -25,13 +25,13 @@ class HomeFragment : BaseFragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-//        binding.rvPrintType.layoutManager=GridLayoutManager(this.context,2);
-//        val printTypes = ArrayList<PrintType>()
-//        printTypes.add(PrintType("Receipt", 1, R.drawable.ic_home))
-//        printTypes.add(PrintType("Receipt", 1, R.drawable.ic_home))
-//        printTypes.add(PrintType("Receipt", 1, R.drawable.ic_home))
-//        printTypes.add(PrintType("Receipt", 1, R.drawable.ic_home))
-//        binding.rvPrintType.adapter = PrintTypeAdapter(printTypes)
+        binding.rvPrintType.layoutManager=GridLayoutManager(this.context,2);
+        val printTypes = ArrayList<PrintType>()
+        printTypes.add(PrintType("Receipt", 1, R.drawable.ic_home))
+        printTypes.add(PrintType("Receipt", 1, R.drawable.ic_home))
+        printTypes.add(PrintType("Receipt", 1, R.drawable.ic_home))
+        printTypes.add(PrintType("Receipt", 1, R.drawable.ic_home))
+        binding.rvPrintType.adapter = PrintTypeAdapter(printTypes)
 
         return root
     }
