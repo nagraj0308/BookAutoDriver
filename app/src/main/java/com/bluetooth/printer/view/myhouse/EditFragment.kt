@@ -83,44 +83,6 @@ class EditFragment : BaseFragment() {
             }
         }
 
-
-        binding.ivAutoPhoto2.setOnClickListener {
-            if (PermissionUtils.checkReadStoragePermission(requireContext())) {
-                startForResult2.launch(
-                    Intent(
-                        Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI
-                    )
-                )
-            } else {
-                PermissionUtils.requestReadStoragePermission(requireActivity())
-            }
-        }
-
-        binding.ivAutoPhoto3.setOnClickListener {
-            if (PermissionUtils.checkReadStoragePermission(requireContext())) {
-                startForResult3.launch(
-                    Intent(
-                        Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI
-                    )
-                )
-            } else {
-                PermissionUtils.requestReadStoragePermission(requireActivity())
-            }
-        }
-
-
-        binding.ivAutoPhoto4.setOnClickListener {
-            if (PermissionUtils.checkReadStoragePermission(requireContext())) {
-                startForResult4.launch(
-                    Intent(
-                        Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI
-                    )
-                )
-            } else {
-                PermissionUtils.requestReadStoragePermission(requireActivity())
-            }
-        }
-
         if (isNew) {
             binding.llEdit.visibility = View.GONE
             binding.btnSubmit.visibility = View.VISIBLE
@@ -147,64 +109,7 @@ class EditFragment : BaseFragment() {
             val picturePath = cursor.getString(columnIndex)
             cursor.close()
             Glide.with(this).asBitmap().load(picturePath).into(binding.ivAutoPhoto1)
-            performCrop(selectedImage, 3, 2, 1)
-        }
-    }
-
-    private val startForResult2 = registerForActivityResult(
-        ActivityResultContracts.StartActivityForResult()
-    ) { result: ActivityResult ->
-        if (result.resultCode == Activity.RESULT_OK && null != result.data) {
-            val data = result.data
-            val selectedImage: Uri = data!!.data!!
-            val filePathColumn = arrayOf(MediaStore.Images.Media.DATA)
-            val cursor = requireActivity().contentResolver.query(
-                selectedImage, filePathColumn, null, null, null
-            )
-            cursor!!.moveToFirst()
-            val columnIndex = cursor.getColumnIndex(filePathColumn[0])
-            val picturePath = cursor.getString(columnIndex)
-            cursor.close()
-            Glide.with(this).asBitmap().load(picturePath).into(binding.ivAutoPhoto2)
-            performCrop(selectedImage, 3, 2, 2)
-        }
-    }
-
-    private val startForResult3 = registerForActivityResult(
-        ActivityResultContracts.StartActivityForResult()
-    ) { result: ActivityResult ->
-        if (result.resultCode == Activity.RESULT_OK && null != result.data) {
-            val data = result.data
-            val selectedImage: Uri = data!!.data!!
-            val filePathColumn = arrayOf(MediaStore.Images.Media.DATA)
-            val cursor = requireActivity().contentResolver.query(
-                selectedImage, filePathColumn, null, null, null
-            )
-            cursor!!.moveToFirst()
-            val columnIndex = cursor.getColumnIndex(filePathColumn[0])
-            val picturePath = cursor.getString(columnIndex)
-            cursor.close()
-            Glide.with(this).asBitmap().load(picturePath).into(binding.ivAutoPhoto3)
-            performCrop(selectedImage, 3, 2, 3)
-        }
-    }
-
-    private val startForResult4 = registerForActivityResult(
-        ActivityResultContracts.StartActivityForResult()
-    ) { result: ActivityResult ->
-        if (result.resultCode == Activity.RESULT_OK && null != result.data) {
-            val data = result.data
-            val selectedImage: Uri = data!!.data!!
-            val filePathColumn = arrayOf(MediaStore.Images.Media.DATA)
-            val cursor = requireActivity().contentResolver.query(
-                selectedImage, filePathColumn, null, null, null
-            )
-            cursor!!.moveToFirst()
-            val columnIndex = cursor.getColumnIndex(filePathColumn[0])
-            val picturePath = cursor.getString(columnIndex)
-            cursor.close()
-            Glide.with(this).asBitmap().load(picturePath).into(binding.ivAutoPhoto4)
-            performCrop(selectedImage, 3, 2, 4)
+            performCrop(selectedImage, 3, 2)
         }
     }
 
@@ -225,57 +130,8 @@ class EditFragment : BaseFragment() {
         }
     }
 
-    private val startForCropResult2 = registerForActivityResult(
-        ActivityResultContracts.StartActivityForResult()
-    ) { result: ActivityResult ->
-        if (result.resultCode == Activity.RESULT_OK && null != result.data) {
-            val data = result.data
-            try {
-                val extras: Bundle = data!!.extras!!
-                val croppedPic = extras.getParcelable<Bitmap>("data")
-                Glide.with(this).asBitmap().load(croppedPic).into(binding.ivAutoPhoto2)
-                if (croppedPic != null) {
-                }
-            } catch (_: Exception) {
-            }
-        }
-    }
 
-    private val startForCropResult3 = registerForActivityResult(
-        ActivityResultContracts.StartActivityForResult()
-    ) { result: ActivityResult ->
-        if (result.resultCode == Activity.RESULT_OK && null != result.data) {
-            val data = result.data
-            try {
-                val extras: Bundle = data!!.extras!!
-                val croppedPic = extras.getParcelable<Bitmap>("data")
-                Glide.with(this).asBitmap().load(croppedPic).into(binding.ivAutoPhoto3)
-                if (croppedPic != null) {
-                }
-            } catch (_: Exception) {
-            }
-        }
-    }
-
-    private val startForCropResult4 = registerForActivityResult(
-        ActivityResultContracts.StartActivityForResult()
-    ) { result: ActivityResult ->
-        if (result.resultCode == Activity.RESULT_OK && null != result.data) {
-            val data = result.data
-            try {
-                val extras: Bundle = data!!.extras!!
-                val croppedPic = extras.getParcelable<Bitmap>("data")
-                Glide.with(this).asBitmap().load(croppedPic).into(binding.ivAutoPhoto4)
-                if (croppedPic != null) {
-                }
-
-            } catch (_: Exception) {
-            }
-        }
-    }
-
-
-    private fun performCrop(picUri: Uri, arx: Int, ary: Int, imgNo: Int) {
+    private fun performCrop(picUri: Uri, arx: Int, ary: Int) {
         val cropIntent = Intent("com.android.camera.action.CROP")
         cropIntent.setDataAndType(picUri, "image/*")
         cropIntent.putExtra("crop", "true")
@@ -284,31 +140,11 @@ class EditFragment : BaseFragment() {
         cropIntent.putExtra("outputX", 256)
         cropIntent.putExtra("outputY", 256)
         cropIntent.putExtra("return-data", true)
-        if (imgNo == 1) {
             startForCropResult1.launch(
                 Intent(
                     cropIntent
                 )
             )
-        } else if (imgNo == 2) {
-            startForCropResult2.launch(
-                Intent(
-                    cropIntent
-                )
-            )
-        } else if (imgNo == 3) {
-            startForCropResult3.launch(
-                Intent(
-                    cropIntent
-                )
-            )
-        } else if (imgNo == 4) {
-            startForCropResult4.launch(
-                Intent(
-                    cropIntent
-                )
-            )
-        }
     }
 
 

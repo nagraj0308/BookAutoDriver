@@ -5,6 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.GridLayoutManager
+import com.bluetooth.printer.R
+import com.bluetooth.printer.data.PrintType
 import com.bluetooth.printer.databinding.FragmentHomeBinding
 import com.bluetooth.printer.view.base.BaseFragment
 
@@ -21,9 +24,15 @@ class HomeFragment : BaseFragment() {
     ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
-        binding.btnRefresh.setOnClickListener {
 
-        }
+//        binding.rvPrintType.layoutManager=GridLayoutManager(this.context,2);
+//        val printTypes = ArrayList<PrintType>()
+//        printTypes.add(PrintType("Receipt", 1, R.drawable.ic_home))
+//        printTypes.add(PrintType("Receipt", 1, R.drawable.ic_home))
+//        printTypes.add(PrintType("Receipt", 1, R.drawable.ic_home))
+//        printTypes.add(PrintType("Receipt", 1, R.drawable.ic_home))
+//        binding.rvPrintType.adapter = PrintTypeAdapter(printTypes)
+
         return root
     }
 

@@ -6,10 +6,11 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.bluetooth.printer.R
+import com.bluetooth.printer.data.PrintType
 import com.bumptech.glide.Glide
 
-class ImageAdapter(private val mList: List<String>) :
-    RecyclerView.Adapter<ImageAdapter.ViewHolder>() {
+class PrintTypeAdapter(private val mList: List<PrintType>) :
+    RecyclerView.Adapter<PrintTypeAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_image, parent, false)
@@ -18,7 +19,7 @@ class ImageAdapter(private val mList: List<String>) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = mList[position]
-        Glide.with(holder.iv.context).asBitmap().load(item).into(holder.iv)
+        Glide.with(holder.iv.context).asBitmap().load(item.resId).into(holder.iv)
     }
 
     override fun getItemCount(): Int {

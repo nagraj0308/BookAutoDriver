@@ -12,13 +12,6 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/nav_view_house"
-        android:name="com.bluetooth.printer.view.home.ViewFragment"
-        android:label="@string/house_details"
-        tools:layout="@layout/fragment_view_details" />
-
-
-    <fragment
         android:id="@+id/nav_my_house"
         android:name="com.bluetooth.printer.view.myhouse.MyHouseFragment"
         android:label="@string/my_flat"
