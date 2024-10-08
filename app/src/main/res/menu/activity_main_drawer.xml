@@ -9,10 +9,6 @@
             android:icon="@drawable/ic_home"
             android:title="@string/home" />
         <item
-            android:id="@+id/nav_my_house"
-            android:icon="@drawable/ic_address"
-            android:title="@string/my_flat" />
-        <item
             android:id="@+id/nav_about_us"
             android:icon="@drawable/ic_info"
             android:title="@string/about_us" />

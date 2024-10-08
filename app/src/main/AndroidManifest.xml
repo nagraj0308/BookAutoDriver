@@ -40,6 +40,10 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".view.printpdf.PrintPDFActivity"
+            android:theme="@style/Theme.BookAutoDriver.NoActionBar"/>
+
 
         <provider
             android:name="androidx.core.content.FileProvider"
