@@ -10,6 +10,7 @@ import com.bluetooth.printer.R
 import com.bluetooth.printer.data.PrintType
 import com.bluetooth.printer.databinding.FragmentHomeBinding
 import com.bluetooth.printer.view.base.BaseFragment
+import com.bluetooth.printer.view.printpdf.PrintPDFActivity
 
 
 class HomeFragment : BaseFragment() {
@@ -27,14 +28,18 @@ class HomeFragment : BaseFragment() {
 
         binding.rvPrintType.layoutManager=GridLayoutManager(this.context,2);
         val printTypes = ArrayList<PrintType>()
-        printTypes.add(PrintType("Receipt", 1, R.drawable.ic_home))
-        printTypes.add(PrintType("Receipt", 1, R.drawable.ic_home))
-        printTypes.add(PrintType("Receipt", 1, R.drawable.ic_home))
-        printTypes.add(PrintType("Receipt", 1, R.drawable.ic_home))
-        binding.rvPrintType.adapter = PrintTypeAdapter(printTypes)
-
+        printTypes.add(PrintType("Print PDF", 1, R.drawable.ic_pdf))
+        printTypes.add(PrintType("Print Image", 2, R.drawable.ic_image))
+        binding.rvPrintType.adapter = PrintTypeAdapter(printTypes,onClickListener = { _, item -> openPrintTypeActivity(item)})
         return root
     }
+
+    private fun openPrintTypeActivity(printType: PrintType){
+       if (printType.id==1){
+           activity?.let { PrintPDFActivity.start(it,printType) }
+       }
+    }
+
 
 
     override fun onDestroyView() {
