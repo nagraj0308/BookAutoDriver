@@ -29,7 +29,7 @@ class BTDeviceListActivity : BaseActivity() {
     companion object {
         fun start(activity: Activity) {
             val intent = Intent(activity, BTDeviceListActivity::class.java);
-            activity.startActivity(intent)
+            activity.startActivityForResult(intent,10)
         }
     }
 
@@ -58,6 +58,7 @@ class BTDeviceListActivity : BaseActivity() {
                 run {
                     pm.btDeviceName = item.name
                     pm.btDeviceAddress = item.address
+                    finish()
                 }
             })
     }
