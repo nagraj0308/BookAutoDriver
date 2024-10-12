@@ -50,7 +50,6 @@ class HomeActivity : BaseActivity() {
     private lateinit var binding: ActivityHomeBinding
     private lateinit var headerBinding: NavHeaderMainBinding
     private var remoteConfig: FirebaseRemoteConfig = Firebase.remoteConfig
-    private val viewModel: HomeViewModel by viewModels()
     private lateinit var appUpdateManager: AppUpdateManager
     private val updateType = AppUpdateType.IMMEDIATE
 

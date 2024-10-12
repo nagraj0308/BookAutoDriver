@@ -3,12 +3,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:ignore="MissingLeanbackLauncher">
 
+    <uses-permission android:name="android.permission.BLUETOOTH"
+        android:maxSdkVersion="30"
+        />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"
+        android:maxSdkVersion="30"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+    <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
+    <uses-permission
+        android:name="android.permission.BLUETOOTH_PRIVILEGED"
+        tools:ignore="ProtectedPermissions"
+        />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADVERTISE" />
+
+
+
     <uses-feature
         android:name="android.software.leanback"
         android:required="false" />
 
     <uses-feature
         android:name="android.hardware.touchscreen"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.bluetooth"
         android:required="false" />
 
     <uses-permission android:name="android.permission.INTERNET" />
