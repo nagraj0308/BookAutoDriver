@@ -1,6 +1,7 @@
 package com.bluetooth.printer.view.printpdf
 
 import android.app.Activity
+import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothSocket
 import android.content.Intent
 import android.os.Bundle
@@ -13,6 +14,10 @@ import com.bluetooth.printer.view.btdevice.BTDeviceListActivity
 import com.bluetooth.printer.view.utils.PermissionUtils
 import com.bluetooth.printer.view.utils.RequestCode
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.io.IOException
 import javax.inject.Inject
 
@@ -43,11 +48,11 @@ class PrintPDFActivity : BaseActivity() {
         printType = intent.getSerializableExtra("item") as PrintType?
         printType?.let {
             supportActionBar?.title = it.name
-            showToast(it.name)
         }
-        connectBTDevice()
         supportActionBar?.setDisplayHomeAsUpEnabled(true);
         supportActionBar?.setDisplayShowHomeEnabled(true);
+
+        connectBTDevice()
 
         binding.btnSubmit.setOnClickListener {
             printer?.let { it1 ->
@@ -65,7 +70,20 @@ class PrintPDFActivity : BaseActivity() {
 
     private fun connectBTDevice() {
         if (PermissionUtils.checkBTDeviceConnectPermission(this)) {
-            printer = BluetoothConnection().connectToDevice(pm.btDeviceAddress) // R
+            if(BluetoothAdapter.checkBluetoothAddress(pm.btDeviceAddress)){
+                CoroutineScope(Dispatchers.IO).launch {
+                    printer = BluetoothConnection().connectToDevice(pm.btDeviceAddress)
+                    withContext(Dispatchers.Main) {
+                        if (printer == null || !printer!!.isConnected) {
+                            showToast("Failed to connect to printer")
+                        }else{
+                            showToast("Connected to printer")
+                        }
+                    }
+                }
+            }else{
+                BTDeviceListActivity.start(this)
+            }
         } else {
             PermissionUtils.requestBTDeviceConnectPermission(this);
         }
@@ -90,7 +108,7 @@ class PrintPDFActivity : BaseActivity() {
         return true
     }
 
-    fun sendData(socket: BluetoothSocket, data: String) {
+    private fun sendData(socket: BluetoothSocket, data: String) {
         try {
             val outputStream = socket.outputStream
             outputStream.write(data.toByteArray())
@@ -114,7 +132,9 @@ class PrintPDFActivity : BaseActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        connectBTDevice()
+        if(requestCode == 10 && resultCode == Activity.RESULT_OK){
+            connectBTDevice()
+        }
     }
 
 }
