@@ -3,8 +3,11 @@ package com.bluetooth.printer.view.utils
 
 import android.graphics.Bitmap
 import android.graphics.Canvas
+import android.graphics.pdf.PdfRenderer
 import android.location.Location
+import android.os.ParcelFileDescriptor
 import android.view.View
+import java.io.File
 
 
 class Utils {
@@ -24,10 +27,34 @@ class Utils {
             return null
         }
 
-        fun distance(lat1: Double, lon1: Double, lat2: Double, lon2: Double): Double {
-            val results = FloatArray(1)
-            Location.distanceBetween(lat1, lon1, lat2, lon2, results)
-            return String.format("%.2f", results[0] / 1000).toDouble()
+        fun renderPdfPage(filePath: String, pageIndex: Int): Bitmap? {
+            val pdfFile = File(filePath)
+            var bitmap: Bitmap? = null
+
+            try {
+                val fileDescriptor =
+                    ParcelFileDescriptor.open(pdfFile, ParcelFileDescriptor.MODE_READ_ONLY)
+                val renderer = PdfRenderer(fileDescriptor)
+
+                val page = renderer.openPage(pageIndex)
+                val width = page.width
+                val height = page.height
+
+                // Create a bitmap large enough to hold the PDF page
+                bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
+
+                // Render the PDF page to the bitmap
+                page.render(bitmap, null, null, PdfRenderer.Page.RENDER_MODE_FOR_DISPLAY)
+
+                page.close()
+                renderer.close()
+
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+
+            return bitmap
         }
+
     }
 }
