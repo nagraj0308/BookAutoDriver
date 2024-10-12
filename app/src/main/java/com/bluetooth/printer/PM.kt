@@ -13,10 +13,22 @@ class PM(private val preferences: SharedPreferences) {
             preferences.edit().putBoolean(IS_LOGGED_IN, value).apply()
         }
 
+    var btDeviceAddress: String
+        get() = preferences.getString(BT_DEVICE_ADDRESS, "").toString()
+        set(value) {
+            preferences.edit().putString(BT_DEVICE_ADDRESS, value).apply()
+        }
 
+    var btDeviceName: String
+        get() = preferences.getString(BT_DEVICE_NAME, "").toString()
+        set(value) {
+            preferences.edit().putString(BT_DEVICE_NAME, value).apply()
+        }
 
     companion object {
         const val PM_FILE = "pm_file"
         private const val IS_LOGGED_IN = "is_logged_in"
+        private const val BT_DEVICE_ADDRESS = "bt_device_address"
+        private const val BT_DEVICE_NAME = "bt_device_name"
     }
 }

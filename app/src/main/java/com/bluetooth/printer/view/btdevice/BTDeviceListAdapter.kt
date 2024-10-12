@@ -1,4 +1,4 @@
-package com.bluetooth.printer.view.home
+package com.bluetooth.printer.view.btdevice
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,14 +7,14 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bluetooth.printer.R
-import com.bluetooth.printer.data.PrintType
+import com.bluetooth.printer.data.BTDevice
 import com.bumptech.glide.Glide
 
-class PrintTypeAdapter(
-    private val mList: List<PrintType>,
-    private val onClickListener: (View,PrintType) -> Unit
+class BTDeviceListAdapter(
+    private val mList: List<BTDevice>,
+    private val onClickListener: (View, BTDevice) -> Unit
 ) :
-    RecyclerView.Adapter<PrintTypeAdapter.ViewHolder>() {
+    RecyclerView.Adapter<BTDeviceListAdapter.ViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

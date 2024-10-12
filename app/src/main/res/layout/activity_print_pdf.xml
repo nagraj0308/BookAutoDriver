@@ -6,25 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".view.printpdf.PrintPDFActivity">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/action_bar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/Theme.BookAutoDriver.AppBarOverlay">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/Theme.BookAutoDriver.PopupOverlay" />
-
-    </com.google.android.material.appbar.AppBarLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/action_bar"
         android:visibility="visible">
 
         <ScrollView

@@ -60,7 +60,7 @@
 
         <activity
             android:name=".view.printpdf.PrintPDFActivity"
-            android:theme="@style/Theme.BookAutoDriver.NoActionBar"/>
+            android:theme="@style/Theme.MaterialComponents.Bridge"/>
 
 
         <provider
