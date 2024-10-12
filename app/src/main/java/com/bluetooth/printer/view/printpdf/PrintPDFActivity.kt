@@ -54,7 +54,7 @@ class PrintPDFActivity : BaseActivity() {
 
         connectBTDevice()
 
-        binding.btnSubmit.setOnClickListener {
+        binding.btnPrint.setOnClickListener {
             printer?.let { it1 ->
                 run {
                     if (it1.isConnected) {

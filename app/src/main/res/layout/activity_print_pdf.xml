@@ -4,14 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="0dp"
     tools:context=".view.printpdf.PrintPDFActivity">
 
 
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="visible">
+
 
         <ScrollView
             android:layout_width="match_parent"
@@ -33,42 +31,6 @@
 
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/til_name"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="5dp"
-                        android:hint="@string/name"
-                        app:startIconDrawable="@drawable/ic_person">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:inputType="text"
-                            android:maxLength="50"
-                            android:maxLines="1" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/til_mobile_number"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="5dp"
-                        android:hint="@string/mobile_number"
-                        app:startIconDrawable="@drawable/ic_call">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:inputType="phone"
-                            android:maxLength="15"
-                            android:maxLines="1" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/til_rate"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
@@ -85,22 +47,6 @@
 
                     </com.google.android.material.textfield.TextInputLayout>
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/til_address"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="5dp"
-                        android:hint="@string/address"
-                        app:startIconDrawable="@drawable/ic_address">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="top"
-                            android:inputType="textMultiLine" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
 
 
                     <TextView
@@ -141,59 +87,27 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
+            android:padding="0dp"
+            android:layout_margin="0dp"
             android:orientation="vertical">
 
 
-            <LinearLayout
-                android:id="@+id/ll_edit"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="2">
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btn_save"
-                    style="@style/Widget.MaterialComponents.Button.Icon"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="2dp"
-                    android:layout_weight="1"
-                    android:padding="10dp"
-                    android:text="@string/save"
-                    android:textAllCaps="false"
-                    app:icon="@drawable/ic_sync"
-                    app:iconGravity="textStart" />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btn_delete"
-                    style="@style/Widget.MaterialComponents.Button.Icon"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="2dp"
-                    android:layout_weight="1"
-                    android:padding="10dp"
-                    android:text="@string/delete"
-                    android:textAllCaps="false"
-                    app:icon="@drawable/ic_delete"
-                    app:iconGravity="textStart" />
-
-            </LinearLayout>
-
-
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_submit"
+                android:id="@+id/btn_print"
                 style="@style/Widget.MaterialComponents.Button.Icon"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
-                android:text="@string/submit"
+                android:text="@string/print"
+                android:layout_margin="0dp"
                 android:textAllCaps="false"
-                app:icon="@drawable/ic_done"
+                app:icon="@drawable/ic_print"
+                android:elevation="0dp"
+                app:elevation="0dp"
                 app:iconGravity="textStart" />
 
 
         </LinearLayout>
-    </RelativeLayout>
 
 
 </RelativeLayout>

@@ -15,7 +15,7 @@ android {
 
     defaultConfig {
         applicationId = "com.bluetooth.printer"
-        minSdk = 24
+        minSdk = 28
         targetSdk = 34
         versionCode = 1
         versionName = "0.1"

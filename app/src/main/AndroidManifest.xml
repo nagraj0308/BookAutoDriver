@@ -60,10 +60,10 @@
 
         <activity
             android:name=".view.printpdf.PrintPDFActivity"
-            android:theme="@style/Theme.MaterialComponents.Bridge"/>
+            android:theme="@style/NormalActivityTheme"/>
         <activity
             android:name=".view.btdevice.BTDeviceListActivity"
-            android:theme="@style/Theme.MaterialComponents.Bridge"/>
+            android:theme="@style/Theme.MaterialComponents.Light"/>
 
 
         <provider
