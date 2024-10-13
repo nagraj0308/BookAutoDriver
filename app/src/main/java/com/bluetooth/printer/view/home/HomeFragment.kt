@@ -35,6 +35,8 @@ class HomeFragment : BaseFragment() {
     private fun openPrintTypeActivity(printType: PrintType){
        if (printType.id==1){
            activity?.let { PrintPDFActivity.start(it,printType) }
+       }else{
+           showToast("Coming soon..")
        }
     }
 
