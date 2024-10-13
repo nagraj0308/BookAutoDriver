@@ -2,6 +2,7 @@ package com.bluetooth.printer.view.btdevice
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.bluetooth.BluetoothClass
 import android.bluetooth.BluetoothDevice
 import android.bluetooth.BluetoothManager
 import android.content.Intent
@@ -87,12 +88,30 @@ class BTDeviceListActivity : BaseActivity() {
         val pairedDevices: Set<BluetoothDevice> = bluetoothManager.adapter.getBondedDevices()
         if (pairedDevices.isNotEmpty()) {
             for (device in pairedDevices) {
-                btDevices.add(BTDevice(device.name, device.address, R.drawable.ic_home))
+                btDevices.add(BTDevice(device.name, device.address, getDeviceIcon(device.bluetoothClass.majorDeviceClass)))
             }
         } else {
             showToast("No paired bluetooth printer, Please connect with a bluetooth printer!")
         }
         return btDevices
+    }
+
+    private fun getDeviceIcon(major: Int):Int{
+
+      return  when (major) {
+            BluetoothClass.Device.Major.AUDIO_VIDEO -> R.drawable.ic_audiotrack
+            BluetoothClass.Device.Major.COMPUTER -> R.drawable.ic_computer
+            BluetoothClass.Device.Major.HEALTH -> R.drawable.ic_health
+            BluetoothClass.Device.Major.IMAGING -> R.drawable.ic_print
+            BluetoothClass.Device.Major.MISC -> R.drawable.ic_device_unknown
+            BluetoothClass.Device.Major.NETWORKING -> R.drawable.ic_info
+            BluetoothClass.Device.Major.PERIPHERAL -> R.drawable.ic_home
+            BluetoothClass.Device.Major.PHONE -> R.drawable.ic_phone
+            BluetoothClass.Device.Major.TOY -> R.drawable.ic_toys
+            BluetoothClass.Device.Major.UNCATEGORIZED -> R.drawable.ic_device_unknown
+            BluetoothClass.Device.Major.WEARABLE -> R.drawable.ic_headphones
+            else -> R.drawable.ic_device_unknown
+        }
     }
 
 }

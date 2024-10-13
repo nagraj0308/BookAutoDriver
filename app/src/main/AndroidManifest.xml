@@ -63,7 +63,7 @@
             android:theme="@style/NormalActivityTheme"/>
         <activity
             android:name=".view.btdevice.BTDeviceListActivity"
-            android:theme="@style/Theme.MaterialComponents.Light"/>
+            android:theme="@style/NormalActivityTheme"/>
 
 
         <provider

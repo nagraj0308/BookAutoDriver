@@ -14,6 +14,7 @@ class RequestCodeIntent {
     companion object {
         const val READ_CONTENT = 100
         const val BT_DEVICE_LIST = 101
+        const val APP_UPDATE = 102
 
     }
 }

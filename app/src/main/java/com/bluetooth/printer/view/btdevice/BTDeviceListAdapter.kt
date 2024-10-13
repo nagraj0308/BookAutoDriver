@@ -19,7 +19,7 @@ class BTDeviceListAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_print_type, parent, false)
+            .inflate(R.layout.item_bt_device, parent, false)
         return ViewHolder(view)
     }
 
@@ -27,6 +27,7 @@ class BTDeviceListAdapter(
         val item = mList[position]
         Glide.with(holder.iv.context).asBitmap().load(item.resId).into(holder.iv)
         holder.tvName.text = item.name;
+        holder.tvAddress.text = item.address;
 
         holder.itemView.setOnClickListener { view ->
             onClickListener.invoke(view, item)
@@ -40,5 +41,6 @@ class BTDeviceListAdapter(
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val iv: ImageView = itemView.findViewById(R.id.iv_photo)
         val tvName: TextView = itemView.findViewById(R.id.tv_name)
+        val tvAddress: TextView = itemView.findViewById(R.id.tv_address)
     }
 }

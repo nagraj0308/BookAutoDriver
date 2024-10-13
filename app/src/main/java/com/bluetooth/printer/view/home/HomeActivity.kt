@@ -1,5 +1,6 @@
 package com.bluetooth.printer.view.home
 
+import android.app.Activity
 import android.app.Dialog
 import android.content.Intent
 import android.net.Uri
@@ -20,7 +21,9 @@ import com.bluetooth.printer.R
 import com.bluetooth.printer.databinding.ActivityHomeBinding
 import com.bluetooth.printer.databinding.NavHeaderMainBinding
 import com.bluetooth.printer.view.base.BaseActivity
+import com.bluetooth.printer.view.btdevice.BTDeviceListActivity
 import com.bluetooth.printer.view.utils.Constants
+import com.bluetooth.printer.view.utils.RequestCodeIntent
 import com.google.android.material.navigation.NavigationView
 import com.google.android.play.core.appupdate.AppUpdateManager
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
@@ -65,7 +68,6 @@ class HomeActivity : BaseActivity() {
         setSupportActionBar(binding.appBarMain.toolbar)
 
 
-
         val drawerLayout: DrawerLayout = binding.drawerLayout
         val navView: NavigationView = binding.navView
         val navController = findNavController(R.id.nav_host_fragment_content_main)
@@ -76,6 +78,12 @@ class HomeActivity : BaseActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        navView.menu.findItem(R.id.nav_setting).setOnMenuItemClickListener {
+            BTDeviceListActivity.start(this)
+            drawerLayout.closeDrawers()
+            false
+        }
 
         navView.menu.findItem(R.id.nav_share).setOnMenuItemClickListener {
             val sendIntent: Intent = Intent().apply {
@@ -120,8 +128,6 @@ class HomeActivity : BaseActivity() {
     }
 
 
-
-
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
@@ -145,11 +151,6 @@ class HomeActivity : BaseActivity() {
     }
 
 
-
-
-
-
-
     override fun onResume() {
         super.onResume()
         if (updateType == AppUpdateType.IMMEDIATE) {
@@ -159,7 +160,7 @@ class HomeActivity : BaseActivity() {
                         info,
                         updateType,
                         this,
-                        123
+                        RequestCodeIntent.APP_UPDATE
                     )
                 }
             }
@@ -190,18 +191,17 @@ class HomeActivity : BaseActivity() {
                     info,
                     updateType,
                     this,
-                    123
+                    RequestCodeIntent.APP_UPDATE
                 )
             }
         }
     }
 
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == 123) {
-            if (resultCode != RESULT_OK) {
-                println("Something went wrong updating...")
-            }
+        if (requestCode == RequestCodeIntent.APP_UPDATE && resultCode != RESULT_OK) {
+            showToast("Something went wrong updating...")
         }
     }
 
