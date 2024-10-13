@@ -21,6 +21,7 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
+                    android:background="@drawable/bg_add_pdf"
                     android:layout_height="wrap_content">
                     <ImageView
                         android:id="@+id/iv_select_pdf"
@@ -36,6 +37,7 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
                 <TextView
                     android:id="@+id/tv_file_name"
+                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="10dp"
