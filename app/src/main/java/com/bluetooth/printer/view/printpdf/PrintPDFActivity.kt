@@ -10,6 +10,7 @@ import android.os.Bundle
 import com.bluetooth.printer.PM
 import com.bluetooth.printer.data.PrintType
 import com.bluetooth.printer.databinding.ActivityPrintPdfBinding
+import com.bluetooth.printer.device.BTUtils
 import com.bluetooth.printer.device.BluetoothConnection
 import com.bluetooth.printer.view.base.BaseActivity
 import com.bluetooth.printer.view.btdevice.BTDeviceListActivity
@@ -145,7 +146,7 @@ class PrintPDFActivity : BaseActivity() {
     private fun sendBitMapData(socket: BluetoothSocket, data: Bitmap) {
         try {
             val outputStream = socket.outputStream
-            val bytes: ByteArray = Utils.bitmapToBytes(data)
+            val bytes: ByteArray = BTUtils.bitmapToBytes(data)
             outputStream.write(ESC_ALIGN_CENTER)
             outputStream.write(bytes)
         } catch (e: Exception) {
