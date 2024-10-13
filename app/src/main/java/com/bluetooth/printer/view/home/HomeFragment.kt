@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.bluetooth.printer.R
 import com.bluetooth.printer.data.PrintType
@@ -16,7 +15,6 @@ import com.bluetooth.printer.view.printpdf.PrintPDFActivity
 class HomeFragment : BaseFragment() {
 
     private var _binding: FragmentHomeBinding? = null
-    private val viewModel: HomeViewModel by activityViewModels()
 
     private val binding get() = _binding!!
 
@@ -37,6 +35,8 @@ class HomeFragment : BaseFragment() {
     private fun openPrintTypeActivity(printType: PrintType){
        if (printType.id==1){
            activity?.let { PrintPDFActivity.start(it,printType) }
+       }else{
+           showToast("Coming soon..")
        }
     }
 
