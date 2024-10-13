@@ -4,6 +4,7 @@ import android.app.Activity
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothSocket
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import com.bluetooth.printer.PM
 import com.bluetooth.printer.data.PrintType
@@ -12,7 +13,8 @@ import com.bluetooth.printer.device.BluetoothConnection
 import com.bluetooth.printer.view.base.BaseActivity
 import com.bluetooth.printer.view.btdevice.BTDeviceListActivity
 import com.bluetooth.printer.view.utils.PermissionUtils
-import com.bluetooth.printer.view.utils.RequestCode
+import com.bluetooth.printer.view.utils.RequestCodeIntent
+import com.bluetooth.printer.view.utils.RequestCodePermission
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -95,7 +97,7 @@ class PrintPDFActivity : BaseActivity() {
         grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == RequestCode.BT_DEVICE && PermissionUtils.checkBTDeviceConnectPermission(
+        if (requestCode == RequestCodePermission.BT_DEVICE_CONNECT && PermissionUtils.checkBTDeviceConnectPermission(
                 this
             )
         ) {
@@ -132,9 +134,17 @@ class PrintPDFActivity : BaseActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if(requestCode == 10 && resultCode == Activity.RESULT_OK){
+        if(requestCode == RequestCodeIntent.BT_DEVICE_LIST && resultCode == Activity.RESULT_OK){
             connectBTDevice()
         }
+
+        if (requestCode == RequestCodeIntent.READ_CONTENT && resultCode == Activity.RESULT_OK) {
+            val pdfUri: Uri? = data?.data
+            pdfUri?.let {
+                  ///
+             }
+        }
     }
+
 
 }

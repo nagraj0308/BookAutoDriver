@@ -13,7 +13,8 @@ import com.bluetooth.printer.data.BTDevice
 import com.bluetooth.printer.databinding.ActivityBtDeviceListBinding
 import com.bluetooth.printer.view.base.BaseActivity
 import com.bluetooth.printer.view.utils.PermissionUtils
-import com.bluetooth.printer.view.utils.RequestCode
+import com.bluetooth.printer.view.utils.RequestCodeIntent
+import com.bluetooth.printer.view.utils.RequestCodePermission
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -29,7 +30,7 @@ class BTDeviceListActivity : BaseActivity() {
     companion object {
         fun start(activity: Activity) {
             val intent = Intent(activity, BTDeviceListActivity::class.java);
-            activity.startActivityForResult(intent,10)
+            activity.startActivityForResult(intent,RequestCodeIntent.BT_DEVICE_LIST)
         }
     }
 
@@ -74,7 +75,7 @@ class BTDeviceListActivity : BaseActivity() {
         grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == RequestCode.BT_DEVICE && PermissionUtils.checkBTDeviceConnectPermission(this)) {
+        if (requestCode == RequestCodePermission.BT_DEVICE_CONNECT && PermissionUtils.checkBTDeviceConnectPermission(this)) {
             showBTDevices()
         }
     }

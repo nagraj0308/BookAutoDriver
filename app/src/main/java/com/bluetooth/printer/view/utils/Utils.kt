@@ -1,14 +1,22 @@
 package com.bluetooth.printer.view.utils
 
 
+import android.app.Activity
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.pdf.PdfRenderer
-import android.location.Location
 import android.os.ParcelFileDescriptor
 import android.view.View
 import java.io.File
 
+class RequestCodeIntent {
+    companion object {
+        const val READ_CONTENT = 100
+        const val BT_DEVICE_LIST = 101
+
+    }
+}
 
 class Utils {
     companion object {
@@ -54,6 +62,12 @@ class Utils {
             }
 
             return bitmap
+        }
+
+        fun openPDFChooser(activity: Activity){
+            val pdfPickerIntent = Intent(Intent.ACTION_GET_CONTENT)
+            pdfPickerIntent.type = "application/pdf"
+            activity.startActivityForResult(Intent.createChooser(pdfPickerIntent, "Select PDF"), RequestCodeIntent.READ_CONTENT)
         }
 
     }
