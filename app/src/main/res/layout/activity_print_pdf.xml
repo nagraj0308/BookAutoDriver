@@ -6,10 +6,20 @@
     android:layout_height="match_parent"
     android:padding="0dp"
     tools:context=".view.printpdf.PrintPDFActivity">
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/banner_ad"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+        app:adSize="BANNER"
+        app:adUnitId="ca-app-pub-8309769930611097/8659005718">
+    </com.google.android.gms.ads.AdView>
 
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/banner_ad"
             android:layout_above="@+id/ll_buttons"
             android:layout_alignParentTop="true">
 
