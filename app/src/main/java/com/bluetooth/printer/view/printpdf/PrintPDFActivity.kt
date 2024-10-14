@@ -7,6 +7,7 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
+import android.view.View
 import com.bluetooth.printer.PM
 import com.bluetooth.printer.data.PrintType
 import com.bluetooth.printer.databinding.ActivityPrintPdfBinding
@@ -18,6 +19,7 @@ import com.bluetooth.printer.view.utils.PermissionUtils
 import com.bluetooth.printer.view.utils.RequestCodeIntent
 import com.bluetooth.printer.view.utils.RequestCodePermission
 import com.bluetooth.printer.view.utils.Utils
+import com.google.android.gms.ads.AdRequest
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -76,10 +78,10 @@ class PrintPDFActivity : BaseActivity() {
             }
         }
         binding.tvFileName.text = "File Name : ";
-        binding.ivSelectPdf.setOnClickListener{
-            if(PermissionUtils.checkReadStoragePermission(this)){
+        binding.ivSelectPdf.setOnClickListener {
+            if (PermissionUtils.checkReadStoragePermission(this)) {
                 Utils.openPDFChooser(this)
-            }else{
+            } else {
                 PermissionUtils.requestReadStoragePermission(this)
             }
         }
@@ -87,22 +89,22 @@ class PrintPDFActivity : BaseActivity() {
 
     private fun connectBTDevice() {
         if (PermissionUtils.checkBTDeviceConnectPermission(this)) {
-            if(BluetoothAdapter.checkBluetoothAddress(pm.btDeviceAddress)){
+            if (BluetoothAdapter.checkBluetoothAddress(pm.btDeviceAddress)) {
                 CoroutineScope(Dispatchers.IO).launch {
                     if (printer == null || !printer!!.isConnected) {
                         printer = BluetoothConnection().connectToDevice(pm.btDeviceAddress)
                         withContext(Dispatchers.Main) {
                             if (printer == null || !printer!!.isConnected) {
                                 showToast("Failed to connect to printer")
-                            }else{
+                            } else {
                                 showToast("Connected to printer")
                             }
                         }
-                    }else{
+                    } else {
                         showToast("Connected to printer")
                     }
                 }
-            }else{
+            } else {
                 BTDeviceListActivity.start(this)
             }
         } else {
@@ -123,7 +125,9 @@ class PrintPDFActivity : BaseActivity() {
             connectBTDevice()
         }
 
-        if (requestCode == RequestCodePermission.READ_STORAGE && PermissionUtils.checkReadStoragePermission(this)
+        if (requestCode == RequestCodePermission.READ_STORAGE && PermissionUtils.checkReadStoragePermission(
+                this
+            )
         ) {
             Utils.openPDFChooser(this)
         }
@@ -169,19 +173,26 @@ class PrintPDFActivity : BaseActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if(requestCode == RequestCodeIntent.BT_DEVICE_LIST && resultCode == Activity.RESULT_OK){
+        if (requestCode == RequestCodeIntent.BT_DEVICE_LIST && resultCode == Activity.RESULT_OK) {
             connectBTDevice()
         }
 
         if (requestCode == RequestCodeIntent.READ_CONTENT && resultCode == Activity.RESULT_OK) {
             val pdfUri: Uri? = data?.data
             pdfUri?.let {
-                it.path?.let { it1 -> Utils.renderPdfPage(it1,1) ?.let { it2 ->
-                    printer?.let { it3 -> it2?.let { it4 -> sendBitMapData(it3, it4) } }
-                }}
-             }
+                it.path?.let { it1 ->
+                    Utils.renderPdfPage(it1, 1)?.let { it2 ->
+                        printer?.let { it3 -> it2?.let { it4 -> sendBitMapData(it3, it4) } }
+                    }
+                }
+            }
         }
     }
 
-
+    override fun onStart() {
+        super.onStart()
+        val adRequest: AdRequest = AdRequest.Builder().build()
+        binding.bannerAd.loadAd(adRequest)
+    }
 }
+

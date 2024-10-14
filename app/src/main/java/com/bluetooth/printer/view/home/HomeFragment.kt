@@ -10,6 +10,7 @@ import com.bluetooth.printer.data.PrintType
 import com.bluetooth.printer.databinding.FragmentHomeBinding
 import com.bluetooth.printer.view.base.BaseFragment
 import com.bluetooth.printer.view.printpdf.PrintPDFActivity
+import com.google.android.gms.ads.AdRequest
 
 
 class HomeFragment : BaseFragment() {
@@ -53,6 +54,12 @@ class HomeFragment : BaseFragment() {
 
     override fun hideProgress() {
         TODO("Not yet implemented")
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val adRequest: AdRequest = AdRequest.Builder().build()
+        binding.bannerAd.loadAd(adRequest)
     }
 
 

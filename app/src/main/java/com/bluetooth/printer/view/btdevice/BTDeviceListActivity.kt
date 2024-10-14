@@ -16,6 +16,7 @@ import com.bluetooth.printer.view.base.BaseActivity
 import com.bluetooth.printer.view.utils.PermissionUtils
 import com.bluetooth.printer.view.utils.RequestCodeIntent
 import com.bluetooth.printer.view.utils.RequestCodePermission
+import com.google.android.gms.ads.AdRequest
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -112,6 +113,12 @@ class BTDeviceListActivity : BaseActivity() {
             BluetoothClass.Device.Major.WEARABLE -> R.drawable.ic_headphones
             else -> R.drawable.ic_device_unknown
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        val adRequest: AdRequest = AdRequest.Builder().build()
+        binding.bannerAd.loadAd(adRequest)
     }
 
 }
