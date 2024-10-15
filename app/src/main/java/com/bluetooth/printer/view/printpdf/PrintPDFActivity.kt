@@ -39,9 +39,6 @@ class PrintPDFActivity : BaseActivity() {
     private lateinit var binding: ActivityPrintPdfBinding
 
 
-    val ESC_ALIGN_CENTER: ByteArray = byteArrayOf(0x1b, 'a'.code.toByte(), 0x01)
-
-
     companion object {
         fun start(activity: Activity, printType: PrintType) {
             val intent = Intent(activity, PrintPDFActivity::class.java);
@@ -151,7 +148,7 @@ class PrintPDFActivity : BaseActivity() {
         try {
             val outputStream = socket.outputStream
             val bytes: ByteArray = BTUtils.bitmapToBytes(data)
-            outputStream.write(ESC_ALIGN_CENTER)
+            outputStream.write(byteArrayOf(0x1b, 'a'.code.toByte(), 0x01))
             outputStream.write(bytes)
         } catch (e: Exception) {
             e.printStackTrace()
