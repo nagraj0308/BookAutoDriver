@@ -17,8 +17,8 @@ android {
         applicationId = "com.bluetooth.printer"
         minSdk = 28
         targetSdk = 34
-        versionCode = 2
-        versionName = "0.2"
+        versionCode = 3
+        versionName = "0.3"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -85,7 +85,7 @@ dependencies {
 
 
     //firebase
-    implementation(platform("com.google.firebase:firebase-bom:33.0.0"))
+    implementation(platform("com.google.firebase:firebase-bom:33.4.0"))
     implementation("com.google.firebase:firebase-analytics-ktx")
     implementation("com.google.firebase:firebase-crashlytics-ktx")
     implementation("com.google.firebase:firebase-perf-ktx")
@@ -100,7 +100,7 @@ dependencies {
 
 
     //ads
-    implementation("com.google.android.gms:play-services-ads:23.2.0")
+    implementation("com.google.android.gms:play-services-ads:23.4.0")
 
     //in app update
     implementation("com.google.android.play:app-update:2.1.0")
@@ -109,7 +109,7 @@ dependencies {
 
 
     implementation("android.arch.lifecycle:extensions:1.1.1")
-    implementation("androidx.work:work-runtime-ktx:2.9.0")
+    implementation("androidx.work:work-runtime-ktx:2.9.1")
 
 
     // Coroutines
