@@ -15,7 +15,6 @@ class BluetoothConnection(private val bluetoothAdapter: BluetoothAdapter? = Blue
 
         try {
             socket = device?.createRfcommSocketToServiceRecord(UUID.fromString("00001101-0000-1000-8000-00805F9B34FB"))//serial; communication uuid
-            Thread.sleep(2000)
             socket?.connect()
         } catch (e: Exception) {
             e.printStackTrace()
