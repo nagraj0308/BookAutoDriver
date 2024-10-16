@@ -72,6 +72,21 @@ class PrintPDFActivity : BaseActivity() {
                 }
             }
         }
+
+        binding.btnPrint2.setOnClickListener {
+            printer?.let { it1 ->
+                run {
+                    if (it1.isConnected) {
+                        Utils.screenShot(binding.ivSelectPdf)
+                            ?.let { it2 -> BluetoothPrinter.sendBitMapData(it1, it2) }
+//                        sendData(it1, " अंश नोबादा अंश नोबादा  अंश नोबादा अंश नोबादा अंश नोबादा अंश नोबादा अंश नोबादा अंश नोबादा अंश नोबादा अंश नोबादा अंश नोबादा अंश नोबादा अंश नोबादा अंश नोबादा अंश नोबादा अंश नोबादा अंश नोबादा अंश नोबादा अंश नोबादा अंश नोबादा अंश नोबादा अंश नोबादा अंश नोबादा अंश नोबादा अंश नोबादा अंश नोबादा अंश नोबादा अंश नोबादा अंश नोबादा अंश नोबादा अंश नोबादा अंश नोबादा अंश नोबादा अंश नोबादा अंश नोबादा अंश नोबादा अंश नोबादा अंश नोबादा अंश नोबादा अंश नोबादा अंश नोबादा अंश नोबादा अंश नोबादा अंश नोबादा")
+                    } else {
+                        showToast("Printer not connected")
+                        BTDeviceListActivity.start(this)
+                    }
+                }
+            }
+        }
         binding.tvFileName.text = "File Name : ";
         binding.ivSelectPdf.setOnClickListener {
             if (PermissionUtils.checkReadStoragePermission(this)) {
