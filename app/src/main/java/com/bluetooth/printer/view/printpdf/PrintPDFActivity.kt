@@ -57,6 +57,7 @@ class PrintPDFActivity : BaseActivity() {
         supportActionBar?.setDisplayShowHomeEnabled(true);
 
         connectBTDevice()
+        connectBTDevice2()
 
         binding.btnPrint.setOnClickListener {
             printer?.let { it1 ->
@@ -74,7 +75,7 @@ class PrintPDFActivity : BaseActivity() {
         }
 
         binding.btnPrint2.setOnClickListener {
-            printer?.let { it1 ->
+            printer2?.let { it1 ->
                 run {
                     if (it1.isConnected) {
                         Utils.screenShot(binding.ivSelectPdf)
@@ -105,6 +106,31 @@ class PrintPDFActivity : BaseActivity() {
                         printer = BluetoothConnection().connectToDevice(pm.btDeviceAddress)
                         withContext(Dispatchers.Main) {
                             if (printer == null || !printer!!.isConnected) {
+                                showToast("Failed to connect to printer")
+                            } else {
+                                showToast("Connected to printer")
+                            }
+                        }
+                    } else {
+                        showToast("Connected to printer")
+                    }
+                }
+            } else {
+                BTDeviceListActivity.start(this)
+            }
+        } else {
+            PermissionUtils.requestBTDeviceConnectPermission(this);
+        }
+    }
+
+    private fun connectBTDevice2() {
+        if (PermissionUtils.checkBTDeviceConnectPermission(this)) {
+            if (BluetoothAdapter.checkBluetoothAddress(pm.btDeviceAddress2)) {
+                CoroutineScope(Dispatchers.IO).launch {
+                    if (printer2 == null || !printer2!!.isConnected) {
+                        printer2 = BluetoothConnection().connectToDevice(pm.btDeviceAddress2)
+                        withContext(Dispatchers.Main) {
+                            if (printer2 == null || !printer2!!.isConnected) {
                                 showToast("Failed to connect to printer")
                             } else {
                                 showToast("Connected to printer")
