@@ -1,13 +1,22 @@
 package com.bluetooth.printer.view.utils
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.pdf.PdfRenderer
 import android.os.ParcelFileDescriptor
+import android.util.Log
 import android.view.View
+import com.google.android.gms.ads.identifier.AdvertisingIdClient
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException
+import com.google.android.gms.common.GooglePlayServicesRepairableException
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.io.File
+import java.io.IOException
 
 class RequestCodeIntent {
     companion object {
@@ -68,6 +77,30 @@ class Utils {
             val pdfPickerIntent = Intent(Intent.ACTION_GET_CONTENT)
             pdfPickerIntent.type = "application/pdf"
             activity.startActivityForResult(Intent.createChooser(pdfPickerIntent, "Select PDF"), RequestCodeIntent.READ_CONTENT)
+        }
+
+        fun printAdvertisingId( context : Context){
+            CoroutineScope(Dispatchers.IO).launch {
+
+                var idInfo: AdvertisingIdClient.Info? = null
+                try {
+                    idInfo = AdvertisingIdClient.getAdvertisingIdInfo(context)
+                } catch (e: GooglePlayServicesNotAvailableException) {
+                    e.printStackTrace()
+                } catch (e: GooglePlayServicesRepairableException) {
+                    e.printStackTrace()
+                } catch (e: IOException) {
+                    e.printStackTrace()
+                }
+                var advertId: String? = null
+                try {
+                    advertId = idInfo!!.id
+                } catch (e: NullPointerException) {
+                    e.printStackTrace()
+                }
+                Log.d("NAGRAJ", "$advertId")
+
+            }
         }
     }
 }
