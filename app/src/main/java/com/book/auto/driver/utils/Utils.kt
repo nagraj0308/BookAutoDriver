@@ -1,12 +1,21 @@
 package com.book.auto.driver.utils
 
 
+import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
+import android.util.Log
 import android.view.View
+import com.google.android.gms.ads.identifier.AdvertisingIdClient
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException
+import com.google.android.gms.common.GooglePlayServicesRepairableException
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.ktx.storage
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import java.io.IOException
 
 
 class FBS {
@@ -33,6 +42,30 @@ class Utils {
                 return bitmap
             }
             return null
+        }
+
+        fun printAdvertisingId( context : Context){
+            CoroutineScope(Dispatchers.IO).launch {
+
+                var idInfo: AdvertisingIdClient.Info? = null
+                try {
+                    idInfo = AdvertisingIdClient.getAdvertisingIdInfo(context)
+                } catch (e: GooglePlayServicesNotAvailableException) {
+                    e.printStackTrace()
+                } catch (e: GooglePlayServicesRepairableException) {
+                    e.printStackTrace()
+                } catch (e: IOException) {
+                    e.printStackTrace()
+                }
+                var advertId: String? = null
+                try {
+                    advertId = idInfo!!.id
+                } catch (e: NullPointerException) {
+                    e.printStackTrace()
+                }
+                Log.d("NAGRAJ", "$advertId")
+
+            }
         }
     }
 }
