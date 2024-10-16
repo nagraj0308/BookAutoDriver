@@ -9,6 +9,7 @@ import com.bluetooth.printer.R
 import com.bluetooth.printer.data.PrintType
 import com.bluetooth.printer.databinding.FragmentHomeBinding
 import com.bluetooth.printer.view.base.BaseFragment
+import com.bluetooth.printer.view.printimage.PrintImageActivity
 import com.bluetooth.printer.view.printpdf.PrintPDFActivity
 import com.google.android.gms.ads.AdRequest
 
@@ -37,7 +38,7 @@ class HomeFragment : BaseFragment() {
        if (printType.id==1){
            activity?.let { PrintPDFActivity.start(it,printType) }
        }else{
-           showToast("Coming soon..")
+           activity?.let { PrintImageActivity.start(it,printType) }
        }
     }
 
