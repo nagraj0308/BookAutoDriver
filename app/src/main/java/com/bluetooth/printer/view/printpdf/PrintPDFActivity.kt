@@ -3,10 +3,8 @@ package com.bluetooth.printer.view.printpdf
 import android.app.Activity
 import android.bluetooth.BluetoothAdapter
 import android.content.Intent
-import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
-import android.text.Html
 import android.util.Log
 import com.bluetooth.printer.PM
 import com.bluetooth.printer.data.PrintType
@@ -37,9 +35,6 @@ class PrintPDFActivity : BaseActivity() {
 
     private lateinit var binding: ActivityPrintPdfBinding
 
-    private lateinit var selectedFile:Uri
-
-
     companion object {
         fun start(activity: Activity, printType: PrintType) {
             val intent = Intent(activity, PrintPDFActivity::class.java);
@@ -62,17 +57,9 @@ class PrintPDFActivity : BaseActivity() {
         connectBTDevice()
 
         binding.btnPrint.setOnClickListener {
-            printer?.let { it ->
+            printer?.let { it1 ->
                 run {
-                    if (it.isConnected) {
-                        if (selectedFile != null) {
-                            selectedFile.path?.let {
-
-                            }
-                        }else{
-                            showToast("File not selected!")
-                        }
-
+                    if (it1.isConnected) {
                         Utils.screenShot(binding.ivSelectPdf)
                             ?.let { it2 -> BluetoothPrinter.sendBitMapData(it1, it2) }
                     } else {
@@ -81,8 +68,6 @@ class PrintPDFActivity : BaseActivity() {
                     }
                 }
             }
-
-            BluetoothPrinter.sendBitMapData(it, it2)
         }
         binding.tvFileName.text = "File Name : ";
         binding.ivSelectPdf.setOnClickListener {
@@ -158,7 +143,6 @@ class PrintPDFActivity : BaseActivity() {
                 return
             }
             if (data.data==null){
-                selectedFile= data.data!!
                 Log.v("NAGRAJ", "B")
                 return
             }
@@ -167,6 +151,15 @@ class PrintPDFActivity : BaseActivity() {
                 Log.v("NAGRAJ", "C")
                 return
             }
+            val pdfUri: Uri? = data.data
+            if (pdfUri != null) {
+                pdfUri.path?.let {
+                    Utils.renderPdfPage(it, 1)?.let { it2 ->
+                        printer?.let { it3 -> it2?.let { it4 -> BluetoothPrinter.sendBitMapData(it3, it4) } }
+                    }
+                }
+            }
+
         }
     }
 
