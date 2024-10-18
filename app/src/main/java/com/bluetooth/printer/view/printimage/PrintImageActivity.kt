@@ -4,9 +4,12 @@ import android.app.Activity
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothSocket
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Base64
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import com.bluetooth.printer.PM
@@ -105,6 +108,30 @@ class PrintImageActivity : BaseActivity() {
             val picturePath = cursor.getString(columnIndex)
             cursor.close()
             Glide.with(this).asBitmap().load(picturePath).into(binding.ivSelectPdf)
+
+            val bitmap: Bitmap
+            // Assuming the string could be a file path or Base64 encoded image
+            if (picturePath.startsWith("data:image")) {
+                // It's a Base64 encoded image
+                val decodedString: ByteArray =
+                    Base64.decode(picturePath.split(",")[1], Base64.DEFAULT)
+                bitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
+            } else {
+                bitmap = BitmapFactory.decodeFile(picturePath)
+            }
+
+            printer?.let { it1 ->
+                run {
+                    if (it1.isConnected) {
+                        bitmap
+                            ?.let { it2 -> BluetoothPrinter.sendBitMapData(it1, it2) }
+                    } else {
+                        showToast("Printer not connected")
+                        BTDeviceListActivity.start(this)
+                    }
+                }
+            }
+
         }
     }
 
