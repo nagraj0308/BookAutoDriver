@@ -2,10 +2,12 @@ package com.bluetooth.printer.view.printpdf
 
 import android.app.Activity
 import android.bluetooth.BluetoothAdapter
-import android.bluetooth.BluetoothSocket
 import android.content.Intent
+import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
+import android.text.Html
+import android.util.Log
 import com.bluetooth.printer.PM
 import com.bluetooth.printer.data.PrintType
 import com.bluetooth.printer.databinding.ActivityPrintPdfBinding
@@ -23,7 +25,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.io.IOException
 import javax.inject.Inject
 
 
@@ -35,6 +36,8 @@ class PrintPDFActivity : BaseActivity() {
     private var printType: PrintType? = null
 
     private lateinit var binding: ActivityPrintPdfBinding
+
+    private lateinit var selectedFile:Uri
 
 
     companion object {
@@ -59,18 +62,27 @@ class PrintPDFActivity : BaseActivity() {
         connectBTDevice()
 
         binding.btnPrint.setOnClickListener {
-            printer?.let { it1 ->
+            printer?.let { it ->
                 run {
-                    if (it1.isConnected) {
+                    if (it.isConnected) {
+                        if (selectedFile != null) {
+                            selectedFile.path?.let {
+
+                            }
+                        }else{
+                            showToast("File not selected!")
+                        }
+
                         Utils.screenShot(binding.ivSelectPdf)
                             ?.let { it2 -> BluetoothPrinter.sendBitMapData(it1, it2) }
-//                        sendData(it1, " अंश नोबादा अंश नोबादा  अंश नोबादा अंश नोबादा अंश नोबादा अंश नोबादा अंश नोबादा अंश नोबादा अंश नोबादा अंश नोबादा अंश नोबादा अंश नोबादा अंश नोबादा अंश नोबादा अंश नोबादा अंश नोबादा अंश नोबादा अंश नोबादा अंश नोबादा अंश नोबादा अंश नोबादा अंश नोबादा अंश नोबादा अंश नोबादा अंश नोबादा अंश नोबादा अंश नोबादा अंश नोबादा अंश नोबादा अंश नोबादा अंश नोबादा अंश नोबादा अंश नोबादा अंश नोबादा अंश नोबादा अंश नोबादा अंश नोबादा अंश नोबादा अंश नोबादा अंश नोबादा अंश नोबादा अंश नोबादा अंश नोबादा अंश नोबादा")
                     } else {
                         showToast("Printer not connected")
                         BTDeviceListActivity.start(this)
                     }
                 }
             }
+
+            BluetoothPrinter.sendBitMapData(it, it2)
         }
         binding.tvFileName.text = "File Name : ";
         binding.ivSelectPdf.setOnClickListener {
@@ -133,16 +145,6 @@ class PrintPDFActivity : BaseActivity() {
         return true
     }
 
-    private fun sendData(socket: BluetoothSocket, data: String) {
-        try {
-            val outputStream = socket.outputStream
-            outputStream.write(data.toByteArray())
-        } catch (e: IOException) {
-            e.printStackTrace()
-        }
-    }
-
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == RequestCodeIntent.BT_DEVICE_LIST && resultCode == Activity.RESULT_OK) {
@@ -150,13 +152,20 @@ class PrintPDFActivity : BaseActivity() {
         }
 
         if (requestCode == RequestCodeIntent.READ_CONTENT && resultCode == Activity.RESULT_OK) {
-            val pdfUri: Uri? = data?.data
-            pdfUri?.let {
-                it.path?.let { it1 ->
-                    Utils.renderPdfPage(it1, 1)?.let { it2 ->
-                        printer?.let { it3 -> it2?.let { it4 -> BluetoothPrinter.sendBitMapData(it3, it4) } }
-                    }
-                }
+
+            if (data==null){
+                Log.v("NAGRAJ", "A")
+                return
+            }
+            if (data.data==null){
+                selectedFile= data.data!!
+                Log.v("NAGRAJ", "B")
+                return
+            }
+
+            if (data.data!!.path==null){
+                Log.v("NAGRAJ", "C")
+                return
             }
         }
     }
