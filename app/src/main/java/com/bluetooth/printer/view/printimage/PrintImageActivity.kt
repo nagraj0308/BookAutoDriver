@@ -6,6 +6,9 @@ import android.bluetooth.BluetoothSocket
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import com.bluetooth.printer.PM
 import com.bluetooth.printer.data.PrintType
 import com.bluetooth.printer.databinding.ActivityPrintImageBinding
@@ -17,6 +20,7 @@ import com.bluetooth.printer.view.utils.PermissionUtils
 import com.bluetooth.printer.view.utils.RequestCodeIntent
 import com.bluetooth.printer.view.utils.RequestCodePermission
 import com.bluetooth.printer.view.utils.Utils
+import com.bumptech.glide.Glide
 import com.google.android.gms.ads.AdRequest
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
@@ -75,10 +79,32 @@ class PrintImageActivity : BaseActivity() {
         binding.tvFileName.text = "File Name : ";
         binding.ivSelectPdf.setOnClickListener {
             if (PermissionUtils.checkReadStoragePermission(this)) {
-                Utils.openPDFChooser(this)
+                startForResult.launch(
+                    Intent(
+                        Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+                    )
+                )
             } else {
                 PermissionUtils.requestReadStoragePermission(this)
             }
+        }
+    }
+
+    private val startForResult = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result: ActivityResult ->
+        if (result.resultCode == Activity.RESULT_OK && null != result.data) {
+            val data = result.data
+            val selectedImage: Uri = data!!.data!!
+            val filePathColumn = arrayOf(MediaStore.Images.Media.DATA)
+            val cursor = this.contentResolver.query(
+                selectedImage, filePathColumn, null, null, null
+            )
+            cursor!!.moveToFirst()
+            val columnIndex = cursor.getColumnIndex(filePathColumn[0])
+            val picturePath = cursor.getString(columnIndex)
+            cursor.close()
+            Glide.with(this).asBitmap().load(picturePath).into(binding.ivSelectPdf)
         }
     }
 
